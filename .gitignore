@@ -1,4 +1,8 @@
 pom.properties
 */target/*
 /build/
+<<<<<<< HEAD
 MANIFEST.MF
+=======
+MANIFEST.MF
+>>>>>>> branch 'main' of https://github.com/SpringSecondProject/Camp_Project.git
