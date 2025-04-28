@@ -1,8 +1,15 @@
-pom.properties
-*/target/*
+# Maven 빌드 결과물 무시
+/target/
+*/target/
+
+# 자동 생성 파일 무시
 /build/
-<<<<<<< HEAD
+pom.properties
 MANIFEST.MF
-=======
-MANIFEST.MF
->>>>>>> branch 'main' of https://github.com/SpringSecondProject/Camp_Project.git
+
+# 기타 IDE 설정 파일 무시
+*.iml
+.idea/
+.project
+.classpath
+.settings/
