@@ -3,7 +3,10 @@
  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
  "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<typeAliases>
+		<typeAlias type="com.sist.vo.CampVO" alias="CampVO"/>
+	</typeAliases>
   <mappers>
-    <!-- <mapper resource="com/sist/mapper/food-mapper.xml"/> -->
+    <mapper resource="com/sist/mapper/camp-mapper.xml"/>
   </mappers>
 </configuration>
