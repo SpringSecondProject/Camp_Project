@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class ShopController {
+public class ItemController {
 	@GetMapping("shop/list.do")
 	public String main(Model model) {
 		model.addAttribute("main_jsp","../shop/list.jsp");
