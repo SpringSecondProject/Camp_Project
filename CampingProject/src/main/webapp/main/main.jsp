@@ -10,7 +10,9 @@
     <meta name="author" content="">
     <link href="../images/favicon.png" rel="shortcut icon">
     <title>Ludus - Electronics, Apparel, Computers, Books, DVDs & more</title>
-
+    <!-- bootstrap3 -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	
     <!--====== Google Font ======-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
 
@@ -22,6 +24,7 @@
 
     <!--====== App ======-->
     <link rel="stylesheet" href="../css/app.css">
+    
 	<!-- vue -->
 	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -310,7 +313,7 @@
         <!--====== End - Add to Cart Modal ======-->
 
 
-        <!--====== 로그인창 ======-->
+        <!--====== 로그인창 ======
         <div class="modal fade new-l" id="newsletter-modal">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content modal--shadow">
@@ -352,7 +355,7 @@
                 </div>
             </div>
         </div>
-        <!--====== End - Newsletter Subscribe Modal ======-->
+        ====== End - Newsletter Subscribe Modal ======-->
         <!--====== End - Modal Section ======-->
     </div>
     <!--====== End - Main App ======-->

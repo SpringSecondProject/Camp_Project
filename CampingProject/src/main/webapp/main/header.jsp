@@ -54,9 +54,17 @@ $(function(){
 
                                 <!--====== List ======-->
                                 <ul class="ah-list ah-list--design1 ah-list--link-color-white">
-                                    <li class="has-dropdown" data-tooltip="tooltip" data-placement="left" title="계정">
+                                    <li class="has-dropdown" data-tooltip="tooltip" data-placement="left">
 
-                                        <a><i class="far fa-user-circle"></i></a>
+                                        <a>
+                                        	<i class="far fa-user-circle"></i>
+                                        	<c:if test="${sessionScope.userid==null }">
+                                        		<span>로그인/회원가입</span>
+                                        	</c:if>
+                                        	<c:if test="${sessionScope.userid!=null }">
+                                        		<span>${sessionScope.username }님 환영합니다</span>
+                                        	</c:if>
+                                        </a>
 
                                         <!--====== Dropdown ======-->
 
@@ -64,12 +72,12 @@ $(function(){
                                         <ul style="width:120px">
                                         	<c:if test="${sessionScope.userid==null }">
 	                                            <li>
-	                                                <a href="#l"><i class="fas fa-user-plus u-s-m-r-6"></i>
+	                                                <a href="../member/signup.do"><i class="fas fa-user-plus u-s-m-r-6"></i>
 	                                                    <span>회원가입</span>
 	                                                </a>
 	                                            </li>
 	                                            <li>
-	                                                <a href="#"><i class="fas fa-lock u-s-m-r-6"></i>
+	                                                <a href="../member/login.do"><i class="fas fa-lock u-s-m-r-6"></i>
 	                                                    <span>로그인</span>
 	                                                </a>
 	                                            </li>
@@ -81,7 +89,7 @@ $(function(){
 	                                                </a>
 	                                            </li>
 	                                            <li>
-	                                                <a href="#"><i class="fas fa-lock-open u-s-m-r-6"></i>
+	                                                <a href="../member/logout.do"><i class="fas fa-lock-open u-s-m-r-6"></i>
 	                                                    <span>로그아웃</span>
 	                                                </a>
 	                                            </li>
