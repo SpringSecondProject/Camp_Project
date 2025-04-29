@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -144,7 +146,7 @@ $(function(){
                                         <span class="js-menu-toggle"></span>
                                         <ul style="width:200px">
                                             <li>
-                                                <a href="#">Blog Left Sidebar</a>
+                                                <a href="../camp/list.do">캠핑장 목록</a>
                                             </li>
                                         </ul>
                                         <!--====== End - Dropdown ======-->
@@ -193,28 +195,32 @@ $(function(){
                                         </ul>
                                         <!--====== End - Dropdown ======-->
                                     </li>
-                                    <li class="has-dropdown">
-                                        <a>마이페이지<i class="fas fa-angle-down u-s-m-l-6"></i></a>
-                                        <!--====== Dropdown ======-->
-                                        <span class="js-menu-toggle"></span>
-                                        <ul style="width:200px">
-                                            <li>
-                                                <a href="#">Blog Left Sidebar</a>
-                                            </li>
-                                        </ul>
-                                        <!--====== End - Dropdown ======-->
-                                    </li>
-                                    <li class="has-dropdown">
-                                        <a>관리자페이지<i class="fas fa-angle-down u-s-m-l-6"></i></a>
-                                        <!--====== Dropdown ======-->
-                                        <span class="js-menu-toggle"></span>
-                                        <ul style="width:200px">
-                                            <li>
-                                                <a href="#">Blog Left Sidebar</a>
-                                            </li>
-                                        </ul>
-                                        <!--====== End - Dropdown ======-->
-                                    </li>
+                                    <sec:authorize access="hasRole('ROLE_USER')">
+	                                    <li class="has-dropdown">
+	                                        <a>마이페이지<i class="fas fa-angle-down u-s-m-l-6"></i></a>
+	                                        <!--====== Dropdown ======-->
+	                                        <span class="js-menu-toggle"></span>
+	                                        <ul style="width:200px">
+	                                            <li>
+	                                                <a href="#">Blog Left Sidebar</a>
+	                                            </li>
+	                                        </ul>
+	                                        <!--====== End - Dropdown ======-->
+	                                    </li>
+                                    </sec:authorize>
+                                    <sec:authorize access="hasRole('ROLE_ADMIN')">
+	                                    <li class="has-dropdown">
+	                                        <a>관리자페이지<i class="fas fa-angle-down u-s-m-l-6"></i></a>
+	                                        <!--====== Dropdown ======-->
+	                                        <span class="js-menu-toggle"></span>
+	                                        <ul style="width:200px">
+	                                            <li>
+	                                                <a href="#">Blog Left Sidebar</a>
+	                                            </li>
+	                                        </ul>
+	                                        <!--====== End - Dropdown ======-->
+	                                    </li>
+                                    </sec:authorize>
                                     <li class="has-dropdown">
                                         <a>샘플 페이지<i class="fas fa-angle-down u-s-m-l-6"></i></a>
 
