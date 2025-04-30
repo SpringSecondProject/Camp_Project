@@ -34,12 +34,6 @@
                                     <form>
                                         <div class="tool-style__form-wrap">
                                             <div class="u-s-m-b-8"><select class="select-box select-box--transparent-b-2">
-                                                    <option>Show: 8</option>
-                                                    <option selected>Show: 12</option>
-                                                    <option>Show: 16</option>
-                                                    <option>Show: 28</option>
-                                                </select></div>
-                                            <div class="u-s-m-b-8"><select class="select-box select-box--transparent-b-2">
                                                     <option selected>Sort By: Newest Items</option>
                                                     <option>Sort By: Latest Items</option>
                                                     <option>Sort By: Best Selling</option>
@@ -53,8 +47,8 @@
                             </div>
                             <div class="shop-p__collection">
                                 <div class="row is-grid-active">
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
-                                        <div class="product-m" v-for="vo in list">
+                                    <div class="col-lg-4 col-md-6 col-sm-6" v-for="vo in list">
+                                        <div class="product-m">
                                             <div class="product-m__thumb">
 
                                                 <a class="aspect" href="#">
