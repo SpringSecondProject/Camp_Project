@@ -15,10 +15,16 @@ $(function(){
 	console.log(${vo})
 })
 </script>
+<style type="text/css">
+.pd-tab__{
+	margin: 0px auto;
+	width: 860px;
+}
+</style>
 </head>
 <body>
     <!--====== App Content ======-->
-    <div class="app-content" id="detailApp">
+    <div class="app-content">
 
         <!--====== Section 1 ======-->
         <div class="u-s-p-t-90">
@@ -194,7 +200,9 @@ $(function(){
                             <div class="u-s-m-b-15">
                                 <div class="pd-detail-inline-2">
                                     <div class="u-s-m-b-15">
-                                        <a class="btn btn--e-brand-b-2" href="../camp/reserve.do?cno=${vo.contentId}">예약하기</a>
+                                    	<c:if test="${sessionScope.userid!=null }">
+	                                        <a class="btn btn--e-brand-b-2" href="../camp/reserve.do?cno=${vo.contentId}">예약하기</a>
+                                    	</c:if>
                                     </div>
                                 </div>
                             </div>
@@ -233,27 +241,137 @@ $(function(){
                             <div class="tab-content">
                             
 								<div class="tab-pane show active" id="pd-descript">
-								    <div class="pd-tab__tag">
-								        <h2 class="u-s-m-b-15">캠핑장 소개</h2>
+								    <div class="pd-tab__">
+								        <c:if test="${vo.intro!='' }">
+									        <table class="table">
+									        	<tr>
+									        		<td>
+									        			<pre style="white-space: normal;background-color: white;border: none;font-size: 12px">${vo.intro }</pre>
+									        			최종정보 수정일 : ${vo.modifiedtime}
+									        		</td>
+									        	</tr>
+									        </table>
+								        </c:if>
+								        <c:if test="${vo.sbrsCl!='' }">
+						        			<h3>
+						        				<i class="fas fa-check-circle u-s-m-r-8" style="color: green;"></i>
+						        				<span style="color: black;">캠핑장 시설정보<span>
+						        			</h3>
+									        <table class="table">
+									        	<tr>
+									        		<td>
+									        			<div class="row" style="background-color: #F9F9F9;">
+									        				<c:forEach var="sbr" items="${sbrsCl}">
+									        					<c:if test="${sbr.check==1}">
+									        						<div style="width: 80px;height: 80px;text-align: center;line-height: 200%;margin: 20px">
+										        						<img src="../images/icon/camp/icon_${sbr.no }.PNG" style="width: 50px;height: 50px;">
+											        					<div>${sbr.text }</div>
+									        						</div>
+									        					</c:if>
+									        				</c:forEach>
+									        			</div>
+									        		</td>
+									        	</tr>
+									        </table>
+								        </c:if>
+					        			<h3>
+					        				<i class="fas fa-check-circle u-s-m-r-8" style="color: green;"></i>
+					        				<span style="color: black;">기타 주요시설<span>
+					        			</h3>
+								        <table class="table" style="font-size: 12px">
+								        	<c:if test="${main!=''}">
+									        	<tr>
+									        		<th class="text-center" width="20%">주요시설</th>
+									        		<td class="text-left" width="80%">
+									        			${main }
+									        		</td>
+									        	</tr>
+								        	</c:if>
+								        	<c:if test="${floor!=''}">
+									        	<tr>
+									        		<th class="text-center" width="20%">바닥형태 (단위:면)</th>
+									        		<td class="text-left" width="80%">
+									        			${floor }
+									        		</td>
+									        	</tr>
+								        	</c:if>
+								        	<c:if test="${size!=''}">
+									        	<tr>
+									        		<th class="text-center" width="20%">사이트 크기</th>
+									        		<td class="text-left" width="80%">
+									        			${size }
+									        		</td>
+									        	</tr>
+								        	</c:if>
+								        	<c:if test="${vo.glampInnerFclty!='' }">
+									        	<tr>
+									        		<th class="text-center" width="20%">글램핑 내부시설</th>
+									        		<td class="text-left" width="80%">
+									        			${vo.glampInnerFclty}
+									        		</td>
+									        	</tr>
+								        	</c:if>
+								        	<c:if test="${vo.caravInnerFclty!='' }">
+									        	<tr>
+									        		<th class="text-center" width="20%">카라반 내부시설</th>
+									        		<td class="text-left" width="80%">
+									        			${vo.caravInnerFclty }
+									        		</td>
+									        	</tr>
+								        	</c:if>
+								        	<c:if test="${vo.animalCmgCl!='' }">
+									        	<tr>
+									        		<th class="text-center" width="20%">반려동물 출입</th>
+									        		<td class="text-left" width="80%">
+									        			${vo.animalCmgCl }
+									        		</td>
+									        	</tr>
+								        	</c:if>
+						        			<c:if test="${vo.brazierCl!='' }">
+									        	<tr>
+									        		<th class="text-center" width="20%">화로대</th>
+									        		<td class="text-left" width="80%">
+									        			${vo.brazierCl }
+									        		</td>
+									        	</tr>
+						        			</c:if>
+						        			<c:if test="${safe!=''}">
+									        	<tr>
+									        		<th class="text-center" width="20%">안전시설현황</th>
+									        		<td class="text-left" width="80%">
+									        			${safe }
+									        		</td>
+									        	</tr>
+						        			</c:if>
+								        </table>
+									    <div class="row">
+									    	<c:forEach var="img" items="${images }">
+										    	<div class="col-md-2">
+												    <div class="thumbnail">
+												        <img src="${img }" alt="Lights" style="height: 80px">
+												    </div>
+												</div>
+									    	</c:forEach>
+									    </div>
 								    </div>
-								</div>
+								</div>	
 								<div class="tab-pane" id="pd-map">
-								    <div class="pd-tab__tag">
+								    <div class="pd-tab__">
 								        <h2 class="u-s-m-b-15">위치/주변정보</h2>
 								    </div>
 								</div>
 								<div class="tab-pane" id="pd-calendar">
-								    <div class="pd-tab__tag">
+								    <div class="pd-tab__">
 								        <h2 class="u-s-m-b-15">예약정보</h2>
 								    </div>
 								</div>
 								<div class="tab-pane" id="pd-review">
-								    <div class="pd-tab__tag">
+								    <div class="pd-tab__">
 								        <h2 class="u-s-m-b-15">리뷰</h2>
 								    </div>
 								</div>
 								<div class="tab-pane" id="pd-notice">
-								    <div class="pd-tab__tag">
+								    <div class="pd-tab__">
 								        <h2 class="u-s-m-b-15">공지</h2>
 								    </div>
 								</div>
