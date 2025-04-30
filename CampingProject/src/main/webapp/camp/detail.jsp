@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +12,7 @@ $(function(){
 		let tab=$(this).attr('href')
 		$('.tab-pane').removeClass("show")
 	})
+	console.log(${vo})
 })
 </script>
 </head>
@@ -45,18 +47,42 @@ $(function(){
                         <div class="pd u-s-m-b-30">
                             <div class="slider-fouc pd-wrap">
                                 <div id="pd-o-initiate">
-                                    <div class="pd-o-img-wrap" :data-src="vo.firstImageUrl">
-                                        <img class="u-img-fluid" :src="vo.firstImageUrl" :data-zoom-image="vo.firstImageUrl" alt="">
-                                    </div>
+                                	<c:if test="${vo.firstImageUrl!=''}">
+	                                    <div class="pd-o-img-wrap" data-src="${vo.firstImageUrl}">
+	                                        <img class="u-img-fluid" src="${vo.firstImageUrl}" data-zoom-image="${vo.firstImageUrl}">
+	                                    </div>
+                                	</c:if>
+                                    <c:forEach begin="0" end="6" var="i">
+	                                    <div class="pd-o-img-wrap" data-src="${images[i] }">
+	                                        <img class="u-img-fluid" src="${images[i] }" data-zoom-image="${images[i] }" style="max-height: 370px">
+	                                    </div>
+                                    </c:forEach>
+                                	<c:if test="${vo.firstImageUrl==''}">
+	                                    <div class="pd-o-img-wrap" data-src="${images[7] }">
+	                                        <img class="u-img-fluid" src="${images[7] }" data-zoom-image="${images[7] }" style="max-height: 370px">
+	                                    </div>
+                                	</c:if>
                                 </div>
                                 <span class="pd-text">Click for larger zoom</span>
                             </div>
                             <div class="u-s-m-t-15">
                                 <div class="slider-fouc">
                                     <div id="pd-o-thumbnail">
-                                        <div>
-                                            <img class="u-img-fluid" :src="vo.firstImageUrl" alt="">
-                                        </div>
+	                                	<c:if test="${vo.firstImageUrl!=''}">
+	                                        <div>
+	                                            <img class="u-img-fluid" src="${vo.firstImageUrl}">
+	                                        </div>
+	                                    </c:if>
+	                                    <c:forEach begin="0" end="6" var="i">
+	                                        <div>
+	                                            <img class="u-img-fluid" src="${images[i] }" style="max-height: 75px">
+	                                        </div>
+	                                    </c:forEach>
+	                                	<c:if test="${vo.firstImageUrl==''}">
+	                                        <div>
+	                                            <img class="u-img-fluid" src="${images[7] }" style="max-height: 75px">
+	                                        </div>
+	                                    </c:if>
                                     </div>
                                 </div>
                             </div>
@@ -68,98 +94,109 @@ $(function(){
                         <!--====== Product Right Side Details ======-->
                         <div class="pd-detail">
                             <div>
-
-                                <span class="pd-detail__name">{{vo.facltNm}}</span>
+                                <span class="pd-detail__name"><h2>${vo.facltNm}</h2></span>
                             </div>
                             <div class="u-s-m-b-15">
-                                <div class="pd-detail__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                                    <span class="pd-detail__review u-s-m-l-4">
-                                        <a data-click-scroll="#view-review">23 Reviews</a>
-                                    </span>
-                                </div>
+                                <span class="pd-detail__preview-desc">${vo.lineIntro }</span></div>
                             </div>
                             <div class="u-s-m-b-15">
-                                <div class="pd-detail__inline">
-
-                                    <span class="pd-detail__stock">200 in stock</span>
-
-                                    <span class="pd-detail__left">Only 2 left</span></div>
+                            	<table class="table" style="font-size: 16px">
+                            		<tr>
+                            			<td class="text-center" width="20%"><b>주소</b></td>
+                            			<td class="text-left" width="80%">
+                            				<c:if test="${vo.addr1!='' || vo.addr2!=''}">
+	                            				${vo.addr1}&nbsp;${vo.addr2}
+                            				</c:if>
+                            				<c:if test="${vo.addr1=='' && vo.addr2==''}">
+	                            				&nbsp;-&nbsp;
+                            				</c:if>
+                            			</td>
+                            		</tr>
+                            		<tr>
+                            			<td class="text-center" width="20%"><b>문의처</b></td>
+                            			<td class="text-left" width="80%">
+                            				<c:if test="${vo.tel!=''}">
+	                            				${vo.tel}
+                            				</c:if>
+                            				<c:if test="${vo.tel==''}">
+	                            				&nbsp;-&nbsp;
+                            				</c:if>
+                            			</td>
+                            		</tr>
+                            		<tr>
+                            			<td class="text-center" width="20%"><b>캠핑장 유형</b></td>
+                            			<td class="text-left" width="80%">
+                            				<c:if test="${vo.lctCl!=''}">
+	                            				${vo.lctCl}
+                            				</c:if>
+                            				<c:if test="${vo.lctCl==''}">
+	                            				&nbsp;-&nbsp;
+                            				</c:if>
+                            			</td>
+                            		</tr>
+                            		<tr>
+                            			<td class="text-center" width="20%"><b>운영기간</b></td>
+                            			<td class="text-left" width="80%">
+                            				<c:if test="${vo.operPdCl!=''}">
+	                            				${vo.operPdCl}
+                            				</c:if>
+                            				<c:if test="${vo.operPdCl==''}">
+	                            				&nbsp;-&nbsp;
+                            				</c:if>
+                            			</td>
+                            		</tr>
+                            		<tr>
+                            			<td class="text-center" width="20%"><b>운영일</b></td>
+                            			<td class="text-left" width="80%">
+                            				<c:if test="${vo.operDeCl!=''}">
+	                            				${vo.operDeCl}
+                            				</c:if>
+                            				<c:if test="${vo.operDeCl==''}">
+	                            				&nbsp;-&nbsp;
+                            				</c:if>
+                            			</td>
+                            		</tr>
+                            		<tr>
+                            			<td class="text-center" width="20%"><b>홈페이지</b></td>
+                            			<td class="text-left" width="80%">
+                            				<c:if test="${vo.homepage!=''}">
+	                            				<a href="${vo.homepage}" target="_blank">홈페이지 바로가기</a>
+                            				</c:if>
+                            				<c:if test="${vo.homepage==''}">
+	                            				&nbsp;-&nbsp;
+                            				</c:if>
+                            			</td>
+                            		</tr>
+                            		<tr>
+                            			<td class="text-center" width="20%"><b>예약방법</b></td>
+                            			<td class="text-left" width="80%">
+                            				<c:if test="${vo.resveCl!=''}">
+	                            				${vo.resveCl}
+                            				</c:if>
+                            				<c:if test="${vo.resveCl==''}">
+	                            				&nbsp;-&nbsp;
+                            				</c:if>
+                            			</td>
+                            		</tr>
+                            		<tr>
+                            			<td class="text-center" width="20%"><b>주변이용가능시설</b></td>
+	                            		<td class="text-left" width="80%">
+	                            			<c:if test="${vo.posblFcltyCl!=''}">
+	                            				${vo.posblFcltyCl}
+	                            			</c:if>
+	                            			<c:if test="${vo.posblFcltyCl==''}">
+	                            				&nbsp;-&nbsp;
+	                            			</c:if>
+	                            		</td>
+                            		</tr>
+                            	</table>
                             </div>
                             <div class="u-s-m-b-15">
-
-                                <span class="pd-detail__preview-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></div>
-                            <div class="u-s-m-b-15">
-                                <div class="pd-detail__inline">
-
-                                    <span class="pd-detail__click-wrap"><i class="far fa-heart u-s-m-r-6"></i>
-
-                                        <a href="signin.html">Add to Wishlist</a>
-
-                                        <span class="pd-detail__click-count">(222)</span></span></div>
-                            </div>
-                            <div class="u-s-m-b-15">
-                                <div class="pd-detail__inline">
-
-                                    <span class="pd-detail__click-wrap"><i class="far fa-envelope u-s-m-r-6"></i>
-
-                                        <a href="signin.html">Email me When the price drops</a>
-
-                                        <span class="pd-detail__click-count">(20)</span></span></div>
-                            </div>
-                            <div class="u-s-m-b-15">
-                                <ul class="pd-social-list">
-                                    <li>
-
-                                        <a class="s-fb--color-hover" href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li>
-
-                                        <a class="s-tw--color-hover" href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li>
-
-                                        <a class="s-insta--color-hover" href="#"><i class="fab fa-instagram"></i></a></li>
-                                    <li>
-
-                                        <a class="s-wa--color-hover" href="#"><i class="fab fa-whatsapp"></i></a></li>
-                                    <li>
-
-                                        <a class="s-gplus--color-hover" href="#"><i class="fab fa-google-plus-g"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="u-s-m-b-15">
-                                <form class="pd-detail__form">
-                                    <div class="pd-detail-inline-2">
-                                        <div class="u-s-m-b-15">
-
-                                            <!--====== Input Counter ======-->
-                                            <div class="input-counter">
-
-                                                <span class="input-counter__minus fas fa-minus"></span>
-
-                                                <input class="input-counter__text input-counter--text-primary-style" type="text" value="1" data-min="1" data-max="1000">
-
-                                                <span class="input-counter__plus fas fa-plus"></span></div>
-                                            <!--====== End - Input Counter ======-->
-                                        </div>
-                                        <div class="u-s-m-b-15">
-
-                                            <button class="btn btn--e-brand-b-2" type="submit">Add to Cart</button></div>
+                                <div class="pd-detail-inline-2">
+                                    <div class="u-s-m-b-15">
+                                        <a class="btn btn--e-brand-b-2" href="../camp/reserve.do?cno=${vo.contentId}">예약하기</a>
                                     </div>
-                                </form>
-                            </div>
-                            <div class="u-s-m-b-15">
-
-                                <span class="pd-detail__label u-s-m-b-8">Product Policy:</span>
-                                <ul class="pd-detail__policy-list">
-                                    <li><i class="fas fa-check-circle u-s-m-r-8"></i>
-
-                                        <span>Buyer Protection.</span></li>
-                                    <li><i class="fas fa-check-circle u-s-m-r-8"></i>
-
-                                        <span>Full Refund if you don't receive your order.</span></li>
-                                    <li><i class="fas fa-check-circle u-s-m-r-8"></i>
-
-                                        <span>Returns accepted if product not as described.</span></li>
-                                </ul>
+                                </div>
                             </div>
                         </div>
                         <!--====== End - Product Right Side Details ======-->
@@ -506,30 +543,5 @@ $(function(){
         <!--====== End - Section 1 ======-->
     </div>
     <!--====== End - App Content ======-->
-    <script>
-    	let detailApp=Vue.createApp({
-    		data(){
-    			return {
-    				cno:${param.cno},
-    				vo:{}
-    			}
-    		},
-    		mounted(){
-    			axios.get('../camp/detail_vue.do',{
-    				params:{
-    					cno:this.cno
-    				}
-    			}).then(res=>{
-    				console.log(res.data)
-    				this.vo=res.data
-    			}).catch(error=>{
-    				console.log(error.response)
-    			})
-    		},
-    		mehtods:{
-    			
-    		}
-    	}).mount("#detailApp")
-    </script>
 </body>
 </html>
