@@ -22,13 +22,8 @@ public class CampController {
 	@Autowired
 	private CampManager cm;
 	
-	@GetMapping("camp/list.do")
-	public String camp_list(Model model) {
-		model.addAttribute("main_jsp","../camp/list.jsp");
-		return "main/main";
-	}
-	
 	private String[] icons={"","전기","무선인터넷","장작판매","온수","트렘폴린","물놀이장","놀이터","산책로","운동장","운동시설","마트.편의점","덤프스테이션"};
+
 	@GetMapping("camp/detail.do")
 	public String camp_detail(int cno,Model model) {
 		String title=service.campGetTitle(cno);

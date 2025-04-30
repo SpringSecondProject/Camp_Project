@@ -1,14 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.aspect_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+</style>
 </head>
 <body>
     <!--====== App Content ======-->
-    <div class="app-content">
+    <div class="app-content" id="listApp">
 
         <!--====== Section 1 ======-->
         <div class="u-s-p-y-90">
@@ -26,12 +34,6 @@
                                     <form>
                                         <div class="tool-style__form-wrap">
                                             <div class="u-s-m-b-8"><select class="select-box select-box--transparent-b-2">
-                                                    <option>Show: 8</option>
-                                                    <option selected>Show: 12</option>
-                                                    <option>Show: 16</option>
-                                                    <option>Show: 28</option>
-                                                </select></div>
-                                            <div class="u-s-m-b-8"><select class="select-box select-box--transparent-b-2">
                                                     <option selected>Sort By: Newest Items</option>
                                                     <option>Sort By: Latest Items</option>
                                                     <option>Sort By: Best Selling</option>
@@ -45,13 +47,13 @@
                             </div>
                             <div class="shop-p__collection">
                                 <div class="row is-grid-active">
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <div class="col-lg-4 col-md-6 col-sm-6" v-for="vo in list">
                                         <div class="product-m">
                                             <div class="product-m__thumb">
 
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="../camp/detail.do">
-
-                                                    <img class="aspect__img" src="images/product/men/product6.jpg" alt=""></a>
+                                                <a class="aspect" href="#">
+  													<img class="aspect_img" :src="'https://www.ocamall.com'+vo.poster" alt="" />
+												</a>
                                                 <div class="product-m__quick-look">
 
                                                     <a class="fas fa-search" data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick Look"></a></div>
@@ -62,10 +64,10 @@
                                             <div class="product-m__content">
                                                 <div class="product-m__category">
 
-                                                    <a href="shop-side-version-2.html">Men Clothing</a></div>
+                                                    <a href="shop-side-version-2.html">{{vo.type}}</a></div>
                                                 <div class="product-m__name">
 
-                                                    <a href="product-detail.html">New Fashion B Nice Elegant</a></div>
+                                                    <a href="../item/detail">{{vo.name}}</a></div>
                                                 <div class="product-m__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i class="far fa-star"></i>
 
                                                     <span class="product-m__review">(23)</span></div>
@@ -73,7 +75,7 @@
                                                 <div class="product-m__hover">
                                                     <div class="product-m__preview-description">
 
-                                                        <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></div>
+                                                        <span></span></div>
                                                     <div class="product-m__wishlist">
 
                                                         <a class="far fa-heart" href="#" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"></a></div>
@@ -870,161 +872,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="u-s-m-b-30">
-                                    <div class="shop-w">
-                                        <div class="shop-w__intro-wrap">
-                                            <h1 class="shop-w__h">COLOR</h1>
-
-                                            <span class="fas fa-minus shop-w__toggle" data-target="#s-color" data-toggle="collapse"></span>
-                                        </div>
-                                        <div class="shop-w__wrap collapse show" id="s-color">
-                                            <ul class="shop-w__list gl-scroll">
-                                                <li>
-                                                    <div class="color__check">
-
-                                                        <input type="checkbox" id="jet">
-
-                                                        <label class="color__check-label" for="jet" style="background-color: #333333"></label></div>
-
-                                                    <span class="shop-w__total-text">(2)</span>
-                                                </li>
-                                                <li>
-                                                    <div class="color__check">
-
-                                                        <input type="checkbox" id="folly">
-
-                                                        <label class="color__check-label" for="folly" style="background-color: #FF0055"></label></div>
-
-                                                    <span class="shop-w__total-text">(4)</span>
-                                                </li>
-                                                <li>
-                                                    <div class="color__check">
-
-                                                        <input type="checkbox" id="yellow">
-
-                                                        <label class="color__check-label" for="yellow" style="background-color: #FFFF00"></label></div>
-
-                                                    <span class="shop-w__total-text">(6)</span>
-                                                </li>
-                                                <li>
-                                                    <div class="color__check">
-
-                                                        <input type="checkbox" id="granite-gray">
-
-                                                        <label class="color__check-label" for="granite-gray" style="background-color: #605F5E"></label></div>
-
-                                                    <span class="shop-w__total-text">(8)</span>
-                                                </li>
-                                                <li>
-                                                    <div class="color__check">
-
-                                                        <input type="checkbox" id="space-cadet">
-
-                                                        <label class="color__check-label" for="space-cadet" style="background-color: #1D3461"></label></div>
-
-                                                    <span class="shop-w__total-text">(10)</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="u-s-m-b-30">
-                                    <div class="shop-w">
-                                        <div class="shop-w__intro-wrap">
-                                            <h1 class="shop-w__h">SIZE</h1>
-
-                                            <span class="fas fa-minus collapsed shop-w__toggle" data-target="#s-size" data-toggle="collapse"></span>
-                                        </div>
-                                        <div class="shop-w__wrap collapse" id="s-size">
-                                            <ul class="shop-w__list gl-scroll">
-                                                <li>
-
-                                                    <!--====== Check Box ======-->
-                                                    <div class="check-box">
-
-                                                        <input type="checkbox" id="xs">
-                                                        <div class="check-box__state check-box__state--primary">
-
-                                                            <label class="check-box__label" for="xs">XS</label></div>
-                                                    </div>
-                                                    <!--====== End - Check Box ======-->
-
-                                                    <span class="shop-w__total-text">(2)</span>
-                                                </li>
-                                                <li>
-
-                                                    <!--====== Check Box ======-->
-                                                    <div class="check-box">
-
-                                                        <input type="checkbox" id="small">
-                                                        <div class="check-box__state check-box__state--primary">
-
-                                                            <label class="check-box__label" for="small">Small</label></div>
-                                                    </div>
-                                                    <!--====== End - Check Box ======-->
-
-                                                    <span class="shop-w__total-text">(4)</span>
-                                                </li>
-                                                <li>
-
-                                                    <!--====== Check Box ======-->
-                                                    <div class="check-box">
-
-                                                        <input type="checkbox" id="medium">
-                                                        <div class="check-box__state check-box__state--primary">
-
-                                                            <label class="check-box__label" for="medium">Medium</label></div>
-                                                    </div>
-                                                    <!--====== End - Check Box ======-->
-
-                                                    <span class="shop-w__total-text">(6)</span>
-                                                </li>
-                                                <li>
-
-                                                    <!--====== Check Box ======-->
-                                                    <div class="check-box">
-
-                                                        <input type="checkbox" id="large">
-                                                        <div class="check-box__state check-box__state--primary">
-
-                                                            <label class="check-box__label" for="large">Large</label></div>
-                                                    </div>
-                                                    <!--====== End - Check Box ======-->
-
-                                                    <span class="shop-w__total-text">(8)</span>
-                                                </li>
-                                                <li>
-
-                                                    <!--====== Check Box ======-->
-                                                    <div class="check-box">
-
-                                                        <input type="checkbox" id="xl">
-                                                        <div class="check-box__state check-box__state--primary">
-
-                                                            <label class="check-box__label" for="xl">XL</label></div>
-                                                    </div>
-                                                    <!--====== End - Check Box ======-->
-
-                                                    <span class="shop-w__total-text">(10)</span>
-                                                </li>
-                                                <li>
-
-                                                    <!--====== Check Box ======-->
-                                                    <div class="check-box">
-
-                                                        <input type="checkbox" id="xxl">
-                                                        <div class="check-box__state check-box__state--primary">
-
-                                                            <label class="check-box__label" for="xxl">XXL</label></div>
-                                                    </div>
-                                                    <!--====== End - Check Box ======-->
-
-                                                    <span class="shop-w__total-text">(12)</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -1034,5 +881,63 @@
         <!--====== End - Section 1 ======-->
     </div>
     <!--====== End - App Content ======-->
+    <script>
+    let listApp=Vue.createApp({
+    	data(){
+    		return {
+    			list:[],
+    			curpage:1,
+    			totalpage:0,
+    			startPage:0,
+    			endPage:0
+    			
+    		}
+    	},
+    	mounted(){
+    		this.dataRecv()
+    	},
+    	methods:{
+    		prev(){
+    			this.curpage=this.startPage-1
+    			this.dataRecv()
+    		},
+    		next(){
+    			this.curpage=this.endPage+1
+    			this.dataRecv()
+    		},
+    		pageChange(page){
+    			this.curpage=page
+    			this.dataRecv()
+    		},
+    		range(start,end){
+    			let arr=[]
+    			let len=end-start
+    			for(let i=0;i<=len;i++)
+    			{
+    				arr[i]=start
+    				start++
+    			}
+    			return arr
+    		},
+    		dataRecv(){
+    			axios.get('http://localhost:8080/web/item/list_vue.do',{
+        			params:{
+        				page:this.curpage,
+        				cno:this.cno
+        			}
+        		}).then(res=>{
+        			console.log(res.date)
+        			this.list=res.data.list
+        			this.curpage=res.data.curpage
+        			this.totalpage=res.data.totalpage
+        			this.startPage=res.data.startPage
+        			this.endPage=res.data.endPage
+        		}).catch(error=>{
+        			console.log(error.response)
+        		})
+    		}
+    	}
+    }).mount("#listApp")
+    </script>
 </body>
 </html>

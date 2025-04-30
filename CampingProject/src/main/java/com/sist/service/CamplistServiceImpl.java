@@ -1,0 +1,32 @@
+package com.sist.service;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sist.vo.*;
+import com.sist.dao.*;
+
+
+@Service
+public class CamplistServiceImpl implements CamplistService {
+	
+    @Autowired
+    private CamplistDAO cDao;
+
+	@Override
+	public List<CampVO> campListData(Map map) {
+		// TODO Auto-generated method stub
+		return cDao.campListData(map);
+	}
+
+	@Override
+	public int campTotalPage() {
+		// TODO Auto-generated method stub
+		return cDao.campTotalPage();
+	}
+
+
+}
