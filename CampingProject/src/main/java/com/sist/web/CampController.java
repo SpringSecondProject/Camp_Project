@@ -22,11 +22,6 @@ public class CampController {
 	@Autowired
 	private CampManager cm;
 	
-	@GetMapping("camp/list.do")
-	public String camp_list(Model model) {
-		model.addAttribute("main_jsp","../camp/list.jsp");
-		return "main/main";
-	}
 	@GetMapping("camp/detail.do")
 	public String camp_detail(int cno,Model model) {
 		String title=service.campGetTitle(cno);
