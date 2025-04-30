@@ -11,8 +11,18 @@ public class ItemDAO {
 	@Autowired
 	private ItemMapper mapper;
 	
-	public List<ItemVO> itemListData(Map map)
+	public List<ItemVO> itemListData(int start,int end)
 	{
-		return mapper.itemListData(map);
+		return mapper.itemListData(start, end);
+	}
+	
+	public int itemTotalPage()
+	{
+		return mapper.itemTotalPage();
+	}
+	
+	public ItemVO itemDetailData(int ino)
+	{
+		return mapper.itemDetailData(ino);
 	}
 }

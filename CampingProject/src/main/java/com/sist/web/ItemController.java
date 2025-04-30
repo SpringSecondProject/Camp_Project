@@ -6,9 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ItemController {
-	@GetMapping("shop/list.do")
+	@GetMapping("item/list.do")
 	public String main(Model model) {
-		model.addAttribute("main_jsp","../shop/list.jsp");
+		model.addAttribute("main_jsp","../item/list.jsp");
+		return "main/main";
+	}
+	@GetMapping("item/detail.do")
+	public String item_detail(Model model) {
+		model.addAttribute("main_jsp","../item/detail.jsp");
 		return "main/main";
 	}
 }

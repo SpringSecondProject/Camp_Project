@@ -147,7 +147,6 @@ $(function(){
                                         <ul style="width:200px">
                                             <li>
                                                 <a href="../camp/list.do">캠핑장 목록</a>
-                                                <a href="../camp/detail.do?cno=4">캠핑장 상세(임시)</a>
                                             </li>
                                         </ul>
                                         <!--====== End - Dropdown ======-->
@@ -158,7 +157,7 @@ $(function(){
                                         <span class="js-menu-toggle"></span>
                                         <ul style="width:200px">
                                             <li>
-                                                <a href="#">Blog Left Sidebar</a>
+                                                <a href="../item/list.do">상품 목록</a>
                                             </li>
                                         </ul>
                                         <!--====== End - Dropdown ======-->

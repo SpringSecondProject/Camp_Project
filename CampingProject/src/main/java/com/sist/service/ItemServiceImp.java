@@ -15,9 +15,19 @@ public class ItemServiceImp implements ItemService{
 	@Autowired
 	private ItemDAO idao;
 	@Override
-	public List<ItemVO> itemListData(Map map) {
+	public List<ItemVO> itemListData(int start,int end) {
 		// TODO Auto-generated method stub
-		return idao.itemListData(map);
+		return idao.itemListData(start, end);
+	}
+	@Override
+	public int itemTotalPage() {
+		// TODO Auto-generated method stub
+		return idao.itemTotalPage();
+	}
+	@Override
+	public ItemVO itemDetailData(int ino) {
+		// TODO Auto-generated method stub
+		return idao.itemDetailData(ino);
 	}
 	
 }
