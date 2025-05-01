@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 gitignore
 복사
@@ -26,3 +27,9 @@ Thumbs.db
 # IDE 관련
 .idea/
 *.iml
+=======
+pom.properties
+ */target/*
+ /build/
+ MANIFEST.MF
+>>>>>>> branch 'main' of https://github.com/SpringSecondProject/Camp_Project.git

@@ -8,7 +8,7 @@
 </head>
 <body>
     <!--====== App Content ======-->
-    <div class="app-content">
+    <div class="app-content" id="campApp">
 
         <!--====== Section 1 ======-->
         <div class="u-s-p-y-90">
@@ -25,12 +25,14 @@
                                         <span class="js-shop-list-target">List</span></div>
                                     <form>
                                         <div class="tool-style__form-wrap">
-                                            <div class="u-s-m-b-8"><select class="select-box select-box--transparent-b-2">
-                                                    <option>Show: 8</option>
-                                                    <option selected>Show: 12</option>
-                                                    <option>Show: 16</option>
-                                                    <option>Show: 28</option>
-                                                </select></div>
+                                            <div class="u-s-m-b-8">
+	                                            <select class="select-box select-box--transparent-b-2" 
+	                                            v-model="rowSize" @change="pageChange(1)">
+	                                                    <option :value="8">Show: 8</option>
+														<option :value="12">Show: 12</option>
+														<option :value="16">Show: 16</option>
+	                                            </select>
+                                            </div>
                                             <div class="u-s-m-b-8"><select class="select-box select-box--transparent-b-2">
                                                     <option selected>Sort By: Newest Items</option>
                                                     <option>Sort By: Latest Items</option>
@@ -45,35 +47,41 @@
                             </div>
                             <div class="shop-p__collection">
                                 <div class="row is-grid-active">
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                	<div :class="colClass" v-for="vo in list">
                                         <div class="product-m">
                                             <div class="product-m__thumb">
 
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="../camp/detail.do">
+                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" :href="'../camp/detail.do?cno='+vo.cno" >
 
-                                                    <img class="aspect__img" src="images/product/men/product6.jpg" alt=""></a>
+                                                    <img class="aspect__img" :src="vo.poster"></a> 
                                                 <div class="product-m__quick-look">
 
                                                     <a class="fas fa-search" data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick Look"></a></div>
-                                                <div class="product-m__add-cart">
+                                                <div class="product-m__add-cart"> 
 
                                                     <a class="btn--e-brand" data-modal="modal" data-modal-id="#add-to-cart">Add to Cart</a></div>
                                             </div>
                                             <div class="product-m__content">
-                                                <div class="product-m__category">
-
-                                                    <a href="shop-side-version-2.html">Men Clothing</a></div>
+                                            	<br>
+		
                                                 <div class="product-m__name">
 
-                                                    <a href="product-detail.html">New Fashion B Nice Elegant</a></div>
-                                                <div class="product-m__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-
-                                                    <span class="product-m__review">(23)</span></div>
-                                                <div class="product-m__price">$125.00</div>
+                                                    <a :href="'/camp/detail.do?cno=' + vo.cno">{{ vo.title }}</a>
+                                                </div>
+                                                <hr style="margin: 5px;">
+                                                <div class="product-m__category" >
+                                                
+                                                    <a href="shop-side-version-2.html">종류 : {{vo.induty}} </a>
+                                                </div>
+                                                    
+                                                
+                                                <div class="product-m__category">
+                                                	<a href="shop-side-version-2.html">환경 정보 : {{vo.lctCl}} </a>
+                                                </div>
                                                 <div class="product-m__hover">
                                                     <div class="product-m__preview-description">
 
-                                                        <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></div>
+                                                        <span>{{vo.intro}}</span></div>
                                                     <div class="product-m__wishlist">
 
                                                         <a class="far fa-heart" href="#" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"></a></div>
@@ -87,22 +95,23 @@
 
                                 <!--====== Pagination ======-->
                                 <ul class="shop-p__pagination">
-                                    <li class="is-active">
-
-                                        <a href="shop-grid-right.html">1</a></li>
-                                    <li>
-
-                                        <a href="shop-grid-right.html">2</a></li>
-                                    <li>
-
-                                        <a href="shop-grid-right.html">3</a></li>
-                                    <li>
-
-                                        <a href="shop-grid-right.html">4</a></li>
-                                    <li>
-
-                                        <a class="fas fa-angle-right" href="shop-grid-right.html"></a></li>
+                               		<li class="page-item" v-if="startPage>1" >
+                                        <a class="page-link" @click="prev()">
+      									<i class="fas fa-angle-left"></i> 이전
+      									</a>
+                                    </li>
+                                        
+                                    <li :class="i==curpage?'is-active':''" v-for="i in range(startPage,endPage)">
+                                        <a @click="pageChange(i)">{{i}}</a>
+                                    </li>
+                                        
+                                    <li class="page-item" v-if="endPage<totalpage">
+                                        <a class="page-link" @click="next()">
+									      다음 <i class="fas fa-angle-right"></i>
+									    </a>
+                                    </li>
                                 </ul>
+                            
                                 <!--====== End - Pagination ======-->
                             </div>
                         </div>
@@ -693,72 +702,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="u-s-m-b-30">
-                                    <div class="shop-w">
-                                        <div class="shop-w__intro-wrap">
-                                            <h1 class="shop-w__h">RATING</h1>
-
-                                            <span class="fas fa-minus shop-w__toggle" data-target="#s-rating" data-toggle="collapse"></span>
-                                        </div>
-                                        <div class="shop-w__wrap collapse show" id="s-rating">
-                                            <ul class="shop-w__list gl-scroll">
-                                                <li>
-                                                    <div class="rating__check">
-
-                                                        <input type="checkbox">
-                                                        <div class="rating__check-star-wrap"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                                                    </div>
-
-                                                    <span class="shop-w__total-text">(2)</span>
-                                                </li>
-                                                <li>
-                                                    <div class="rating__check">
-
-                                                        <input type="checkbox">
-                                                        <div class="rating__check-star-wrap"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
-
-                                                            <span>& Up</span></div>
-                                                    </div>
-
-                                                    <span class="shop-w__total-text">(8)</span>
-                                                </li>
-                                                <li>
-                                                    <div class="rating__check">
-
-                                                        <input type="checkbox">
-                                                        <div class="rating__check-star-wrap"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-
-                                                            <span>& Up</span></div>
-                                                    </div>
-
-                                                    <span class="shop-w__total-text">(10)</span>
-                                                </li>
-                                                <li>
-                                                    <div class="rating__check">
-
-                                                        <input type="checkbox">
-                                                        <div class="rating__check-star-wrap"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-
-                                                            <span>& Up</span></div>
-                                                    </div>
-
-                                                    <span class="shop-w__total-text">(12)</span>
-                                                </li>
-                                                <li>
-                                                    <div class="rating__check">
-
-                                                        <input type="checkbox">
-                                                        <div class="rating__check-star-wrap"><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-
-                                                            <span>& Up</span></div>
-                                                    </div>
-
-                                                    <span class="shop-w__total-text">(1)</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                                 <div class="u-s-m-b-30">
                                     <div class="shop-w">
                                         <div class="shop-w__intro-wrap">
@@ -1034,5 +978,81 @@
         <!--====== End - Section 1 ======-->
     </div>
     <!--====== End - App Content ======-->
+    <script>
+    let campListApp=Vue.createApp({
+    	
+    	data(){
+    		return {
+    			list:[],
+    			curpage:1,
+    			totalpage:0,
+    			startPage:0,
+    			endPage:0,
+    			rowSize:12
+    			 
+    		}
+    	},
+    	computed: {
+			  colClass() {
+			    if (this.rowSize === 8) return "col-lg-6 col-md-6 col-sm-12" 
+			    if (this.rowSize === 12) return "col-lg-4 col-md-6 col-sm-12"
+			    if (this.rowSize === 16) return "col-lg-3 col-md-6 col-sm-12" 
+			    return "col-lg-3 col-md-6 col-sm-12"
+			  }
+		},
+    	mounted(){
+			this.dataRecv()
+    	},
+    	methods:{
+    		
+    		prev(){
+    			this.curpage=this.startPage-1
+    			this.dataRecv()
+    		},
+    		next(){
+    			this.curpage=this.endPage+1
+    			this.dataRecv()
+    			
+    		},
+    		pageChange(page){
+    			this.curpage=page
+    			this.dataRecv()
+    			
+    			
+    		},
+    		range(start,end){
+    			let arr=[]
+    			let len=end-start
+    			for(let i=0;i<=len;i++)
+    			{
+    				arr[i]=start
+    				start++
+    			}
+    			return arr
+    		},
+    		dataRecv(){
+    			axios.get('http://localhost:8080/web/camp/list_vue.do',{
+        			params:{
+        				page:this.curpage,
+        				rowSize: this.rowSize
+        			}
+        		}).then(res=>{
+        			console.log(res.data)
+        			this.list=res.data.list
+        			this.curpage=res.data.curpage
+        			this.totalpage=res.data.totalpage
+        			this.startPage=res.data.startPage
+        			this.endPage=res.data.endPage
+
+        			this.$nextTick(() => {
+        		        setTimeout(() => window.dispatchEvent(new Event('resize')), 100);
+        		    });
+        		}).catch(error=>{
+        			console.log(error.response)
+        		})
+    		}
+    	}
+    }).mount("#campApp")
+    </script>
 </body>
 </html>
