@@ -51,7 +51,7 @@
                                         <div class="product-m">
                                             <div class="product-m__thumb">
 
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="../camp/detail.do" >
+                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" :href="'../camp/detail.do?cno='+vo.cno" >
 
                                                     <img class="aspect__img" :src="vo.poster"></a> 
                                                 <div class="product-m__quick-look">
