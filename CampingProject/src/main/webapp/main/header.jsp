@@ -177,7 +177,7 @@ $(function(){
                                                 <a href="../recipe/chef_list.do">셰프 목록</a>
                                             </li>
                                             <li>
-                                                <a href="../recipe/chef_recipe.do">셰프's 레시피</a>
+                                                <a href="../recipe/chefs_recipe.do">셰프's 레시피</a>
                                             </li>
                                         </ul>
                                         <!--====== End - Dropdown ======-->

@@ -1,0 +1,70 @@
+.list_lump {
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.list_ranking {
+  width: 40px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  color: #555;
+}
+
+.list_mem {
+  margin-left: 10px;
+}
+
+.list_mem img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.list_cont {
+  flex: 1;
+  margin-left: 15px;
+}
+
+.chef_name_box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chef_name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+}
+
+.follow_btn {
+  font-size: 13px;
+  padding: 5px 10px;
+}
+
+.chef_count_box {
+  margin-top: 10px;
+}
+
+.chef_count_box span {
+  margin-right: 15px;
+  color: #666;
+  font-size: 14px;
+}
+
+.chef_count_box i {
+  margin-right: 5px;
+  color: #999;
+}
+.btn-group .btn {
+    min-width: 200px; /* 버튼 넓이 맞추기 */
+    text-align: left; /* 아이콘+텍스트 정렬 */
+}
+.dropdown-menu {
+    min-width: 200px; /* 드롭다운 넓이 맞추기 */
+}
