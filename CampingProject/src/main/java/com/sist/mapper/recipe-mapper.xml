@@ -7,7 +7,12 @@
 		FROM (SELECT no,poster,title,chef,rownum as num  
 		FROM (SELECT no,poster,title,chef 
 		FROM recipeDetail
-		WHERE chef = #{chef} ORDER BY poster DESC)) 
+		<where>
+          <if test="chef != null and chef != ''">
+            chef = #{chef}
+          </if>
+        </where>
+		ORDER BY poster DESC)) 
 		WHERE num BETWEEN #{start} AND #{end}
 	</select>
 	<select id="chefsRecipeTotalPage" parameterType="hashmap" resultType="int">
