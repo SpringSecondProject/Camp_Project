@@ -5,8 +5,12 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.sist.vo.CampVO" alias="CampVO"/>
+ 		<typeAlias type="com.sist.vo.ChefVO" alias="ChefVO"/>
+ 		<typeAlias type="com.sist.vo.RecipeVO" alias="RecipeVO"/>
 	</typeAliases>
   <mappers>
     <mapper resource="com/sist/mapper/camp-mapper.xml"/>
+	<mapper resource="com/sist/mapper/chef-mapper.xml"/>
+ 		<mapper resource="com/sist/mapper/recipe-mapper.xml"/>
   </mappers>
 </configuration>

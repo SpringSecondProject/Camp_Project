@@ -2,3 +2,5 @@ pom.properties
  */target/*
  /build/
  MANIFEST.MF
+ 
+/CampingProject/target/
