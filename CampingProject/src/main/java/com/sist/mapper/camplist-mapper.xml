@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.CamplistMapper">
+
+
+		<select id="campFilter" resultType="CampVO" parameterType="map">
+		    SELECT cno, title, intro, poster, induty, lctcl, addr,doNm, num
+		    FROM (
+		        SELECT cno, title, intro, poster, induty, lctcl, addr,doNm, rownum AS num
+		        FROM (
+		            SELECT /*+ INDEX_ASC(camp camp_no_pk) */
+		                   cno, title, intro, poster, induty, lctcl, addr,doNm
+		            FROM camp
+		            WHERE poster IS NOT NULL
+		            <if test="locations != null and locations.size > 0">
+				        AND (
+				            <foreach item="loc" collection="locations" separator="OR">
+				                doNm LIKE '%' || #{loc} || '%'
+				            </foreach>
+				        )
+				    </if>
+		        )
+		    )
+		    WHERE num BETWEEN #{start} AND #{end}
+		</select>
+
+		<select id="campFilterTotalPage" resultType="int" parameterType="map">
+		    SELECT COUNT(*) 
+		    FROM camp
+		    WHERE poster IS NOT NULL
+            <if test="locations != null and locations.size > 0">
+		        AND (
+		            <foreach item="loc" collection="locations" separator="OR">
+		                doNm LIKE '%' || #{loc} || '%'
+		            </foreach>
+		        )
+		    </if>
+		</select>
+
+</mapper>

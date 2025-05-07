@@ -5,6 +5,7 @@ import java.util.*;
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sist.mapper.CamplistMapper;
@@ -18,7 +19,7 @@ public class CamplistRestController {
 	private CamplistService service;
 
 	@GetMapping("camp/list_vue.do")
-	public Map camp_list(int page, int rowSize) {
+	public Map camp_list(int page, int rowSize, @RequestParam(required = false) String locations) {
 
 		int start = (page - 1) * rowSize + 1;
 		int end = page * rowSize;
@@ -26,11 +27,22 @@ public class CamplistRestController {
 		Map map = new HashMap();
 		map.put("start", start);
 		map.put("end", end);
-
 		
-		List<CampVO> list=service.campListData(map);
-		int total=service.campTotalPage();
-		System.out.println(rowSize);
+	    List<CampVO> list;
+	    int total;
+	    
+	    //지역별 필터 선택했을때랑 안했을때 구분 
+	    if (locations != null && !locations.isEmpty()) {
+	        List<String> locList = Arrays.asList(locations.split(","));
+	        map.put("locations", locList);
+	        list = service.campFilter(map);
+	        total = service.campFilterTotalPage(map);
+	    } else {
+	        list = service.campListData(map);
+	        total = service.campTotalPage();
+	    }
+	    	
+	    // 페이지 카운트 전체 넘겨서 여기서 계산.
 		int totalpage = (int) Math.ceil(total / (double) rowSize);
 		
 		final int BLOCK=10;
@@ -47,6 +59,10 @@ public class CamplistRestController {
 		map.put("curpage", page);
 		map.put("totalpage", totalpage);
 		
+		
+		
+		
 		return map;
 	}
+	
 }

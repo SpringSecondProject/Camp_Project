@@ -28,5 +28,23 @@ public class CamplistServiceImpl implements CamplistService {
 		return cDao.campTotalPage();
 	}
 
+	@Override
+	public List<CampVO> campFilter(Map map) {
+		// TODO Auto-generated method stub
+		return cDao.campFilter(map);
+	}
+
+	@Override
+	public int campFilterTotalPage(Map map) {
+		// TODO Auto-generated method stub
+		return cDao.campFilterTotalPage(map);
+	}
+
+	@Override
+	public List<Map> campLocationCount() {
+		// TODO Auto-generated method stub
+		return cDao.campLocationCount();
+	}
+
 
 }
