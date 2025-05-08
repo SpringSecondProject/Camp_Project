@@ -21,4 +21,13 @@ public interface ItemMapper {
 	@Select("SELECT * FROM item "
 			  +"WHERE ino=#{ino}")
 	public ItemVO itemDetailData(int ino);
+	@Select("SELECT ino,poster,type,name,price,discount,rcount,num "
+	        + "FROM (SELECT ino,poster,type,name,price,discount,rcount,rownum as num "
+	        + "FROM Item WHERE type=#{category}) "
+	        + "WHERE num BETWEEN #{start} AND #{end}")
+	public List<ItemVO> itemListByCategory(@Param("start") int start,
+	                                        @Param("end") int end,
+	                                        @Param("category") String category);
+	@Select("SELECT CEIL(COUNT(*)/20.0) FROM item")
+	public int itemTotalPageByCategory(String category);
 }
