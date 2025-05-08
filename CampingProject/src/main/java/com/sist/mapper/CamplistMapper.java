@@ -7,9 +7,9 @@ import java.util.*;
 public interface CamplistMapper {
 	//camp_no_pk 시퀀스 생성
 	
-	@Select("SELECT cno,title,intro,poster,induty,lctcl,addr,num "
-			+ "FROM (SELECT cno,title,intro,poster,induty,lctcl,addr,rownum as num "
-			+ "FROM (SELECT /*+ INDEX_ASC(camp camp_no_pk) */cno,title,intro,poster,induty,lctcl,addr "
+	@Select("SELECT cno,title,intro,poster,induty,lctcl,addr,price,num "
+			+ "FROM (SELECT cno,title,intro,poster,induty,lctcl,addr,price,rownum as num "
+			+ "FROM (SELECT /*+ INDEX_ASC(camp camp_no_pk) */cno,title,intro,poster,induty,lctcl,addr,price "
 			+ "FROM camp WHERE poster IS NOT NULL))"
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<CampVO> campListData(Map map);

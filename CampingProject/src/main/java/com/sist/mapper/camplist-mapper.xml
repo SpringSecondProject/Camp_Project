@@ -4,12 +4,12 @@
 
 
 		<select id="campFilter" resultType="CampVO" parameterType="map">
-		    SELECT cno, title, intro, poster, induty, lctcl, addr,doNm, num
+		    SELECT cno, title, intro, poster, induty, lctcl, addr,doNm,price, num
 		    FROM (
-		        SELECT cno, title, intro, poster, induty, lctcl, addr,doNm, rownum AS num
+		        SELECT cno, title, intro, poster, induty, lctcl, addr,doNm,price, rownum AS num
 		        FROM (
 		            SELECT /*+ INDEX_ASC(camp camp_no_pk) */
-		                   cno, title, intro, poster, induty, lctcl, addr,doNm
+		                   cno, title, intro, poster, induty, lctcl, addr,doNm,price 
 		            FROM camp
 		            WHERE poster IS NOT NULL
 		            <if test="locations != null and locations.size > 0">
@@ -19,6 +19,15 @@
 				            </foreach>
 				        )
 				    </if>
+				    
+			        <!-- 가격 필터 -->
+		       	    <if test="minPrice != null">
+			          AND price &gt;= #{minPrice}
+			        </if>
+			
+			        <if test="maxPrice != null">
+			          AND price &lt;= #{maxPrice}
+			        </if>
 		        )
 		    )
 		    WHERE num BETWEEN #{start} AND #{end}
@@ -35,6 +44,16 @@
 		            </foreach>
 		        )
 		    </if>
+		    
+		    <!-- 가격 필터 -->
+            <if test="minPrice != null">
+	          AND price &gt;= #{minPrice}
+	        </if>
+	
+	        <if test="maxPrice != null">
+	          AND price &lt;= #{maxPrice}
+	        </if>
+	        
 		</select>
 
 </mapper>

@@ -33,14 +33,7 @@
 														<option :value="16">Show: 16</option>
 	                                            </select>
                                             </div>
-                                            <div class="u-s-m-b-8"><select class="select-box select-box--transparent-b-2">
-                                                    <option selected>Sort By: Newest Items</option>
-                                                    <option>Sort By: Latest Items</option>
-                                                    <option>Sort By: Best Selling</option>
-                                                    <option>Sort By: Best Rating</option>
-                                                    <option>Sort By: Lowest Price</option>
-                                                    <option>Sort By: Highest Price</option>
-                                                </select></div>
+                                            
                                         </div>
                                     </form>
                                 </div>
@@ -64,11 +57,17 @@
                                             <div class="product-m__content">
                                             	<br>
 		
-                                                <div class="product-m__name">
+                                                <div class="product-m__name" >
 
                                                     <a :href="'/camp/detail.do?cno=' + vo.cno">{{ vo.title }}</a>
                                                 </div>
+                                                
+                                                <div class="product-m__name" style="color: #4285F4 !important;" >
+                                                	<a style="color: #4285F4 !important;"href="shop-side-version-2.html">가격 : {{vo.price.toLocaleString()+ '원'}} </a>
+                                                </div>
+                                                
                                                 <hr style="margin: 5px;">
+                                                
                                                 <div class="product-m__category" >
                                                 
                                                     <a href="shop-side-version-2.html">종류 : {{vo.induty}} </a>
@@ -76,13 +75,14 @@
                                                     
                                                 
                                                 <div class="product-m__category">
-                                                	<a href="shop-side-version-2.html">환경 정보 : {{vo.lctCl}} </a>
+                                                	<a href="shop-side-version-2.html">환경 정보 : {{vo.lctCl || '없음' }} </a>
                                                 </div>
+                                                
                                                 <div class="product-m__hover">
                                                     <div class="product-m__preview-description">
 														<span>주소 : {{vo.addr}}</span>
 														<br>
-                                                        <span>정보 : {{vo.intro}}</span></div>
+                                                        <span>정보 : {{ vo.intro || '없음' }}</span></div>
                                                     <div class="product-m__wishlist">
 
                                                         <a class="far fa-heart" href="#" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"></a></div>
@@ -123,6 +123,8 @@
 
                                 <span>FILTERS</span></h1>
                             <div class="shop-w-master__sidebar sidebar--bg-snow">
+                            
+                            <%-- 지역별 필터 영역 --%>
                             <div class="u-s-m-b-30">
                                     <div class="shop-w">
                                         <div class="shop-w__intro-wrap">
@@ -145,6 +147,38 @@
                                         </div>
                                     </div>
                                 </div>
+                                
+                                <%-- 가격별 필터 영역 --%>
+                                <div class="u-s-m-b-30">
+                                    <div class="shop-w">
+                                        <div class="shop-w__intro-wrap">
+                                            <h1 class="shop-w__h">가격</h1>
+
+                                            <span class="fas fa-minus shop-w__toggle" data-target="#s-price" data-toggle="collapse"></span>
+                                        </div>
+                                        <div class="shop-w__wrap collapse show" id="s-price">
+                                            <form class="shop-w__form-p">
+                                                <div class="shop-w__form-p-wrap">
+                                                    <div>
+
+                                                        <label for="price-min"></label>
+
+                                                        <input class="input-text input-text--primary-style" type="text" id="minPrice" v-model="minPrice" placeholder="최소금액"></div>
+                                                    <div>
+
+                                                        <label for="price-max"></label>
+
+                                                        <input class="input-text input-text--primary-style" type="text" id="maxPrice" v-model="maxPrice" placeholder="최대금액"></div>
+                                                    <div>
+
+                                                        <button class="btn btn--icon fas fa-angle-right btn--e-transparent-platinum-b-2" type="button"  @click="pageChange(1)"></button></div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                
                                 <div class="u-s-m-b-30">
                                     <div class="shop-w">
                                         <div class="shop-w__intro-wrap">
@@ -157,16 +191,29 @@
                                                 <li>
 
                                                     <!--====== Check Box ======-->
-                                                    <div class="check-box">
-
-                                                        <input type="checkbox" id="free-shipping">
-                                                        <div class="check-box__state check-box__state--primary">
-
-                                                            <label class="check-box__label" for="free-shipping">Free Shipping</label></div>
-                                                    </div>
+                                                    <div class="radio-box">
+													  <input type="radio" id="dog-small" name="pet" value="소형견 가능" v-model="selectedPet">
+													  <div class="radio-box__state radio-box__state--primary">
+													    <label class="radio-box__label" for="dog-small">소형견 가능</label>
+													  </div><br>
+													</div>
+													
+													<div class="radio-box">
+													  <input type="radio" id="dog-all" name="pet" value="모든견종 가능" v-model="selectedPet">
+													  <div class="radio-box__state radio-box__state--primary">
+													    <label class="radio-box__label" for="dog-all">모든견종 가능</label>
+													  </div><br>
+													</div>
+													
+													<div class="radio-box">
+													  <input type="radio" id="no-pet" name="pet" value="애견동반 불가" v-model="selectedPet">
+													  <div class="radio-box__state radio-box__state--primary">
+													    <label class="radio-box__label" for="no-pet">애견동반 불가</label>
+													  </div>
+													</div>
                                                     <!--====== End - Check Box ======-->
                                                 </li>
-                                            </ul>
+                                            </ul> 
                                         </div>
                                     </div>
                                 </div>
@@ -239,34 +286,7 @@
                                 </div>
                                 
                                 
-                                <div class="u-s-m-b-30">
-                                    <div class="shop-w">
-                                        <div class="shop-w__intro-wrap">
-                                            <h1 class="shop-w__h">PRICE</h1>
-
-                                            <span class="fas fa-minus shop-w__toggle" data-target="#s-price" data-toggle="collapse"></span>
-                                        </div>
-                                        <div class="shop-w__wrap collapse show" id="s-price">
-                                            <form class="shop-w__form-p">
-                                                <div class="shop-w__form-p-wrap">
-                                                    <div>
-
-                                                        <label for="price-min"></label>
-
-                                                        <input class="input-text input-text--primary-style" type="text" id="price-min" placeholder="Min"></div>
-                                                    <div>
-
-                                                        <label for="price-max"></label>
-
-                                                        <input class="input-text input-text--primary-style" type="text" id="price-max" placeholder="Max"></div>
-                                                    <div>
-
-                                                        <button class="btn btn--icon fas fa-angle-right btn--e-transparent-platinum-b-2" type="submit"></button></div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                                 
                                 <div class="u-s-m-b-30">
                                     <div class="shop-w">
@@ -444,8 +464,9 @@
     			endPage:0,
     			rowSize:12,
     			locations: [], // 지역별 필터
-    			locationCounts: [] // 지역별 갯수
-    			  
+    			locationCounts: [], // 지역별 갯수
+    			minPrice: null, // 금액별 필터
+    		    maxPrice: null
     		}
     	},
     	computed: {
@@ -495,19 +516,26 @@
     			return arr
     		},
     		dataRecv(){
+    			console.log("최소금액:", this.minPrice)
+    			console.log("최대금액:", this.maxPrice)
+    			
     			axios.get('http://localhost:8080/web/camp/list_vue.do',{
         			params:{
         				page:this.curpage,
         				rowSize: this.rowSize,
-        				locations: this.locations.join(',')
+        				locations: this.locations.join(','),
+        			    minPrice: this.minPrice,
+        			    maxPrice: this.maxPrice
         			}
         		}).then(res=>{
+        			console.log(res.data)
         			this.list=res.data.list
         			this.curpage=res.data.curpage
         			this.totalpage=res.data.totalpage
         			this.startPage=res.data.startPage
         			this.endPage=res.data.endPage
-
+					
+        			
         			this.$nextTick(() => {
         		        setTimeout(() => window.dispatchEvent(new Event('resize')), 100);
         		    });
