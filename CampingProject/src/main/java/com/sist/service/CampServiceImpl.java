@@ -15,4 +15,9 @@ public class CampServiceImpl implements CampService{
 	public String campGetTitle(int cno) {
 		return cDao.campGetTitle(cno);
 	}
+
+	@Override
+	public CampVO campDetailData(int cno) {
+		return cDao.campDetailData(cno);
+	}
 }

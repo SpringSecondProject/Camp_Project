@@ -1,6 +1,7 @@
 package com.sist.dao;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -24,5 +25,15 @@ public class ItemDAO {
 	public ItemVO itemDetailData(int ino)
 	{
 		return mapper.itemDetailData(ino);
+	}
+	
+	public List<ItemVO> itemListByCategory(int start,int end,String category)
+	{
+		return mapper.itemListByCategory(start, end, category);
+	}
+
+	public int itemTotalPageByCategory(String category)
+	{
+		return mapper.itemTotalPageByCategory(category);
 	}
 }

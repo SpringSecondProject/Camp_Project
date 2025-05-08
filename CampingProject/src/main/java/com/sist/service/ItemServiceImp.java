@@ -29,5 +29,15 @@ public class ItemServiceImp implements ItemService{
 		// TODO Auto-generated method stub
 		return idao.itemDetailData(ino);
 	}
+	@Override
+	public List<ItemVO> itemListByCategory(int start, int end, String category) {
+		// TODO Auto-generated method stub
+		return idao.itemListByCategory(start, end, category);
+	}
+	@Override
+	public int itemTotalPageByCategory(String category) {
+		// TODO Auto-generated method stub
+		return idao.itemTotalPageByCategory(category);
+	}
 	
 }
