@@ -132,69 +132,15 @@
                                         </div>
                                         <div class="shop-w__wrap collapse show" id="s-manufacturer">
                                             <ul class="shop-w__list-2">
-                                                <li>
-                                                    <div class="list__content">
-
-                                                        <input type="checkbox" value="서울" v-model="locations" @change="pageChange(1)">
-
-                                                        <span>서울특별시</span></div>
-			
-                                                    <span class="shop-w__total-text">(23)</span>
-                                                </li>
-                                                <li>
-                                                    <div class="list__content">
-
-                                                        <input type="checkbox" value="경기" v-model="locations" @change="pageChange(1)">
-
-                                                        <span>경기도</span></div>
-
-                                                    <span class="shop-w__total-text">(2)</span>
-                                                </li>
-                                                <li>
-                                                    <div class="list__content">
-
-                                                        <input type="checkbox" value="강원" v-model="locations" @change="pageChange(1)">
-
-                                                        <span>강원도</span></div>
-
-                                                    <span class="shop-w__total-text">(2)</span>
-                                                </li>
-                                                <li>
-                                                    <div class="list__content">
-
-                                                        <input type="checkbox" value="충청" v-model="locations" @change="pageChange(1)">
-
-                                                        <span>충청도</span></div>
-
-                                                    <span class="shop-w__total-text">(9)</span>
-                                                </li>
-                                                <li>
-                                                    <div class="list__content">
-
-                                                        <input type="checkbox" value="전라" v-model="locations" @change="pageChange(1)">
-
-                                                        <span>전라도</span></div>
-
-                                                    <span class="shop-w__total-text">(3)</span>
-                                                </li>
-                                                <li>
-                                                    <div class="list__content">
-
-                                                        <input type="checkbox" value="경상" v-model="locations" @change="pageChange(1)">
-
-                                                        <span>경상도</span></div>
-
-                                                    <span class="shop-w__total-text">(3)</span>
-                                                </li>
-                                                <li>
-                                                    <div class="list__content">
-
-                                                        <input type="checkbox" value="제주" v-model="locations" @change="pageChange(1)">
-
-                                                        <span>제주도</span></div>
-
-                                                    <span class="shop-w__total-text">(3)</span>
-                                                </li>
+                                                
+                                                <li v-for="item in locationCounts" :key="item.name">
+												  <div class="list__content">
+												    <input type="checkbox" :value="item.name" v-model="locations" @change="pageChange(1)">
+												    <span>{{ item.name }}</span>
+												  </div>
+												  <span class="shop-w__total-text">({{ item.cnt }})</span>
+												</li>
+                                                
                                             </ul>
                                         </div>
                                     </div>
@@ -497,8 +443,9 @@
     			startPage:0,
     			endPage:0,
     			rowSize:12,
-    			locations: []
-    			 
+    			locations: [], // 지역별 필터
+    			locationCounts: [] // 지역별 갯수
+    			  
     		}
     	},
     	computed: {
@@ -511,9 +458,17 @@
 		},
     	mounted(){
 			this.dataRecv()
+			this.getLocationCounts()
     	},
     	methods:{
-    		
+   		 	getLocationCounts() { // 지역별 필터 갯수
+   			    axios.get("http://localhost:8080/web/camp/location_count_vue.do")
+   			      .then(res => {
+   			        this.locationCounts = res.data
+   			      }).catch(err => {
+   			        console.error(err)
+   			      })
+   			},
     		prev(){
     			this.curpage=this.startPage-1
     			this.dataRecv()

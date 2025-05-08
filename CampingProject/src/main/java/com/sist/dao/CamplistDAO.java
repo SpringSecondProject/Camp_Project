@@ -24,7 +24,8 @@ public class CamplistDAO {
 	public int campFilterTotalPage(Map map) {
 		return mapper.campFilterTotalPage(map);
 	}
-	public List<Map> campLocationCount(){
+	public List<CampVO> campLocationCount(){
 		return mapper.campLocationCount();
 	}
+	
 }

@@ -41,7 +41,7 @@ public class CamplistServiceImpl implements CamplistService {
 	}
 
 	@Override
-	public List<Map> campLocationCount() {
+	public List<CampVO> campLocationCount() {
 		// TODO Auto-generated method stub
 		return cDao.campLocationCount();
 	}

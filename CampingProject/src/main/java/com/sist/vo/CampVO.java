@@ -35,4 +35,7 @@ import java.util.*;
 public class CampVO {
 	private int cno,gnrlSiteCo,autoSiteCo,glampSiteCo,caravSiteCo,indvdlCaravSiteCo,hit,fCount,lCount,rCount;
 	private String title,intro,poster,manageSttus,hovofBgnde,hvofEnddle,operPdCl,induty,lctCl,addr,doNm,caravAcmpnyAt,trlerAcmpnyAt,animalCmgCl,mapX,mapY;
+	// 캠핑장 필터 
+	private String name;
+	private int cnt;
 }

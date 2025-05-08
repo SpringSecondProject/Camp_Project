@@ -57,9 +57,9 @@ public interface CamplistMapper {
 	public int campFilterTotalPage(Map map); 
 	
 	
-	
+	 
 	@Select("SELECT doNm AS name, COUNT(*) AS cnt "
 			+ "FROM camp "
 			+ "WHERE poster IS NOT NULL GROUP BY doNm")
-	public List<Map> campLocationCount();
+	public List<CampVO> campLocationCount();
 }

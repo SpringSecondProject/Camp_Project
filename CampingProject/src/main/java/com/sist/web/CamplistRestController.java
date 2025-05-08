@@ -60,9 +60,18 @@ public class CamplistRestController {
 		map.put("totalpage", totalpage);
 		
 		
-		
-		
 		return map;
+	}
+	@GetMapping("camp/location_count_vue.do")
+	public List<CampVO> locationCount() {
+		List<CampVO> list=service.campLocationCount();
+		
+	    // 우선순위 정의
+	    List<String> priority = Arrays.asList("서울특별시", "경기도", "충청도", "경상도", "전라도", "강원도", "제주도");
+
+	    // 정렬
+	    list.sort(Comparator.comparingInt(o -> priority.indexOf(o.getName())));
+	    return list;
 	}
 	
 }
