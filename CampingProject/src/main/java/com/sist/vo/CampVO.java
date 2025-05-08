@@ -38,4 +38,6 @@ public class CampVO {
 	// 캠핑장 필터 
 	private String name;
 	private int cnt;
+	// 가격 db에 추가
+	private int price;
 }
