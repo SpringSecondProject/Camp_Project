@@ -4,12 +4,12 @@
 
 
 		<select id="campFilter" resultType="CampVO" parameterType="map">
-		    SELECT cno, title, intro, poster, induty, lctcl, addr,doNm,price, num
+		    SELECT cno, title, intro, poster, induty, lctcl, addr,doNm,price,animalcmgcl, num
 		    FROM (
-		        SELECT cno, title, intro, poster, induty, lctcl, addr,doNm,price, rownum AS num
+		        SELECT cno, title, intro, poster, induty, lctcl, addr,doNm,price,animalcmgcl, rownum AS num
 		        FROM (
-		            SELECT /*+ INDEX_ASC(camp camp_no_pk) */
-		                   cno, title, intro, poster, induty, lctcl, addr,doNm,price 
+		            SELECT /*+ INDEX_ASC(camp camp_cno_pk) */
+		                   cno, title, intro, poster, induty, lctcl, addr,doNm,price,animalcmgcl 
 		            FROM camp
 		            WHERE poster IS NOT NULL
 		            <if test="locations != null and locations.size > 0">
@@ -28,6 +28,20 @@
 			        <if test="maxPrice != null">
 			          AND price &lt;= #{maxPrice}
 			        </if>
+			        
+			        <!-- 펫 가능 필터 -->
+			        <if test="pet != null and pet != ''">
+					  AND animalCmgCl = #{pet}
+					</if>
+					
+					<!-- 캠핑장 종류 필터 -->
+					<if test="types !=null and types.size > 0">
+					  AND (
+					    <foreach item="t" collection="types" separator="OR">
+					      induty LIKE '%' || #{t} || '%'
+					    </foreach>
+					  )
+					</if>
 		        )
 		    )
 		    WHERE num BETWEEN #{start} AND #{end}
@@ -54,6 +68,19 @@
 	          AND price &lt;= #{maxPrice}
 	        </if>
 	        
+       		<!-- 펫 가능 필터 -->
+	        <if test="pet != null and pet != ''">
+			  AND animalCmgCl = #{pet}
+			</if>
+			
+			<if test="types != null and types.size > 0 ">
+			  AND (
+			  	<foreach item="t" collection="types" separator="OR">
+			  	  induty LIKE '%' || #{t} || '%'
+			  	</foreach>
+			  )			  
+			</if>
+			
 		</select>
 
 </mapper>

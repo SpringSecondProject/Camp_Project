@@ -27,5 +27,8 @@ public class CamplistDAO {
 	public List<CampVO> campLocationCount(){
 		return mapper.campLocationCount();
 	}
+	public List<String> campIndutyList(){
+		return mapper.campIndutyList();
+	}
 	
 }

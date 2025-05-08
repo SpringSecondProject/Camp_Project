@@ -14,4 +14,5 @@ public interface CamplistService {
 	public List<CampVO> campFilter(Map map); 
 	public int campFilterTotalPage(Map map);
 	public List<CampVO> campLocationCount();
+	public List<String> campIndutyList();
 }

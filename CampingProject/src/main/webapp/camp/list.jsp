@@ -72,6 +72,11 @@
                                                 
                                                     <a href="shop-side-version-2.html">종류 : {{vo.induty}} </a>
                                                 </div>
+                                                
+                                                <div class="product-m__category" >
+                                                
+                                                    <a href="shop-side-version-2.html">애견 동반 : {{vo.animalCmgCl}} </a>
+                                                </div>
                                                     
                                                 
                                                 <div class="product-m__category">
@@ -184,176 +189,84 @@
                                         <div class="shop-w__intro-wrap">
                                             <h1 class="shop-w__h">애견 동반</h1>
 
-                                            <span class="fas fa-minus shop-w__toggle" data-target="#s-shipping" data-toggle="collapse"></span>
+                                            <span class="fas fa-minus shop-w__toggle" data-target="#s-pet" data-toggle="collapse"></span>
                                         </div>
-                                        <div class="shop-w__wrap collapse show" id="s-shipping">
+                                        <div class="shop-w__wrap collapse show" id="s-pet">
                                             <ul class="shop-w__list gl-scroll">
-                                                <li>
-
-                                                    <!--====== Check Box ======-->
-                                                    <div class="radio-box">
-													  <input type="radio" id="dog-small" name="pet" value="소형견 가능" v-model="selectedPet">
-													  <div class="radio-box__state radio-box__state--primary">
-													    <label class="radio-box__label" for="dog-small">소형견 가능</label>
-													  </div><br>
-													</div>
-													
-													<div class="radio-box">
-													  <input type="radio" id="dog-all" name="pet" value="모든견종 가능" v-model="selectedPet">
-													  <div class="radio-box__state radio-box__state--primary">
-													    <label class="radio-box__label" for="dog-all">모든견종 가능</label>
-													  </div><br>
-													</div>
-													
-													<div class="radio-box">
-													  <input type="radio" id="no-pet" name="pet" value="애견동반 불가" v-model="selectedPet">
-													  <div class="radio-box__state radio-box__state--primary">
-													    <label class="radio-box__label" for="no-pet">애견동반 불가</label>
-													  </div>
-													</div>
-                                                    <!--====== End - Check Box ======-->
-                                                </li>
-                                            </ul> 
+                                            	
+											  <li>
+											    <div class="radio-box">
+											      <input type="radio" id="dog-small" value="" v-model="selectedPet" @change="pageChange(1)">
+											      <div class="radio-box__state radio-box__state--primary">
+											        <label class="radio-box__label">전체</label>
+											      </div>
+											    </div>
+											  </li>
+											  
+											  <li>
+											    <div class="radio-box">
+											      <input type="radio" id="dog-small" value="가능(소형견)" v-model="selectedPet" @change="pageChange(1)">
+											      <div class="radio-box__state radio-box__state--primary">
+											        <label class="radio-box__label">소형견 가능</label>
+											      </div>
+											    </div>
+											  </li>
+											  
+											  <li>
+											    <div class="radio-box">
+											      <input type="radio" id="dog-all" value="가능" v-model="selectedPet" @change="pageChange(1)">
+											      <div class="radio-box__state radio-box__state--primary">
+											        <label class="radio-box__label">모든견종 가능</label>
+											      </div>
+											    </div>
+											  </li>
+											
+											  <li>
+											    <div class="radio-box">
+											      <input type="radio" id="no-pet" value="불가능" v-model="selectedPet" @change="pageChange(1)">
+											      <div class="radio-box__state radio-box__state--primary">
+											        <label class="radio-box__label">애견동반 불가</label>
+											      </div>
+											    </div>
+											  </li>
+											</ul>	
                                         </div>
                                     </div>
                                 </div>
-                                <div class="u-s-m-b-30">
+                                
+								<div class="u-s-m-b-30">
                                     <div class="shop-w">
                                         <div class="shop-w__intro-wrap">
-                                            <h1 class="shop-w__h">CATEGORY</h1>
+                                            <h1 class="shop-w__h">캠핑 유형</h1>
 
-                                            <span class="fas fa-minus shop-w__toggle" data-target="#s-category" data-toggle="collapse"></span>
+                                            <span class="fas fa-minus shop-w__toggle" data-target="#s-type" data-toggle="collapse"></span>
                                         </div>
-                                        <div class="shop-w__wrap collapse show" id="s-category">
-                                            <ul class="shop-w__category-list gl-scroll">
-                                                <li class="has-list">
-
-                                                    <a href="#">Electronics</a>
-
-                                                    <span class="category-list__text u-s-m-l-6">(23)</span>
-
-                                                    <span class="js-shop-category-span is-expanded fas fa-plus u-s-m-l-6"></span>
-                                                    <ul style="display:block">
-                                                        <li class="has-list">
-
-                                                            <a href="#">3D Printer & Supplies</a>
-
-                                                            <span class="js-shop-category-span fas fa-plus u-s-m-l-6"></span>
-                                                            <ul>
-                                                                <li>
-
-                                                                    <a href="#">3d Printer</a></li>
-                                                                <li>
-
-                                                                    <a href="#">3d Printing Pen</a></li>
-                                                                <li>
-
-                                                                    <a href="#">3d Printing Accessories</a></li>
-                                                                <li>
-
-                                                                    <a href="#">3d Printer Module Board</a></li>
-                                                            </ul>
-                                                        </li>
-                                                        
-                                                        <li class="has-list">
-
-                                                            <a href="#">Necessary Accessories</a>
-
-                                                            <span class="js-shop-category-span fas fa-plus u-s-m-l-6"></span>
-                                                            <ul>
-                                                                <li>
-
-                                                                    <a href="#">Flash Cards</a></li>
-                                                                <li>
-
-                                                                    <a href="#">Memory Cards</a></li>
-                                                                <li>
-
-                                                                    <a href="#">Flash Pins</a></li>
-                                                                <li>
-
-                                                                    <a href="#">Compact Discs</a></li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                </li>
+                                        <div class="shop-w__wrap collapse show" id="s-type">
+                                            <ul class="shop-w__list gl-scroll">
+												
+												<li v-for="item in typeCounts" :key="item.induty">
+												  <div class="check-box">
+												    <input type="checkbox" :value="item.induty" v-model="selectedTypes" @change="pageChange(1)">
+												    <div class="check-box__state check-box__state--primary">
+												      <label class="check-box__label">{{ item.induty }}</label>
+												    </div>
+												  </div>
+												  <span class="shop-w__total-text">({{ item.cnt }})</span>
+												</li>
                                                 
-                                                
-                                               
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                                
-                                
-                                
-                                
+                                        
                                 <div class="u-s-m-b-30">
                                     <div class="shop-w">
                                         <div class="shop-w__intro-wrap">
-                                            <h1 class="shop-w__h">COLOR</h1>
+                                            <h1 class="shop-w__h">자연 환경</h1>
 
-                                            <span class="fas fa-minus shop-w__toggle" data-target="#s-color" data-toggle="collapse"></span>
+                                            <span class="fas fa-minus shop-w__toggle" data-target="#s-envir" data-toggle="collapse"></span>
                                         </div>
-                                        <div class="shop-w__wrap collapse show" id="s-color">
-                                            <ul class="shop-w__list gl-scroll">
-                                                <li>
-                                                    <div class="color__check">
-
-                                                        <input type="checkbox" id="jet">
-
-                                                        <label class="color__check-label" for="jet" style="background-color: #333333"></label></div>
-
-                                                    <span class="shop-w__total-text">(2)</span>
-                                                </li>
-                                                <li>
-                                                    <div class="color__check">
-
-                                                        <input type="checkbox" id="folly">
-
-                                                        <label class="color__check-label" for="folly" style="background-color: #FF0055"></label></div>
-
-                                                    <span class="shop-w__total-text">(4)</span>
-                                                </li>
-                                                <li>
-                                                    <div class="color__check">
-
-                                                        <input type="checkbox" id="yellow">
-
-                                                        <label class="color__check-label" for="yellow" style="background-color: #FFFF00"></label></div>
-
-                                                    <span class="shop-w__total-text">(6)</span>
-                                                </li>
-                                                <li>
-                                                    <div class="color__check">
-
-                                                        <input type="checkbox" id="granite-gray">
-
-                                                        <label class="color__check-label" for="granite-gray" style="background-color: #605F5E"></label></div>
-
-                                                    <span class="shop-w__total-text">(8)</span>
-                                                </li>
-                                                <li>
-                                                    <div class="color__check">
-
-                                                        <input type="checkbox" id="space-cadet">
-
-                                                        <label class="color__check-label" for="space-cadet" style="background-color: #1D3461"></label></div>
-
-                                                    <span class="shop-w__total-text">(10)</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="u-s-m-b-30">
-                                    <div class="shop-w">
-                                        <div class="shop-w__intro-wrap">
-                                            <h1 class="shop-w__h">SIZE</h1>
-
-                                            <span class="fas fa-minus collapsed shop-w__toggle" data-target="#s-size" data-toggle="collapse"></span>
-                                        </div>
-                                        <div class="shop-w__wrap collapse" id="s-size">
+                                        <div class="shop-w__wrap collapse show" id="s-envir">
                                             <ul class="shop-w__list gl-scroll">
                                                 <li>
 
@@ -363,7 +276,7 @@
                                                         <input type="checkbox" id="xs">
                                                         <div class="check-box__state check-box__state--primary">
 
-                                                            <label class="check-box__label" for="xs">XS</label></div>
+                                                            <label class="check-box__label" for="xs">산</label></div>
                                                     </div>
                                                     <!--====== End - Check Box ======-->
 
@@ -377,7 +290,7 @@
                                                         <input type="checkbox" id="small">
                                                         <div class="check-box__state check-box__state--primary">
 
-                                                            <label class="check-box__label" for="small">Small</label></div>
+                                                            <label class="check-box__label" for="small">강</label></div>
                                                     </div>
                                                     <!--====== End - Check Box ======-->
 
@@ -391,7 +304,7 @@
                                                         <input type="checkbox" id="medium">
                                                         <div class="check-box__state check-box__state--primary">
 
-                                                            <label class="check-box__label" for="medium">Medium</label></div>
+                                                            <label class="check-box__label" for="medium">호수</label></div>
                                                     </div>
                                                     <!--====== End - Check Box ======-->
 
@@ -405,7 +318,7 @@
                                                         <input type="checkbox" id="large">
                                                         <div class="check-box__state check-box__state--primary">
 
-                                                            <label class="check-box__label" for="large">Large</label></div>
+                                                            <label class="check-box__label" for="large">계곡</label></div>
                                                     </div>
                                                     <!--====== End - Check Box ======-->
 
@@ -419,7 +332,7 @@
                                                         <input type="checkbox" id="xl">
                                                         <div class="check-box__state check-box__state--primary">
 
-                                                            <label class="check-box__label" for="xl">XL</label></div>
+                                                            <label class="check-box__label" for="xl">숲</label></div>
                                                     </div>
                                                     <!--====== End - Check Box ======-->
 
@@ -430,14 +343,42 @@
                                                     <!--====== Check Box ======-->
                                                     <div class="check-box">
 
-                                                        <input type="checkbox" id="xxl">
+                                                        <input type="checkbox" id="xl">
                                                         <div class="check-box__state check-box__state--primary">
 
-                                                            <label class="check-box__label" for="xxl">XXL</label></div>
+                                                            <label class="check-box__label" for="xl">해변</label></div>
                                                     </div>
                                                     <!--====== End - Check Box ======-->
 
-                                                    <span class="shop-w__total-text">(12)</span>
+                                                    <span class="shop-w__total-text">(10)</span>
+                                                </li>
+                                                <li>
+
+                                                    <!--====== Check Box ======-->
+                                                    <div class="check-box">
+
+                                                        <input type="checkbox" id="xl">
+                                                        <div class="check-box__state check-box__state--primary">
+
+                                                            <label class="check-box__label" for="xl">도심</label></div>
+                                                    </div>
+                                                    <!--====== End - Check Box ======-->
+
+                                                    <span class="shop-w__total-text">(10)</span>
+                                                </li>
+                                                <li>
+
+                                                    <!--====== Check Box ======-->
+                                                    <div class="check-box">
+
+                                                        <input type="checkbox" id="xl">
+                                                        <div class="check-box__state check-box__state--primary">
+
+                                                            <label class="check-box__label" for="xl">섬</label></div>
+                                                    </div>
+                                                    <!--====== End - Check Box ======-->
+
+                                                    <span class="shop-w__total-text">(10)</span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -466,7 +407,10 @@
     			locations: [], // 지역별 필터
     			locationCounts: [], // 지역별 갯수
     			minPrice: null, // 금액별 필터
-    		    maxPrice: null
+    		    maxPrice: null,
+    		    selectedPet:'', // 팻 필터
+    		    selectedTypes: [], // 캠핑장 종류 필터
+    		    typeCounts: [] // 종류별 갯수
     		}
     	},
     	computed: {
@@ -480,8 +424,15 @@
     	mounted(){
 			this.dataRecv()
 			this.getLocationCounts()
+			this.getTypeCounts()
     	},
     	methods:{
+   		    getTypeCounts() {
+   			  axios.get("http://localhost:8080/web/camp/type_count_vue.do")
+   			    .then(res => {
+   			      this.typeCounts = res.data // 캠핑장 종류별 필터 갯수
+   			    })
+   			},
    		 	getLocationCounts() { // 지역별 필터 갯수
    			    axios.get("http://localhost:8080/web/camp/location_count_vue.do")
    			      .then(res => {
@@ -518,14 +469,17 @@
     		dataRecv(){
     			console.log("최소금액:", this.minPrice)
     			console.log("최대금액:", this.maxPrice)
-    			
+    			console.log("selectedPet:", this.selectedPet)
+    			console.log("selectedTypes:", this.selectedTypes)
     			axios.get('http://localhost:8080/web/camp/list_vue.do',{
         			params:{
         				page:this.curpage,
         				rowSize: this.rowSize,
-        				locations: this.locations.join(','),
-        			    minPrice: this.minPrice,
-        			    maxPrice: this.maxPrice
+        				locations: this.locations.join(','), // 지역필터
+        			    minPrice: this.minPrice, //금액필터
+        			    maxPrice: this.maxPrice,
+        			    pet: this.selectedPet, // 펫 필터
+        			    types: this.selectedTypes.join(',') // 캠핑장 종류
         			}
         		}).then(res=>{
         			console.log(res.data)

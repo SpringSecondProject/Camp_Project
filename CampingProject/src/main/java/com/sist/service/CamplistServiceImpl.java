@@ -46,5 +46,11 @@ public class CamplistServiceImpl implements CamplistService {
 		return cDao.campLocationCount();
 	}
 
+	@Override
+	public List<String> campIndutyList() {
+		// TODO Auto-generated method stub
+		return cDao.campIndutyList();
+	}
+
 
 }
