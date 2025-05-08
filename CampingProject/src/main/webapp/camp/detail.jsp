@@ -103,7 +103,7 @@ $(function(){
                                 <span class="pd-detail__name"><h2>${vo.facltNm}</h2></span>
                             </div>
                             <div class="u-s-m-b-15">
-                                <span class="pd-detail__preview-desc">${vo.lineIntro }</span></div>
+                                <span class="pd-detail__preview-desc">${vo.lineIntro }</span>
                             </div>
                             <div class="u-s-m-b-15">
                             	<table class="table" style="font-size: 16px">
