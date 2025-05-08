@@ -14,4 +14,7 @@ public class CampDAO {
 	public String campGetTitle(int cno) {
 		return mapper.campGetTitle(cno);
 	}
+	public CampVO campDetailData(int cno) {
+		return mapper.campDetailData(cno);
+	}
 }

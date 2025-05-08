@@ -15,4 +15,9 @@ public class CampRestController {
 	@Autowired
 	private CampService service;
 	
+	@GetMapping("camp/detail_vue.do")
+	public CampVO camp_detail(int cno) {
+		CampVO vo=service.campDetailData(cno);
+		return vo;
+	}
 }
