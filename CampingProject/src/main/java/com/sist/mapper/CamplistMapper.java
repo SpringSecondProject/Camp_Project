@@ -9,7 +9,7 @@ public interface CamplistMapper {
 	
 	@Select("SELECT cno,title,intro,poster,induty,lctcl,addr,price,num "
 			+ "FROM (SELECT cno,title,intro,poster,induty,lctcl,addr,price,rownum as num "
-			+ "FROM (SELECT /*+ INDEX_ASC(camp camp_no_pk) */cno,title,intro,poster,induty,lctcl,addr,price "
+			+ "FROM (SELECT /*+ INDEX_ASC(camp camp_cno_pk) */cno,title,intro,poster,induty,lctcl,addr,price "
 			+ "FROM camp WHERE poster IS NOT NULL))"
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<CampVO> campListData(Map map);

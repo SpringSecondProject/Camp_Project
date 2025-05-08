@@ -98,14 +98,24 @@
     				let calendar=new FullCalendar.Calendar(calendarEl,{
     					initialView:'dayGridMonth',
     					locale: 'ko', // 한국어 적용
+    					dayCellContent: function(arg) { // '일' 제거
+   						  return { html: String(arg.date.getDate()) }
+   						},
     					height:500,
     					validRange:{
     						start:year+"-"+month+"-"+day,
-    						end:(year+1)+"-"+month+"-"+day
+    						end:(year+1)+"-"+month+"-"+'01'
     					},
     					themeSystem:'bootstrap',
     					editable:true, // 라이브러리??
-    					weekends:true, // 주말 활성화
+    					selectAllow: function(selectInfo) {
+    						const day = selectInfo.start.getDay();
+    						if(_this.vo.operDeCl===0){
+	    						return [0,1,2,3,4,5,6].include(selectInfo);
+    						}else {
+	    						return [1,2,3,4,5].include(selectInfo);
+    						}
+    					},
     					businessHours:[
     						{
 		    					daysOfWeek: [1,2,3,4,5],
@@ -114,18 +124,18 @@
     					unselectAuto: false, // 선택 자동해제 해제
     			        select: function(info) {
     			        	_this.startDate=info.startStr.split('T')[0]
-    						_this.endDate=info.end.toISOString().split('T')[0]
-    			        	console.log(info.startStr.split('T')[0] + ' ~ ' + info.end.toISOString().split('T')[0])
+	    					_this.endDate=info.end.toISOString().split('T')[0]
+    			        	if(_this.startDate===_this.endDate){
+    			        		_this.endDate=''
+    			        	}
     			        },
     					dateClick: function(info) {
-    						/*
-    						if ([0, 6].includes(info.date.getDay())) {
-	    						alert("주말은 선택할 수 없습니다.")
-	    						_this.firstDate=''
-	    						calendar.unselect();
-	    						return;
+    						if(_this.vo.operDeCl===1){
+	    						if ([0, 6].includes(info.date.getDay())) {
+		    						alert("주말은 선택할 수 없습니다.")
+		    						return;
+	    						}
     						}
-    						*/
     						if (_this.firstDate==='') {
     							_this.firstDate = info.date;
     							const start = _this.firstDate
@@ -134,51 +144,29 @@
     						} else {
 	    						const start = _this.firstDate < info.date ? _this.firstDate : info.date
 	    						const end = _this.firstDate > info.date ? _this.firstDate : info.date
-	    								
+	    						
+	    						if((end-start)>432000000){
+	    							alert("최대 캠핑 일정은 5박 6일입니다")
+	    							return
+	    						}
+	    						
 			    				let current = new Date(start)
-			    				while (current < end) {
-				    				const day = current.getDay()
-				    				/*
-				    				if ([0,6].includes(day)) {
-				    					alert("주말을 포함할 수 없습니다.")
-			    						_this.firstDate=''
-			    						calendar.unselect();
-				    					return
+	    						if(_this.vo.operDeCl===1){
+				    				while (current < end) {
+					    				const day = current.getDay()
+					    				if ([0,6].includes(day)) {
+					    					alert("주말을 포함할 수 없습니다.")
+					    					return
+					    				}
+					    				current.setDate(current.getDate()+1)
 				    				}
-				    				*/
-				    				current.setDate(current.getDate()+1)
-			    				}
+	    						}
 	    						// FullCalendar에서 시각화
 	    						calendar.select(start, new Date(end.getTime() + 86400000))
 	    						// 초기화
 	    						_this.firstDate=''
     						}
     					}
-    					/*
-	    				selectable: true,
-	    				selectAllow: function(selectInfo) {
-		    				const start = selectInfo.start
-		    				const end = selectInfo.end
-		    				let current = new Date(start)
-		    				
-		    				while (current < end) {
-			    				const day = current.getDay()
-			    				if (day === 0 || day === 6) {
-			    					return false
-			    				}
-			    				current.setDate(current.getDate()+1)
-		    				}
-		    				return true
-	    				},
-	    				select: function(info) {
-	    					const start = info.startStr
-	    					const end = info.end
-
-	    					const endStr = end.toISOString().split('T')[0]
-
-	    					console.log(start+' ~ '+endStr)
-	    				}
-	    				*/
     				})
 	   				calendar.render()
     			})

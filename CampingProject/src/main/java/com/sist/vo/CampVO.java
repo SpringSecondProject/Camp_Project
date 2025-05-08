@@ -40,4 +40,6 @@ public class CampVO {
 	private int cnt;
 	// 가격 db에 추가
 	private int price;
+	// 운영일 db 추가
+	private int operDeCl;
 }

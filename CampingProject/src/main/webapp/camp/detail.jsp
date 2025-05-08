@@ -242,7 +242,7 @@ $(function(){
                             
 								<div class="tab-pane show active" id="pd-descript">
 								    <div class="pd-tab__">
-								        <jsp:include page="detail_data.jsp"/>
+								        <jsp:include page="detail_tap.jsp"/>
 								    </div>
 								</div>	
 								<div class="tab-pane" id="pd-map">

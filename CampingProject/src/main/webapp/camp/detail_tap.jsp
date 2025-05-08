@@ -11,16 +11,17 @@
 	<c:if test="${vo.intro!='' }">
 		<table class="table">
 			<tr>
-				<td><pre
-						style="white-space: normal; background-color: white; border: none; font-size: 12px">${vo.intro }</pre>
-					최종정보 수정일 : ${vo.modifiedtime}</td>
+				<td>
+					<pre style="white-space: normal; background-color: white; border: none; font-size: 12px">${vo.intro }</pre>
+					최종정보 수정일 : ${vo.modifiedtime}
+				</td>
 			</tr>
 		</table>
 	</c:if>
 	<c:if test="${vo.sbrsCl!='' }">
 		<h3>
-			<i class="fas fa-check-circle u-s-m-r-8" style="color: green;"></i> <span
-				style="color: black;">캠핑장 시설정보<span>
+			<i class="fas fa-check-circle u-s-m-r-8" style="color: green;"></i>
+			<span style="color: black;">캠핑장 시설정보<span>
 		</h3>
 		<table class="table">
 			<tr>
@@ -28,10 +29,8 @@
 					<div class="row" style="background-color: #F9F9F9;">
 						<c:forEach var="sbr" items="${sbrsCl}">
 							<c:if test="${sbr.check==1}">
-								<div
-									style="width: 80px; height: 80px; text-align: center; line-height: 200%; margin: 20px">
-									<img src="../images/icon/camp/icon_${sbr.no }.PNG"
-										style="width: 50px; height: 50px;">
+								<div style="width: 80px; height: 80px; text-align: center; line-height: 200%; margin: 20px">
+									<img src="../images/icon/camp/icon_${sbr.no }.PNG" style="width: 50px; height: 50px;">
 									<div>${sbr.text }</div>
 								</div>
 							</c:if>
@@ -42,8 +41,8 @@
 		</table>
 	</c:if>
 	<h3>
-		<i class="fas fa-check-circle u-s-m-r-8" style="color: green;"></i> <span
-			style="color: black;">기타 주요시설<span>
+		<i class="fas fa-check-circle u-s-m-r-8" style="color: green;"></i>
+		<span style="color: black;">기타 주요시설<span>
 	</h3>
 	<table class="table" style="font-size: 12px">
 		<c:if test="${main!=''}">
