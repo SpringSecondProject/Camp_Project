@@ -67,4 +67,7 @@ public interface CamplistMapper {
 			+ "FROM camp "
 			+ "WHERE poster IS NOT NULL")
 	public List<String> campIndutyList();
+	
+	@Select("SELECT lctcl FROM camp WHERE poster IS NOT NULL")
+	public List<String> campLctclList();
 }
