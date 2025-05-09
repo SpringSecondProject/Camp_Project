@@ -1,0 +1,44 @@
+package com.sist.web;
+
+import java.util.*;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import com.sist.service.LikeService;
+
+@RestController
+public class LikeRestController {
+
+	@Autowired
+	private LikeService service;
+
+	@RequestMapping("like/insert_vue.do")
+	public Map insertLike(@RequestBody Map map, HttpSession session) {
+		Map result = new HashMap();
+
+		// 로그인 여부 확인
+		String id = (String) session.getAttribute("userid");
+		if (id == null) {
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "로그인이 필요합니다");
+		}
+ 
+		// 세션에서 ID 주입
+		map.put("id", id);
+
+		// 중복 체크 후 insert
+		int count = service.countLike(map);
+		if (count == 0) {
+			service.insertLike(map);
+			result.put("msg", "좋아요 완료");
+		} else {
+			result.put("msg", "이미 좋아요 했습니다");
+		}
+
+		return result;
+	}
+}

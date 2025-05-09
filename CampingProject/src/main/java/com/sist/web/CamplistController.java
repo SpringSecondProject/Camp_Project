@@ -19,4 +19,11 @@ public class CamplistController {
 		return "main/main";
 	}
 	
+	@GetMapping("like/list.do")
+	public String like_list(Model model) {
+		model.addAttribute("main_jsp","../like/like_list.jsp");
+		return "main/main";
+	}
+	
+	
 }

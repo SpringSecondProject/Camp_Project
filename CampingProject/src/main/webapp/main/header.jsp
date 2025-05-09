@@ -147,6 +147,7 @@ $(function(){
                                         <ul style="width:200px">
                                             <li>
                                                 <a href="../camp/list.do">캠핑장 목록</a>
+                                                <a href="../like/list.do">좋아요 임시</a>
                                             </li>
                                         </ul>
                                         <!--====== End - Dropdown ======-->
