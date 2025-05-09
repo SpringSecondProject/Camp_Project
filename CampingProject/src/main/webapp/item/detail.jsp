@@ -110,10 +110,12 @@
 			                        <td width=45%>{{total}}</td>
 			                       </tr>
 			                      <tr>			          			                        
+                                  <c:if test="${sessionScope.userid!=null }">
 			                        <td colspan="2" class="text-center">
 			                           <button class="btn btn--e-brand-b-2" @click="itemCart()">장바구니</button> 
 			                           <button class="btn btn--e-brand-b-2" @click="itemBuy()">바로구매</button>              
 			                        </td>
+			                       </c:if>
 			                      </tr>	
                             	</table>                          
                             </div>
