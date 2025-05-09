@@ -39,6 +39,11 @@
                                 </div>
                             </div>
                             <div class="shop-p__collection">
+                            
+                            	<div v-if="list.length === 0" class="u-s-m-b-30" style="text-align:center;">
+								  <h2>조건에 맞는 캠핑장이 없습니다</h2>
+								</div>
+								
                                 <div class="row is-grid-active">
                                 	<div :class="colClass" v-for="vo in list">
                                         <div class="product-m">
