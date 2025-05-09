@@ -30,5 +30,7 @@ public class CamplistDAO {
 	public List<String> campIndutyList(){
 		return mapper.campIndutyList();
 	}
-	
+	public List<String> campLctclList(){
+		return mapper.campLctclList();
+	}
 }

@@ -42,6 +42,15 @@
 					    </foreach>
 					  )
 					</if>
+					
+					<!-- 환경 종류 필터 -->
+					<if test="lctcl !=null and lctcl.size > 0">
+					  AND (
+					    <foreach item="lc" collection="lctcl" separator="OR">
+					      lctCl LIKE '%' || #{lc} || '%'
+					    </foreach>
+					  )
+					</if>
 		        )
 		    )
 		    WHERE num BETWEEN #{start} AND #{end}
@@ -79,6 +88,14 @@
 			  	  induty LIKE '%' || #{t} || '%'
 			  	</foreach>
 			  )			  
+			</if>
+			<!-- 환경 종류 필터 -->
+			<if test="lctcl !=null and lctcl.size > 0">
+			  AND (
+			    <foreach item="lc" collection="lctcl" separator="OR">
+			      lctCl LIKE '%' || #{lc} || '%'
+			    </foreach>
+			  )
 			</if>
 			
 		</select>

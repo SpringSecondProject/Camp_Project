@@ -268,118 +268,17 @@
                                         </div>
                                         <div class="shop-w__wrap collapse show" id="s-envir">
                                             <ul class="shop-w__list gl-scroll">
-                                                <li>
-
-                                                    <!--====== Check Box ======-->
-                                                    <div class="check-box">
-
-                                                        <input type="checkbox" id="xs">
-                                                        <div class="check-box__state check-box__state--primary">
-
-                                                            <label class="check-box__label" for="xs">산</label></div>
-                                                    </div>
-                                                    <!--====== End - Check Box ======-->
-
-                                                    <span class="shop-w__total-text">(2)</span>
-                                                </li>
-                                                <li>
-
-                                                    <!--====== Check Box ======-->
-                                                    <div class="check-box">
-
-                                                        <input type="checkbox" id="small">
-                                                        <div class="check-box__state check-box__state--primary">
-
-                                                            <label class="check-box__label" for="small">강</label></div>
-                                                    </div>
-                                                    <!--====== End - Check Box ======-->
-
-                                                    <span class="shop-w__total-text">(4)</span>
-                                                </li>
-                                                <li>
-
-                                                    <!--====== Check Box ======-->
-                                                    <div class="check-box">
-
-                                                        <input type="checkbox" id="medium">
-                                                        <div class="check-box__state check-box__state--primary">
-
-                                                            <label class="check-box__label" for="medium">호수</label></div>
-                                                    </div>
-                                                    <!--====== End - Check Box ======-->
-
-                                                    <span class="shop-w__total-text">(6)</span>
-                                                </li>
-                                                <li>
-
-                                                    <!--====== Check Box ======-->
-                                                    <div class="check-box">
-
-                                                        <input type="checkbox" id="large">
-                                                        <div class="check-box__state check-box__state--primary">
-
-                                                            <label class="check-box__label" for="large">계곡</label></div>
-                                                    </div>
-                                                    <!--====== End - Check Box ======-->
-
-                                                    <span class="shop-w__total-text">(8)</span>
-                                                </li>
-                                                <li>
-
-                                                    <!--====== Check Box ======-->
-                                                    <div class="check-box">
-
-                                                        <input type="checkbox" id="xl">
-                                                        <div class="check-box__state check-box__state--primary">
-
-                                                            <label class="check-box__label" for="xl">숲</label></div>
-                                                    </div>
-                                                    <!--====== End - Check Box ======-->
-
-                                                    <span class="shop-w__total-text">(10)</span>
-                                                </li>
-                                                <li>
-
-                                                    <!--====== Check Box ======-->
-                                                    <div class="check-box">
-
-                                                        <input type="checkbox" id="xl">
-                                                        <div class="check-box__state check-box__state--primary">
-
-                                                            <label class="check-box__label" for="xl">해변</label></div>
-                                                    </div>
-                                                    <!--====== End - Check Box ======-->
-
-                                                    <span class="shop-w__total-text">(10)</span>
-                                                </li>
-                                                <li>
-
-                                                    <!--====== Check Box ======-->
-                                                    <div class="check-box">
-
-                                                        <input type="checkbox" id="xl">
-                                                        <div class="check-box__state check-box__state--primary">
-
-                                                            <label class="check-box__label" for="xl">도심</label></div>
-                                                    </div>
-                                                    <!--====== End - Check Box ======-->
-
-                                                    <span class="shop-w__total-text">(10)</span>
-                                                </li>
-                                                <li>
-
-                                                    <!--====== Check Box ======-->
-                                                    <div class="check-box">
-
-                                                        <input type="checkbox" id="xl">
-                                                        <div class="check-box__state check-box__state--primary">
-
-                                                            <label class="check-box__label" for="xl">섬</label></div>
-                                                    </div>
-                                                    <!--====== End - Check Box ======-->
-
-                                                    <span class="shop-w__total-text">(10)</span>
-                                                </li>
+                                                
+                                                <li v-for="Llist in lctclCounts" :key="Llist.lctcl">
+												  <div class="check-box">
+												    <input type="checkbox" :value="Llist.lctcl" v-model="lctcl" @change="pageChange(1)">
+												    <div class="check-box__state check-box__state--primary">
+												      <label class="check-box__label">{{ Llist.lctcl }}</label>
+												    </div>
+												  </div>
+												  <span class="shop-w__total-text">({{ Llist.cnt }})</span>
+												</li>
+												
                                             </ul>
                                         </div>
                                     </div>
@@ -410,7 +309,9 @@
     		    maxPrice: null,
     		    selectedPet:'', // 팻 필터
     		    selectedTypes: [], // 캠핑장 종류 필터
-    		    typeCounts: [] // 종류별 갯수
+    		    typeCounts: [], // 종류별 갯수
+    		    lctcl:[],	// 환경 종류 필터
+    		    lctclCounts:[] // 환경 종류 필터 갯수
     		}
     	},
     	computed: {
@@ -425,8 +326,15 @@
 			this.dataRecv()
 			this.getLocationCounts()
 			this.getTypeCounts()
+			this.getLctclCounts()
     	},
     	methods:{
+    		getLctclCounts() {
+    		  axios.get("http://localhost:8080/web/camp/lctcl_count_vue.do")
+    		    .then(res => { 
+    		      this.lctclCounts = res.data 
+    		    })
+    		},
    		    getTypeCounts() {
    			  axios.get("http://localhost:8080/web/camp/type_count_vue.do")
    			    .then(res => {
@@ -434,12 +342,12 @@
    			    })
    			},
    		 	getLocationCounts() { // 지역별 필터 갯수
-   			    axios.get("http://localhost:8080/web/camp/location_count_vue.do")
-   			      .then(res => {
-   			        this.locationCounts = res.data
-   			      }).catch(err => {
-   			        console.error(err)
-   			      })
+   			  axios.get("http://localhost:8080/web/camp/location_count_vue.do")
+   			    .then(res => {
+   			      this.locationCounts = res.data
+   			    }).catch(err => {
+   			      console.error(err)
+   			    })
    			},
     		prev(){
     			this.curpage=this.startPage-1
@@ -467,10 +375,11 @@
     			return arr
     		},
     		dataRecv(){
-    			console.log("최소금액:", this.minPrice)
-    			console.log("최대금액:", this.maxPrice)
-    			console.log("selectedPet:", this.selectedPet)
-    			console.log("selectedTypes:", this.selectedTypes)
+    			//console.log("최소금액:", this.minPrice)
+    			//console.log("최대금액:", this.maxPrice)
+    			//console.log("selectedPet:", this.selectedPet)
+    			//console.log("selectedTypes:", this.selectedTypes)
+    			console.log(this.lctcl)
     			axios.get('http://localhost:8080/web/camp/list_vue.do',{
         			params:{
         				page:this.curpage,
@@ -479,7 +388,8 @@
         			    minPrice: this.minPrice, //금액필터
         			    maxPrice: this.maxPrice,
         			    pet: this.selectedPet, // 펫 필터
-        			    types: this.selectedTypes.join(',') // 캠핑장 종류
+        			    types: this.selectedTypes.join(','), // 캠핑장 종류
+        			    lctcl: this.lctcl.join(',') // 환경 종류
         			}
         		}).then(res=>{
         			console.log(res.data)
