@@ -16,4 +16,9 @@ public class ItemController {
 		model.addAttribute("main_jsp","../item/detail.jsp");
 		return "main/main";
 	}
+	@GetMapping("item/find.do")
+	public String item_find(Model model) {
+		model.addAttribute("main_jsp","../item/find.jsp");
+		return "main/main";
+	}
 }

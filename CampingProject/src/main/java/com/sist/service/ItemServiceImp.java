@@ -39,5 +39,24 @@ public class ItemServiceImp implements ItemService{
 		// TODO Auto-generated method stub
 		return idao.itemTotalPageByCategory(category);
 	}
-	
+	@Override
+	public List<ItemVO> itemListByPrice(int start, int end, Integer min, Integer max) {
+		// TODO Auto-generated method stub
+		return idao.itemListByPrice(start, end, min, max);
+	}
+	@Override
+	public int itemPriceTotalPage(Integer min, Integer max) {
+		// TODO Auto-generated method stub
+		return idao.itemPriceTotalPage(min, max);
+	}
+	@Override
+	public List<ItemVO> itemFindList(int start, int end, String fd, String ss) {
+		// TODO Auto-generated method stub
+		return idao.itemFindList(start, end, fd, ss);
+	}
+	@Override
+	public int itemFindTotalPage(String fd, String ss) {
+		// TODO Auto-generated method stub
+		return idao.itemFindTotalPage(fd, ss);
+	}
 }

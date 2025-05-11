@@ -17,7 +17,12 @@
 	</select>
 	<select id="chefsRecipeTotalPage" parameterType="hashmap" resultType="int">
 		SELECT CEIL(COUNT(*)/#{rowSize}) 
-		FROM recipeDetail WHERE chef = #{chef}
+		FROM recipeDetail
+		<where>
+          <if test="chef != null and chef != ''">
+            chef = #{chef}
+          </if>
+        </where>
 	</select>
 <!-- 
 	<select id="chefsRecipeListData" parameterType="hashmap" resultType="RecipeVO">
