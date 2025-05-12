@@ -66,7 +66,7 @@
                                         </div>
                                         <div class="u-s-m-b-30">
                                             <label class="gl-label" for="login-password">비밀번호</label>
-                                            <input class="input-text input-text--primary-style" type="text" name="pwd" ref="pwd" v-model="pwd" placeholder="Password">
+                                            <input class="input-text input-text--primary-style" type="password" name="pwd" ref="pwd" v-model="pwd" placeholder="Password">
                                         </div>
                                         <div class="gl-inline">
 	                                        <div class="u-s-m-b-30">
