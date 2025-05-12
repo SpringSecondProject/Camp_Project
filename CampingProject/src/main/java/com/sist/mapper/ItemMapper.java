@@ -1,9 +1,13 @@
 package com.sist.mapper;
 import java.util.*;
 
-
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Results;
 
 import com.sist.vo.*;
 public interface ItemMapper {
@@ -73,4 +77,37 @@ public interface ItemMapper {
 			+"FROM item "
 			+"WHERE ${fd} LIKE '%'||#{ss}||'%' ")
 	public int itemFindTotalPage(@Param("fd") String fd,@Param("ss") String ss);
+	
+	// 장바구니
+	@Insert("INSERT INTO Cartlist(cno,ino,userid,account) "
+			  +"VALUES(bc_cno_seq.nextval,#{ino},#{userid},#{account})")
+	public void CartInsert(CartVO vo);
+	   
+	@Select("SELECT COUNT(*) FROM Cartlist "
+		  +"WHERE ino=#{ino} AND id=#{id}")
+	public int CartInoCount(CartVO vo);
+   
+	@Update("UPDATE Cartlist SET "
+		  +"account=account+#{account} "
+		  +"WHERE ino=#{ino} "
+		  +"AND id=#{id}")
+	public void itemAccountUpdate(CartVO vo);
+   
+	@Results({
+	   @Result(property = "ivo.item_name",column = "item_name"),
+	   @Result(property = "ivo.item_poster",column = "item_poster"),
+	   @Result(property = "ivo.item_price",column = "item_price")
+	})
+	
+	@Select("SELECT cno,ino,account,isbuy,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,"
+		  +"item_name,item_poster,item_price "
+		  +"FROM Cartlist cl,item it"
+		  +"WHERE bc.ino=it.ino "
+		  +"AND id=#{id} AND isbuy=0 "
+		  +"ORDER BY cno DESC")
+	public List<CartVO> CartListData(String id);
+	
+	@Delete("DELETE FROM Cartlist "
+				  +"WHERE ino=#{ino}")
+	public void CartDelete(int ino);
 }
