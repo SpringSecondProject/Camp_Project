@@ -2,10 +2,12 @@ package com.sist.web;
 
 import java.util.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -18,13 +20,15 @@ public class LikeRestController {
 	private LikeService service;
 
 	@RequestMapping("like/insert_vue.do")
-	public Map insertLike(@RequestBody Map map, HttpSession session) {
+	public Map insertLike(@RequestBody Map map, HttpSession session ,HttpServletResponse response) {
 		Map result = new HashMap();
 
 		// 로그인 여부 확인
 		String id = (String) session.getAttribute("userid");
+		
 		if (id == null) {
-			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "로그인이 필요합니다");
+		    result.put("msg", "NOLOGIN");
+		    return result; 
 		}
  
 		// 세션에서 ID 주입

@@ -346,13 +346,14 @@
     		    {
     		       withCredentials: true  //  세션 유지하는거임 
     		    }).then(res => {
-    		        alert(res.data.msg || "좋아요 완료");
-    		        
-    		        
+    		        if (res.data.msg === "NOLOGIN") {
+    		            alert("로그인이 필요합니다");
+    		        } else {
+    		            alert(res.data.msg);  // 좋아요 완료 or 이미 좋아요 했습니다
+    		        }
     		    }).catch(err => {
     		        if (err.response?.status === 401) {
     		            alert("로그인이 필요합니다.");
-    		           // location.href = "/member/login.do";
     		        } else {
     		            alert("오류 발생");
     		        }

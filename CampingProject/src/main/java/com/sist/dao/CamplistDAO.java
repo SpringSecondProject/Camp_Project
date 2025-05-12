@@ -33,4 +33,9 @@ public class CamplistDAO {
 	public List<String> campLctclList(){
 		return mapper.campLctclList();
 	}
+	
+	// Aspect 조회수 증가
+	public void HitIncrement(int cno) {
+		mapper.HitIncrement(cno);
+	}
 }

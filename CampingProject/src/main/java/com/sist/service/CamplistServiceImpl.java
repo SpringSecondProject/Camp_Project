@@ -58,5 +58,11 @@ public class CamplistServiceImpl implements CamplistService {
 		return cDao.campLctclList();
 	}
 
+	@Override
+	public void HitIncrement(int cno) {
+		// TODO Auto-generated method stub
+		cDao.HitIncrement(cno);
+	}
+
 
 }
