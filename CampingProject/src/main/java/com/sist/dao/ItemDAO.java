@@ -36,4 +36,24 @@ public class ItemDAO {
 	{
 		return mapper.itemTotalPageByCategory(category);
 	}
+	
+	public List<ItemVO> itemListByPrice(int start,int end,Integer min,Integer max)
+	{
+		return mapper.itemListByPrice(start, end, min, max);
+	}
+	
+	public int itemPriceTotalPage(Integer min,Integer max)
+	{
+		return mapper.itemPriceTotalPage(min, max);
+	}
+	
+	public List<ItemVO> itemFindList(int start,int end,String fd,String ss)
+	{
+		return mapper.itemFindList(start, end, fd, ss);
+	}
+	
+	public int itemFindTotalPage(@Param("fd") String fd,@Param("ss") String ss)
+	{
+		return mapper.itemFindTotalPage(fd, ss);
+	}
 }

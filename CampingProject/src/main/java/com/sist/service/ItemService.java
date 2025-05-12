@@ -1,11 +1,8 @@
 package com.sist.service;
 import java.util.*;
 
-<<<<<<< HEAD
-=======
 import org.apache.ibatis.annotations.Param;
 
->>>>>>> branch 'main' of https://github.com/SpringSecondProject/Camp_Project.git
 import com.sist.vo.*;
 public interface ItemService {
 	

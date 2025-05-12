@@ -17,7 +17,7 @@
 <body>
     <!--====== App Content ======-->
     <div class="app-content" id="listApp">
-
+  
         <!--====== Section 1 ======-->
         <div class="u-s-p-y-90">
             <div class="container">
@@ -191,112 +191,6 @@
         </div>
     </div>
     <script>
-	let listApp=Vue.createApp({
-    data(){
-        return {
-            list:[],
-            curpage:1,
-            totalpage:0,
-            startPage:0,
-            endPage:0,
-            ino:0
-        }
-    },
-    mounted(){
-        this.dataRecv()
-    },
-    methods:{
-        changeCategory(ino) {
-            const categoryMap={
-                1:"화로/BBQ",
-                2:"퍼니처",
-                3:"텐트/타프",
-                4:"키친",
-                5:"침낭/매트",
-                6:"액세서리",
-                7:"스토리지",
-                8:"라이팅",
-                9:"계절용품",
-                10:"RV용품",
-                11:"기타"
-            }
-            this.ino=categoryMap[ino]
-            this.curpage=1
-            this.list=[]
-            this.dataRecvC()
-        },
-        priceFilter() {
-            const min=document.getElementById("price-min").value||null;
-            const max=document.getElementById("price-max").value||null;
-
-            axios.get("http://localhost:8080/web/item/list_by_price_vue.do",{
-                params:{
-                    page:this.curpage,
-                    min:min?parseInt(min):null,
-                    max:max?parseInt(max):null
-                }
-            }).then(res=>{
-                this.list=res.data.list;
-                this.curpage=res.data.curpage;
-                this.totalpage=res.data.totalpage;
-                this.startPage=res.data.startPage;
-                this.endPage=res.data.endPage;
-            }).catch(error=>{
-                console.log("가격 필터 에러:", error.response)
-            })
-        },
-        prev(){
-            this.curpag=this.startPage-1
-            this.dataRecv()
-        },
-        next(){
-            this.curpage=this.endPage+1
-            this.dataRecv()
-        },
-        pageChange(page){
-            this.curpage=page
-            this.dataRecv()
-        },
-        range(start,end){
-            let arr=[]
-            for(let i=start;i<=end;i++){
-                arr.push(i)
-            }
-            return arr
-        },
-        dataRecv(){
-            axios.get('http://localhost:8080/web/item/list_vue.do',{
-                params:{
-                    page:this.curpage,
-                    ino: this.ino
-                }
-            }).then(res=>{
-                this.list=res.data.list
-                this.curpage=res.data.curpage
-                this.totalpage=res.data.totalpage
-                this.startPage=res.data.startPage
-                this.endPage=res.data.endPage
-            }).catch(error=>{
-                console.log(error.response)
-            })
-        },
-        dataRecvC(){
-            axios.get('http://localhost:8080/web/item/list_by_category_vue.do',{
-                params:{
-                    page:this.curpage,
-                    category:this.ino
-                }
-            }).then(res=>{
-                console.log("응답 데이터",res.data)
-                this.list=res.data.list
-                this.curpage=res.data.curpage
-                this.totalpage=res.data.totalpage
-                this.startPage=res.data.startPage
-                this.endPage=res.data.endPage
-            })
-        }
-    }
-	}).mount("#listApp")
 </script>
 </body>
 </html>

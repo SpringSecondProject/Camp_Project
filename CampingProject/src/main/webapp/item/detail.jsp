@@ -110,10 +110,12 @@
 			                        <td width=45%>{{total}}</td>
 			                       </tr>
 			                      <tr>			          			                        
+                                  <c:if test="${sessionScope.userid!=null }">
 			                        <td colspan="2" class="text-center">
 			                           <button class="btn btn--e-brand-b-2" @click="itemCart()">장바구니</button> 
 			                           <button class="btn btn--e-brand-b-2" @click="itemBuy()">바로구매</button>              
 			                        </td>
+			                       </c:if>
 			                      </tr>	
                             	</table>                          
                             </div>
@@ -180,7 +182,6 @@
             </div>
             <!--====== End - Section Intro ======-->
 
-
             <!--====== Section Content ======-->
             <div class="section__content">
                 <div class="container">
@@ -196,7 +197,6 @@
                                         <div class="product-o__action-wrap">
                                             <ul class="product-o__action-list">
                                                 <li>
-
                                                     <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
                                                 <li>
 

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sist.vo.*;
@@ -63,6 +64,67 @@ public class ItemRestController {
 	        endPage=totalpage;
 
 	    Map<String, Object> map=new HashMap<>();
+	    map.put("list", list);
+	    map.put("curpage", page);
+	    map.put("totalpage", totalpage);
+	    map.put("startPage", startPage);
+	    map.put("endPage", endPage);
+
+	    return map;
+	}
+	
+	@GetMapping("item/list_by_price_vue.do")
+	public Map<String, Object> item_list_by_price(
+	        @RequestParam(defaultValue = "1") int page,
+	        @RequestParam(required = false) Integer min,
+	        @RequestParam(required = false) Integer max) {
+
+	    int rowSize=20;
+	    int start=(page*rowSize)-(rowSize - 1);
+	    int end=page*rowSize;
+
+	    List<ItemVO> list=service.itemListByPrice(start, end, min, max);
+	    int totalpage=service.itemPriceTotalPage(min, max);
+
+	    final int BLOCK=10;
+	    int startPage=((page-1)/BLOCK)*BLOCK+1;
+	    int endPage=startPage+BLOCK-1;
+	    if (endPage>totalpage)
+	        endPage=totalpage;
+
+	    Map<String, Object> map=new HashMap<>();
+	    map.put("list", list);
+	    map.put("curpage", page);
+	    map.put("totalpage", totalpage);
+	    map.put("startPage", startPage);
+	    map.put("endPage", endPage);
+
+	    return map;
+	}
+
+	@GetMapping("item/find_vue.do")
+	public Map item_find(int page, String fd, String ss) throws UnsupportedEncodingException {
+	    ss=URLDecoder.decode(ss, "UTF-8");
+
+	    List<String> allowFields = Arrays.asList("name","brand","type");
+	    if (!allowFields.contains(fd)) {
+	        fd="name"; // 기본 필드 설정
+	    }
+
+	    int rowSize=20;
+	    int start=(page*rowSize)-(rowSize-1);
+	    int end=page*rowSize;
+
+	    List<ItemVO> list=service.itemFindList(start, end, fd, ss);
+	    int totalpage=service.itemFindTotalPage(fd, ss);
+
+	    final int BLOCK=10;
+	    int startPage=((page-1)/BLOCK*BLOCK)+1;
+	    int endPage=((page-1)/BLOCK*BLOCK)+BLOCK;
+	    if (endPage>totalpage)
+	        endPage=totalpage;
+
+	    Map<String,Object> map=new HashMap<>();
 	    map.put("list", list);
 	    map.put("curpage", page);
 	    map.put("totalpage", totalpage);
