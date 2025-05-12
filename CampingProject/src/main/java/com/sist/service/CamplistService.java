@@ -16,4 +16,5 @@ public interface CamplistService {
 	public List<CampVO> campLocationCount();
 	public List<String> campIndutyList();
 	public List<String> campLctclList();
+	public void HitIncrement(int cno);
 }

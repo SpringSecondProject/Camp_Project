@@ -95,7 +95,10 @@
                                                         <span>정보 : {{ vo.intro || '없음' }}</span></div>
                                                     <div class="product-m__wishlist">
 
-                                                        <a class="far fa-heart" href="#" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"></a></div>
+                                                        <a class="far fa-heart" data-tooltip="tooltip" data-placement="top" title="좋아요"
+                                                        @click.prevent="likeCamp(vo.cno)"></a>
+                                                        
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -334,6 +337,28 @@
 			this.getLctclCounts()
     	},
     	methods:{
+    		likeCamp(no) {
+    		    axios.post("http://localhost:8080/web/like/insert_vue.do", {
+    		        no: no,
+    		        type: 0 // 캠핑장 타입임.  0 : 캠핑장 1: 쇼핑몰 2 : 레시피 3 : 캠핑카 4 : 커뮤니티
+    		        
+    		    }, 
+    		    {
+    		       withCredentials: true  //  세션 유지하는거임 
+    		    }).then(res => {
+    		        if (res.data.msg === "NOLOGIN") {
+    		            alert("로그인이 필요합니다");
+    		        } else {
+    		            alert(res.data.msg);  // 좋아요 완료 or 이미 좋아요 했습니다
+    		        }
+    		    }).catch(err => {
+    		        if (err.response?.status === 401) {
+    		            alert("로그인이 필요합니다.");
+    		        } else {
+    		            alert("오류 발생");
+    		        }
+    		    })
+    		},
     		getLctclCounts() {
     		  axios.get("http://localhost:8080/web/camp/lctcl_count_vue.do")
     		    .then(res => { 
