@@ -1,6 +1,8 @@
 package com.sist.mapper;
 
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
 import com.sist.vo.*;
 import java.util.*;
 
@@ -70,4 +72,9 @@ public interface CamplistMapper {
 	
 	@Select("SELECT lctcl FROM camp WHERE poster IS NOT NULL")
 	public List<String> campLctclList();
+	
+	// 조회수 증가 Aspect
+	@Update("UPDATE camp SET hit = hit + 1 "
+			+ "WHERE cno=#{cno}")
+	public void HitIncrement(int cno);
 }

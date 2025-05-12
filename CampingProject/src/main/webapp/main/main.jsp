@@ -1,29 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link href="../images/favicon.png" rel="shortcut icon">
-    <title>Ludus - Electronics, Apparel, Computers, Books, DVDs & more</title>
-    <!-- bootstrap -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <!--====== Google Font ======-->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
+	<meta charset="UTF-8">
+	<!--[if IE]>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link href="../images/favicon.png" rel="shortcut icon">
+	<title>Ludus - Electronics, Apparel, Computers, Books, DVDs & more</title>
+	<!-- bootstrap -->
+	<link rel="stylesheet"
+	      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<!--====== Google Font ======-->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
 
-    <!--====== Vendor Css ======-->
-    <link rel="stylesheet" href="../css/vendor.css">
+	<!--====== Vendor Css ======-->
+	<link rel="stylesheet" href="../css/vendor.css">
 
-    <!--====== Utility-Spacing ======-->
-    <link rel="stylesheet" href="../css/utility.css">
+	<!--====== Utility-Spacing ======-->
+	<link rel="stylesheet" href="../css/utility.css">
 
-    <!--====== App ======-->
-    <link rel="stylesheet" href="../css/app.css">
-    
+	<!--====== App ======-->
+	<link rel="stylesheet" href="../css/app.css">
+
+	<script src="https://cdn.tailwindcss.com"></script>
+
 	<!-- vue -->
 	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -31,371 +35,426 @@
 	<script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
 </head>
 <body class="config" id="../js-scrollspy-trigger">
-    <div class="preloader is-active">
-        <div class="preloader__wrap">
+<div class="preloader is-active">
+	<div class="preloader__wrap">
 
-            <img class="preloader__img" src="../images/preloader.png" alt=""></div>
-    </div>
+		<img class="preloader__img" src="../images/preloader.png" alt=""></div>
+</div>
 
-    <!--====== Main App ======-->
-    <div id="app">
-        <div class="fixed-list">
-            <ul class="nav" id="init-scrollspy">
-                <li>
+<!--====== Main App ======-->
+<div id="app">
+	<div class="fixed-list">
+		<ul class="nav" id="init-scrollspy">
+			<li>
 
-                    <a class="nav-link" href="#electronic-01" data-click-scroll="#electronic-01"><i class="fas fa-tv"></i></a></li>
-                <li>
+				<a class="nav-link" href="#electronic-01" data-click-scroll="#electronic-01"><i
+						class="fas fa-tv"></i></a></li>
+			<li>
 
-                    <a class="nav-link" href="#female-02" data-click-scroll="#female-02"><i class="fas fa-female"></i></a></li>
-                <li>
+				<a class="nav-link" href="#female-02" data-click-scroll="#female-02"><i
+						class="fas fa-female"></i></a></li>
+			<li>
 
-                    <a class="nav-link" href="#male-03" data-click-scroll="#male-03"><i class="fas fa-male"></i></a></li>
-                <li>
+				<a class="nav-link" href="#male-03" data-click-scroll="#male-03"><i
+						class="fas fa-male"></i></a></li>
+			<li>
 
-                    <a class="nav-link"><i class="fas fa-fighter-jet"></i></a></li>
-                <li>
+				<a class="nav-link"><i class="fas fa-fighter-jet"></i></a></li>
+			<li>
 
-                    <a class="nav-link"><i class="fas fa-cookie-bite"></i></a></li>
-                <li>
+				<a class="nav-link"><i class="fas fa-cookie-bite"></i></a></li>
+			<li>
 
-                    <a class="nav-link"><i class="fas fa-futbol"></i></a></li>
-                <li>
+				<a class="nav-link"><i class="fas fa-futbol"></i></a></li>
+			<li>
 
-                    <a class="nav-link"><i class="fas fa-book-open"></i></a></li>
-                <li>
+				<a class="nav-link"><i class="fas fa-book-open"></i></a></li>
+			<li>
 
-                    <a class="nav-link"><i class="fas fa-briefcase-medical"></i></a></li>
-            </ul>
-        </div>
-        
-		<jsp:include page="header.jsp"/>
-		
-		<jsp:include page="${main_jsp }"/>
-		
-		<jsp:include page="footer.jsp"/>
-		
+				<a class="nav-link"><i class="fas fa-briefcase-medical"></i></a></li>
+		</ul>
+	</div>
 
-        <!--====== Modal Section ======-->
+	<jsp:include page="header.jsp"/>
 
+	<jsp:include page="${main_jsp }"/>
 
-        <!--====== 바로구매창 ======-->
-        <div class="modal fade" id="quick-look">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content modal--shadow">
-
-                    <button class="btn dismiss-button fas fa-times" type="button" data-dismiss="modal"></button>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-lg-5">
-
-                                <!--====== Product Breadcrumb ======-->
-                                <div class="pd-breadcrumb u-s-m-b-30">
-                                    <ul class="pd-breadcrumb__list">
-                                        <li class="has-separator">
-
-                                            <a href="index.hml">Home</a></li>
-                                        <li class="has-separator">
-
-                                            <a href="shop-side-version-2.html">Electronics</a></li>
-                                        <li class="has-separator">
-
-                                            <a href="shop-side-version-2.html">DSLR Cameras</a></li>
-                                        <li class="is-marked">
-
-                                            <a href="shop-side-version-2.html">Nikon Cameras</a></li>
-                                    </ul>
-                                </div>
-                                <!--====== End - Product Breadcrumb ======-->
+	<jsp:include page="footer.jsp"/>
 
 
-                                <!--====== Product Detail ======-->
-                                <div class="pd u-s-m-b-30">
-                                    <div class="pd-wrap">
-                                        <div id="../js-product-detail-modal">
-                                            <div>
+	<!--====== Modal Section ======-->
 
-                                                <img class="u-img-fluid" src="../images/product/product-d-1.jpg" alt=""></div>
-                                            <div>
 
-                                                <img class="u-img-fluid" src="../images/product/product-d-2.jpg" alt=""></div>
-                                            <div>
+	<!--====== 바로구매창 ======-->
+	<div class="modal fade" id="quick-look">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content modal--shadow">
 
-                                                <img class="u-img-fluid" src="../images/product/product-d-3.jpg" alt=""></div>
-                                            <div>
+				<button class="btn dismiss-button fas fa-times" type="button"
+				        data-dismiss="modal"></button>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-5">
 
-                                                <img class="u-img-fluid" src="../images/product/product-d-4.jpg" alt=""></div>
-                                            <div>
+							<!--====== Product Breadcrumb ======-->
+							<div class="pd-breadcrumb u-s-m-b-30">
+								<ul class="pd-breadcrumb__list">
+									<li class="has-separator">
 
-                                                <img class="u-img-fluid" src="../images/product/product-d-5.jpg" alt=""></div>
-                                        </div>
-                                    </div>
-                                    <div class="u-s-m-t-15">
-                                        <div id="../js-product-detail-modal-thumbnail">
-                                            <div>
+										<a href="index.hml">Home</a></li>
+									<li class="has-separator">
 
-                                                <img class="u-img-fluid" src="../images/product/product-d-1.jpg" alt=""></div>
-                                            <div>
+										<a href="shop-side-version-2.html">Electronics</a></li>
+									<li class="has-separator">
 
-                                                <img class="u-img-fluid" src="../images/product/product-d-2.jpg" alt=""></div>
-                                            <div>
+										<a href="shop-side-version-2.html">DSLR Cameras</a></li>
+									<li class="is-marked">
 
-                                                <img class="u-img-fluid" src="../images/product/product-d-3.jpg" alt=""></div>
-                                            <div>
+										<a href="shop-side-version-2.html">Nikon Cameras</a></li>
+								</ul>
+							</div>
+							<!--====== End - Product Breadcrumb ======-->
 
-                                                <img class="u-img-fluid" src="../images/product/product-d-4.jpg" alt=""></div>
-                                            <div>
 
-                                                <img class="u-img-fluid" src="../images/product/product-d-5.jpg" alt=""></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--====== End - Product Detail ======-->
-                            </div>
-                            <div class="col-lg-7">
+							<!--====== Product Detail ======-->
+							<div class="pd u-s-m-b-30">
+								<div class="pd-wrap">
+									<div id="../js-product-detail-modal">
+										<div>
 
-                                <!--====== Product Right Side Details ======-->
-                                <div class="pd-detail">
-                                    <div>
+											<img class="u-img-fluid"
+											     src="../images/product/product-d-1.jpg" alt="">
+										</div>
+										<div>
 
-                                        <span class="pd-detail__name">Nikon Camera 4k Lens Zoom Pro</span></div>
-                                    <div>
-                                        <div class="pd-detail__inline">
+											<img class="u-img-fluid"
+											     src="../images/product/product-d-2.jpg" alt="">
+										</div>
+										<div>
 
-                                            <span class="pd-detail__price">$6.99</span>
+											<img class="u-img-fluid"
+											     src="../images/product/product-d-3.jpg" alt="">
+										</div>
+										<div>
 
-                                            <span class="pd-detail__discount">(76% OFF)</span><del class="pd-detail__del">$28.97</del></div>
-                                    </div>
-                                    <div class="u-s-m-b-15">
-                                        <div class="pd-detail__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+											<img class="u-img-fluid"
+											     src="../images/product/product-d-4.jpg" alt="">
+										</div>
+										<div>
 
-                                            <span class="pd-detail__review u-s-m-l-4">
+											<img class="u-img-fluid"
+											     src="../images/product/product-d-5.jpg" alt="">
+										</div>
+									</div>
+								</div>
+								<div class="u-s-m-t-15">
+									<div id="../js-product-detail-modal-thumbnail">
+										<div>
 
-                                                <a href="product-detail.html">23 Reviews</a></span></div>
-                                    </div>
-                                    <div class="u-s-m-b-15">
-                                        <div class="pd-detail__inline">
+											<img class="u-img-fluid"
+											     src="../images/product/product-d-1.jpg" alt="">
+										</div>
+										<div>
 
-                                            <span class="pd-detail__stock">200 in stock</span>
+											<img class="u-img-fluid"
+											     src="../images/product/product-d-2.jpg" alt="">
+										</div>
+										<div>
 
-                                            <span class="pd-detail__left">Only 2 left</span></div>
-                                    </div>
-                                    <div class="u-s-m-b-15">
+											<img class="u-img-fluid"
+											     src="../images/product/product-d-3.jpg" alt="">
+										</div>
+										<div>
 
-                                        <span class="pd-detail__preview-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></div>
-                                    <div class="u-s-m-b-15">
-                                        <div class="pd-detail__inline">
+											<img class="u-img-fluid"
+											     src="../images/product/product-d-4.jpg" alt="">
+										</div>
+										<div>
 
-                                            <span class="pd-detail__click-wrap"><i class="far fa-heart u-s-m-r-6"></i>
+											<img class="u-img-fluid"
+											     src="../images/product/product-d-5.jpg" alt="">
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--====== End - Product Detail ======-->
+						</div>
+						<div class="col-lg-7">
+
+							<!--====== Product Right Side Details ======-->
+							<div class="pd-detail">
+								<div>
+
+									<span class="pd-detail__name">Nikon Camera 4k Lens Zoom Pro</span>
+								</div>
+								<div>
+									<div class="pd-detail__inline">
+
+										<span class="pd-detail__price">$6.99</span>
+
+										<span class="pd-detail__discount">(76% OFF)</span>
+										<del class="pd-detail__del">$28.97</del>
+									</div>
+								</div>
+								<div class="u-s-m-b-15">
+									<div class="pd-detail__rating gl-rating-style"><i
+											class="fas fa-star"></i><i class="fas fa-star"></i><i
+											class="fas fa-star"></i><i class="fas fa-star"></i><i
+											class="fas fa-star-half-alt"></i>
+
+										<span class="pd-detail__review u-s-m-l-4">
+
+                                                <a href="product-detail.html">23 Reviews</a></span>
+									</div>
+								</div>
+								<div class="u-s-m-b-15">
+									<div class="pd-detail__inline">
+
+										<span class="pd-detail__stock">200 in stock</span>
+
+										<span class="pd-detail__left">Only 2 left</span></div>
+								</div>
+								<div class="u-s-m-b-15">
+
+									<span class="pd-detail__preview-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span>
+								</div>
+								<div class="u-s-m-b-15">
+									<div class="pd-detail__inline">
+
+                                            <span class="pd-detail__click-wrap"><i
+		                                            class="far fa-heart u-s-m-r-6"></i>
 
                                                 <a href="signin.html">Add to Wishlist</a>
 
-                                                <span class="pd-detail__click-count">(222)</span></span></div>
-                                    </div>
-                                    <div class="u-s-m-b-15">
-                                        <div class="pd-detail__inline">
+                                                <span class="pd-detail__click-count">(222)</span></span>
+									</div>
+								</div>
+								<div class="u-s-m-b-15">
+									<div class="pd-detail__inline">
 
-                                            <span class="pd-detail__click-wrap"><i class="far fa-envelope u-s-m-r-6"></i>
+                                            <span class="pd-detail__click-wrap"><i
+		                                            class="far fa-envelope u-s-m-r-6"></i>
 
                                                 <a href="signin.html">Email me When the price drops</a>
 
-                                                <span class="pd-detail__click-count">(20)</span></span></div>
-                                    </div>
-                                    <div class="u-s-m-b-15">
-                                        <ul class="pd-social-list">
-                                            <li>
+                                                <span class="pd-detail__click-count">(20)</span></span>
+									</div>
+								</div>
+								<div class="u-s-m-b-15">
+									<ul class="pd-social-list">
+										<li>
 
-                                                <a class="s-fb--color-hover" href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                            <li>
+											<a class="s-fb--color-hover" href="#"><i
+													class="fab fa-facebook-f"></i></a></li>
+										<li>
 
-                                                <a class="s-tw--color-hover" href="#"><i class="fab fa-twitter"></i></a></li>
-                                            <li>
+											<a class="s-tw--color-hover" href="#"><i
+													class="fab fa-twitter"></i></a></li>
+										<li>
 
-                                                <a class="s-insta--color-hover" href="#"><i class="fab fa-instagram"></i></a></li>
-                                            <li>
+											<a class="s-insta--color-hover" href="#"><i
+													class="fab fa-instagram"></i></a></li>
+										<li>
 
-                                                <a class="s-wa--color-hover" href="#"><i class="fab fa-whatsapp"></i></a></li>
-                                            <li>
+											<a class="s-wa--color-hover" href="#"><i
+													class="fab fa-whatsapp"></i></a></li>
+										<li>
 
-                                                <a class="s-gplus--color-hover" href="#"><i class="fab fa-google-plus-g"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="u-s-m-b-15">
-                                        <form class="pd-detail__form">
-                                            <div class="pd-detail-inline-2">
-                                                <div class="u-s-m-b-15">
+											<a class="s-gplus--color-hover" href="#"><i
+													class="fab fa-google-plus-g"></i></a></li>
+									</ul>
+								</div>
+								<div class="u-s-m-b-15">
+									<form class="pd-detail__form">
+										<div class="pd-detail-inline-2">
+											<div class="u-s-m-b-15">
 
-                                                    <!--====== Input Counter ======-->
-                                                    <div class="input-counter">
+												<!--====== Input Counter ======-->
+												<div class="input-counter">
 
-                                                        <span class="input-counter__minus fas fa-minus"></span>
+													<span class="input-counter__minus fas fa-minus"></span>
 
-                                                        <input class="input-counter__text input-counter--text-primary-style" type="text" value="1" data-min="1" data-max="1000">
+													<input class="input-counter__text input-counter--text-primary-style"
+													       type="text" value="1" data-min="1"
+													       data-max="1000">
 
-                                                        <span class="input-counter__plus fas fa-plus"></span></div>
-                                                    <!--====== End - Input Counter ======-->
-                                                </div>
-                                                <div class="u-s-m-b-15">
+													<span class="input-counter__plus fas fa-plus"></span>
+												</div>
+												<!--====== End - Input Counter ======-->
+											</div>
+											<div class="u-s-m-b-15">
 
-                                                    <button class="btn btn--e-brand-b-2" type="submit">Add to Cart</button></div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="u-s-m-b-15">
+												<button class="btn btn--e-brand-b-2" type="submit">
+													Add to Cart
+												</button>
+											</div>
+										</div>
+									</form>
+								</div>
+								<div class="u-s-m-b-15">
 
-                                        <span class="pd-detail__label u-s-m-b-8">Product Policy:</span>
-                                        <ul class="pd-detail__policy-list">
-                                            <li><i class="fas fa-check-circle u-s-m-r-8"></i>
+									<span class="pd-detail__label u-s-m-b-8">Product Policy:</span>
+									<ul class="pd-detail__policy-list">
+										<li><i class="fas fa-check-circle u-s-m-r-8"></i>
 
-                                                <span>Buyer Protection.</span></li>
-                                            <li><i class="fas fa-check-circle u-s-m-r-8"></i>
+											<span>Buyer Protection.</span></li>
+										<li><i class="fas fa-check-circle u-s-m-r-8"></i>
 
-                                                <span>Full Refund if you don't receive your order.</span></li>
-                                            <li><i class="fas fa-check-circle u-s-m-r-8"></i>
+											<span>Full Refund if you don't receive your order.</span>
+										</li>
+										<li><i class="fas fa-check-circle u-s-m-r-8"></i>
 
-                                                <span>Returns accepted if product not as described.</span></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!--====== End - Product Right Side Details ======-->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--====== End - Quick Look Modal ======-->
-
-
-        <!--====== 상세보기창 ======-->
-        <div class="modal fade" id="add-to-cart">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content modal-radius modal-shadow">
-
-                    <button class="btn dismiss-button fas fa-times" type="button" data-dismiss="modal"></button>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-12">
-                                <div class="success u-s-m-b-30">
-                                    <div class="success__text-wrap"><i class="fas fa-check"></i>
-
-                                        <span>Item is added successfully!</span></div>
-                                    <div class="success__img-wrap">
-
-                                        <img class="u-img-fluid" src="../images/product/electronic/product1.jpg" alt=""></div>
-                                    <div class="success__info-wrap">
-
-                                        <span class="success__name">Beats Bomb Wireless Headphone</span>
-
-                                        <span class="success__quantity">Quantity: 1</span>
-
-                                        <span class="success__price">$170.00</span></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12">
-                                <div class="s-option">
-
-                                    <span class="s-option__text">1 item (s) in your cart</span>
-                                    <div class="s-option__link-box">
-
-                                        <a class="s-option__link btn--e-white-brand-shadow" data-dismiss="modal">CONTINUE SHOPPING</a>
-
-                                        <a class="s-option__link btn--e-white-brand-shadow" href="cart.html">VIEW CART</a>
-
-                                        <a class="s-option__link btn--e-brand-shadow" href="checkout.html">PROCEED TO CHECKOUT</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--====== End - Add to Cart Modal ======-->
+											<span>Returns accepted if product not as described.</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<!--====== End - Product Right Side Details ======-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--====== End - Quick Look Modal ======-->
 
 
-        <!--====== 로그인창 ======
-        <div class="modal fade new-l" id="newsletter-modal">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content modal--shadow">
+	<!--====== 상세보기창 ======-->
+	<div class="modal fade" id="add-to-cart">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content modal-radius modal-shadow">
 
-                    <button class="btn new-l__dismiss fas fa-times" type="button" data-dismiss="modal"></button>
-                    <div class="modal-body">
-                        <div class="row u-s-m-x-0">
-                            <div class="col-lg-6 new-l__col-1 u-s-p-x-0">
+				<button class="btn dismiss-button fas fa-times" type="button"
+				        data-dismiss="modal"></button>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-6 col-md-12">
+							<div class="success u-s-m-b-30">
+								<div class="success__text-wrap"><i class="fas fa-check"></i>
 
-                                <a class="new-l__img-wrap u-d-block" href="shop-side-version-2.html">
+									<span>Item is added successfully!</span></div>
+								<div class="success__img-wrap">
 
-                                    <img class="u-img-fluid u-d-block" src="../images/newsletter/newsletter.jpg" alt=""></a></div>
-                            <div class="col-lg-6 new-l__col-2">
-                                <div class="new-l__section u-s-m-t-30">
-                                    <div class="u-s-m-b-8 new-l--center">
-                                        <h3 class="new-l__h3">Newsletter</h3>
-                                    </div>
-                                    <div class="u-s-m-b-30 new-l--center">
-                                        <p class="new-l__p1">Sign up for emails to get the scoop on new arrivals, special sales and more.</p>
-                                    </div>
-                                    <form class="new-l__form">
-                                        <div class="u-s-m-b-15">
+									<img class="u-img-fluid"
+									     src="../images/product/electronic/product1.jpg" alt="">
+								</div>
+								<div class="success__info-wrap">
 
-                                            <input class="news-l__input" type="text" placeholder="E-mail Address"></div>
-                                        <div class="u-s-m-b-15">
+									<span class="success__name">Beats Bomb Wireless Headphone</span>
 
-                                            <button class="btn btn--e-brand-b-2" type="submit">Sign up!</button></div>
-                                    </form>
-                                    <div class="u-s-m-b-15 new-l--center">
-                                        <p class="new-l__p2">By Signing up, you agree to receive Reshop offers,<br />promotions and other commercial messages. You may unsubscribe at any time.</p>
-                                    </div>
-                                    <div class="u-s-m-b-15 new-l--center">
+									<span class="success__quantity">Quantity: 1</span>
 
-                                        <a class="new-l__link" data-dismiss="modal">No Thanks</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        ====== End - Newsletter Subscribe Modal ======-->
-        <!--====== End - Modal Section ======-->
-    </div>
-    <!--====== End - Main App ======-->
+									<span class="success__price">$170.00</span></div>
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-12">
+							<div class="s-option">
+
+								<span class="s-option__text">1 item (s) in your cart</span>
+								<div class="s-option__link-box">
+
+									<a class="s-option__link btn--e-white-brand-shadow"
+									   data-dismiss="modal">CONTINUE SHOPPING</a>
+
+									<a class="s-option__link btn--e-white-brand-shadow"
+									   href="cart.html">VIEW CART</a>
+
+									<a class="s-option__link btn--e-brand-shadow"
+									   href="checkout.html">PROCEED TO CHECKOUT</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--====== End - Add to Cart Modal ======-->
 
 
-    <!--====== Google Analytics: change UA-XXXXX-Y to be your site's ID ======-->
-    <script>
-        window.ga = function() {
-            ga.q.push(arguments)
-        };
-        ga.q = [];
-        ga.l = +new Date;
-        ga('create', 'UA-XXXXX-Y', 'auto');
-        ga('send', 'pageview')
-    </script>
-    <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+	<!--====== 로그인창 ======
+	<div class="modal fade new-l" id="newsletter-modal">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content modal--shadow">
 
-    <!--====== Vendor Js ======-->
-    <script src="../js/vendor.js"></script>
+				<button class="btn new-l__dismiss fas fa-times" type="button" data-dismiss="modal"></button>
+				<div class="modal-body">
+					<div class="row u-s-m-x-0">
+						<div class="col-lg-6 new-l__col-1 u-s-p-x-0">
 
-    <!--====== jQuery Shopnav plugin ======-->
-    <script src="../js/jquery.shopnav.js"></script>
+							<a class="new-l__img-wrap u-d-block" href="shop-side-version-2.html">
 
-    <!--====== App ======-->
-    <script src="../js/app.js"></script>
+								<img class="u-img-fluid u-d-block" src="../images/newsletter/newsletter.jpg" alt=""></a></div>
+						<div class="col-lg-6 new-l__col-2">
+							<div class="new-l__section u-s-m-t-30">
+								<div class="u-s-m-b-8 new-l--center">
+									<h3 class="new-l__h3">Newsletter</h3>
+								</div>
+								<div class="u-s-m-b-30 new-l--center">
+									<p class="new-l__p1">Sign up for emails to get the scoop on new arrivals, special sales and more.</p>
+								</div>
+								<form class="new-l__form">
+									<div class="u-s-m-b-15">
 
-    <!--====== Noscript ======-->
-    <noscript>
-        <div class="app-setting">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="app-setting__wrap">
-                            <h1 class="app-setting__h1">JavaScript is disabled in your browser.</h1>
+										<input class="news-l__input" type="text" placeholder="E-mail Address"></div>
+									<div class="u-s-m-b-15">
 
-                            <span class="app-setting__text">Please enable JavaScript in your browser or upgrade to a JavaScript-capable browser.</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </noscript>
+										<button class="btn btn--e-brand-b-2" type="submit">Sign up!</button></div>
+								</form>
+								<div class="u-s-m-b-15 new-l--center">
+									<p class="new-l__p2">By Signing up, you agree to receive Reshop offers,<br />promotions and other commercial messages. You may unsubscribe at any time.</p>
+								</div>
+								<div class="u-s-m-b-15 new-l--center">
+
+									<a class="new-l__link" data-dismiss="modal">No Thanks</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	====== End - Newsletter Subscribe Modal ======-->
+	<!--====== End - Modal Section ======-->
+</div>
+<!--====== End - Main App ======-->
+
+
+<!--====== Google Analytics: change UA-XXXXX-Y to be your site's ID ======-->
+<script>
+  window.ga = function () {
+    ga.q.push(arguments)
+  };
+  ga.q = [];
+  ga.l = +new Date;
+  ga('create', 'UA-XXXXX-Y', 'auto');
+  ga('send', 'pageview')
+</script>
+<script src="https://www.google-analytics.com/analytics.js" async defer></script>
+
+<!--====== Vendor Js ======-->
+<script src="../js/vendor.js"></script>
+
+<!--====== jQuery Shopnav plugin ======-->
+<script src="../js/jquery.shopnav.js"></script>
+
+<!--====== App ======-->
+<script src="../js/app.js"></script>
+
+<!--====== Noscript ======-->
+<noscript>
+	<div class="app-setting">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="app-setting__wrap">
+						<h1 class="app-setting__h1">JavaScript is disabled in your browser.</h1>
+
+						<span class="app-setting__text">Please enable JavaScript in your browser or upgrade to a JavaScript-capable browser.</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</noscript>
 </body>
 </html>
