@@ -5,8 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+ -->
 <link href="../css/chef_list.css" rel="stylesheet">
 </head>
 <body>

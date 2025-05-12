@@ -54,4 +54,25 @@ public class RecipeRestController {
 		
 		return map;
 	}
+
+	@GetMapping("recipe/recipe_list_vue.do")
+	public Map recipe_list_vue(int page)
+	{
+		final int ROWSIZE=RecipeConfig.RECIPE_SIZE;
+		final int BLOCK=RecipeConfig.BLOCK_SIZE;
+
+		Map map=ListUtil.setListRange(page, ROWSIZE);
+		List<RecipeVO> list=service.recipeListData(map);
+		int count=service.recipeTotalCount(map);
+		int totalpage=(int)Math.ceil(count/(double)ROWSIZE);
+		
+		map=new HashMap();
+		map.put("list", list);
+		map.put("curpage", page);
+		map.put("totalpage", totalpage);
+		map.put("count", count);
+		ListUtil.setPageRange(map, BLOCK);
+		
+		return map;
+	}
 }
