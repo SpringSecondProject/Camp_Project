@@ -37,7 +37,7 @@
   .text-muted{color:#868e96!important}  
 </style>
 </head>
-<body> 
+<body>  
     <section class="archive-area section_padding_80" id="listApp">
 	<div class="container mt-4">
 	  
