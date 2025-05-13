@@ -26,8 +26,6 @@
 	<!--====== App ======-->
 	<link rel="stylesheet" href="../css/app.css">
 
-	<script src="https://cdn.tailwindcss.com"></script>
-
 	<!-- vue -->
 	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
