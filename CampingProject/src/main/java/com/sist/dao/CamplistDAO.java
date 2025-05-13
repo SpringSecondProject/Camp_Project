@@ -38,4 +38,8 @@ public class CamplistDAO {
 	public void HitIncrement(int cno) {
 		mapper.HitIncrement(cno);
 	}
+	// 쿠키용 조회
+	public CampVO CampCookie(int cno) {
+		return mapper.CampCookie(cno);
+	}
 }

@@ -17,4 +17,5 @@ public interface CamplistService {
 	public List<String> campIndutyList();
 	public List<String> campLctclList();
 	public void HitIncrement(int cno);
+	public CampVO CampCookie(int cno); //쿠키용
 }

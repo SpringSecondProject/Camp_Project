@@ -64,5 +64,12 @@ public class CamplistServiceImpl implements CamplistService {
 		cDao.HitIncrement(cno);
 	}
 
+	//쿠키용
+	@Override
+	public CampVO CampCookie(int cno) {
+		// TODO Auto-generated method stub
+		return cDao.CampCookie(cno);
+	}
+
 
 }
