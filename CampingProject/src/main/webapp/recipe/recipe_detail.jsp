@@ -8,84 +8,75 @@
 </head>
 <body>
   <section class="archive-area section_padding_80" id="listApp">
-  <div class="container mt-4">
-    <div class="row" id="detail">
-		<table class="table">
-			<tr>
-				<td colspan="3" class="text-center">
-				<img :src="vo.poster" style="width:750px;height:300px">
-				</td>
-			</tr>
-			<tr>
-				<td colspan="3" class="text-center">
-				<h3>{{vo.title}}</h3>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="3" class="text-center">
-				<span style="color:gray">{{vo.content}}</span>
-				</td>
-			</tr>
-			<tr>
-				<td class="text-center"><img src="../images/icon/recipe/a1.png"></td>
-				<td class="text-center"><img src="../images/icon/recipe/a2.png"></td>
-				<td class="text-center"><img src="../images/icon/recipe/a3.png"></td>
-			</tr>
-			<tr>
-				<td class="text-center">{{vo.cook_portion}}</td>
-				<td class="text-center">{{vo.cook_time}}</td>
-				<td class="text-center">{{vo.cook_level}}</td>
-			</tr>
-		</table>
-		<table class="table">
-			<tr>
-				<td><h3>[재료]</h3></td>
-			</tr>
-			<tr>
-				<td>
-					<ul>
-						<li v-for="d in materials">{{d}}</li>
-					</ul>
-				</td>
-			</tr>
-		</table>
-		<table class="table">
-			<tr>
-				<td>
-					<h3>[조리순서]</h3>
-				</td>
-			</tr>
-			<tr>
-				<td>
-				 <table class="table" v-for="(m,index) in mlist">
-				 	<tr>
-				 		<td width=80% class="text-left">{{m}}</td>
-				 		<td width=20% class="text-right">
-				 			<img :src="ilist[index]" style="width:120px; height:80px">
-				 		</td>
-				 	</tr>
-				 </table>
-				</td>
-			</tr>
-		</table>
-		<table class="table">
-			<tr>
-				<td colspan=2>
-					<h3>[레시피 작성자]</h3>
-				</td>
-			</tr>
-			<tr>
-				<td width=30% class="text-center">
-					<img :src="vo.chef_poster" style="width: 50px;height:50px" class="img-circle">
-				</td>
-				<td width=70%>
-					{{vo.chef}}<br>
-					<sub>{{vo.chef_comment}}</sub>
-				</td>
-			</tr>
-		</table>
+<div class="container" id="listApp" style="font-size:12px; line-height:1.6; font-family:'맑은 고딕','Malgun Gothic',sans-serif;">
+
+  <!-- 이미지와 제목 -->
+  <div class="panel panel-default">
+    <div class="panel-body text-center">
+      <img :src="vo.poster" class="img-responsive center-block" style="max-height:300px;">
+      <h2 class="text-primary" style="margin-top:20px;">{{ vo.title }}</h2>
+      <p class="text-muted">{{ vo.content }}</p>
     </div>
   </div>
+
+  <!-- 아이콘 3개 -->
+  <div class="row text-center" style="margin-bottom: 20px;">
+    <div class="col-sm-4">
+      <img src="../images/icon/recipe/a1.png" class="img-responsive center-block" style="height:50px;">
+      <p class="text-muted">{{ vo.cook_portion }}</p>
+    </div>
+    <div class="col-sm-4">
+      <img src="../images/icon/recipe/a2.png" class="img-responsive center-block" style="height:50px;">
+      <p class="text-muted">{{ vo.cook_time }}</p>
+    </div>
+    <div class="col-sm-4">
+      <img src="../images/icon/recipe/a3.png" class="img-responsive center-block" style="height:50px;">
+      <p class="text-muted">{{ vo.cook_level }}</p>
+    </div>
+  </div>
+
+  <!-- 재료 -->
+  <div class="panel panel-default">
+    <div class="panel-heading"><h4 class="panel-title">[ 재료 ]</h4></div>
+    <div class="panel-body">
+      <ul class="list-unstyled" style="column-count: 2;">
+        <li v-for="d in materials" class="text-muted"><span class="glyphicon glyphicon-leaf"></span> {{ d }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 조리 순서 -->
+  <div class="panel panel-default">
+    <div class="panel-heading"><h4 class="panel-title">[ 조리 순서 ]</h4></div>
+    <div class="panel-body">
+      <div v-for="(m, index) in mlist" class="row" style="margin-bottom:15px;">
+        <div class="col-sm-9">
+          <strong>{{ index + 1 }}.</strong> {{ m }}
+        </div>
+        <div class="col-sm-3 text-right">
+          <img :src="ilist[index]" class="img-thumbnail" style="width:100%; max-height:100px;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 작성자 정보 -->
+  <div class="panel panel-default">
+    <div class="panel-heading"><h4 class="panel-title">[ 레시피 작성자 ]</h4></div>
+    <div class="panel-body">
+      <div class="media">
+        <div class="media-left">
+          <img :src="vo.chef_poster" class="img-circle media-object" style="width:60px; height:60px;">
+        </div>
+        <div class="media-body">
+          <h5 class="media-heading">{{ vo.chef }}</h5>
+          <p class="text-muted"><small>{{ vo.chef_comment }}</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
   </section>
   <script>
   let listApp=Vue.createApp({
