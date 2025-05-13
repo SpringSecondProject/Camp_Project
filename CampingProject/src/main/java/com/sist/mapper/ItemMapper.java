@@ -78,7 +78,6 @@ public interface ItemMapper {
 			+"WHERE ${fd} LIKE '%'||#{ss}||'%' ")
 	public int itemFindTotalPage(@Param("fd") String fd,@Param("ss") String ss);
 	
-	// 장바구니
 	@Insert("INSERT INTO Cartlist(cno,ino,userid,account) "
 			  +"VALUES(bc_cno_seq.nextval,#{ino},#{userid},#{account})")
 	public void CartInsert(CartVO vo);
