@@ -1,35 +1,18 @@
-<<<<<<< HEAD
-
-gitignore
-복사
-편집
 # Eclipse 관련
 .project
 .classpath
 .settings/
 
 # 빌드 결과물
-target/
+/target/
 bin/
 build/
 
-# OS별 파일
-.DS_Store
-Thumbs.db
-
-# 로그 파일
+# 로그, 임시 파일
 *.log
-
-# 임시 파일
 *.tmp
 *.swp
 
 # IDE 관련
 .idea/
 *.iml
-=======
-pom.properties
- */target/*
- /build/
- MANIFEST.MF
->>>>>>> branch 'main' of https://github.com/SpringSecondProject/Camp_Project.git
