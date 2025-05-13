@@ -8,6 +8,12 @@
 <link href='https://cdn.jsdelivr.net/npm/@fullcalendar/icalendar@5.11.3/main.css' rel='stylesheet' />
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/locales-all.min.js"></script>
+<style type="text/css">
+#siteStr{
+	width: 180px;
+	white-space: normal;
+}
+</style>
 </head>
 <body>
 	<!--====== App Content ======-->
@@ -44,11 +50,30 @@
                        			</td>
                        		</tr>
                        		<tr>
-                       			<th width="15%">일정</th>
-                       			<td width="70%" class="text-center" style="padding: 8px 0px;"><span v-if="endDate!=''">{{startDate}} - {{endDate}}</span></td>
+                       			<th width="20">일정</th>
+                       			<td width="65" class="text-center" style="padding: 8px 0px;"><span v-if="endDate!=''">{{startDate}} - {{endDate}}</span></td>
                        			<td width="15%" class="text-center">
                        				<input type="button" class="btn-sm btn-success" value="저장" v-if="!isDate" style="width: 60px;" @click="selectDate()">
-                       				<input type="button" class="btn-sm btn-warning" value="재설정" v-if="isDate" @click="resetDate()">
+                       				<input type="button" class="btn-sm btn-warning" value="초기화" v-if="isDate" @click="resetDate()">
+                       			</td>
+                       		</tr>
+                       		<tr v-if="isDate">
+                       			<th width="20%">사이트</th>
+                       			<td width="65" class="text-center" style="padding: 8px 0px;"><p id="siteStr">{{checks.toString()}}</p></td>
+                       			<td width="15%" class="text-center">
+                       				<input type="button" class="btn-sm btn-success" value="저장" v-if="!isSite" style="width: 60px;" @click="selectSite()">
+                       				<input type="button" class="btn-sm btn-warning" value="초기화" v-if="isSite" @click="resetSite()">
+                       			</td>
+                       		</tr>
+                       		<tr v-if="isDate && isSite">
+                       			<td width="20%">비용</td>
+                       			<td colspan="2">
+                       				<span title="(일 수)*(사이트수)*(1박 비용)">{{night}}일 * {{checks.length}}개 * {{priceStr}}원 = {{totalPrice}}원</span>
+                       			</td>
+                       		</tr>
+                       		<tr v-if="isDate && isSite">
+                       			<td colspan="3">
+                       				<input type="button" class="btn-sm btn-success" value="예약" @click="reserve()">
                        			</td>
                        		</tr>
                        	</table>
@@ -57,15 +82,19 @@
                     	<div id="calendar-box" ref="calendar-box" v-show="!isDate">
 	                       	<div id="calendar"></div>
                     	</div>
-                    	<div id="site-box" ref="site-box" v-show="isDate">
-		                	<select ref="type" v-model="type">
+                    	<div id="site-box" ref="site-box" v-show="isDate && !isSite">
+		                	<select ref="type" v-model="type" @change="typeChange()">
 		                		<option v-for="s in sList" :value="s.type">{{s.typeStr}} - {{s.price}}원</option>
 		                	</select>
 			                <div class="row">
-			                	<div class="col-lg-3" v-for="r in rList">
-			                		<input type="checkbox" :disabled="r===1">
+			                	<div class="col-lg-3" v-for="r,idx in rList">
+			                		<input type="checkbox" class="site_check" :disabled="r===1" @click="sCheck(idx)">{{typeStr}}{{idx+1}}
+			                		
 			                	</div>
 			                </div>
+                    	</div>
+                    	<div id="notic-box" ref="notic-box" v-show="isDate && isSite">
+                    		<h1>test</h1>
                     	</div>
                     </div>
                 </div>
@@ -83,14 +112,20 @@
     				sList:[],
     				rList:[],
     				type:0,
+    				price:0,
+    				priceStr:'',
+    				typeStr:'',
     				firstDate:'',
     				startDate:'',
     				endDate:'',
+    				night:0,
     				operDeCl:[],
-    				isDate:false
+    				isDate:false,
+    				isSite:false,
+    				checks:[],
+    				totalPrice:''
     			}
     		},mounted(){
-    			this.printCalender()
     			axios.get('../camp/detail_vue.do',{
     				params:{
     					cno:this.cno
@@ -98,6 +133,7 @@
     			}).then(res=>{
     				console.log(res.data)
     				this.vo=res.data
+	    			this.printCalender()
     			}).catch(error=>{
     				console.log(error.response)
     			})
@@ -108,6 +144,7 @@
    				}).then(res=>{
        				this.sList=res.data
        				this.type=this.sList[0].type
+       				this.typeChange()
        			}).catch(error=>{
        				console.log(error.response)
        			})
@@ -141,10 +178,11 @@
        					editable:true, // 라이브러리??
        					selectAllow: function(selectInfo) {
        						const day = selectInfo.start.getDay();
+       						console.log(_this.vo.operDecl)
        						if(_this.vo.operDeCl===0){
-   	    						return [0,1,2,3,4,5,6].include(selectInfo);
+   	    						return [0,1,2,3,4,5,6].includes(day);
        						}else {
-   	    						return [1,2,3,4,5].include(selectInfo);
+   	    						return [1,2,3,4,5].includes(day);
        						}
        					},
        					businessHours:[
@@ -177,7 +215,7 @@
        						} else {
    	    						const start = _this.firstDate < info.date ? _this.firstDate : info.date
    	    						const end = _this.firstDate > info.date ? _this.firstDate : info.date
-   	    						
+   	    						_this.night=(end-start)/86400000
    	    						if((end-start)>432000000){
    	    							alert("최대 캠핑 일정은 5박 6일입니다")
    	    							return
@@ -216,12 +254,25 @@
     				this.firstDate=''
     				this.startDate=''
     				this.endDate=''
+    				this.resetSite()
     				if(this.calendar) {
 						this.calendar.unselect()
 					}
     				this.$nextTick(() => {
 	    				this.printCalender()
     				})
+    			},
+    			typeChange(){
+    				this.resetSite()
+    				this.sitePrint()
+    				for(let i=0;i<=this.sList.length;i++){
+    					if(this.sList[i].type==this.type){
+    						this.typeStr=this.sList[i].typeStr
+    						this.price=this.sList[i].price
+    						this.priceStr=new Intl.NumberFormat().format(this.price)
+    						break;
+    					}
+    				}
     			},
     			sitePrint(){
     				axios.get('../camp/reserve_list_vue.do',{
@@ -236,6 +287,31 @@
         			}).catch(error=>{
         				console.log(error.response)
         			})
+    			},
+    			sCheck(i){
+    				let idx=this.checks.indexOf(i+1)
+    				if(idx==-1){
+	    				this.checks.push(i+1)
+	    				this.checks=this.checks.sort((a,b)=>a-b)
+    				}else{
+    					this.checks.splice(idx,1)
+    				}
+    				this.totalPrice=new Intl.NumberFormat().format(this.checks.length*this.price*this.night)
+    			},
+    			selectSite(){
+    				if(this.checks.length==0){
+    					alert('사이트를 선택해주세요')
+    					return
+    				}
+    				this.isSite=true
+    			},
+    			resetSite(){
+    				this.isSite=false
+    				this.checks=[]
+    				$('.site_check').prop('checked',false)
+    			},
+    			reserve(){
+    				
     			}
     		}
     	}).mount('#reserveApp')
