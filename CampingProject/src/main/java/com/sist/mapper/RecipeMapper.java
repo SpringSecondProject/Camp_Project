@@ -16,6 +16,9 @@ public interface RecipeMapper {
 	
 	@Select("SELECT COUNT(*) FROM recipeDetail")
 	public int recipeTotalCount(Map map);
+	@Select("SELECT * FROM recipeDetail "
+			+ "WHERE no=#{no}")
+	public RecipeVO recipeDetailData(int no);
 	
 	public List<RecipeVO> chefsRecipeListData(Map map);
 	public int chefsRecipeTotalPage(Map map);

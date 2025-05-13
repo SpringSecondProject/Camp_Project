@@ -69,7 +69,7 @@
 	  <div class="row">
 	    <div class="col-md-3 mb-4" v-for="vo in list" :key="vo.no">
 	      <div class="card h-100">
-	        <a :href="'../recipe/detail.do?no=' + vo.no">
+	        <a :href="'../recipe/recipe_detail.do?no=' + vo.no">
 	          <img :src="vo.poster" class="card-img-top" alt="레시피 이미지">
 	        </a>
 	        <div class="card-body p-2">
