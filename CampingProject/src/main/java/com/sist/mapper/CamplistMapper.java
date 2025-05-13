@@ -82,5 +82,5 @@ public interface CamplistMapper {
 	@Select("SELECT cno,title,poster "
 			+ "FROM camp "
 			+ "WHERE cno=#{cno}")
-	public CampVO CampCookie(int cno);
+	public CampVO CampCookie(int cno); 
 }
