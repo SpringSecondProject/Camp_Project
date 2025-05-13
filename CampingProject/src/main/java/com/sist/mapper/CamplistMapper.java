@@ -77,4 +77,10 @@ public interface CamplistMapper {
 	@Update("UPDATE camp SET hit = hit + 1 "
 			+ "WHERE cno=#{cno}")
 	public void HitIncrement(int cno);
+	
+	// 쿠키용 조회
+	@Select("SELECT cno,title,poster "
+			+ "FROM camp "
+			+ "WHERE cno=#{cno}")
+	public CampVO CampCookie(int cno);
 }
