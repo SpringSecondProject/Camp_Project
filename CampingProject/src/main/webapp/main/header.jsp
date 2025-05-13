@@ -16,7 +16,7 @@
 </head>
 <body>
 <!--====== Main Header ======-->
-<header class="header--style-2">
+<header id="headerApp" class="header--style-2">
 
 	<!--====== Nav 1 ======-->
 	<nav class="primary-nav-wrapper">
@@ -220,7 +220,7 @@
 									<span class="js-menu-toggle"></span>
 									<ul style="width:200px">
 										<li>
-											<a href="#">Blog Left Sidebar</a>
+											<a @click="goProfile()">프로필</a>
 										</li>
 									</ul>
 									<!--====== End - Dropdown ======-->
@@ -712,5 +712,22 @@
 	<!--====== End - Nav 2 ======-->
 </header>
 <!--====== End - Main Header ======-->
+<script>
+  let headerApp = Vue.createApp({
+    data() {
+      return {
+        userid: '',
+      }
+    },
+    mounted() {
+      this.userid = '${sessionScope.userid}'
+    },
+    methods: {
+      goProfile() {
+        location.href = '/web/member/mypage.do?id=' + this.userid
+      },
+    }
+  }).mount('#headerApp')
+</script>
 </body>
 </html>
