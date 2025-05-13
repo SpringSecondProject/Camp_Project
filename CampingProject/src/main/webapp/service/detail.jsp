@@ -1,24 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <head>
 	<title></title>
+	<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 <div id="serviceDetailApp"
      class="flex flex-col w-1/2 min-h-screen justify-start items-center gap-6 my-24 mx-auto">
-	<div class="flex flex-row w-full justify-end items-center"
-	     v-show="qvo.pid == userid">
-		<button type="button"
-		        onclick="deleteQuestion()"
-		        class="bg-red-200 hover:bg-red-300 focus:outline-none font-medium rounded-lg text-2xl px-5 py-2.5 me-2 mb-2">
-			삭제
-		</button>
-	</div>
-
 	<div class="flex flex-col justify-start text-left gap-4 w-full">
 		<!-- 제목 -->
-		<p class="font-bold text-5xl text-black">
-			{{ qvo.title }}
-		</p>
+		<div class="flex flex-row justify-between items-center w-full">
+			<p class="font-bold text-5xl text-black w-full">
+				{{ qvo.title }}
+			</p>
+			<div class="flex flex-row w-full justify-end items-center gap-4">
+				<p class="text-2xl">
+					{{ qvo.ok == 0 ? '답변대기' : '답변완료' }}
+				</p>
+				<button type="button"
+				        v-show="qvo.pid == userid"
+				        onclick="deleteQuestion()"
+				        class="bg-red-200 hover:bg-red-300 focus:outline-none font-medium rounded-lg text-2xl px-5 py-2.5 me-2 mb-2">
+					삭제
+				</button>
+			</div>
+		</div>
 		<!-- 작성 정보 -->
 		<p class="text-2xl">
 			{{ formatDate(qvo.regdate) }}

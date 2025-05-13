@@ -16,6 +16,16 @@ public class RecipeController {
 		return "main/main";
 	}
 
+	@GetMapping("recipe/recipe_detail.do")
+	public String chef_list(String no,Model model)
+	{
+		if(no==null)
+			no="57";
+		model.addAttribute("no",no);
+		model.addAttribute("main_jsp","../recipe/recipe_detail.jsp");
+		return "main/main";
+	}
+
 	@GetMapping("recipe/chef_list.do")
 	public String chef_list(String page,String fd,Model model)
 	{
@@ -37,5 +47,4 @@ public class RecipeController {
 		model.addAttribute("main_jsp","../recipe/chefs_recipe.jsp");
 		return "main/main";
 	}
-
 }

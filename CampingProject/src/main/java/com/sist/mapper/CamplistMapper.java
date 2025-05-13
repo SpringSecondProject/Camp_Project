@@ -78,8 +78,14 @@ public interface CamplistMapper {
 			+ "WHERE cno=#{cno}")
 	public void HitIncrement(int cno);
 	
+	// 메인페이지 출력할꺼 12개 조회수순
+	@Select("SELECT cno,title,poster,induty,lctcl,price,animalcmgcl,addr,hit "
+			 + "FROM (SELECT * FROM camp ORDER BY hit DESC) "
+		     + "WHERE ROWNUM <= 12")
+	public List<CampVO> campMainList();
+	
 	// 쿠키용 조회
-	@Select("SELECT cno,title,poster "
+	@Select("SELECT cno,title,poster,induty,lctcl,price,animalcmgcl,addr "
 			+ "FROM camp "
 			+ "WHERE cno=#{cno}")
 	public CampVO CampCookie(int cno);

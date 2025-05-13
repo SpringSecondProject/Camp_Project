@@ -64,5 +64,19 @@ public class CamplistServiceImpl implements CamplistService {
 		cDao.HitIncrement(cno);
 	}
 
+	//쿠키용
+	@Override
+	public CampVO CampCookie(int cno) {
+		// TODO Auto-generated method stub
+		return cDao.CampCookie(cno);
+	}
+	
+	//메인 조회수순서
+	@Override
+	public List<CampVO> campMainList() {
+		// TODO Auto-generated method stub
+		return cDao.campMainList();
+	}
+
 
 }

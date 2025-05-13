@@ -20,6 +20,10 @@ public class RecipeDAO {
 	{
 		return mapper.recipeTotalCount(map);
 	}
+	public RecipeVO recipeDetailData(int no)
+	{
+		return mapper.recipeDetailData(no);
+	}
 	
 	public List<RecipeVO> chefsRecipeListData(Map map)
 	{
