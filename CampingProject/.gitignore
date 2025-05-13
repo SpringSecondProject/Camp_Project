@@ -4,7 +4,7 @@
 .settings/
 
 # 빌드 결과물
-target/
+/target/
 bin/
 build/
 

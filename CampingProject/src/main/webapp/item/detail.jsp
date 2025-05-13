@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,7 @@
 </head>
 <body>
     <!--====== App Content ======-->
-    <div class="app-content">
+    <div class="app-content" id="detailApp">
 
         <!--====== Section 1 ======-->
         <div class="u-s-p-t-90">
@@ -31,7 +32,7 @@
                         </div>
                	<!--====== Product Detail Zoom ======-->                        
 					<div style="width: 100%; text-align: center;">
-					    <img src="https://www.ocamall.com${vo.poster}" alt="상품 이미지" style="max-height: 370px; max-width: 100%;">
+					    <img src="https://www.ocamall.com${vo.poster} " alt="상품 이미지" style="max-height: 370px; max-width: 100%;">
 					</div>
                    </div>              
                <!--====== Product Right Side Details ======-->
@@ -97,25 +98,29 @@
                             				</c:if>
                             			</td>
                             		</tr>
-				                    <tr>
-				                      <th class="text-center" width=25%>수량</th>
-				                      <td width=45%>
-				                       <select class="form-control" v-model="account">
-				                         <option v-for="i in 10" :value="i">{{i}}개</option>
-				                       </select>
-				                      </td>
-				                    </tr>
-			                       <tr>
-			                        <th class="text-center" width=25%>총금액</th>
-			                        <td width=45%>{{total}}</td>
-			                       </tr>
-			                      <tr>			          			                        
+									<tr>
+									  <th class="text-center" width="25%">수량</th>
+									  <td width="45%">
+									    <select class="form-control" name="account">
+									      <c:forEach var="i" begin="1" end="10">
+									        <option value="${i}" ${i == account ? 'selected' : ''}>${i}개</option>
+									      </c:forEach>
+									    </select>
+									  </td>
+									</tr>
+									<tr>
+									  <th class="text-center" width="25%">총금액</th>
+									  <td width="45%">
+									    <fmt:formatNumber value="${total}" type="number" />
+									  </td>
+									</tr>
+			                      <tr>
+ 								 <td colspan="2" class="text-center">
                                   <c:if test="${sessionScope.userid!=null }">
-			                        <td colspan="2" class="text-center">
-			                           <button class="btn btn--e-brand-b-2" @click="itemCart()">장바구니</button> 
-			                           <button class="btn btn--e-brand-b-2" @click="itemBuy()">바로구매</button>              
-			                        </td>
+										<a class="btn btn--e-brand-b-2" href="../item/item_cart.do">장바구니</a>
+										<a class="btn btn--e-brand-b-2" href="../item/item_cart.do">바로구매</a>
 			                       </c:if>
+			                       </td>
 			                      </tr>	
                             	</table>                          
                             </div>
@@ -157,12 +162,10 @@
                                             </div>
                                         </div>
                                     </div>
-								<div class="tab-pane show active" id="pd-descript">
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	          </div>
+		                    </div>
+		                </div>
+		            </div>
+		          </div>
         <!--====== End - Product Detail Tab ======-->
         <div class="u-s-p-b-90">
 

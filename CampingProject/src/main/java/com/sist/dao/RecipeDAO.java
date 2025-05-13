@@ -16,9 +16,9 @@ public class RecipeDAO {
 	{
 		return mapper.recipeListData(map);
 	}
-	public int recipeTotalPage(int pageSize)
+	public int recipeTotalCount(Map map)
 	{
-		return mapper.recipeTotalPage(pageSize);
+		return mapper.recipeTotalCount(map);
 	}
 	
 	public List<RecipeVO> chefsRecipeListData(Map map)

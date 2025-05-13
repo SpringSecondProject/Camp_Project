@@ -27,6 +27,18 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
+	public List<RecipeVO> recipeListData(Map map) {
+		// TODO Auto-generated method stub
+		return rDao.recipeListData(map);
+	}
+
+	@Override
+	public int recipeTotalCount(Map map) {
+		// TODO Auto-generated method stub
+		return rDao.recipeTotalCount(map);
+	}
+
+	@Override
 	public List<RecipeVO> chefsRecipeListData(Map map) {
 		// TODO Auto-generated method stub
 		return rDao.chefsRecipeListData(map);
@@ -37,5 +49,6 @@ public class RecipeServiceImpl implements RecipeService {
 		// TODO Auto-generated method stub
 		return rDao.chefsRecipeTotalPage(map);
 	}
+
 
 }

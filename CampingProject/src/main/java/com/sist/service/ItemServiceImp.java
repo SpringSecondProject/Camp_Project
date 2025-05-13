@@ -6,14 +6,18 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sist.dao.ItemDAO;
-import com.sist.vo.ItemVO;
+import com.sist.dao.*;
+import com.sist.vo.*;
 
 @Service
 public class ItemServiceImp implements ItemService{
 
 	@Autowired
 	private ItemDAO idao;
+
+	@Autowired
+	private CartDAO cdao;
+
 	@Override
 	public List<ItemVO> itemListData(int start,int end) {
 		// TODO Auto-generated method stub
@@ -59,4 +63,27 @@ public class ItemServiceImp implements ItemService{
 		// TODO Auto-generated method stub
 		return idao.itemFindTotalPage(fd, ss);
 	}
+	@Override
+	public void CartInsert(CartVO vo) {
+		// TODO Auto-generated method stub		
+		int count=cdao.CartInoCount(vo);
+		if(count==0)
+		{
+			cdao.CartInsert(vo);
+		}
+		else
+		{
+			cdao.itemAccountUpdate(vo);
+		}
+	}
+	@Override
+	public List<CartVO> CartListData(String id) {
+		// TODO Auto-generated method stub
+		return cdao.CartListData(id);
+	}
+	@Override
+	public void CartDelete(int ino) {
+		// TODO Auto-generated method stub
+		cdao.CartDelete(ino);
+	}	
 }

@@ -15,4 +15,7 @@ public interface ItemService {
 	public int itemPriceTotalPage(Integer min,Integer max);
 	public List<ItemVO> itemFindList(int start,int end,String fd,String ss);
 	public int itemFindTotalPage(@Param("fd") String fd,@Param("ss") String ss);
+	public void CartInsert(CartVO vo);
+	public List<CartVO> CartListData(String id);
+	public void CartDelete(int ino);	
 }

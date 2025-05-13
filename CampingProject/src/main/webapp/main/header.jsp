@@ -33,8 +33,8 @@ $(function(){
                         <!--====== End - Main Logo ======-->
 
 
-                        <!--====== Search Form ======-->
-                        <form class="main-form">
+				<!--====== Search Form ======-->
+				<form class="main-form flex align-center">
 
                             <label for="main-search"></label>
 
