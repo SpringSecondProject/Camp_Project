@@ -1,8 +1,12 @@
 package com.sist.service;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.sist.dao.*;
 import com.sist.vo.*;
@@ -51,5 +55,62 @@ public class CampServiceImpl implements CampService{
 		}
 		
 		return list;
+	}
+
+	@Override
+	@Transactional
+	public String reserveInsert(ReserveVO vo) {
+		String result="";
+		List<ReserveDetailVO> list=new ArrayList<ReserveDetailVO>();
+		try {
+			result="OK";
+			ReserveDetailVO dvo=new ReserveDetailVO();
+			rDao.reserveInsert(vo);
+			int rno=rDao.reserveFindRno(vo.getId());
+			int sno=rDao.siteFindSno(vo);
+			dvo.setRno(rno);
+			dvo.setSno(sno);
+			dvo.setCno(vo.getCno());
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date startDate = sdf.parse(vo.getStartDateStr());
+			
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(startDate);
+			
+			for(int i=0;i<vo.getBak();i++) {
+				dvo.setResdate(cal.getTime());
+				
+				for(int dno:vo.getSites()) {
+					dvo.setDno(dno);
+					int check=rDao.reserveCheck(dvo);
+					if(check==1) {
+						result="NO";
+						ReserveDetailVO nvo=new ReserveDetailVO();
+						nvo.setRno(dvo.getRno());
+						nvo.setSno(dvo.getSno());
+						nvo.setCno(dvo.getCno());
+						nvo.setDno(dvo.getDno());
+						nvo.setResdate(dvo.getResdate());
+	                    list.add(nvo);
+						continue;
+					}else {
+						rDao.reserveDetailInsert(dvo);
+					}
+				}
+				
+				cal.add(Calendar.DATE, 1);
+			}
+			if (result.equals("NO")) {
+	            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+	        }
+		} catch (Exception e) {
+			result="NO";
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+		for(ReserveDetailVO v:list) {
+			System.out.println(v);
+		}
+		return result;
 	}
 }

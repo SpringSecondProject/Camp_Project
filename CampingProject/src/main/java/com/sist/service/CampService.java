@@ -6,4 +6,6 @@ public interface CampService {
 	public CampVO campDetailData(int cno);
 	public List<SiteVO> siteListData(int cno);
 	public List<Integer> reserveListData(ReserveVO vo);
+	// 예약
+	public String reserveInsert(ReserveVO vo);
 }

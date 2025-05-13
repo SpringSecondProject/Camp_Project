@@ -17,4 +17,23 @@ public class ReserveDAO {
 	public List<Integer> reserveListData(ReserveVO vo) {
 		return mapper.reserveListData(vo);
 	}
+	public void reserveInsert(ReserveVO vo) {
+		try {
+			mapper.reserveInsert(vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public int reserveFindRno(String id) {
+		return mapper.reserveFindRno(id);
+	}
+	public int siteFindSno(ReserveVO vo) {
+		return mapper.siteFindSno(vo);
+	}
+	public int reserveCheck(ReserveDetailVO vo) {
+		return mapper.reserveCheck(vo);
+	}
+	public void reserveDetailInsert(ReserveDetailVO vo) {
+		mapper.reserveDetailInsert(vo);
+	}
 }

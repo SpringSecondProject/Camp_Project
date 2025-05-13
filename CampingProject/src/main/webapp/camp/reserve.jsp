@@ -13,6 +13,9 @@
 	width: 180px;
 	white-space: normal;
 }
+.link{
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -66,14 +69,14 @@
                        			</td>
                        		</tr>
                        		<tr v-if="isDate && isSite">
-                       			<td width="20%">비용</td>
+                       			<th width="20%">비용</th>
                        			<td colspan="2">
-                       				<span title="(일 수)*(사이트수)*(1박 비용)">{{night}}일 * {{checks.length}}개 * {{priceStr}}원 = {{totalPrice}}원</span>
+                       				<span title="(일 수)*(사이트수)*(1박 비용)">{{night}}일 * {{checks.length}}개 * {{priceStr}}원 = {{totalPriceStr}}원</span>
                        			</td>
                        		</tr>
                        		<tr v-if="isDate && isSite">
                        			<td colspan="3">
-                       				<input type="button" class="btn-sm btn-success" value="예약" @click="reserve()">
+                       				<input type="button" class="btn-lg btn-success" value="예약" @click="reserve()" style="width: 100%">
                        			</td>
                        		</tr>
                        	</table>
@@ -88,9 +91,15 @@
 		                	</select>
 			                <div class="row">
 			                	<div class="col-lg-3" v-for="r,idx in rList">
-			                		<input type="checkbox" class="site_check" :disabled="r===1" @click="sCheck(idx)">{{typeStr}}{{idx+1}}
-			                		
-			                	</div>
+								    <div class="thumbnail reserveBox" :id="'reserveBox'+idx" :style="r===1?'opacity: 0.5':''">
+									    <a @click="sCheck(r,idx)">
+									        <img :src="vo.poster" style="width:100%">
+									        <div class="caption">
+									        	<p>{{typeStr}}-{{idx+1}} (<span style="color: gray;">{{priceStr}}원</span>)</p>
+									        </div>
+									    </a>
+								    </div>
+								</div>
 			                </div>
                     	</div>
                     	<div id="notic-box" ref="notic-box" v-show="isDate && isSite">
@@ -123,7 +132,8 @@
     				isDate:false,
     				isSite:false,
     				checks:[],
-    				totalPrice:''
+    				totalPrice:0,
+    				totalPriceStr:''
     			}
     		},mounted(){
     			axios.get('../camp/detail_vue.do',{
@@ -288,15 +298,22 @@
         				console.log(error.response)
         			})
     			},
-    			sCheck(i){
+    			sCheck(r,i){
+    				if(r==1){
+    					alert("이미 예약된 사이트입니다")
+    					return
+    				}
     				let idx=this.checks.indexOf(i+1)
     				if(idx==-1){
+    					$('#reserveBox'+i).css("background-color","whitesmoke")
 	    				this.checks.push(i+1)
 	    				this.checks=this.checks.sort((a,b)=>a-b)
     				}else{
+    					$('#reserveBox'+i).css("background-color","white")
     					this.checks.splice(idx,1)
     				}
-    				this.totalPrice=new Intl.NumberFormat().format(this.checks.length*this.price*this.night)
+    				this.totalPrice=this.checks.length*this.price*this.night
+    				this.totalPriceStr=new Intl.NumberFormat().format(this.totalPrice)
     			},
     			selectSite(){
     				if(this.checks.length==0){
@@ -306,12 +323,29 @@
     				this.isSite=true
     			},
     			resetSite(){
+   					$('.reserveBox').css("background-color","white")
     				this.isSite=false
     				this.checks=[]
     				$('.site_check').prop('checked',false)
     			},
     			reserve(){
-    				
+    				let formData=new FormData()
+					formData.append("cno",this.cno);
+					formData.append("title",this.vo.title);
+					formData.append("type",this.type);
+					formData.append("startDateStr",this.startDate);
+					formData.append("endDateStr",this.endDate);
+					formData.append("price",this.totalPrice);
+					formData.append("bak",this.night);
+					for(let i=0;i<this.checks.length;i++){
+						formData.append("sites",this.checks[i])
+					}
+    				axios.post('../camp/reserve_vue.do',formData)
+    				.then(res=>{
+    					console.log(res.data)
+        			}).catch(error=>{
+        				console.log(error.response)
+        			})
     			}
     		}
     	}).mount('#reserveApp')

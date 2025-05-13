@@ -1,12 +1,15 @@
 package com.sist.web;
 import java.util.*;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.collections.map.HashedMap;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.sist.manager.*;
 import com.sist.service.*;
@@ -32,5 +35,18 @@ public class CampRestController {
 		List<Integer> list=service.reserveListData(vo);
 		map.put("rList", list);
 		return map;
+	}
+	@PostMapping("camp/reserve_vue.do")
+	public String camp_reserve(ReserveVO vo,HttpSession session) {
+		String result="";
+		try {
+			String id=(String)session.getAttribute("userid");
+			vo.setId(id);
+			System.out.println(vo);
+			service.reserveInsert(vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 }
