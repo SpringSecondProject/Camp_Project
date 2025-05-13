@@ -18,4 +18,5 @@ public interface CamplistService {
 	public List<String> campLctclList();
 	public void HitIncrement(int cno);
 	public CampVO CampCookie(int cno); //쿠키용
+	public List<CampVO> campMainList();// 메인 12개 조회수순
 }

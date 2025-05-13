@@ -70,6 +70,13 @@ public class CamplistServiceImpl implements CamplistService {
 		// TODO Auto-generated method stub
 		return cDao.CampCookie(cno);
 	}
+	
+	//메인 조회수순서
+	@Override
+	public List<CampVO> campMainList() {
+		// TODO Auto-generated method stub
+		return cDao.campMainList();
+	}
 
 
 }

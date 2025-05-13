@@ -42,4 +42,8 @@ public class CamplistDAO {
 	public CampVO CampCookie(int cno) {
 		return mapper.CampCookie(cno);
 	}
+	// 메인 조회수 순
+	public List<CampVO> campMainList() {
+		return mapper.campMainList();
+	}
 }
