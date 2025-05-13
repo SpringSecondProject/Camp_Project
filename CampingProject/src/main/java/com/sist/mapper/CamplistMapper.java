@@ -73,7 +73,7 @@ public interface CamplistMapper {
 	@Select("SELECT lctcl FROM camp WHERE poster IS NOT NULL")
 	public List<String> campLctclList();
 	
-	// 조회수 증가 Aspect
+	// 조회수 증가
 	@Update("UPDATE camp SET hit = hit + 1 "
 			+ "WHERE cno=#{cno}")
 	public void HitIncrement(int cno);

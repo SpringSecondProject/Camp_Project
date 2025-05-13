@@ -42,7 +42,17 @@ public class LikeRestController {
 		} else {
 			result.put("msg", "이미 좋아요 했습니다");
 		}
-
+ 
 		return result;
+	}
+	
+	
+	@GetMapping("like/list_vue.do")
+	public List<Integer> campLikeList(@RequestParam("type") int type, HttpSession session) {
+		
+	    String id = (String) session.getAttribute("userid");
+	    if (id == null) return Collections.emptyList();
+	     
+	    return service.likedCampList(id, type); //캠핑장 타입임.  0 : 캠핑장 1: 쇼핑몰 2 : 레시피 3 : 캠핑카 4 : 커뮤니티
 	}
 }

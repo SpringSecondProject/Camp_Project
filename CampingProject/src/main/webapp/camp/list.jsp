@@ -94,10 +94,10 @@
 														<br>
                                                         <span>정보 : {{ vo.intro || '없음' }}</span></div>
                                                     <div class="product-m__wishlist">
-
-                                                        <a class="far fa-heart" data-tooltip="tooltip" data-placement="top" title="좋아요"
-                                                        @click.prevent="likeCamp(vo.cno)"></a>
-                                                        
+                                                        <a :class="likedCamps.includes(vo.cno) ? 'fas fa-heart' : 'far fa-heart'"
+														  title="좋아요" :style="{ color: likedCamps.includes(vo.cno) ? '#ff1500' : '' }"
+														  @click.prevent="likeCamp(vo.cno)">
+														</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -303,6 +303,7 @@
     <jsp:include page="cookie_camp.jsp" />
     <!--====== End - App Content ======-->
     <script>
+    
     let campListApp=Vue.createApp({
     	data(){
     		return {
@@ -320,7 +321,8 @@
     		    selectedTypes: [], // 캠핑장 종류 필터
     		    typeCounts: [], // 종류별 갯수
     		    lctcl:[],	// 환경 종류 필터
-    		    lctclCounts:[] // 환경 종류 필터 갯수
+    		    lctclCounts:[], // 환경 종류 필터 갯수
+    		    likedCamps: [] // 로그인 유저가 좋아요한거 표시
     		}
     	},
     	computed: {
@@ -336,13 +338,21 @@
 			this.getLocationCounts()
 			this.getTypeCounts()
 			this.getLctclCounts()
+			this.loadLikedCamps();
     	},
     	methods:{
+   		  	loadLikedCamps() {
+   			    axios.get("http://localhost:8080/web/like/list_vue.do", {
+   			      params: { type: 0 },
+   			      withCredentials: true //  세션 유지하는거임 
+   			    }).then(res => {
+   			      this.likedCamps = res.data; 
+   			    })
+   			},
     		likeCamp(no) {
     		    axios.post("http://localhost:8080/web/like/insert_vue.do", {
     		        no: no,
     		        type: 0 // 캠핑장 타입임.  0 : 캠핑장 1: 쇼핑몰 2 : 레시피 3 : 캠핑카 4 : 커뮤니티
-    		        
     		    }, 
     		    {
     		       withCredentials: true  //  세션 유지하는거임 
@@ -350,10 +360,13 @@
     		        if (res.data.msg === "NOLOGIN") {
     		            alert("로그인이 필요합니다");
     		        } else {
-    		            alert(res.data.msg);  // 좋아요 완료 or 이미 좋아요 했습니다
+	    		        	if (!this.likedCamps.includes(no)) {
+	    		                this.likedCamps.push(no); // 바로 반영
+	    		              }
+	    		          	  alert(res.data.msg);  // 좋아요 완료 or 이미 좋아요 했습니다
     		        }
     		    }).catch(err => {
-    		        if (err.response?.status === 401) {
+    		        if (err.response && err.response.status === 401) {
     		            alert("로그인이 필요합니다.");
     		        } else {
     		            alert("오류 발생");

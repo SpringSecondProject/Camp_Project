@@ -1,7 +1,9 @@
 package com.sist.dao;
 
+import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,5 +19,9 @@ public class LikeDAO {
     }
     public int countLike(Map map) {
     	return mapper.countLike(map);
+    }
+    
+    public List<Integer> likedCampList(String id, int type){
+    	return mapper.likedCampList(id, type);
     }
 }

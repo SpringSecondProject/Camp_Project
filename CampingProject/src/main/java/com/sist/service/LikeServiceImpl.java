@@ -1,5 +1,6 @@
 package com.sist.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,12 @@ public class LikeServiceImpl implements LikeService {
 	public int countLike(Map map) {
 		// TODO Auto-generated method stub
 		return Ldao.countLike(map);
+	}
+
+	@Override
+	public List<Integer> likedCampList(String id, int type) {
+		// TODO Auto-generated method stub
+		return Ldao.likedCampList(id, type);
 	}
 	
 	
