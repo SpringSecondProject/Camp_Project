@@ -51,6 +51,13 @@
 					    </foreach>
 					  )
 					</if>
+					<!-- 검색으로 찾기 -->
+					<if test="keyword != null and keyword != ''">
+					  AND (
+					    title LIKE '%' || #{keyword} || '%'
+					    OR addr LIKE '%' || #{keyword} || '%'
+					  )
+					</if>
 		        )
 		    )
 		    WHERE num BETWEEN #{start} AND #{end}
@@ -97,7 +104,13 @@
 			    </foreach>
 			  )
 			</if>
-			
+			<!-- 검색으로 찾기 -->
+			<if test="keyword != null and keyword != ''">
+			  AND (
+			    title LIKE '%' || #{keyword} || '%'
+			    OR addr LIKE '%' || #{keyword} || '%'
+			  )
+			</if>			
 		</select>
-
+		
 </mapper>
