@@ -3,6 +3,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,10 +59,16 @@ public class CampServiceImpl implements CampService{
 	}
 
 	@Override
+	public ReserveVO reserveDetailData(int rno) {
+		return rDao.reserveDetailData(rno);
+	}
+	
+	@Override
 	@Transactional
-	public String reserveInsert(ReserveVO vo) {
+	public Map reserveInsert(ReserveVO vo) {
+		Map map=new HashMap();
 		String result="";
-		List<ReserveDetailVO> list=new ArrayList<ReserveDetailVO>();
+		Set<Integer> set=new HashSet<Integer>();
 		try {
 			result="OK";
 			ReserveDetailVO dvo=new ReserveDetailVO();
@@ -86,13 +93,7 @@ public class CampServiceImpl implements CampService{
 					int check=rDao.reserveCheck(dvo);
 					if(check==1) {
 						result="NO";
-						ReserveDetailVO nvo=new ReserveDetailVO();
-						nvo.setRno(dvo.getRno());
-						nvo.setSno(dvo.getSno());
-						nvo.setCno(dvo.getCno());
-						nvo.setDno(dvo.getDno());
-						nvo.setResdate(dvo.getResdate());
-	                    list.add(nvo);
+	                    set.add(dno);
 						continue;
 					}else {
 						rDao.reserveDetailInsert(dvo);
@@ -106,11 +107,18 @@ public class CampServiceImpl implements CampService{
 	        }
 		} catch (Exception e) {
 			result="NO";
+			e.printStackTrace();
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
-		for(ReserveDetailVO v:list) {
-			System.out.println(v);
-		}
-		return result;
+		List<Integer> list = new ArrayList<>(set);
+		Collections.sort(list);
+		map.put("msg", result);
+		map.put("list", list);
+		return map;
+	}
+
+	@Override
+	public int reserveFindRno(String id) {
+		return rDao.reserveFindRno(id);
 	}
 }

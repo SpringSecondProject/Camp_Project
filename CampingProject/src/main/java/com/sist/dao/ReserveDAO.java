@@ -18,11 +18,7 @@ public class ReserveDAO {
 		return mapper.reserveListData(vo);
 	}
 	public void reserveInsert(ReserveVO vo) {
-		try {
-			mapper.reserveInsert(vo);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		mapper.reserveInsert(vo);
 	}
 	public int reserveFindRno(String id) {
 		return mapper.reserveFindRno(id);
@@ -32,6 +28,15 @@ public class ReserveDAO {
 	}
 	public int reserveCheck(ReserveDetailVO vo) {
 		return mapper.reserveCheck(vo);
+	}
+	public ReserveVO reserveDetailData(int rno) {
+		ReserveVO vo=new ReserveVO();
+		try {
+			vo= mapper.reserveDetailData(rno);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return vo;
 	}
 	public void reserveDetailInsert(ReserveDetailVO vo) {
 		mapper.reserveDetailInsert(vo);

@@ -18,6 +18,8 @@ import com.sist.vo.*;
 public class CampRestController {
 	@Autowired
 	private CampService service;
+	@Autowired
+	private MileageService ms;
 
 	@GetMapping("camp/detail_vue.do")
 	public CampVO camp_detail(int cno) {
@@ -37,16 +39,23 @@ public class CampRestController {
 		return map;
 	}
 	@PostMapping("camp/reserve_vue.do")
-	public String camp_reserve(ReserveVO vo,HttpSession session) {
-		String result="";
+	public Map camp_reserve(ReserveVO vo,int point,HttpSession session) {
+		System.out.println(point);
+		Map map=new HashMap();
 		try {
 			String id=(String)session.getAttribute("userid");
 			vo.setId(id);
-			System.out.println(vo);
-			service.reserveInsert(vo);
+			map=service.reserveInsert(vo);
+			MileageVO mvo=new MileageVO();
+			int rno=service.reserveFindRno(id);
+			mvo.setId(id);
+			mvo.setNo(rno);
+			mvo.setType(0);
+			mvo.setPoint(point);
+			ms.mileageUse(mvo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return result;
+		return map;
 	}
 }

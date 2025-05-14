@@ -256,8 +256,8 @@ $(function(){
 								    </div>
 								</div>
 								<div class="tab-pane" id="pd-review">
-								    <div class="pd-tab__">
-								        <h2 class="u-s-m-b-15">리뷰</h2>
+								    <div class="pd-tab__" id="review-app" data-type=${type } data-no=${param.cno }>
+								        <jsp:include page="../commons/review.jsp"/>
 								    </div>
 								</div>
 								<div class="tab-pane" id="pd-notice">
