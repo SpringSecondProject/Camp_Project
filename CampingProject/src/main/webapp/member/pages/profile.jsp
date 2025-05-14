@@ -34,7 +34,8 @@
 		   class="text-black rounded-lg text-xl hover:font-bold underline underline-offset-4">
 			수정하기
 		</a>
-		<a class="text-black rounded-lg text-xl hover:font-bold underline underline-offset-4">
+		<a @click="accountDelete()"
+		   class="text-black rounded-lg text-xl hover:font-bold underline underline-offset-4">
 			회원탈퇴
 		</a>
 	</div>
@@ -84,6 +85,19 @@
         }).then(res => {
           this.items = {...this.inputValue}; // 화면에 반영
           this.mode = false;
+        }).catch(e => {
+          console.log('Update failed', e);
+        });
+      },
+      accountDelete() {
+        console.log('onCommit', this.inputValue);
+        // 서버로 수정된 데이터 전송
+        axios.post('/web/member/profile_delete_vue.do', {
+          id: '${sessionScope.userid }',
+        }).then(res => {
+          console.log(res)
+          alert('회원탈퇴가 완료되었습니다. 이용해주셔서 감사합니다.')
+          location.href = '/main/main.do'
         }).catch(e => {
           console.log('Update failed', e);
         });

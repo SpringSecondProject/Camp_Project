@@ -81,4 +81,13 @@ public class MemberRestController {
   public void member_profile_update(MemberVO vo) {
     service.memberInfoUpdate(vo);
   }
+
+  @GetMapping("member/profile_delete_vue.do")
+  public void member_profile_delete(String id) {
+    try {
+      service.memberInfoDelete(id);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
 }

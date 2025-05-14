@@ -11,4 +11,6 @@ public interface MemberService {
   public MemberVO memberInfoData(String id);
 
   public void memberInfoUpdate(MemberVO vo);
+
+  public void memberInfoDelete(String id);
 }

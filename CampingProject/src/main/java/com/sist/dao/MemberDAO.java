@@ -30,4 +30,8 @@ public class MemberDAO {
   public void memberInfoUpdate(MemberVO vo) {
     mapper.memberInfoUpdate(vo);
   }
+
+  public void memberInfoDelete(String id) {
+    mapper.memberInfoDelete(id);
+  }
 }

@@ -1,6 +1,7 @@
 package com.sist.mapper;
 
 import com.sist.vo.MemberVO;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -25,7 +26,9 @@ public interface MemberMapper {
   @Select("SELECT id,name,nickname,email,sex,post,addr1,addr2,phone FROM member WHERE id=#{id}")
   public MemberVO memberInfoData(String id);
 
-  @Update("UPDATE member SET nickname, post, addr1, addr2, phone WHERE id=#{id}")
+  @Update("UPDATE member SET nickname=#{nickname}, post=#{post}, addr1=#{addr1}, addr2=#{addr2}, phone=#{phone} WHERE id=#{id}")
   public void memberInfoUpdate(MemberVO vo);
 
+  @Delete("DELETE FROM member WHERE id=#{id}")
+  public void memberInfoDelete(String id);
 }
