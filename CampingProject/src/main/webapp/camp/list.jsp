@@ -49,7 +49,7 @@
                                         <div class="product-m">
                                             <div class="product-m__thumb">
 
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" :href="'../camp/detail.do?cno='+vo.cno" >
+                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" :href="'../camp/detail_before.do?cno='+vo.cno" >
 
                                                     <img class="aspect__img" :src="vo.poster"></a> 
                                                 <div class="product-m__quick-look">
@@ -297,12 +297,13 @@
                 </div>
             </div>
         </div>
+        
         <!--====== End - Section 1 ======-->
     </div>
+    <jsp:include page="cookie_camp.jsp" />
     <!--====== End - App Content ======-->
     <script>
     let campListApp=Vue.createApp({
-    	
     	data(){
     		return {
     			list:[],

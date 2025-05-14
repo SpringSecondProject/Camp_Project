@@ -75,4 +75,25 @@ public class RecipeRestController {
 		
 		return map;
 	}
+	@GetMapping("recipe/recipe_detail_vue.do")
+	public Map recipe_detail_vue(int no)
+	{
+		Map map=new HashMap();
+		RecipeVO vo=service.recipeDetailData(no);
+		String[] materials=vo.getMaterials().split(RecipeConfig.MATERIAL_SEPERATOR);
+		String[] steps=vo.getFoodmake().split(RecipeConfig.STEP_SEPERATOR);
+		String[] mlist=new String[steps.length];
+		String[] ilist=new String[steps.length];
+		for(int i=0;i<steps.length;i++)
+		{
+			StringTokenizer st=new StringTokenizer(steps[i], RecipeConfig.IMAGE_SEPERATOR);
+			mlist[i]=st.nextToken();
+			ilist[i]=st.nextToken();
+		}
+		map.put("vo", vo);
+		map.put("materials", materials);
+		map.put("mlist", mlist);
+		map.put("ilist", ilist);
+		return map;
+	}
 }

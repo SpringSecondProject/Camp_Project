@@ -7,14 +7,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MemberController {
-	@GetMapping("member/signup.do")
-	public String member_signup(Model model) {
-		model.addAttribute("main_jsp","../member/signup.jsp");
-		return "main/main";
-	}
-	@RequestMapping("member/login.do")
-	public String member_login(Model model) {
-		model.addAttribute("main_jsp","../member/login.jsp");
-		return "main/main";
-	}
+
+  @GetMapping("member/signup.do")
+  public String member_signup(Model model) {
+    model.addAttribute("main_jsp", "../member/signup.jsp");
+    return "main/main";
+  }
+
+  @RequestMapping("member/login.do")
+  public String member_login(Model model) {
+    model.addAttribute("main_jsp", "../member/login.jsp");
+    return "main/main";
+  }
+
+  @GetMapping("member/mypage.do")
+  public String member_mypage(Model model) {
+    model.addAttribute("path", "account");
+    model.addAttribute("page", "../member/pages/account.jsp");
+    model.addAttribute("main_jsp", "../member/mypage.jsp");
+    return "main/main";
+  }
+
+  @GetMapping("member/profile.do")
+  public String member_profile(Model model) {
+    model.addAttribute("path", "profile");
+    model.addAttribute("page", "../member/pages/profile.jsp");
+    model.addAttribute("main_jsp", "../member/mypage.jsp");
+    return "main/main";
+  }
 }

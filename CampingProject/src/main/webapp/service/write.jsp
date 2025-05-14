@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <head>
 	<title></title>
+	<script src="https://cdn.tailwindcss.com"></script>
 	<style>
       /* 최상위 영역 명시적으로 선언 */
       .comm-write-wrapper {

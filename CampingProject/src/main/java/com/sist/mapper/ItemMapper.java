@@ -78,9 +78,8 @@ public interface ItemMapper {
 			+"WHERE ${fd} LIKE '%'||#{ss}||'%' ")
 	public int itemFindTotalPage(@Param("fd") String fd,@Param("ss") String ss);
 	
-	// 장바구니
 	@Insert("INSERT INTO Cartlist(cno,ino,userid,account) "
-			  +"VALUES(bc_cno_seq.nextval,#{ino},#{userid},#{account})")
+			  +"VALUES(cl_cno_seq.nextval,#{ino},#{userid},#{account})")
 	public void CartInsert(CartVO vo);
 	   
 	@Select("SELECT COUNT(*) FROM Cartlist "
@@ -102,7 +101,7 @@ public interface ItemMapper {
 	@Select("SELECT cno,ino,account,isbuy,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,"
 		  +"item_name,item_poster,item_price "
 		  +"FROM Cartlist cl,item it"
-		  +"WHERE bc.ino=it.ino "
+		  +"WHERE cl.ino=it.ino "
 		  +"AND id=#{id} AND isbuy=0 "
 		  +"ORDER BY cno DESC")
 	public List<CartVO> CartListData(String id);

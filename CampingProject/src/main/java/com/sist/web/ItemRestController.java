@@ -133,4 +133,23 @@ public class ItemRestController {
 
 	    return map;
 	}
+	@PostMapping("item/cart_insert.do")
+	public String cart_insert(int ino,int account,
+			HttpSession session)
+	{
+		String result="";
+		String id=(String)session.getAttribute("userid");
+		CartVO vo=new CartVO();
+		vo.setAccount(account);
+		vo.setId(id);
+		vo.setIno(ino);
+		try
+		{
+			service.CartInsert(vo);
+		  	result="yes";
+		} catch(Exception ex) {
+			result=ex.getMessage();  
+	  	}
+		return result;
+	}
 }

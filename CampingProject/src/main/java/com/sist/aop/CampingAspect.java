@@ -14,10 +14,10 @@ public class CampingAspect {
     private CamplistDAO cDao;
 
     // 컨트롤로 실행전에 실행되는거임
-    @Before("execution(* com.sist.web.CampController.camp_detail(..))")
-    public void increaseHit(JoinPoint jp) {
-    	int cno = (int) jp.getArgs()[0];
-        cDao.HitIncrement(cno);
-        System.out.println("조회수 증가 완료 (AOP)");
-    }
+//    @Before("execution(* com.sist.web.CampController.camp_detail(..))")
+//    public void increaseHit(JoinPoint jp) {
+//    	int cno = (int) jp.getArgs()[0];
+//        cDao.HitIncrement(cno);
+//        System.out.println("조회수 증가 완료 (AOP)");
+//    }
 }
