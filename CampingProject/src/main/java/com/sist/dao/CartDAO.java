@@ -33,4 +33,8 @@ public class CartDAO {
 	{
 		mapper.CartDelete(ino);
 	}
+	public CartVO getCartItemByCno(int cno, String id) 
+	{
+		return mapper.getCartItemByCno(cno, id);
+	}
 }

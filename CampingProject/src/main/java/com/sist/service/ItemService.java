@@ -18,4 +18,5 @@ public interface ItemService {
 	public void CartInsert(CartVO vo);
 	public List<CartVO> CartListData(String id);
 	public void CartDelete(int ino);	
+	public CartVO getCartItemByCno(int cno, String id);
 }

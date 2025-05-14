@@ -17,7 +17,6 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-5">
-
                         <!--====== Product Breadcrumb ======-->
                         <div class="pd-breadcrumb u-s-m-b-30">
                             <ul class="pd-breadcrumb__list">
@@ -129,9 +128,10 @@
 									</tr>
 			                      <tr>
  								 <td colspan="2" class="text-center">
-                                  <c:if test="${sessionScope.userid!=null }">
-										<a class="btn btn--e-brand-b-2" href="../item/item_cart.do">장바구니</a>
-										<a class="btn btn--e-brand-b-2" href="../item/item_cart.do">바로구매</a>
+                                  <c:if test="${sessionScope.userid!=null }">			
+									<input type="hidden" id="userid" value="${sessionScope.userid}" />
+									<a class="btn btn--e-brand-b-2" href="#" onclick="cartInsert(${vo.ino})">장바구니</a>
+									<a class="btn btn--e-brand-b-2" href="../item/item_cart.do?cno=${vo.ino}">바로구매</a>
 			                       </c:if>
 			                       </td>
 			                      </tr>	
@@ -454,20 +454,51 @@
             </div>
             <!--====== End - Section Content ======-->
         </div>
- <script>
-  	document.addEventListener('DOMContentLoaded', function () {
-    	const rawPrice = document.getElementById('priceValue').value || "0";
-    	const price = parseInt(rawPrice.replace(/,/g, ''), 10);
-    	const quantitySelect = document.getElementById('quantitySelect');
-	    const totalAmount = document.getElementById('totalAmount');
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const rawPrice = document.getElementById('priceValue').value || "0";
+    const price = parseInt(rawPrice.replace(/,/g, ''), 10);
+    const quantitySelect = document.getElementById('quantitySelect');
+    const totalAmount = document.getElementById('totalAmount');
+
     function updateTotal() {
-		const quantity = parseInt(quantitySelect.value);
-      	const total = price * quantity;
-      	totalAmount.textContent = total.toLocaleString();
+      const quantity = parseInt(quantitySelect.value);
+      const total = price * quantity;
+      totalAmount.textContent = total.toLocaleString();
     }
+
     quantitySelect.addEventListener('change', updateTotal);
     updateTotal();
   });
+
+  function cartInsert(ino) {
+    const account = document.getElementById('quantitySelect').value;
+    const userId = document.getElementById('userid').value;
+
+    fetch('../item/cart_insert.do', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: new URLSearchParams({
+        ino: ino,
+        account: account,
+ 		id: userId
+      })
+    })
+    .then(res => res.text())
+    .then(result => {
+      if (result === 'yes') {
+        alert('장바구니에 추가되었습니다!');
+      } else {
+        alert('에러: ' + result);
+      }
+    })
+    .catch(error => {
+      console.error('에러 발생:', error);
+      alert('서버 요청 중 오류가 발생했습니다.');
+    });
+  }
 </script>
 </body>
 </html>
