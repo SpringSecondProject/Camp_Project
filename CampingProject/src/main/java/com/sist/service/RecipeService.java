@@ -5,6 +5,9 @@ import java.util.*;
 import com.sist.vo.*;
 
 public interface RecipeService {
+	public List<RecentRecipeVO> selectRecentData();
+	public void insertRecentData();
+	
 	public List<ChefVO> chefListData(Map map);
 	public int chefTotalPage(int rowSize);
 

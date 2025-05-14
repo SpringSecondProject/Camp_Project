@@ -7,6 +7,7 @@
 		<typeAlias type="com.sist.vo.CampVO" alias="CampVO"/>
  		<typeAlias type="com.sist.vo.ChefVO" alias="ChefVO"/>
  		<typeAlias type="com.sist.vo.RecipeVO" alias="RecipeVO"/>
+ 		<typeAlias type="com.sist.vo.RecentRecipeVO" alias="RecentRecipeVO"/>
  		<typeAlias type="com.sist.vo.ReserveVO" alias="ReserveVO"/>
  		<typeAlias type="com.sist.vo.ReserveDetailVO" alias="ReserveDetailVO"/>
  		<typeAlias type="com.sist.vo.SiteVO" alias="SiteVO"/>

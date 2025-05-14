@@ -22,8 +22,8 @@
 
                                         <span class="js-shop-grid-target is-active">Grid</span>
 
-                                        <span class="js-shop-list-target">List</span></div>
-                                    <form>
+                                        <span class="js-shop-list-target">List</span>
+                                        <form>
                                         <div class="tool-style__form-wrap">
                                             <div class="u-s-m-b-8">
 	                                            <select class="select-box select-box--transparent-b-2" 
@@ -36,6 +36,18 @@
                                             
                                         </div>
                                     </form>
+                                    </div>
+                                    
+                                    <form class="main-form flex align-center" @submit.prevent="pageChange(1)">
+
+										<label for="main-search"></label>
+					
+										<input class="input-text input-text--border-radius input-text--style-2"
+										       type="text" id="main-search" placeholder="캠핑장 이름과 주소로 검색" v-model="keyword">
+					
+										<button class="btn btn--icon fas fa-search main-search-button"
+										        type="button" @click="pageChange(1)"></button>
+									</form>
                                 </div>
                             </div>
                             <div class="shop-p__collection">
@@ -94,10 +106,10 @@
 														<br>
                                                         <span>정보 : {{ vo.intro || '없음' }}</span></div>
                                                     <div class="product-m__wishlist">
-
-                                                        <a class="far fa-heart" data-tooltip="tooltip" data-placement="top" title="좋아요"
-                                                        @click.prevent="likeCamp(vo.cno)"></a>
-                                                        
+                                                        <a :class="likedCamps.includes(vo.cno) ? 'fas fa-heart' : 'far fa-heart'"
+														  title="좋아요" :style="{ color: likedCamps.includes(vo.cno) ? '#ff1500' : '' }"
+														  @click.prevent="likeCamp(vo.cno)">
+														</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -147,7 +159,6 @@
                                         </div>
                                         <div class="shop-w__wrap collapse show" id="s-manufacturer">
                                             <ul class="shop-w__list-2">
-                                                
                                                 <li v-for="item in locationCounts" :key="item.name">
 												  <div class="list__content">
 												    <input type="checkbox" :value="item.name" v-model="locations" @change="pageChange(1)">
@@ -183,8 +194,9 @@
 
                                                         <input class="input-text input-text--primary-style" type="text" id="maxPrice" v-model="maxPrice" placeholder="최대금액"></div>
                                                     <div>
-
-                                                        <button class="btn btn--icon fas fa-angle-right btn--e-transparent-platinum-b-2" type="button"  @click="pageChange(1)"></button></div>
+														<likeCard></likeCard>
+                                                        
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>
@@ -302,7 +314,11 @@
     </div>
     <jsp:include page="cookie_camp.jsp" />
     <!--====== End - App Content ======-->
+    
+    <script src="../like/likeCard.js"></script>
+    <script src="../like/likeTypes.js"></script>
     <script>
+    
     let campListApp=Vue.createApp({
     	data(){
     		return {
@@ -320,7 +336,9 @@
     		    selectedTypes: [], // 캠핑장 종류 필터
     		    typeCounts: [], // 종류별 갯수
     		    lctcl:[],	// 환경 종류 필터
-    		    lctclCounts:[] // 환경 종류 필터 갯수
+    		    lctclCounts:[], // 환경 종류 필터 갯수
+    		    likedCamps: [], // 로그인 유저가 좋아요한거 표시
+    		    keyword:''// 캠핑장 검색어
     		}
     	},
     	computed: {
@@ -336,29 +354,13 @@
 			this.getLocationCounts()
 			this.getTypeCounts()
 			this.getLctclCounts()
+			//this.loadLikedCamps();
+			likeUtil.loadLikedCamps(this, window.LIKE_TYPES.CAMP); // 좋아요 불러오기
     	},
     	methods:{
-    		likeCamp(no) {
-    		    axios.post("http://localhost:8080/web/like/insert_vue.do", {
-    		        no: no,
-    		        type: 0 // 캠핑장 타입임.  0 : 캠핑장 1: 쇼핑몰 2 : 레시피 3 : 캠핑카 4 : 커뮤니티
-    		        
-    		    }, 
-    		    {
-    		       withCredentials: true  //  세션 유지하는거임 
-    		    }).then(res => {
-    		        if (res.data.msg === "NOLOGIN") {
-    		            alert("로그인이 필요합니다");
-    		        } else {
-    		            alert(res.data.msg);  // 좋아요 완료 or 이미 좋아요 했습니다
-    		        }
-    		    }).catch(err => {
-    		        if (err.response?.status === 401) {
-    		            alert("로그인이 필요합니다.");
-    		        } else {
-    		            alert("오류 발생");
-    		        }
-    		    })
+    		likeCamp(no) { // 좋아요 클릭시
+    		      likeUtil.likeCamp(this, no , window.LIKE_TYPES.CAMP); 
+    		//  CAMP: 0, SHOP: 1, RECIPE: 2, CAR: 3, COMMUNITY: 4
     		},
     		getLctclCounts() {
     		  axios.get("http://localhost:8080/web/camp/lctcl_count_vue.do")
@@ -410,7 +412,8 @@
     			//console.log("최대금액:", this.maxPrice)
     			//console.log("selectedPet:", this.selectedPet)
     			//console.log("selectedTypes:", this.selectedTypes)
-    			console.log(this.lctcl)
+    			//console.log(this.lctcl)
+    			console.log(this.keyword+"키워드")
     			axios.get('http://localhost:8080/web/camp/list_vue.do',{
         			params:{
         				page:this.curpage,
@@ -420,7 +423,8 @@
         			    maxPrice: this.maxPrice,
         			    pet: this.selectedPet, // 펫 필터
         			    types: this.selectedTypes.join(','), // 캠핑장 종류
-        			    lctcl: this.lctcl.join(',') // 환경 종류
+        			    lctcl: this.lctcl.join(','), // 환경 종류
+        			    keyword: this.keyword
         			}
         		}).then(res=>{
         			console.log(res.data)
@@ -438,6 +442,9 @@
         			console.log(error.response)
         		})
     		}
+    	},
+    	components:{
+    		'likeCard':likeCard
     	}
     }).mount("#campApp")
     </script>

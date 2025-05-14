@@ -2,7 +2,7 @@ package com.sist.web;
 
 import com.sist.service.MemberService;
 import com.sist.vo.MemberVO;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,16 +52,42 @@ public class MemberRestController {
   public Map member_account(@Param("id") String id) {
     MemberVO vo = service.memberInfoData(id);
 
-    Map map = new HashMap();
-    map.put("id", vo.getId());
+    Map map = new LinkedHashMap();
     map.put("name", vo.getName());
     map.put("nickname", vo.getNickname());
     map.put("email", vo.getEmail());
     map.put("phone", vo.getPhone());
-    map.put("post", vo.getPost());
-    map.put("addr1", vo.getAddr1());
-    map.put("addr2", vo.getAddr2());
+    map.put("addr", vo.getPost() + "\n " + vo.getAddr1() + " " + vo.getAddr2());
 
     return map;
+  }
+
+  @GetMapping("member/profile_vue.do")
+  public Map member_profile(@Param("id") String id) {
+    MemberVO vo = service.memberInfoData(id);
+
+    Map map = new LinkedHashMap();
+    map.put("ID", vo.getId());
+    map.put("이름", vo.getName());
+    map.put("이메일", vo.getEmail());
+    map.put("닉네임", vo.getNickname());
+    map.put("연락처", vo.getPhone());
+    map.put("주소", vo.getPost() + "\n " + vo.getAddr1() + " " + vo.getAddr2());
+
+    return map;
+  }
+
+  @GetMapping("member/profile_update_vue.do")
+  public void member_profile_update(MemberVO vo) {
+    service.memberInfoUpdate(vo);
+  }
+
+  @GetMapping("member/profile_delete_vue.do")
+  public void member_profile_delete(String id) {
+    try {
+      service.memberInfoDelete(id);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
   }
 }

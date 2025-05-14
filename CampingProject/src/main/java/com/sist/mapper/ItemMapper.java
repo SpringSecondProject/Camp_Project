@@ -78,8 +78,8 @@ public interface ItemMapper {
 			+"WHERE ${fd} LIKE '%'||#{ss}||'%' ")
 	public int itemFindTotalPage(@Param("fd") String fd,@Param("ss") String ss);
 	
-	@Insert("INSERT INTO Cartlist(cno,ino,userid,account) "
-			  +"VALUES(cl_cno_seq.nextval,#{ino},#{userid},#{account})")
+	@Insert("INSERT INTO Cartlist(cno,ino,id,account) "
+			  +"VALUES(cl_cno_seq.nextval,#{ino},#{id},#{account})")
 	public void CartInsert(CartVO vo);
 	   
 	@Select("SELECT COUNT(*) FROM Cartlist "
@@ -95,18 +95,25 @@ public interface ItemMapper {
 	@Results({
 	   @Result(property = "ivo.item_name",column = "item_name"),
 	   @Result(property = "ivo.item_poster",column = "item_poster"),
-	   @Result(property = "ivo.item_price",column = "item_price")
+	   @Result(property = "ivo.item_price",column = "item_price"),
+	   @Result(property = "ivo.item_type",column = "item_type")
 	})
 	
-	@Select("SELECT cno,ino,account,isbuy,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,"
-		  +"item_name,item_poster,item_price "
-		  +"FROM Cartlist cl,item it"
-		  +"WHERE cl.ino=it.ino "
-		  +"AND id=#{id} AND isbuy=0 "
+	@Select("SELECT cno,ino,account,total,status,bno,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,"
+		  +"item_name,item_poster,item_price,item_type "
+		  +"FROM Cartlist cl "		  
+		  +"INNER JOIN item it ON cl.ino = it.ino "
+		  +"WHERE cl.id = #{id} AND cl.status = 0 "
 		  +"ORDER BY cno DESC")
 	public List<CartVO> CartListData(String id);
+
+	@Select("SELECT cno, ino, account, total, status, bno, TO_CHAR(regdate, 'YYYY-MM-DD') as dbday, "
+	        + "item_name, item_poster, item_price,item_type "
+	        + "FROM Cartlist cl "
+	        + "INNER JOIN item it ON cl.ino = it.ino "
+	        + "WHERE cl.cno = #{cno} AND cl.id = #{id} AND cl.status = 0")
+	public CartVO getCartItemByCno(@Param("cno") int cno, @Param("id") String id);
 	
-	@Delete("DELETE FROM Cartlist "
-				  +"WHERE ino=#{ino}")
+	@Delete("DELETE FROM Cartlist WHERE ino=#{ino} AND id=#{id}")
 	public void CartDelete(int ino);
 }
