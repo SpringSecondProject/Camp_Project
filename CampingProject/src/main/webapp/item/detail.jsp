@@ -75,33 +75,46 @@
 	                            				Sold Out
                             				</c:if>
                             			</td>
-                            		</tr>
-                            		<tr>
+                            		</tr>                           
+										<tr>
                             			<td class="text-center" width="20%"><b>할인율</b></td>
                             			<td class="text-left" width="80%">
                             				<c:if test="${vo.discount!=''}">
-	                            				${vo.discount}%
+        										<span style="color:red">${vo.discount}%</span>
                             				</c:if>
                             				<c:if test="${vo.discount==''}">
-	                            				&nbsp;-&nbsp;
-                            				</c:if>
-                            			</td>
-                            		</tr>
-                            		<tr>
-                            			<td class="text-center" width="20%"><b>판매가</b></td>
-                            			<td class="text-left" width="80%">
-                            				<c:if test="${vo.price!=null}">
-	                            				${vo.price}원
-                            				</c:if>
-                            				<c:if test="${vo.price==null}">
-	                            				Sold Out
+	                            				<span>&nbsp;-&nbsp;</span>
                             				</c:if>
                             			</td>
                             		</tr>
 									<tr>
+									  <td class="text-center" width="20%"><b>판매가</b></td>
+									  <td class="text-left" width="80%">
+									    <c:if test="${vo.price != null}">
+									      <c:choose>
+									        <c:when test="${vo.discount != ''}">
+									          <fmt:parseNumber var="price" value="${vo.price}" integerOnly="true"/>
+									          <fmt:parseNumber var="discount" value="${vo.discount}" integerOnly="true"/>
+									          <c:set var="salePrice" value="${price - (price * discount / 100)}"/>
+											 <fmt:formatNumber value="${salePrice}" type="number" maxFractionDigits="0" var="formattedSalePrice"/>
+											<span id="salePrice">${formattedSalePrice}</span>원	
+								          <input type="hidden" id="priceValue" value="${formattedSalePrice}" />
+									        </c:when>
+									        <c:otherwise>
+									          ${vo.price}원
+									          <input type="hidden" id="priceValue" value="${vo.price}" />
+									        </c:otherwise>
+									      </c:choose>
+									    </c:if>
+									    <c:if test="${vo.price == null}">
+									      Sold Out
+									    </c:if>
+									  </td>
+									</tr> 
+									<tr>
 									  <th class="text-center" width="25%">수량</th>
 									  <td width="45%">
-									    <select class="form-control" name="account">
+    									<select class="form-control" name="account" id="quantitySelect">
 									      <c:forEach var="i" begin="1" end="10">
 									        <option value="${i}" ${i == account ? 'selected' : ''}>${i}개</option>
 									      </c:forEach>
@@ -109,9 +122,9 @@
 									  </td>
 									</tr>
 									<tr>
-									  <th class="text-center" width="25%">총금액</th>
+									  <th class="text-center" width="25	%">총금액</th>
 									  <td width="45%">
-									    <fmt:formatNumber value="${total}" type="number" />
+   										 <span id="totalAmount"><fmt:formatNumber value="${total}" type="number" /></span>원
 									  </td>
 									</tr>
 			                      <tr>
@@ -441,5 +454,20 @@
             </div>
             <!--====== End - Section Content ======-->
         </div>
+ <script>
+  	document.addEventListener('DOMContentLoaded', function () {
+    	const rawPrice = document.getElementById('priceValue').value || "0";
+    	const price = parseInt(rawPrice.replace(/,/g, ''), 10);
+    	const quantitySelect = document.getElementById('quantitySelect');
+	    const totalAmount = document.getElementById('totalAmount');
+    function updateTotal() {
+		const quantity = parseInt(quantitySelect.value);
+      	const total = price * quantity;
+      	totalAmount.textContent = total.toLocaleString();
+    }
+    quantitySelect.addEventListener('change', updateTotal);
+    updateTotal();
+  });
+</script>
 </body>
 </html>
