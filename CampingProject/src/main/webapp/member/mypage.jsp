@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
 	<title></title>
 	<script src="https://cdn.tailwindcss.com"></script>
@@ -13,7 +12,7 @@
 				<jsp:include page="../member/components/sideNav.jsp"/>
 				<jsp:include page="../member/components/orderSummary.jsp"/>
 			</div>
-			<div class="flex flex-col w-full">
+			<div class="flex flex-col w-full px-8">
 				<jsp:include page="${page}"/>
 			</div>
 		</div>

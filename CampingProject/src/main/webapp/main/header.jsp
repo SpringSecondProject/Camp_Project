@@ -1,13 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<!DOCTYPE html>
-<html>
 <head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title></title>
 	<script type="text/javascript">
       $(function () {
         $('#sample a').attr("target", "_blank")
@@ -220,7 +216,25 @@
 									<span class="js-menu-toggle"></span>
 									<ul style="width:200px">
 										<li>
-											<a @click="goProfile()">프로필</a>
+											<a href="../member/mypage.do">계정</a>
+										</li>
+										<li>
+											<a href="../member/profile.do">프로필</a>
+										</li>
+										<li>
+											<a href="#">캠핑장 예약</a>
+										</li>
+										<li>
+											<a href="#">장바구니</a>
+										</li>
+										<li>
+											<a href="#">즐겨찾기</a>
+										</li>
+										<li>
+											<a href="#">좋아요</a>
+										</li>
+										<li>
+											<a href="#">댓글</a>
 										</li>
 									</ul>
 									<!--====== End - Dropdown ======-->
@@ -712,22 +726,4 @@
 	<!--====== End - Nav 2 ======-->
 </header>
 <!--====== End - Main Header ======-->
-<script>
-  let headerApp = Vue.createApp({
-    data() {
-      return {
-        userid: '',
-      }
-    },
-    mounted() {
-      this.userid = '${sessionScope.userid}'
-    },
-    methods: {
-      goProfile() {
-        location.href = '/web/member/mypage.do?id=' + this.userid
-      },
-    }
-  }).mount('#headerApp')
-</script>
 </body>
-</html>
