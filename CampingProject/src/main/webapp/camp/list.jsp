@@ -147,7 +147,6 @@
                                         </div>
                                         <div class="shop-w__wrap collapse show" id="s-manufacturer">
                                             <ul class="shop-w__list-2">
-                                                
                                                 <li v-for="item in locationCounts" :key="item.name">
 												  <div class="list__content">
 												    <input type="checkbox" :value="item.name" v-model="locations" @change="pageChange(1)">
@@ -183,8 +182,9 @@
 
                                                         <input class="input-text input-text--primary-style" type="text" id="maxPrice" v-model="maxPrice" placeholder="최대금액"></div>
                                                     <div>
-
-                                                        <button class="btn btn--icon fas fa-angle-right btn--e-transparent-platinum-b-2" type="button"  @click="pageChange(1)"></button></div>
+														<likeCard></likeCard>
+                                                        
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>
@@ -302,6 +302,9 @@
     </div>
     <jsp:include page="cookie_camp.jsp" />
     <!--====== End - App Content ======-->
+    
+    <script src="../like/likeCard.js"></script>
+    <script src="../like/likeTypes.js"></script>
     <script>
     
     let campListApp=Vue.createApp({
@@ -338,40 +341,13 @@
 			this.getLocationCounts()
 			this.getTypeCounts()
 			this.getLctclCounts()
-			this.loadLikedCamps();
+			//this.loadLikedCamps();
+			likeUtil.loadLikedCamps(this, window.LIKE_TYPES.CAMP); // 좋아요 불러오기
     	},
     	methods:{
-   		  	loadLikedCamps() {
-   			    axios.get("http://localhost:8080/web/like/list_vue.do", {
-   			      params: { type: 0 },
-   			      withCredentials: true //  세션 유지하는거임 
-   			    }).then(res => {
-   			      this.likedCamps = res.data; 
-   			    })
-   			},
-    		likeCamp(no) {
-    		    axios.post("http://localhost:8080/web/like/insert_vue.do", {
-    		        no: no,
-    		        type: 0 // 캠핑장 타입임.  0 : 캠핑장 1: 쇼핑몰 2 : 레시피 3 : 캠핑카 4 : 커뮤니티
-    		    }, 
-    		    {
-    		       withCredentials: true  //  세션 유지하는거임 
-    		    }).then(res => {
-    		        if (res.data.msg === "NOLOGIN") {
-    		            alert("로그인이 필요합니다");
-    		        } else {
-	    		        	if (!this.likedCamps.includes(no)) {
-	    		                this.likedCamps.push(no); // 바로 반영
-	    		              }
-	    		          	  alert(res.data.msg);  // 좋아요 완료 or 이미 좋아요 했습니다
-    		        }
-    		    }).catch(err => {
-    		        if (err.response && err.response.status === 401) {
-    		            alert("로그인이 필요합니다.");
-    		        } else {
-    		            alert("오류 발생");
-    		        }
-    		    })
+    		likeCamp(no) { // 좋아요 클릭시
+    		      likeUtil.likeCamp(this, no , window.LIKE_TYPES.CAMP); 
+    		//  CAMP: 0, SHOP: 1, RECIPE: 2, CAR: 3, COMMUNITY: 4
     		},
     		getLctclCounts() {
     		  axios.get("http://localhost:8080/web/camp/lctcl_count_vue.do")
@@ -423,7 +399,7 @@
     			//console.log("최대금액:", this.maxPrice)
     			//console.log("selectedPet:", this.selectedPet)
     			//console.log("selectedTypes:", this.selectedTypes)
-    			console.log(this.lctcl)
+    			//console.log(this.lctcl)
     			axios.get('http://localhost:8080/web/camp/list_vue.do',{
         			params:{
         				page:this.curpage,
@@ -451,6 +427,9 @@
         			console.log(error.response)
         		})
     		}
+    	},
+    	components:{
+    		'likeCard':likeCard
     	}
     }).mount("#campApp")
     </script>

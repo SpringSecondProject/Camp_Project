@@ -6,27 +6,18 @@ window.LIKE_TYPES = {
   COMMUNITY: 4
 };
 
-let listApp=Vue.createApp({
-			data(){
-				return{
-				likedCamps: [] // 로그인 유저가 좋아요한거 표시
-				}
-			},
-			mounted(){
-			this.loadLikedCamps()
-			},
-			methods:{
-			loadLikedCamps(vm, type = window.LIKE_TYPES.CAMP) {
-    axios.get("/web/like/list_vue.do", {
+window.likeUtil = {
+  loadLikedCamps(vm, type) {
+    axios.get("http://localhost:8080/web/like/list_vue.do", {
       params: { type },
       withCredentials: true
     }).then(res => {
       vm.likedCamps = res.data;
-    });
+    })
   },
 
-  likeCamp(vm, no, type = window.LIKE_TYPES.CAMP) {
-    axios.post("/web/like/insert_vue.do", {
+  likeCamp(vm, no, type) {
+    axios.post("http://localhost:8080/web/like/insert_vue.do", {
       no,
       type
     }, {
@@ -46,7 +37,6 @@ let listApp=Vue.createApp({
       } else {
         alert("오류 발생");
       }
-    });
+    })
   }
-			}
-		}).mount("#campApp")
+};
