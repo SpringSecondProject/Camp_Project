@@ -22,7 +22,7 @@ public class CamplistRestController {
 	public Map camp_list(int page, int rowSize, @RequestParam(required = false) String locations,
 		    @RequestParam(required = false) Integer minPrice, @RequestParam(required = false) Integer maxPrice,
 		    @RequestParam(required =false) String pet, @RequestParam(required = false) String types,
-		    @RequestParam(required = false) String lctcl) {
+		    @RequestParam(required = false) String lctcl, @RequestParam(required = false) String keyword) {
 		
 		int start = (page - 1) * rowSize + 1;
 		int end = page * rowSize;
@@ -62,12 +62,17 @@ public class CamplistRestController {
 	        List<String> locList = Arrays.asList(locations.split(","));
 	        map.put("locations", locList);
 	    }
+	    // 검색어 필터
+	    if (keyword != null && !keyword.isEmpty()) {
+	        map.put("keyword", keyword);
+	    }
 	    
 	    boolean hasFilter = (locations != null && !locations.isEmpty())|| // 지역별 필터 있거나 
 	    					(minPrice != null || maxPrice != null) ||   // 가격별 필터 하나라도 있으면	
 	    					(pet != null && !pet.isEmpty()) || // 펫 필터
 	    					(lctcl != null && !lctcl.isEmpty()) || // 환경 유형 필터
-	    					(types != null && !types.isEmpty()); // 캠핑장 종류 필터
+	    					(types != null && !types.isEmpty()) || // 캠핑장 종류 필터
+	    					(keyword != null && !keyword.isEmpty()); // 캠핑장 검색 필터
 	    
 	    //필터 선택했을때랑 안했을때 구분 
 	    if (hasFilter) { 
@@ -97,8 +102,9 @@ public class CamplistRestController {
 		map.put("curpage", page);
 		map.put("totalpage", totalpage);
 		 
-		 
+		
 		return map;
+		
 	}
 	
 	@GetMapping("camp/location_count_vue.do")
