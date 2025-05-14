@@ -35,4 +35,44 @@ public class MemberController {
     model.addAttribute("main_jsp", "../member/mypage.jsp");
     return "main/main";
   }
+
+  @GetMapping("member/campreserve.do")
+  public String member_campReserve(Model model) {
+    model.addAttribute("path", "campreserve");
+    model.addAttribute("page", "../member/pages/campReserve.jsp");
+    model.addAttribute("main_jsp", "../member/mypage.jsp");
+    return "main/main";
+  }
+
+  @GetMapping("member/cart.do")
+  public String member_cart(Model model) {
+    model.addAttribute("path", "cart");
+    model.addAttribute("page", "../member/pages/cart.jsp");
+    model.addAttribute("main_jsp", "../member/mypage.jsp");
+    return "main/main";
+  }
+
+  @GetMapping("member/bookmark.do")
+  public String member_bookmark(Model model) {
+    model.addAttribute("path", "bookmark");
+    model.addAttribute("page", "../member/pages/bookmark.jsp");
+    model.addAttribute("main_jsp", "../member/mypage.jsp");
+    return "main/main";
+  }
+
+  @GetMapping("member/like.do")
+  public String member_like(Model model) {
+    model.addAttribute("path", "like");
+    model.addAttribute("page", "../member/pages/like.jsp");
+    model.addAttribute("main_jsp", "../member/mypage.jsp");
+    return "main/main";
+  }
+
+  @GetMapping("member/reply.do")
+  public String member_reply(Model model) {
+    model.addAttribute("path", "reply");
+    model.addAttribute("page", "../member/pages/reply.jsp");
+    model.addAttribute("main_jsp", "../member/mypage.jsp");
+    return "main/main";
+  }
 }

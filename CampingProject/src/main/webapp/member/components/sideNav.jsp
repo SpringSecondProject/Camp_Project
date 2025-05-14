@@ -11,19 +11,19 @@
 	<a id="profile" href="../member/profile.do">
 		프로필
 	</a>
-	<a id="" href="#">
+	<a id="campreserve" href="../member/campreserve.do">
 		캠핑장 예약
 	</a>
-	<a id="" href="#">
+	<a id="cart" href="../member/cart.do">
 		장바구니
 	</a>
-	<a id="" href="#">
+	<a id="bookmark" href="../member/bookmark.do">
 		즐겨찾기
 	</a>
-	<a id="" href="#">
+	<a id="like" href="../member/like.do">
 		좋아요
 	</a>
-	<a id="" href="#">
+	<a id="reply" href="../member/reply.do">
 		댓글
 	</a>
 </div>
