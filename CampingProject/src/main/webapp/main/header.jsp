@@ -1,13 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<!DOCTYPE html>
-<html>
 <head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title></title>
 	<script type="text/javascript">
       $(function () {
         $('#sample a').attr("target", "_blank")
@@ -16,7 +12,7 @@
 </head>
 <body>
 <!--====== Main Header ======-->
-<header class="header--style-2">
+<header id="headerApp" class="header--style-2">
 
 	<!--====== Nav 1 ======-->
 	<nav class="primary-nav-wrapper">
@@ -220,7 +216,25 @@
 									<span class="js-menu-toggle"></span>
 									<ul style="width:200px">
 										<li>
-											<a href="#">Blog Left Sidebar</a>
+											<a href="../member/mypage.do">계정</a>
+										</li>
+										<li>
+											<a href="../member/profile.do">프로필</a>
+										</li>
+										<li>
+											<a href="#">캠핑장 예약</a>
+										</li>
+										<li>
+											<a href="#">장바구니</a>
+										</li>
+										<li>
+											<a href="#">즐겨찾기</a>
+										</li>
+										<li>
+											<a href="#">좋아요</a>
+										</li>
+										<li>
+											<a href="#">댓글</a>
 										</li>
 									</ul>
 									<!--====== End - Dropdown ======-->
@@ -713,4 +727,3 @@
 </header>
 <!--====== End - Main Header ======-->
 </body>
-</html>

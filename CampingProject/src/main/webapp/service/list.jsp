@@ -1,11 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <head>
-	<title>QnA</title>
+	<title></title>
 	<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 <div id="serviceListApp"
-     class="flex flex-col w-screen min-h-screen justify-start items-center gap-6 py-14 my-10">
+     class="flex flex-col w-screen min-h-screen justify-start items-center gap-4 py-10 my-10">
+	<div class="flex w-1/2 justify-start items-center p-4 bg-gray-200 mb-12">
+		<ul class="breadcrumb__list w-full p-4 bg-gray-100">
+			<li class="has-separator">
+				<a href="../main/main.do">Home</a></li>
+			<li class="is-marked">
+				<a href="../service/list.do">QnA</a></li>
+		</ul>
+	</div>
 	<div class="flex justify-between items-center w-1/2 mb-10">
 		<form>
 			<label for="default-search"
