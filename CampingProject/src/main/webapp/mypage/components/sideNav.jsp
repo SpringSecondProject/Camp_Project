@@ -11,8 +11,11 @@
 	<a id="profile" href="../mypage/profile.do">
 		프로필
 	</a>
+	<a id="campreserve" href="../mypage/mileage.do">
+		마일리지 조회
+	</a>
 	<a id="campreserve" href="../mypage/campreserve.do">
-		캠핑장 예약
+		캠핑장 예약 관리
 	</a>
 	<a id="cart" href="../mypage/cart.do">
 		장바구니

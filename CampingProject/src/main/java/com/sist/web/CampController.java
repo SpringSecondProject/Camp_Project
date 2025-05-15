@@ -40,11 +40,4 @@ public class CampController {
 		model.addAttribute("main_jsp","../camp/reserve.jsp");
 		return "main/main";
 	}
-	@GetMapping("mypage/campreserve.do")
-	public String mypage_reserve(MileageVO vo,HttpSession session,Model model) {
-		model.addAttribute("path", "campreserve");
-	    model.addAttribute("page", "../member/pages/campReserve.jsp");
-	    model.addAttribute("main_jsp", "../member/mypage.jsp");
-		return "main/main";
-	}
 }

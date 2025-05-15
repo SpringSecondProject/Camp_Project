@@ -202,25 +202,28 @@
 									<span class="js-menu-toggle"></span>
 									<ul style="width:200px">
 										<li>
-											<a href="../member/mypage.do">계정</a>
+											<a href="../mypage/mypage.do">계정</a>
 										</li>
 										<li>
-											<a href="../member/profile.do">프로필</a>
+											<a href="../mypage/profile.do">프로필</a>
 										</li>
 										<li>
-											<a href="#">캠핑장 예약</a>
+											<a href="../mypage/mileage.do">마일리지 조회</a>
 										</li>
 										<li>
-											<a href="#">장바구니</a>
+											<a href="../mypage/campreserve.do">캠핑장 예약 관리</a>
 										</li>
 										<li>
-											<a href="#">즐겨찾기</a>
+											<a href="../mypage/cart.do">장바구니</a>
 										</li>
 										<li>
-											<a href="#">좋아요</a>
+											<a href="../mypage/bookmark.do">즐겨찾기</a>
 										</li>
 										<li>
-											<a href="#">댓글</a>
+											<a href="../mypage/like.do">좋아요</a>
+										</li>
+										<li>
+											<a href="../mypage/reply.do">댓글</a>
 										</li>
 									</ul>
 									<!--====== End - Dropdown ======-->

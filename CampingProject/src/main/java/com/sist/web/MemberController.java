@@ -36,6 +36,14 @@ public class MemberController {
     return "main/main";
   }
 
+  @GetMapping("mypage/mileage.do")
+  public String mypage_mileage(Model model) {
+	  model.addAttribute("path", "mileage");
+	  model.addAttribute("page", "../mypage/pages/mileage.jsp");
+	  model.addAttribute("main_jsp", "../mypage/main.jsp");
+	  return "main/main";
+  }
+  
   @GetMapping("mypage/campreserve.do")
   public String mypage_campReserve(Model model) {
     model.addAttribute("path", "campreserve");
