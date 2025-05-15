@@ -216,10 +216,10 @@
 									<span class="js-menu-toggle"></span>
 									<ul style="width:200px">
 										<li>
-											<a href="../member/mypage.do">계정</a>
+											<a href="../mypage/main.do">계정</a>
 										</li>
 										<li>
-											<a href="../member/profile.do">프로필</a>
+											<a href="../mypage/profile.do">프로필</a>
 										</li>
 										<li>
 											<a href="#">캠핑장 예약</a>

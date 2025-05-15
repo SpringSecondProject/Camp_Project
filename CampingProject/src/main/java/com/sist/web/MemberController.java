@@ -20,59 +20,59 @@ public class MemberController {
     return "main/main";
   }
 
-  @GetMapping("member/mypage.do")
-  public String member_mypage(Model model) {
+  @GetMapping("mypage/main.do")
+  public String mypage_main(Model model) {
     model.addAttribute("path", "account");
-    model.addAttribute("page", "../member/pages/account.jsp");
-    model.addAttribute("main_jsp", "../member/mypage.jsp");
+    model.addAttribute("page", "../mypage/pages/account.jsp");
+    model.addAttribute("main_jsp", "../mypage/main.jsp");
     return "main/main";
   }
 
-  @GetMapping("member/profile.do")
-  public String member_profile(Model model) {
+  @GetMapping("mypage/profile.do")
+  public String mypage_profile(Model model) {
     model.addAttribute("path", "profile");
-    model.addAttribute("page", "../member/pages/profile.jsp");
-    model.addAttribute("main_jsp", "../member/mypage.jsp");
+    model.addAttribute("page", "../mypage/pages/profile.jsp");
+    model.addAttribute("main_jsp", "../mypage/main.jsp");
     return "main/main";
   }
 
-  @GetMapping("member/campreserve.do")
-  public String member_campReserve(Model model) {
+  @GetMapping("mypage/campreserve.do")
+  public String mypage_campReserve(Model model) {
     model.addAttribute("path", "campreserve");
-    model.addAttribute("page", "../member/pages/campReserve.jsp");
-    model.addAttribute("main_jsp", "../member/mypage.jsp");
+    model.addAttribute("page", "../mypage/pages/campReserve.jsp");
+    model.addAttribute("main_jsp", "../mypage/main.jsp");
     return "main/main";
   }
 
-  @GetMapping("member/cart.do")
-  public String member_cart(Model model) {
+  @GetMapping("mypage/cart.do")
+  public String mypage_cart(Model model) {
     model.addAttribute("path", "cart");
-    model.addAttribute("page", "../member/pages/cart.jsp");
-    model.addAttribute("main_jsp", "../member/mypage.jsp");
+    model.addAttribute("page", "../mypage/pages/cart.jsp");
+    model.addAttribute("main_jsp", "../mypage/main.jsp");
     return "main/main";
   }
 
-  @GetMapping("member/bookmark.do")
-  public String member_bookmark(Model model) {
+  @GetMapping("mypage/bookmark.do")
+  public String mypage_bookmark(Model model) {
     model.addAttribute("path", "bookmark");
-    model.addAttribute("page", "../member/pages/bookmark.jsp");
-    model.addAttribute("main_jsp", "../member/mypage.jsp");
+    model.addAttribute("page", "../mypage/pages/bookmark.jsp");
+    model.addAttribute("main_jsp", "../mypage/main.jsp");
     return "main/main";
   }
 
-  @GetMapping("member/like.do")
-  public String member_like(Model model) {
+  @GetMapping("mypage/like.do")
+  public String mypage_like(Model model) {
     model.addAttribute("path", "like");
-    model.addAttribute("page", "../member/pages/like.jsp");
-    model.addAttribute("main_jsp", "../member/mypage.jsp");
+    model.addAttribute("page", "../mypage/pages/like.jsp");
+    model.addAttribute("main_jsp", "../mypage/main.jsp");
     return "main/main";
   }
 
-  @GetMapping("member/reply.do")
-  public String member_reply(Model model) {
+  @GetMapping("mypage/reply.do")
+  public String mypage_reply(Model model) {
     model.addAttribute("path", "reply");
     model.addAttribute("page", "../member/pages/reply.jsp");
-    model.addAttribute("main_jsp", "../member/mypage.jsp");
+    model.addAttribute("main_jsp", "../mypage/main.jsp");
     return "main/main";
   }
 }

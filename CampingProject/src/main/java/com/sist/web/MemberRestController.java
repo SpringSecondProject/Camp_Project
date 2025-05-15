@@ -48,8 +48,8 @@ public class MemberRestController {
     return result;
   }
 
-  @GetMapping("member/account_vue.do")
-  public Map member_account(@Param("id") String id) {
+  @GetMapping("mypage/account_vue.do")
+  public Map mypage_account(@Param("id") String id) {
     MemberVO vo = service.memberInfoData(id);
 
     Map map = new LinkedHashMap();
@@ -62,8 +62,8 @@ public class MemberRestController {
     return map;
   }
 
-  @GetMapping("member/profile_vue.do")
-  public Map member_profile(@Param("id") String id) {
+  @GetMapping("mypage/profile_vue.do")
+  public Map mypage_profile(@Param("id") String id) {
     MemberVO vo = service.memberInfoData(id);
 
     Map map = new LinkedHashMap();
@@ -77,13 +77,13 @@ public class MemberRestController {
     return map;
   }
 
-  @GetMapping("member/profile_update_vue.do")
-  public void member_profile_update(MemberVO vo) {
+  @GetMapping("mypage/profile_update_vue.do")
+  public void mypage_profile_update(MemberVO vo) {
     service.memberInfoUpdate(vo);
   }
 
-  @GetMapping("member/profile_delete_vue.do")
-  public void member_profile_delete(String id) {
+  @GetMapping("mypage/profile_delete_vue.do")
+  public void mypage_profile_delete(String id) {
     try {
       service.memberInfoDelete(id);
     } catch (Exception e) {
