@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class CartVO {
-	private int cno,ino,account,total,status,bno;
+	private int cno,ino,account,status,bno;
 	private String id;
 	private Date regdate;
     private String dbday;

@@ -100,7 +100,7 @@ public interface ItemMapper {
 	   @Result(property = "ivo.type",column = "item_type")
 	})
 	
-	@Select("SELECT cl.cno, cl.ino, cl.account, cl.total, cl.status, cl.bno, "
+	@Select("SELECT cl.cno, cl.ino, cl.account, cl.status, cl.bno, "
 		       + "TO_CHAR(cl.regdate, 'YYYY-MM-DD') AS dbday, "
 		       + "it.name AS item_name, it.poster AS item_poster, it.price AS item_price, it.type AS item_type, it.discount AS item_discount "
 		       + "FROM Cartlist cl "
