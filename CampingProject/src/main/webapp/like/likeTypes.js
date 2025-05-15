@@ -8,7 +8,7 @@ window.LIKE_TYPES = {
 
 window.likeUtil = {
   loadLikedCamps(vm, type) {
-    axios.get("http://localhost:8080/web/like/list_vue.do", {
+    axios.get("../like/list_vue.do", {
       params: { type },
       withCredentials: true
     }).then(res => {
@@ -17,7 +17,7 @@ window.likeUtil = {
   },
 
   likeCamp(vm, no, type) {
-    axios.post("http://localhost:8080/web/like/insert_vue.do", {
+    axios.post("../like/insert_vue.do", {
       no,
       type
     }, {

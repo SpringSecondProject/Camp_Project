@@ -17,10 +17,14 @@
 			<form>
 				<div class="tool-style__form-wrap">
 					<div class="u-s-m-b-8">
-						<select class="select-box select-box--transparent-b-2" onchange="location.href=this.value">
-							<option value="/web/like/likeList.do" ${page eq '../member/pages/like.jsp' ? 'selected' : ''}>캠핑장</option>
-							<option value="/web/like/itemList.do" ${page eq '../member/pages/like_item.jsp' ? 'selected' : ''}>쇼핑몰</option>
-							<option value="/web/like/recipeList.do" ${page eq '../member/pages/like_recipe.jsp' ? 'selected' : ''}>레시피</option>
+						<select class="select-box select-box--transparent-b-2"
+							onchange="location.href=this.value">
+							<option value="/web/like/likeList.do"
+								${page eq '../member/pages/like.jsp' ? 'selected' : ''}>캠핑장</option>
+							<option value="/web/like/itemList.do"
+								${page eq '../member/pages/like_item.jsp' ? 'selected' : ''}>쇼핑몰</option>
+							<option value="/web/like/recipeList.do"
+								${page eq '../member/pages/like_recipe.jsp' ? 'selected' : ''}>레시피</option>
 							<option>커뮤니티</option>
 						</select>
 					</div>
@@ -40,43 +44,23 @@
 				<div class="container">
 					<div class="blog-m">
 						<div class="row blog-m-init">
-							<c:forEach var="camp" items="${likeList}">
+							<c:forEach var="recipe" items="${likeList}">
 								<div class="blog-m__element">
 									<div class="bp-mini">
 										<div class="bp-mini__thumbnail text-center">
-											<img src="${camp.poster}" style="width: 100%; height: 180px;" />
+											<img src="${recipe.poster}"
+												style="width: 100%; height: 180px;" />
 										</div>
 										<div class="bp-mini__content">
-											<div class="bp-mini__stat">
-												<span class="bp-mini__h1"> <a href="#">${camp.title}</a>
-												</span> 
-												
-												<span class="bp-mini__stat-wrap"> 
-												<span class="bp-mini__preposition addr">종류 : ${camp.induty}</span> 
-												<span class="bp-mini__preposition addr">주소 : ${camp.addr}
-												</span> 
-												<hr style="margin: 5px;">
-												<span class="bp-mini__stat"> 
-												<span class="bp-mini__preposition" style="color: #4285F4; font-size: 16px;">
-												<a href="#">가격 : ${camp.price}원</a>
-												</span>
-												</span> <br>
-											</div>
-												<span class="bp-mini__stat-wrap"> 
-													<span class="bp-mini__preposition addr">환경 정보 : ${camp.lctCl}</span> 
-													<span class="bp-mini__preposition addr">애견 동반 : ${camp.animalCmgCl}</span>
-												</span> <br>
-
+											<span class="bp-mini__h1"><a href="#">${recipe.title}</a></span>
 											<div class="blog-t-w">
-												<a class="gl-tag btn--e-transparent-hover-brand-b-2"
-													href="#">예약하기</a> <a
-													class="gl-tag btn--e-transparent-hover-brand-b-2" href="#">삭제하기</a>
+												<a class="gl-tag btn--e-transparent-hover-brand-b-2" href="#">레시피 보기</a> 
+												<a class="gl-tag btn--e-transparent-hover-brand-b-2" href="#">삭제하기</a>
 											</div>
 										</div>
 									</div>
 								</div>
 							</c:forEach>
-
 						</div>
 					</div>
 					<nav class="post-center-wrap u-s-p-y-60">

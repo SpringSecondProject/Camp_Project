@@ -20,7 +20,7 @@
 	<a id="bookmark" href="../member/bookmark.do">
 		즐겨찾기
 	</a>
-	<a id="like" href="../member/like.do">
+	<a id="like" href="../like/likeList.do">
 		좋아요
 	</a>
 	<a id="reply" href="../member/reply.do">

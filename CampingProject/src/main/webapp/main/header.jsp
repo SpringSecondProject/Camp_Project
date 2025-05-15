@@ -231,7 +231,7 @@
 											<a href="#">즐겨찾기</a>
 										</li>
 										<li>
-											<a href="#">좋아요</a>
+											<a href="../like/likeList.do">좋아요</a>
 										</li>
 										<li>
 											<a href="#">댓글</a>
