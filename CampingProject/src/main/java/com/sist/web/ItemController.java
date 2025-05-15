@@ -1,5 +1,7 @@
 package com.sist.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,8 +35,8 @@ public class ItemController {
 		return "main/main";
 	}
 	@GetMapping("item/item_cart.do")
-	public String item_cart(@RequestParam("cno") int cno,String id, Model model) {
-	    CartVO cartItem = service.getCartItemByCno(cno, id); 
+	public String item_cart(String id, Model model) {
+		List<CartVO> cartItem = service.CartListData(id); 
 	    model.addAttribute("cartItem", cartItem);
 		model.addAttribute("main_jsp","../item/item_cart.jsp");
 		return "main/main";

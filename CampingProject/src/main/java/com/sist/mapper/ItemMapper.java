@@ -93,26 +93,21 @@ public interface ItemMapper {
 	public void itemAccountUpdate(CartVO vo);
    
 	@Results({
-	   @Result(property = "ivo.item_name",column = "item_name"),
-	   @Result(property = "ivo.item_poster",column = "item_poster"),
-	   @Result(property = "ivo.item_price",column = "item_price"),
-	   @Result(property = "ivo.item_type",column = "item_type")
+	   @Result(property = "ivo.name",column = "item_name"),
+	   @Result(property = "ivo.poster",column = "item_poster"),
+	   @Result(property = "ivo.price",column = "item_price"),
+	   @Result(property = "ivo.discount",column = "item_discount"),
+	   @Result(property = "ivo.type",column = "item_type")
 	})
 	
-	@Select("SELECT cno,ino,account,total,status,bno,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,"
-		  +"item_name,item_poster,item_price,item_type "
-		  +"FROM Cartlist cl "		  
-		  +"INNER JOIN item it ON cl.ino = it.ino "
-		  +"WHERE cl.id = #{id} AND cl.status = 0 "
-		  +"ORDER BY cno DESC")
+	@Select("SELECT cl.cno, cl.ino, cl.account, cl.total, cl.status, cl.bno, "
+		       + "TO_CHAR(cl.regdate, 'YYYY-MM-DD') AS dbday, "
+		       + "it.name AS item_name, it.poster AS item_poster, it.price AS item_price, it.type AS item_type, it,discount AS item_discount "
+		       + "FROM Cartlist cl "
+		       + "INNER JOIN item it ON cl.ino = it.ino "
+		       + "WHERE cl.id = #{id} AND cl.status = 0 "
+		       + "ORDER BY cl.cno DESC")
 	public List<CartVO> CartListData(String id);
-
-	@Select("SELECT cno, ino, account, total, status, bno, TO_CHAR(regdate, 'YYYY-MM-DD') as dbday, "
-	        + "item_name, item_poster, item_price,item_type "
-	        + "FROM Cartlist cl "
-	        + "INNER JOIN item it ON cl.ino = it.ino "
-	        + "WHERE cl.cno = #{cno} AND cl.id = #{id} AND cl.status = 0")
-	public CartVO getCartItemByCno(@Param("cno") int cno, @Param("id") String id);
 	
 	@Delete("DELETE FROM Cartlist WHERE ino=#{ino} AND id=#{id}")
 	public void CartDelete(int ino);
