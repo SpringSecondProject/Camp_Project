@@ -9,28 +9,29 @@ public interface RecipeMapper {
 
 	@Select("SELECT rno,poster,title,no "
 			+ "FROM recipeDetail "
-			+ "ORDER BY rno")
-	public List<RecentRecipeVO> selectRecentData();
-	@Insert("INSERT INTO recentRecipe("
+			+ "WHERE rownum<=#{topSize}"
+			+ "ORDER BY rno DESC")
+	public List<RecentRecipeVO> selectRecentData(int topSize);
+	@Insert("INSERT INTO recentRecipe VALUES("
 			+ "(SELECT NVL(MAX(rno)+1,1) FROM recentRecipe),"
 			+ "#{poster},#{title},#{no})")
-	public void insertRecentData();
-	@Insert("INSERT INTO recipeDetail("
+	public void insertRecentData(RecentRecipeVO vo);
+	@Insert("INSERT INTO recipeDetail VALUES("
 			+ "(SELECT NVL(MAX(no)+1,1) FROM recipeDetail),"
 			+ "#{poster},#{title},#{chef},#{chef_poster},#{chef_comment},"
 			+ "#{cook_portion},#{cook_time},#{cook_level},#{content},#{foodmake},#{materials},"
 			+ "0,0,0)")
-	public void insertRecipeData();
-	@Select("SELECT COUNT(*) FROM recipeDetail "
-			+ "WHERE title='#{title}'")
+	public void insertRecipeData(RecipeVO vo);
+	@Select("SELECT NVL(MAX(no),0) FROM recipeDetail "
+			+ "WHERE title=#{title}")
 	public int findRecipeDetail(String title);
-	@Select("SELECT COUNT(*) FROM recentRecipe "
-			+ "WHERE title='#{title}'")
+	@Select("SELECT NVL(MAX(rno),0) FROM recentRecipe "
+			+ "WHERE title=#{title}")
 	public int findRecentRecipe(String title);
 	
 	@Select("SELECT no,poster,title,num "
 			+ "FROM (SELECT no,poster,title,rownum as num  "
-			+ "FROM (SELECT /* INDEX_ASC(recipeDetail rd_no_pk)*/no,poster,title "
+			+ "FROM (SELECT /* INDEX_DESC(recipeDetail rd_no_pk)*/no,poster,title "
 			+ "FROM recipeDetail)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<RecipeVO> recipeListData(Map map);

@@ -1,6 +1,7 @@
 package com.sist.vo;
 
 import lombok.Data;
+import com.sist.vo.*;
 
 /*
 RNO    NOT NULL NUMBER         
@@ -12,4 +13,7 @@ NO              NUMBER
 public class RecentRecipeVO {
 	private int rno,no;
 	private String poster,title;
+	private String url;
+	
+	private RecipeVO rvo;
 }

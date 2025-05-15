@@ -4,6 +4,7 @@ import java.util.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sist.vo.*;
 import com.sist.mapper.*;
@@ -12,17 +13,24 @@ public class RecipeDAO {
 	@Autowired
 	private RecipeMapper mapper;
 	
-	public List<RecentRecipeVO> selectRecentData()
+	public List<RecentRecipeVO> selectRecentData(int topSize)
 	{
-		return mapper.selectRecentData();
+		return mapper.selectRecentData(topSize);
 	}
-	public void insertRecentData()
+	@Transactional
+	public void insertRecentData(RecentRecipeVO vo)
 	{
-		mapper.insertRecentData();
+		String title=vo.getTitle();
+		if(vo.getNo()==0)
+		{
+			mapper.insertRecipeData(vo.getRvo());
+			vo.setNo(mapper.findRecipeDetail(vo.getTitle()));
+		}
+		mapper.insertRecentData(vo);
 	}
-	public void insertRecipeData()
+	public void insertRecipeData(RecipeVO vo)
 	{
-		mapper.insertRecipeData();
+		mapper.insertRecipeData(vo);
 	}
 	public int findRecipeDetail(String title)
 	{

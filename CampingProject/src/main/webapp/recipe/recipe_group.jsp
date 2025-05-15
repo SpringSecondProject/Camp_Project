@@ -28,7 +28,7 @@
   .card-body{-ms-flex:1 1 auto;flex:1 1 auto;padding:1.25rem}
   .card-img-top{ 
   	width:100%; 
-	height: 250px;             /* 원하는 높이로 조절 */
+	height: 200px;             /* 원하는 높이로 조절 */
   	object-fit: cover;         /* 이미지가 잘리더라도 꽉 채움 */
   	border-top-left-radius: calc(.25rem - 1px); 
   	border-top-right-radius: calc(.25rem - 1px) 

@@ -12,7 +12,7 @@
             chef = #{chef}
           </if>
         </where>
-		ORDER BY poster DESC)) 
+		ORDER BY no DESC)) 
 		WHERE num BETWEEN #{start} AND #{end}
 	</select>
 	<select id="chefsRecipeTotalPage" parameterType="hashmap" resultType="int">
