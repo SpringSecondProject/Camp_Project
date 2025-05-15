@@ -131,7 +131,7 @@
                                   <c:if test="${sessionScope.userid!=null }">			
 									<input type="hidden" id="userid" value="${sessionScope.userid}" />
 									<a class="btn btn--e-brand-b-2" href="#" onclick="cartInsert(${vo.ino})">장바구니</a>
-									<a class="btn btn--e-brand-b-2" href="../item/item_cart.do?cno=${vo.ino}">바로구매</a>
+									<a class="btn btn--e-brand-b-2" href="../item/item_cart.do?id=${userid}">바로구매</a>
 			                       </c:if>
 			                       </td>
 			                      </tr>	
