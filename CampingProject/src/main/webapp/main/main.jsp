@@ -10,7 +10,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<link href="../images/favicon.png" rel="shortcut icon">
-	<title>Ludus - Electronics, Apparel, Computers, Books, DVDs & more</title>
+	<title>CAMPRO</title>
 	<!-- bootstrap -->
 	<link rel="stylesheet"
 	      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
