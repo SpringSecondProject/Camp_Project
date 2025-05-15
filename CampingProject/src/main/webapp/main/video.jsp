@@ -11,8 +11,15 @@
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+	margin-top: 20px;
 }
 </style>
+<script type="text/javascript">
+$(function(){
+	let arr=${vList}
+	console.log(arr)
+})
+</script>
 </head>
 <body>
     <div class="u-s-p-b-60">
@@ -41,14 +48,12 @@
                         <div class="slider-fouc">
                             <div class="owl-carousel tab-slider" data-item="4">
                             	<c:forEach var="vVo" items="${vList }">
-	                                <div class="u-s-m-b-30">
+	                                <div class="u-s-m-b-30" title="${vVo.title}">
 	                                    <div class="product-o product-o--hover-on">
 	                                        <div class="product-o__wrap">
-	                                            <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
-	                                                <iframe src="'https://www.youtube.com/embed/'${vVo.videoid}" style="width: 240px;height: 180px"></iframe>
-	                                            </a>
+	                                            <iframe src="https://www.youtube.com/embed/${vVo.videoid}" style="width: 240px;height: 180px"></iframe>
 	                                        </div>
-	                                        <span class="video_title"><a href="product-detail.html">${vVo.title}</a></span>
+	                                        <p class="video_title">${vVo.title}</p>
 	                                    </div>
 	                                </div>
                             	</c:forEach>

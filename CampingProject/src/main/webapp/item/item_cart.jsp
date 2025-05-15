@@ -24,7 +24,7 @@
                                         <a href="../main/main.do">Home</a></li>
                                     <li class="is-marked">
 
-                                     <a href="../item/item_cart.do">Shopping  Cart</a></li>
+                                     <a href="../item/item_cart.do?cno=${param.cno}">Shopping  Cart</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -63,26 +63,26 @@
                                         <div class="w-r__wrap-1">
                                             <div class="w-r__img-wrap">
 
-                                                <img class="u-img-fluid" src="images/product/electronic/product3.jpg" alt=""></div>
+                                                <img src="https://www.ocamall.com${cartItem.ivo.item_poster} " alt=""></div>
                                             <div class="w-r__info">
 
                                                 <span class="w-r__name">
 
-                                                    <a href="product-detail.html">Yellow Wireless Headphone</a></span>
+                                                    <a href="product-detail.html">${cartItem.ivo.item_name}</a></span>
 
                                                 <span class="w-r__category">
 
-                                                    <a href="shop-side-version-2.html">Electronics</a></span>
+                                                    <a href="shop-side-version-2.html">${cartItem.ivo.item_type}</a></span>
 
-                                                <span class="w-r__price">$125.00
+                                                <span class="w-r__price">${cartItem.account * cartItem.ivo.item_price}
 
-                                                    <span class="w-r__discount">$160.00</span></span></div>
+                                                    <span class="w-r__discount">${cartItem.ivo.item_price}</span></span></div>
                                         </div>
                                         <div class="w-r__wrap-2">
 
                                             <a class="w-r__link btn--e-brand-b-2" data-modal="modal" data-modal-id="#add-to-cart">BUY</a>
 
-                                            <a class="w-r__link btn--e-transparent-platinum-b-2" href="product-detail.html">VIEW</a>
+                                            <a class="w-r__link btn--e-transparent-platinum-b-2" href="../item/detail.do?ino=${vo.ino}">VIEW</a>
 
                                             <a class="w-r__link btn--e-transparent-platinum-b-2" href="#">REMOVE</a></div>
                                     </div>

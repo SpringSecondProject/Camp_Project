@@ -18,7 +18,6 @@ import com.sist.vo.*;
 public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 	@Autowired
 	private MemberService service;
-	
 	// 로그인 성공
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -28,7 +27,6 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 		session.setAttribute("userid", vo.getId());
 		session.setAttribute("username", vo.getNickname()==null?vo.getName():vo.getNickname());
 		session.setAttribute("sex", vo.getSex());
-		
 		response.sendRedirect("../main/main.do");
 	}
 	

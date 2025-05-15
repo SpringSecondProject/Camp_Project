@@ -1,4 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.mapper.ReserveMapper">
+	<resultMap type="reserveVO" id="reserveMap">
+		<result property="rno" column="rno"/>
+		<result property="id" column="id"/>
+	    <result property="title" column="title"/>
+	    <result property="cno" column="cno"/>
+	    <result property="regDateStr" column="regDateStr"/>
+	    <result property="startDateStr" column="startDateStr"/>
+	    <result property="endDateStr" column="endDateStr"/>
+	    <result property="price" column="price"/>
+	    <result property="state" column="state"/>
+	    <result property="type" column="type"/>
+		<collection property="rdList" ofType="ReserveDetailVO">
+			<result property="dno" column="dno"/>
+			<result property="resdateStr" column="resdateStr"/>
+		</collection>
+	</resultMap>
+	<select id="reserveDetailData" resultMap="reserveMap" parameterType="int">
+		SELECT cr.rno,id,cr.cno,title,
+		TO_CHAR(regdate,'YYYY-MM-DD') as regDateStr,
+		TO_CHAR(startdate,'YYYY-MM-DD') as startDateStr,
+		TO_CHAR(enddate,'YYYY-MM-DD') as endDateStr,
+		cr.price,state,rd.dno,
+		TO_CHAR(resdate,'YYYY-MM-DD') as resDateStr,type
+		FROM CAMP_RESERVE cr,RESERVE_DETAIL rd,CAMP_SITE cs
+		WHERE cr.rno=#{rno} AND cr.rno=rd.rno AND rd.sno=cs.sno
+	</select>
 </mapper>

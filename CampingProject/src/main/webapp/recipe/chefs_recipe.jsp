@@ -9,16 +9,17 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
  -->
-<link href="../css/chef_list.css" rel="stylesheet">
+<link href="../css/recipe.css" rel="stylesheet">
 <style>
-  .category-menu { background: #f8f9fa; padding: 15px; }
-  .category-menu h6 { margin-top: 10px; }
-  .recipe-card img { width: 100%; height: 200px; object-fit: cover; }
-  .recipe-card { margin-bottom: 30px; }
-  .recipe-meta { font-size: 0.9rem; color: #666; }
   .h-100 { height: 100%!important }
   .card-body{-ms-flex:1 1 auto;flex:1 1 auto;padding:1.25rem}
-  .card-img-top{ width:100%; border-top-left-radius: calc(.25rem - 1px); border-top-right-radius: calc(.25rem - 1px) }
+  .card-img-top{ 
+  	width:100%; 
+	height: 250px;             /* 원하는 높이로 조절 */
+  	object-fit: cover;         /* 이미지가 잘리더라도 꽉 채움 */
+  	border-top-left-radius: calc(.25rem - 1px); 
+  	border-top-right-radius: calc(.25rem - 1px) 
+  }
   .card-title{margin-bottom:.75rem}
   .card-text:last-child{margin-bottom:0}
   .text-truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -28,6 +29,7 @@
 <body>
     <!-- ****** Archive Area Start ****** -->
     <section class="archive-area section_padding_80" id="listApp">
+	    <div style="height: 10px"></div>
 		<div class="container mt-4">
 		  <div class="row">
 		    <div class="col-md-3 mb-4" v-for="vo in list" :key="vo.no">

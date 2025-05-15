@@ -13,6 +13,19 @@ public class RecipeServiceImpl implements RecipeService {
 	private RecipeDAO rDao;
 	@Autowired
 	private ChefDAO cDao;
+
+	@Override
+	public List<RecentRecipeVO> selectRecentData() {
+		// TODO Auto-generated method stub
+		List<RecentRecipeVO> list=rDao.selectRecentData();
+		return list;
+	}
+
+	@Override
+	public void insertRecentData() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	@Override
 	public List<ChefVO> chefListData(Map map) {

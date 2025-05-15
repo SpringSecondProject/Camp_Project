@@ -5,8 +5,10 @@ import java.util.*;
 
 @Data
 public class ReserveVO {
-	private int rno,id,cno,price,state,type;
-	private String name,regdateStr,startDateStr,endDateStr;
-	private Date regdate,startDate,endDate;
+	private int rno,cno,price,state,type;
+	private String id,title,regDateStr,startDateStr,endDateStr;
+	private Date regDate,startDate,endDate;
 	private List<ReserveDetailVO> rdList;
+	private int[] sites;
+	private int bak; //예약일 수
 }

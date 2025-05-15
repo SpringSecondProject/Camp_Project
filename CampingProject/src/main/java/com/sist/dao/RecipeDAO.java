@@ -12,6 +12,27 @@ public class RecipeDAO {
 	@Autowired
 	private RecipeMapper mapper;
 	
+	public List<RecentRecipeVO> selectRecentData()
+	{
+		return mapper.selectRecentData();
+	}
+	public void insertRecentData()
+	{
+		mapper.insertRecentData();
+	}
+	public void insertRecipeData()
+	{
+		mapper.insertRecipeData();
+	}
+	public int findRecipeDetail(String title)
+	{
+		return mapper.findRecipeDetail(title);
+	}
+	public int findRecentRecipe(String title)
+	{
+		return mapper.findRecentRecipe(title);
+	}
+	
 	public List<RecipeVO> recipeListData(Map map)
 	{
 		return mapper.recipeListData(map);

@@ -1,7 +1,9 @@
 package com.sist.mapper;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 
 import com.sist.vo.*;
 
@@ -12,4 +14,18 @@ public interface ReserveMapper {
 			+ "WHERE RESDATE IN(#{startDateStr},#{endDateStr}) "
 			+ "AND sno=(SELECT SNO FROM CAMP_SITE s WHERE s.CNO=#{cno} AND TYPE=#{type})")
 	public List<Integer> reserveListData(ReserveVO vo);
+	@Insert("INSERT INTO CAMP_RESERVE(rno,id,cno,title,regdate,startdate,enddate,price,state) "
+			+ "VALUES(cr_rno_seq.nextval,#{id},#{cno},#{title},SYSDATE,#{startDateStr},#{endDateStr},#{price},0)")
+	public void reserveInsert(ReserveVO vo);
+	@Select("SELECT rno FROM CAMP_RESERVE WHERE id=#{id} AND rownum=1 ORDER BY rno DESC")
+	public int reserveFindRno(String id);
+	@Select("SELECT sno FROM CAMP_SITE WHERE cno=#{cno} AND type=#{type}")
+	public int siteFindSno(ReserveVO vo);
+	@Select("SELECT COUNT(*) FROM RESERVE_DETAIL WHERE sno=#{sno} AND dno=#{dno} AND resdate=#{resdate}")
+	public int reserveCheck(ReserveDetailVO vo);
+	@Insert("INSERT INTO RESERVE_DETAIL(rno,sno,cno,dno,resdate) "
+			+ "VALUES(#{rno},#{sno},#{cno},#{dno},#{resdate})")
+	public void reserveDetailInsert(ReserveDetailVO vo);
+	
+	public ReserveVO reserveDetailData(int rno);
 }

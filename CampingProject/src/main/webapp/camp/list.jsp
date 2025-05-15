@@ -22,8 +22,8 @@
 
                                         <span class="js-shop-grid-target is-active">Grid</span>
 
-                                        <span class="js-shop-list-target">List</span></div>
-                                    <form>
+                                        <span class="js-shop-list-target">List</span>
+                                        <form>
                                         <div class="tool-style__form-wrap">
                                             <div class="u-s-m-b-8">
 	                                            <select class="select-box select-box--transparent-b-2" 
@@ -36,6 +36,18 @@
                                             
                                         </div>
                                     </form>
+                                    </div>
+                                    
+                                    <form class="main-form flex align-center" @submit.prevent="pageChange(1)">
+
+										<label for="main-search"></label>
+					
+										<input class="input-text input-text--border-radius input-text--style-2"
+										       type="text" id="main-search" placeholder="캠핑장 이름과 주소로 검색" v-model="keyword">
+					
+										<button class="btn btn--icon fas fa-search main-search-button"
+										        type="button" @click="pageChange(1)"></button>
+									</form>
                                 </div>
                             </div>
                             <div class="shop-p__collection">
@@ -325,7 +337,8 @@
     		    typeCounts: [], // 종류별 갯수
     		    lctcl:[],	// 환경 종류 필터
     		    lctclCounts:[], // 환경 종류 필터 갯수
-    		    likedCamps: [] // 로그인 유저가 좋아요한거 표시
+    		    likedCamps: [], // 로그인 유저가 좋아요한거 표시
+    		    keyword:''// 캠핑장 검색어
     		}
     	},
     	computed: {
@@ -400,6 +413,7 @@
     			//console.log("selectedPet:", this.selectedPet)
     			//console.log("selectedTypes:", this.selectedTypes)
     			//console.log(this.lctcl)
+    			console.log(this.keyword+"키워드")
     			axios.get('http://localhost:8080/web/camp/list_vue.do',{
         			params:{
         				page:this.curpage,
@@ -409,7 +423,8 @@
         			    maxPrice: this.maxPrice,
         			    pet: this.selectedPet, // 펫 필터
         			    types: this.selectedTypes.join(','), // 캠핑장 종류
-        			    lctcl: this.lctcl.join(',') // 환경 종류
+        			    lctcl: this.lctcl.join(','), // 환경 종류
+        			    keyword: this.keyword
         			}
         		}).then(res=>{
         			console.log(res.data)

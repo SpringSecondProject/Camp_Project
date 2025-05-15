@@ -1,8 +1,13 @@
 package com.sist.service;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.sist.dao.*;
 import com.sist.vo.*;
@@ -51,5 +56,69 @@ public class CampServiceImpl implements CampService{
 		}
 		
 		return list;
+	}
+
+	@Override
+	public ReserveVO reserveDetailData(int rno) {
+		return rDao.reserveDetailData(rno);
+	}
+	
+	@Override
+	@Transactional
+	public Map reserveInsert(ReserveVO vo) {
+		Map map=new HashMap();
+		String result="";
+		Set<Integer> set=new HashSet<Integer>();
+		try {
+			result="OK";
+			ReserveDetailVO dvo=new ReserveDetailVO();
+			rDao.reserveInsert(vo);
+			int rno=rDao.reserveFindRno(vo.getId());
+			int sno=rDao.siteFindSno(vo);
+			dvo.setRno(rno);
+			dvo.setSno(sno);
+			dvo.setCno(vo.getCno());
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date startDate = sdf.parse(vo.getStartDateStr());
+			
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(startDate);
+			
+			for(int i=0;i<vo.getBak();i++) {
+				dvo.setResdate(cal.getTime());
+				
+				for(int dno:vo.getSites()) {
+					dvo.setDno(dno);
+					int check=rDao.reserveCheck(dvo);
+					if(check==1) {
+						result="NO";
+	                    set.add(dno);
+						continue;
+					}else {
+						rDao.reserveDetailInsert(dvo);
+					}
+				}
+				
+				cal.add(Calendar.DATE, 1);
+			}
+			if (result.equals("NO")) {
+	            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+	        }
+		} catch (Exception e) {
+			result="NO";
+			e.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+		List<Integer> list = new ArrayList<>(set);
+		Collections.sort(list);
+		map.put("msg", result);
+		map.put("list", list);
+		return map;
+	}
+
+	@Override
+	public int reserveFindRno(String id) {
+		return rDao.reserveFindRno(id);
 	}
 }
