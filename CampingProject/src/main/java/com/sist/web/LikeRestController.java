@@ -25,12 +25,11 @@ public class LikeRestController {
 
 		// 로그인 여부 확인
 		String id = (String) session.getAttribute("userid");
-		
+
 		if (id == null) {
 		    result.put("msg", "NOLOGIN");
 		    return result; 
-		}
- 
+		} 
 		// 세션에서 ID 주입
 		map.put("id", id);
 
@@ -46,7 +45,6 @@ public class LikeRestController {
 		return result;
 	}
 	
-	
 	@GetMapping("like/list_vue.do")
 	public List<Integer> campLikeList(@RequestParam("type") int type, HttpSession session) {
 		
@@ -55,4 +53,6 @@ public class LikeRestController {
 	     
 	    return service.likedCampList(id, type); //캠핑장 타입임.  0 : 캠핑장 1: 쇼핑몰 2 : 레시피 3 : 캠핑카 4 : 커뮤니티
 	}
+	
+	
 }

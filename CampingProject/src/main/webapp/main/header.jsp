@@ -220,7 +220,7 @@
 											<a href="../mypage/bookmark.do">즐겨찾기</a>
 										</li>
 										<li>
-											<a href="../mypage/like.do">좋아요</a>
+											<a href="../like/likeList.do">좋아요</a>
 										</li>
 										<li>
 											<a href="../mypage/reply.do">댓글</a>

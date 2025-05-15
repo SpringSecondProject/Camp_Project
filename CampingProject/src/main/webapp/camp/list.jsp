@@ -35,7 +35,7 @@
                                             </div>
                                             
                                         </div>
-                                    </form>
+                                    	</form>
                                     </div>
                                     
                                     <form class="main-form flex align-center" @submit.prevent="pageChange(1)">
@@ -193,11 +193,10 @@
                                                         <label for="price-max"></label>
 
                                                         <input class="input-text input-text--primary-style" type="text" id="maxPrice" v-model="maxPrice" placeholder="최대금액"></div>
-                                                    <div>
-														<likeCard></likeCard>
                                                         
-                                                    </div>
-                                                </div>
+                                                     <div>
+                                                        <button class="btn btn--icon fas fa-angle-right btn--e-transparent-platinum-b-2" type="button"  @click="pageChange(1)"></button></div>
+                                               		 </div>
                                             </form>
                                         </div>
                                     </div>
@@ -315,7 +314,6 @@
     <jsp:include page="cookie_camp.jsp" />
     <!--====== End - App Content ======-->
     
-    <script src="../like/likeCard.js"></script>
     <script src="../like/likeTypes.js"></script>
     <script>
     
@@ -363,19 +361,19 @@
     		//  CAMP: 0, SHOP: 1, RECIPE: 2, CAR: 3, COMMUNITY: 4
     		},
     		getLctclCounts() {
-    		  axios.get("http://localhost:8080/web/camp/lctcl_count_vue.do")
+    		  axios.get("../camp/lctcl_count_vue.do")
     		    .then(res => { 
     		      this.lctclCounts = res.data 
     		    })
     		},
    		    getTypeCounts() {
-   			  axios.get("http://localhost:8080/web/camp/type_count_vue.do")
+   			  axios.get("../camp/type_count_vue.do")
    			    .then(res => {
    			      this.typeCounts = res.data // 캠핑장 종류별 필터 갯수
    			    })
    			},
    		 	getLocationCounts() { // 지역별 필터 갯수
-   			  axios.get("http://localhost:8080/web/camp/location_count_vue.do")
+   			  axios.get("../camp/location_count_vue.do")
    			    .then(res => {
    			      this.locationCounts = res.data
    			    }).catch(err => {
@@ -413,8 +411,8 @@
     			//console.log("selectedPet:", this.selectedPet)
     			//console.log("selectedTypes:", this.selectedTypes)
     			//console.log(this.lctcl)
-    			console.log(this.keyword+"키워드")
-    			axios.get('http://localhost:8080/web/camp/list_vue.do',{
+    			//console.log(this.keyword+"키워드")
+    			axios.get('../camp/list_vue.do',{
         			params:{
         				page:this.curpage,
         				rowSize: this.rowSize,
@@ -442,9 +440,6 @@
         			console.log(error.response)
         		})
     		}
-    	},
-    	components:{
-    		'likeCard':likeCard
     	}
     }).mount("#campApp")
     </script>
