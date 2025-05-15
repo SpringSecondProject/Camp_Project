@@ -163,6 +163,7 @@
 								<ul style="width:200px">
 									<li>
 										<a href="../item/list.do">상품 목록</a>
+										<a href="../item/find.do">상품 검색</a>
 									</li>
 								</ul>
 								<!--====== End - Dropdown ======-->
@@ -216,10 +217,10 @@
 									<span class="js-menu-toggle"></span>
 									<ul style="width:200px">
 										<li>
-											<a href="../mypage/main.do">계정</a>
+											<a href="../member/mypage.do">계정</a>
 										</li>
 										<li>
-											<a href="../mypage/profile.do">프로필</a>
+											<a href="../member/profile.do">프로필</a>
 										</li>
 										<li>
 											<a href="#">캠핑장 예약</a>

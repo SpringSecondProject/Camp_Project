@@ -14,7 +14,7 @@ public class ItemServiceImp implements ItemService{
 
 	@Autowired
 	private ItemDAO idao;
- 
+
 	@Autowired
 	private CartDAO cdao;
 
@@ -85,5 +85,20 @@ public class ItemServiceImp implements ItemService{
 	public void CartDelete(int ino) {
 		// TODO Auto-generated method stub
 		cdao.CartDelete(ino);
+	}
+	@Override
+	public ItemVO ItemCookie(int ino) {
+		// TODO Auto-generated method stub
+		return idao.ItemCookie(ino);
+	}
+	@Override
+	public void HitIncrement(int ino) {
+		// TODO Auto-generated method stub
+		idao.HitIncrement(ino);
+	}
+	@Override
+	public List<ItemVO> itemList() {
+		// TODO Auto-generated method stub
+		return idao.itemList();
 	}
 }

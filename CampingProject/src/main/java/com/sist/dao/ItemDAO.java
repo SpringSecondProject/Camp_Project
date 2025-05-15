@@ -56,4 +56,19 @@ public class ItemDAO {
 	{
 		return mapper.itemFindTotalPage(fd, ss);
 	}
+	
+	public ItemVO ItemCookie(int ino)
+	{
+		return mapper.ItemCookie(ino);
+	}
+	
+	public void HitIncrement(int ino)
+	{
+		mapper.HitIncrement(ino);
+	}
+	
+	public List<ItemVO> itemList()
+	{
+		return mapper.itemList();
+	}
 }
