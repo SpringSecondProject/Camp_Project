@@ -148,6 +148,7 @@
 								<ul style="width:200px">
 									<li>
 										<a href="../item/list.do">상품 목록</a>
+										<a href="../item/find.do">상품 검색</a>
 									</li>
 								</ul>
 								<!--====== End - Dropdown ======-->

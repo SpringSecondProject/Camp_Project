@@ -5,25 +5,25 @@
 <body>
 <div id="sideNavApp"
      class="flex flex-col px-8 py-16 w-full bg-white shadow-lg text-2xl gap-4 mb-12">
-	<a id="account" href="../member/mypage.do">
+	<a id="account" href="../mypage/main.do">
 		계정
 	</a>
-	<a id="profile" href="../member/profile.do">
+	<a id="profile" href="../mypage/profile.do">
 		프로필
 	</a>
-	<a id="campreserve" href="../member/campreserve.do">
+	<a id="campreserve" href="../mypage/campreserve.do">
 		캠핑장 예약
 	</a>
-	<a id="cart" href="../member/cart.do">
+	<a id="cart" href="../mypage/cart.do">
 		장바구니
 	</a>
-	<a id="bookmark" href="../member/bookmark.do">
+	<a id="bookmark" href="../mypage/bookmark.do">
 		즐겨찾기
 	</a>
-	<a id="like" href="../member/like.do">
+	<a id="like" href="../mypage/like.do">
 		좋아요
 	</a>
-	<a id="reply" href="../member/reply.do">
+	<a id="reply" href="../mypage/reply.do">
 		댓글
 	</a>
 </div>

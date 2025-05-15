@@ -17,6 +17,8 @@ public interface ItemService {
 	public int itemFindTotalPage(@Param("fd") String fd,@Param("ss") String ss);
 	public void CartInsert(CartVO vo);
 	public List<CartVO> CartListData(String id);
-	public void CartDelete(int ino);	
-	public CartVO getCartItemByCno(int cno, String id);
+	public void CartDelete(int ino);
+	public ItemVO ItemCookie(int ino);
+	public void HitIncrement(int ino);
+	public List<ItemVO> itemList();
 }

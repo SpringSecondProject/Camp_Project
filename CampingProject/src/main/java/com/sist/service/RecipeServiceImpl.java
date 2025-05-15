@@ -15,16 +15,27 @@ public class RecipeServiceImpl implements RecipeService {
 	private ChefDAO cDao;
 
 	@Override
-	public List<RecentRecipeVO> selectRecentData() {
+	public List<RecentRecipeVO> selectRecentData(int topSize) {
 		// TODO Auto-generated method stub
-		List<RecentRecipeVO> list=rDao.selectRecentData();
-		return list;
+		return rDao.selectRecentData(topSize);
 	}
 
 	@Override
-	public void insertRecentData() {
+	public int findRecentRecipe(String title) {
 		// TODO Auto-generated method stub
-		
+		return rDao.findRecentRecipe(title);
+	}
+	
+	@Override
+	public int findRecipeDetail(String title) {
+		// TODO Auto-generated method stub
+		return rDao.findRecipeDetail(title);
+	}
+
+	@Override
+	public void insertRecentData(RecentRecipeVO vo) {
+		// TODO Auto-generated method stub
+		rDao.insertRecentData(vo);
 	}
 	
 	@Override
@@ -68,4 +79,5 @@ public class RecipeServiceImpl implements RecipeService {
 		// TODO Auto-generated method stub
 		return rDao.chefsRecipeTotalPage(map);
 	}
+
 }

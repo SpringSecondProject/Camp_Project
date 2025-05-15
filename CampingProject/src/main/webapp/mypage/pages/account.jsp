@@ -128,7 +128,7 @@
       }
     },
     mounted() {
-      axios.get('/web/member/account_vue.do', {
+      axios.get('/web/mypage/account_vue.do', {
         params: {
           id: '${sessionScope.userid}'
         }

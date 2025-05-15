@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sist.vo.*;
@@ -135,25 +134,22 @@ public class ItemRestController {
 	    return map;
 	}
 	@PostMapping("item/cart_insert.do")
-	@ResponseBody
-	public String cart_insert(@RequestParam("ino") int ino,
-            @RequestParam("account") int account,
-            HttpSession session)
+	public String cart_insert(int ino,int account,
+			HttpSession session)
 	{
-		String result;
+		String result="";
 		String id=(String)session.getAttribute("userid");
 		CartVO vo=new CartVO();
-		vo.setIno(ino);
 		vo.setAccount(account);
 		vo.setId(id);
+		vo.setIno(ino);
 		try
 		{
 			service.CartInsert(vo);
-			result="yes";
+		  	result="yes";
 		} catch(Exception ex) {
-			ex.printStackTrace();
-			result= "error: " + ex.getMessage();  
-		}
+			result=ex.getMessage();  
+	  	}
 		return result;
 	}
 }

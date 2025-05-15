@@ -5,15 +5,15 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.Results;
 
 import com.sist.vo.*;
 public interface ItemMapper {
-	@Select("SELECT ino,poster,type,brand,name,price,discount,rcount,num "
-			+"FROM (SELECT ino,poster,type,brand,name,price,discount,rcount,rownum as num "
-			+"FROM (SELECT ino,poster,type,brand,name,price,discount,rcount "
+	@Select("SELECT ino,poster,type,brand,name,price,discount,rcount,hit,num "
+			+"FROM (SELECT ino,poster,type,brand,name,price,discount,rcount,hit,rownum as num "
+			+"FROM (SELECT ino,poster,type,brand,name,price,discount,rcount,hit "
 			+"FROM Item)) "
 			+"WHERE num BETWEEN #{start} AND #{end}")
 	public List<ItemVO> itemListData(
@@ -27,8 +27,8 @@ public interface ItemMapper {
 			  +"WHERE ino=#{ino}")
 	public ItemVO itemDetailData(int ino);
 	
-	@Select("SELECT ino,poster,type,brand,name,price,discount,rcount,num "
-	        + "FROM (SELECT ino,poster,type,brand,name,price,discount,rcount,rownum as num "
+	@Select("SELECT ino,poster,type,brand,name,price,discount,rcount,hit,num "
+	        + "FROM (SELECT ino,poster,type,brand,name,price,discount,rcount,hit,rownum as num "
 	        + "FROM Item WHERE type=#{category}) "
 	        + "WHERE num BETWEEN #{start} AND #{end}")
 	public List<ItemVO> itemListByCategory(@Param("start") int start,
@@ -39,8 +39,8 @@ public interface ItemMapper {
 	public int itemTotalPageByCategory(String category);
 	
 	@Select("<script>"
-	        + "SELECT ino,poster,type,brand,name,price,discount,rcount,num "
-	        + "FROM (SELECT ino,poster,type,brand,name,price,discount,rcount,rownum as num "
+	        + "SELECT ino,poster,type,brand,name,price,discount,rcount,hit,num "
+	        + "FROM (SELECT ino,poster,type,brand,name,price,discount,rcount,hit,rownum as num "
 	        + "FROM (SELECT * FROM item "
 	        + "<where>"
 	        + "<if test='min != null'>TO_NUMBER(REPLACE(price, ',', '')) &gt;= #{min}</if>"
@@ -65,9 +65,9 @@ public interface ItemMapper {
 	        + "</script>")
 	public int itemPriceTotalPage(@Param("min") Integer min, @Param("max") Integer max);
 	
-	@Select("SELECT ino,poster,type,brand,name,price,discount,rcount,num "
-            +"FROM (SELECT ino,poster,type,brand,name,price,discount,rcount,rownum as num "
-            +"FROM (SELECT /*+ INDEX_ASC(item item_ino_pk)*/ino,poster,type,brand,name,price,discount,rcount "
+	@Select("SELECT ino,poster,type,brand,name,price,discount,rcount,hit,num "
+            +"FROM (SELECT ino,poster,type,brand,name,price,discount,rcount,hit,rownum as num "
+            +"FROM (SELECT /*+ INDEX_ASC(item item_ino_pk)*/ino,poster,type,brand,name,price,discount,rcount,hit "
             +"FROM item WHERE ${fd} LIKE '%'||#{ss}||'%')) "
             +"WHERE num BETWEEN #{start} AND #{end}")
 	public List<ItemVO> itemFindList(@Param("start") int start,
@@ -78,42 +78,50 @@ public interface ItemMapper {
 			+"WHERE ${fd} LIKE '%'||#{ss}||'%' ")
 	public int itemFindTotalPage(@Param("fd") String fd,@Param("ss") String ss);
 	
-	@Insert("INSERT INTO Cartlist(cno,ino,id,account) "
-			  +"VALUES(cl_cno_seq.nextval,#{ino},#{id},#{account})")
+	@Insert("INSERT INTO Cartlist(cno,ino,userid,account) "
+			  +"VALUES(bc_cno_seq.nextval,#{ino},#{userid},#{account})")
 	public void CartInsert(CartVO vo);
-	   
+	
 	@Select("SELECT COUNT(*) FROM Cartlist "
-		  +"WHERE ino=#{ino} AND id=#{id}")
+		   +"WHERE ino=#{ino} AND id=#{id}")
 	public int CartInoCount(CartVO vo);
-   
+	   
 	@Update("UPDATE Cartlist SET "
-		  +"account=account+#{account} "
-		  +"WHERE ino=#{ino} "
-		  +"AND id=#{id}")
+		   +"account=account+#{account} "
+		   +"WHERE ino=#{ino} "
+		   +"AND id=#{id}")
 	public void itemAccountUpdate(CartVO vo);
-   
+ 
 	@Results({
 	   @Result(property = "ivo.item_name",column = "item_name"),
 	   @Result(property = "ivo.item_poster",column = "item_poster"),
-	   @Result(property = "ivo.item_price",column = "item_price"),
-	   @Result(property = "ivo.item_type",column = "item_type")
+	   @Result(property = "ivo.item_price",column = "item_price")
 	})
 	
-	@Select("SELECT cno,ino,account,total,status,bno,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,"
-		  +"item_name,item_poster,item_price,item_type "
-		  +"FROM Cartlist cl "		  
-		  +"INNER JOIN item it ON cl.ino = it.ino "
-		  +"WHERE cl.id = #{id} AND cl.status = 0 "
+	@Select("SELECT cno,ino,account,isbuy,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,"
+		  +"item_name,item_poster,item_price "
+		  +"FROM Cartlist cl,item it"
+		  +"WHERE bc.ino=it.ino "
+		  +"AND id=#{id} AND isbuy=0 "
 		  +"ORDER BY cno DESC")
 	public List<CartVO> CartListData(String id);
-
-	@Select("SELECT cno, ino, account, total, status, bno, TO_CHAR(regdate, 'YYYY-MM-DD') as dbday, "
-	        + "item_name, item_poster, item_price,item_type "
-	        + "FROM Cartlist cl "
-	        + "INNER JOIN item it ON cl.ino = it.ino "
-	        + "WHERE cl.cno = #{cno} AND cl.id = #{id} AND cl.status = 0")
-	public CartVO getCartItemByCno(@Param("cno") int cno, @Param("id") String id);
 	
-	@Delete("DELETE FROM Cartlist WHERE ino=#{ino} AND id=#{id}")
+	@Delete("DELETE FROM Cartlist "
+				  +"WHERE ino=#{ino}")
 	public void CartDelete(int ino);
+	
+	@Select("SELECT ino,name,poster,hit "
+			+"FROM item "
+			+"WHERE ino=#{ino}")
+	public ItemVO ItemCookie(int ino);
+	
+	@Update("UPDATE item SET hit=hit+1 "
+			+ "WHERE ino=#{ino}")
+	public void HitIncrement(int ino);
+	
+	
+	@Select("SELECT ino,poster,type,brand,name,price,discount,hit "
+			 + "FROM (SELECT * FROM item ORDER BY hit DESC) "
+		     + "WHERE ROWNUM<=12")
+	public List<ItemVO> itemList();
 }

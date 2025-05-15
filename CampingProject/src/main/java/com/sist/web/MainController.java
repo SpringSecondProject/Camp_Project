@@ -20,6 +20,8 @@ public class MainController {
 	@Autowired
 	private CamplistService service;
 	
+	@Autowired
+	private ItemService iservice;
 	
 	@GetMapping("main/main.do")
 	public String main(Model model) {
@@ -28,6 +30,10 @@ public class MainController {
 		//model.addAttribute("vList",vList);
 	    List<CampVO> Clist = service.campMainList(); // 캠핑장 목록 가져오기
 	    model.addAttribute("Clist", Clist);
+	    
+	    List<ItemVO> Ilist = iservice.itemList();
+	    model.addAttribute("Ilist", Ilist);
+	    
 		model.addAttribute("main_jsp","../main/home.jsp");
 		return "main/main";
 	}

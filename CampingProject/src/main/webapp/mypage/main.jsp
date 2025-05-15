@@ -6,14 +6,14 @@
 <body>
 <div id="app" class="flex justify-center w-screen min-h-screen p-24">
 	<div class="flex flex-col w-4/5 mx-auto">
-		<jsp:include page="../member/components/breadcrumb.jsp"/>
+		<jsp:include page="components/breadcrumb.jsp"/>
 		<div class="flex flex-row w-full">
 			<div class="flex flex-col w-1/4">
-				<jsp:include page="../member/components/sideNav.jsp"/>
-				<jsp:include page="../member/components/orderSummary.jsp"/>
+				<jsp:include page="components/sideNav.jsp"/>
+				<jsp:include page="components/orderSummary.jsp"/>
 			</div>
 			<div class="flex flex-col w-full px-8">
-				<jsp:include page="${page}"/>
+				<jsp:include page="${page }"/>
 			</div>
 		</div>
 	</div>

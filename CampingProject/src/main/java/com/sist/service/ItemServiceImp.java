@@ -87,8 +87,18 @@ public class ItemServiceImp implements ItemService{
 		cdao.CartDelete(ino);
 	}
 	@Override
-	public CartVO getCartItemByCno(int cno, String id) {
+	public ItemVO ItemCookie(int ino) {
 		// TODO Auto-generated method stub
-		return cdao.getCartItemByCno(cno, id);
+		return idao.ItemCookie(ino);
+	}
+	@Override
+	public void HitIncrement(int ino) {
+		// TODO Auto-generated method stub
+		idao.HitIncrement(ino);
+	}
+	@Override
+	public List<ItemVO> itemList() {
+		// TODO Auto-generated method stub
+		return idao.itemList();
 	}
 }
