@@ -23,7 +23,7 @@
 	<a id="bookmark" href="../mypage/bookmark.do">
 		즐겨찾기
 	</a>
-	<a id="like" href="../mypage/like.do">
+	<a id="like" href="../like/likeList.do">
 		좋아요
 	</a>
 	<a id="reply" href="../mypage/reply.do">
