@@ -19,10 +19,7 @@ public class MileageAspect {
 	@Autowired
 	private MileageService service;
 	
-	@After("execution(* com.sist.security.LoginSuccessHandler.*(..))"
-		+ " || execution(* com.sist.web.MainController.*(..))"
-		+ " || execution(* com.sist.web.CampRestController.camp_reserve(..))"
-		)
+	@After("execution(* com.sist.web.*Controller.*(..))")
 	public void MileageUpdate(JoinPoint jp) {
 		HttpServletRequest request=((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
 		HttpSession session=request.getSession();

@@ -11,7 +11,13 @@ public class MileageDAO {
 	private MileageMapper mapper;
 	
 	public int getMileage(String id) {
-		return mapper.getMileage(id);
+		int mileage=0;
+		try {
+			mileage=mapper.getMileage(id);
+		} catch (Exception e) {
+			mileage=0;
+		}
+		return mileage; 
 	}
 	public void mileageInsert(MileageVO vo) {
 		mapper.mileageInsert(vo);

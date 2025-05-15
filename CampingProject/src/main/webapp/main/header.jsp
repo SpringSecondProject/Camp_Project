@@ -28,21 +28,6 @@
 					<img src="../images/logo/logo-2.png" alt=""></a>
 				<!--====== End - Main Logo ======-->
 
-
-				<!--====== Search Form ======-->
-				<form class="main-form flex align-center">
-
-					<label for="main-search"></label>
-
-					<input class="input-text input-text--border-radius input-text--style-2"
-					       type="text" id="main-search" placeholder="Search">
-
-					<button class="btn btn--icon fas fa-search main-search-button"
-					        type="submit"></button>
-				</form>
-				<!--====== End - Search Form ======-->
-
-
 				<!--====== Dropdown Main plugin ======-->
 				<div class="menu-init" id="navigation">
 

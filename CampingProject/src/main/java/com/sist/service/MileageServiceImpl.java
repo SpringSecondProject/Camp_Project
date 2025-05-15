@@ -69,5 +69,9 @@ public class MileageServiceImpl implements MileageService{
 		}
 		return result;
 	}
+	@Override
+	public List<ReserveVO> reserveConfirmedList() {
+		return rDao.reserveConfirmedList();
+	}
 
 }

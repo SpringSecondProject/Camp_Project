@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sist.manager.*;
 import com.sist.service.*;
 import com.sist.vo.*;
+import com.sist.commons.*;
 @RestController
 public class CampRestController {
 	@Autowired
@@ -40,14 +41,13 @@ public class CampRestController {
 	}
 	@PostMapping("camp/reserve_vue.do")
 	public Map camp_reserve(ReserveVO vo,int point,HttpSession session) {
-		System.out.println(point);
 		Map map=new HashMap();
 		try {
 			String id=(String)session.getAttribute("userid");
 			vo.setId(id);
 			map=service.reserveInsert(vo);
 			MileageVO mvo=new MileageVO();
-			int rno=service.reserveFindRno(id);
+			int rno=service.reserveFindNewRno(id);
 			mvo.setId(id);
 			mvo.setNo(rno);
 			mvo.setType(0);
@@ -58,4 +58,35 @@ public class CampRestController {
 		}
 		return map;
 	}
+	////////////////////// 마이페이지-예약(임시)/////////////////////
+	@GetMapping("mypage/reserve_list_vue.do")
+	public Map mypage_reserve_list(int page,HttpSession session) {
+		Map map=new HashMap();
+		String id=(String)session.getAttribute("userid");
+		int rowSize=5;
+		map=ListUtil.setListRange(page, rowSize);
+		map.put("id", id);
+		List<ReserveVO> list=service.myReserveListData(map);
+		int totalpage=service.myReserveTotalPage(id);
+		
+		map=new HashMap();
+		map.put("list", list);
+		
+		final int BLOCK=10;
+		map.put("curpage", page);
+		map.put("totalpage", totalpage);
+		map=ListUtil.setPageRange(map, BLOCK);
+		return map;
+	}
+	// 예약 취소
+	@GetMapping("mypage/reserve_cancel_vue.do")
+	public String mypage_reserve_cancel(int rno) {
+		return service.reserveCancel(rno);
+	}
+	// 예약 확정
+	@GetMapping("mypage/reserve_confirmed_vue.do")
+	public String mypage_reserve_confirmed(int rno) {
+		return service.reserveConfirmedState(rno);
+	}
+	////////////////////////////////////////////////////////////
 }

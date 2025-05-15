@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import com.sist.service.*;
 import com.sist.dao.*;
 import com.sist.vo.*;
 @Service
@@ -17,6 +18,8 @@ public class CampServiceImpl implements CampService{
 	private CampDAO cDao;
 	@Autowired
 	private ReserveDAO rDao;
+	@Autowired
+	private MileageService mService;
 	
 	private String[] camp= {"","일반 야영장","자동차 야영장","글램핑 야영장","카라반","개인 카라반 구역"};
 	
@@ -73,7 +76,7 @@ public class CampServiceImpl implements CampService{
 			result="OK";
 			ReserveDetailVO dvo=new ReserveDetailVO();
 			rDao.reserveInsert(vo);
-			int rno=rDao.reserveFindRno(vo.getId());
+			int rno=rDao.reserveFindNewRno(vo.getId());
 			int sno=rDao.siteFindSno(vo);
 			dvo.setRno(rno);
 			dvo.setSno(sno);
@@ -118,7 +121,51 @@ public class CampServiceImpl implements CampService{
 	}
 
 	@Override
-	public int reserveFindRno(String id) {
-		return rDao.reserveFindRno(id);
+	public int reserveFindNewRno(String id) {
+		return rDao.reserveFindNewRno(id);
+	}
+
+	@Override
+	public List<ReserveVO> myReserveListData(Map map) {
+		return rDao.myReserveListData(map);
+	}
+
+	@Override
+	public int myReserveTotalPage(String id) {
+		return rDao.myReserveTotalPage(id);
+	}
+
+	@Override
+	@Transactional
+	public String reserveCancel(int rno) {
+		String msg="";
+		try {
+			rDao.reserveDetailDelete(rno);
+			rDao.reserveCancelState(rno);
+			msg="OK";
+		} catch (Exception e) {
+			msg="NO";
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+		return msg;
+	}
+
+	@Override
+	@Transactional
+	public String reserveConfirmedState(int rno) {
+		String msg="";
+		try {
+			rDao.reserveConfirmedState(rno);
+			MileageVO vo=new MileageVO();
+			vo.setId(rDao.reserveGetId(rno));
+			vo.setNo(rno);
+			vo.setType(0);
+			mService.mileageAdd(vo);
+			msg="OK";
+		} catch (Exception e) {
+			msg="NO";
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+		return msg;
 	}
 }

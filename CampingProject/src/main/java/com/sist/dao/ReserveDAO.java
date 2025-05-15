@@ -20,8 +20,8 @@ public class ReserveDAO {
 	public void reserveInsert(ReserveVO vo) {
 		mapper.reserveInsert(vo);
 	}
-	public int reserveFindRno(String id) {
-		return mapper.reserveFindRno(id);
+	public int reserveFindNewRno(String id) {
+		return mapper.reserveFindNewRno(id);
 	}
 	public int siteFindSno(ReserveVO vo) {
 		return mapper.siteFindSno(vo);
@@ -30,15 +30,30 @@ public class ReserveDAO {
 		return mapper.reserveCheck(vo);
 	}
 	public ReserveVO reserveDetailData(int rno) {
-		ReserveVO vo=new ReserveVO();
-		try {
-			vo= mapper.reserveDetailData(rno);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return vo;
+		return mapper.reserveDetailData(rno);
 	}
 	public void reserveDetailInsert(ReserveDetailVO vo) {
 		mapper.reserveDetailInsert(vo);
+	}
+	public List<ReserveVO> myReserveListData(Map map) {
+		return mapper.myReserveListData(map);
+	}
+	public int myReserveTotalPage(String id) {
+		return mapper.myReserveTotalPage(id);
+	}
+	public void reserveDetailDelete(int rno) {
+		mapper.reserveDetailDelete(rno);
+	}
+	public void reserveCancelState(int rno) {
+		mapper.reserveCancelState(rno);
+	}
+	public void reserveConfirmedState(int rno) {
+		mapper.reserveConfirmedState(rno);
+	}
+	public String reserveGetId(int rno) {
+		return mapper.reserveGetId(rno);
+	}
+	public List<ReserveVO> reserveConfirmedList(){
+		return mapper.reserveConfirmedList();
 	}
 }

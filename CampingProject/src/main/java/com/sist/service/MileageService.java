@@ -18,4 +18,6 @@ public interface MileageService {
 	 * point : 사용 포인트
 	 */
 	public String mileageUse(MileageVO vo);
+	// 예약 자동 확정 (남은 기간 7일)
+	public List<ReserveVO> reserveConfirmedList();
 }
