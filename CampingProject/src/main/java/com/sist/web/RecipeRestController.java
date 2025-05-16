@@ -22,6 +22,7 @@ public class RecipeRestController {
 		
 		return map;
 	}
+	
 	@GetMapping("chef/list_vue.do")
 	public Map chef_list_vue(int page, String fd)
 	{

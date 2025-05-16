@@ -33,13 +33,12 @@
                     <div class="tab-pane active show" id="e-t-r">
                         <div class="slider-fouc">
                             <div class="owl-carousel tab-slider" data-item="4">
-                                <div class="u-s-m-b-30" v-for="(vo, index) in list" :key="vo.rno">
+                                <div class="u-s-m-b-30" v-for="vo in list" :key="vo.no">
                                     <div class="product-o product-o--hover-on">
                                         <div class="product-o__wrap">
-
                                             <a class="aspect aspect--bg-grey aspect--square u-d-block" :href="'../recipe/recipe_detail?no='+vo.rno">
-
-                                                <img class="aspect__img" :src="vo.poster" alt=""></a>
+                                                <img class="aspect__img" :src="vo.poster" alt="">
+                                            </a>
                                             <div class="product-o__action-wrap">
                                                 <ul class="product-o__action-list">
                                                     <li>
