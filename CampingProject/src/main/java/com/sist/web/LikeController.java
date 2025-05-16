@@ -40,7 +40,9 @@ public class LikeController {
 	@GetMapping("like/itemList.do")
 	public String itemLikeList(Model model, HttpSession session) {
 	    String id = (String) session.getAttribute("userid");
-	    Map map = Map.of("id", id, "type", 1);
+		Map map=new HashMap();
+		map.put("id", id);
+		map.put("type", 1);
 	    List<ItemVO> likeList = lService.MyItemLikeList(map);
 	    //System.out.println(likeList+"이이템리스트 정보");
 	    model.addAttribute("likeList", likeList);
@@ -54,7 +56,9 @@ public class LikeController {
 	@GetMapping("like/recipeList.do")
 	public String recipeLikeList(Model model, HttpSession session) {
 	    String id = (String) session.getAttribute("userid");
-	    Map map = Map.of("id", id, "type", 2);
+		Map map=new HashMap();
+		map.put("id", id);
+		map.put("type", 2);
 	    List<RecipeVO> likeList = lService.MyRecipeLikeList(map);
 	    //System.out.println(likeList+"레시피리스트 정보");
 	    model.addAttribute("likeList", likeList);
