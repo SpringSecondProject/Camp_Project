@@ -12,6 +12,16 @@ public class RecipeRestController {
 	@Autowired
 	private RecipeService service;
 	
+	@GetMapping("main/recipe_vue.do")
+	public Map main_recipe_vue()
+	{
+		final int TOPSIZE=RecipeConfig.TOP_SIZE;
+		List<RecentRecipeVO> list=service.selectRecentData(TOPSIZE);
+		Map map=new HashMap();
+		map.put("list", list);
+		
+		return map;
+	}
 	@GetMapping("chef/list_vue.do")
 	public Map chef_list_vue(int page, String fd)
 	{
