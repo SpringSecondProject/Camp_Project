@@ -32,7 +32,7 @@
 	</div>
 
 	<!--====== Main App ======-->
-	<div id="app">
+	<div id="ItemLikeApp">
 		<!--====== App Content ======-->
 		<div class="app-content">
 			<!--====== Section 1 ======-->
@@ -47,15 +47,15 @@
 											<img src="https://www.ocamall.com${item.poster}" style="width: 100%; height: 180px;" />
 										</div>
 										<div class="bp-mini__content">
-											<span class="bp-mini__h1"><a href="#">${item.name}</a></span>
+											<span class="bp-mini__h1 addr"><a href="#">${item.name}</a></span>
 											<span class="bp-mini__stat-wrap">
 												<span class="bp-mini__preposition addr">브랜드 : ${item.brand}</span>
 												<span class="bp-mini__preposition addr">종류 : ${item.type}</span>
 												<span class="bp-mini__preposition addr" style="color: #4285F4;">가격 : ${item.price}%</span>
 											</span>
 											<div class="blog-t-w">
-												<a class="gl-tag btn--e-transparent-hover-brand-b-2" href="#">구매하기</a>
-												<a class="gl-tag btn--e-transparent-hover-brand-b-2" href="#">삭제하기</a>
+												<a class="gl-tag btn--e-transparent-hover-brand-b-2" href="#">예약하기</a> 
+												<a class="gl-tag btn--e-transparent-hover-brand-b-2" @click.prevent="deleteLike(${item.ino })">삭제하기</a>
 											</div>
 										</div>
 									</div>
@@ -82,5 +82,31 @@
 		</div>
 		<!--====== End - App Content ======-->
 	</div>
+	<script>
+	let ItemLike=Vue.createApp({
+		data(){
+			return{
+				
+			}
+		},
+		methods:{
+			deleteLike(ino){
+				axios.post("../like/delete_vue.do",null,{
+					params:{
+						no:ino,
+						type:1
+					}
+				}).then(res=>{
+					location.reload();
+				}).catch(error=>{
+					console.log(error.response)
+				})
+			}			
+		},
+		mounted(){
+			
+		}	
+	}).mount("#ItemLikeApp")
+	</script>
 </body>
 

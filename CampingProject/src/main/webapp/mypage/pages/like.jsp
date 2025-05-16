@@ -48,7 +48,7 @@
 										</div>
 										<div class="bp-mini__content">
 											<div class="bp-mini__stat">
-												<span class="bp-mini__h1"> <a href="#">${camp.title}</a>
+												<span class="bp-mini__h1 addr"> <a href="#">${camp.title}</a>
 												</span> 
 												
 												<span class="bp-mini__stat-wrap"> 
