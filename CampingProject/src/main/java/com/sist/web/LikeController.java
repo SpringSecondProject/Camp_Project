@@ -31,8 +31,8 @@ public class LikeController {
 		//System.out.println(likeList);
 		model.addAttribute("likeList", likeList);
 	    model.addAttribute("path", "like");
-	    model.addAttribute("page", "../member/pages/like.jsp");
-	    model.addAttribute("main_jsp", "../member/mypage.jsp");
+	    model.addAttribute("page", "../mypage/pages/like.jsp");
+	    model.addAttribute("main_jsp", "../mypage/main.jsp");
 		return "main/main";
 	}
 	
@@ -42,11 +42,11 @@ public class LikeController {
 	    String id = (String) session.getAttribute("userid");
 	    Map map = Map.of("id", id, "type", 1);
 	    List<ItemVO> likeList = lService.MyItemLikeList(map);
-	    System.out.println(likeList+"이이템리스트 정보");
+	    //System.out.println(likeList+"이이템리스트 정보");
 	    model.addAttribute("likeList", likeList);
 	    model.addAttribute("path", "like");
-	    model.addAttribute("page", "../member/pages/like_item.jsp");
-	    model.addAttribute("main_jsp", "../member/mypage.jsp");
+	    model.addAttribute("page", "../mypage/pages/like_item.jsp");
+	    model.addAttribute("main_jsp", "../mypage/main.jsp");
 	    return "main/main";
 	}
 
@@ -56,11 +56,11 @@ public class LikeController {
 	    String id = (String) session.getAttribute("userid");
 	    Map map = Map.of("id", id, "type", 2);
 	    List<RecipeVO> likeList = lService.MyRecipeLikeList(map);
-	    System.out.println(likeList+"레시피리스트 정보");
+	    //System.out.println(likeList+"레시피리스트 정보");
 	    model.addAttribute("likeList", likeList);
 	    model.addAttribute("path", "like");
-	    model.addAttribute("page", "../member/pages/like_recipe.jsp");
-	    model.addAttribute("main_jsp", "../member/mypage.jsp");
+	    model.addAttribute("page", "../mypage/pages/like_recipe.jsp");
+	    model.addAttribute("main_jsp", "../mypage/main.jsp");
 	    return "main/main";
 	}
 	
