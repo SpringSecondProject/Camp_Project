@@ -45,10 +45,13 @@
                                                 <div class="product-m__quick-look">
 
                                                     <a class="fas fa-search" data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick Look"></a></div>
+                                                    
                                                 <div class="product-m__add-cart">
-
-                                                    <a class="btn--e-brand" data-modal="modal" data-modal-id="#add-to-cart">Add to Cart</a></div>
+													<c:if test="${sessionScope.userid!=null }">
+                                                    <a class="btn--e-brand" data-modal="modal" data-modal-id="#add-to-cart">Add to Cart</a></c:if></div>
+                                                    
                                             </div>
+                                            
                                             <div class="product-m__content">
                                                 <div class="product-m__category">
 
@@ -63,8 +66,11 @@
 
                                                         <span></span></div>
                                                     <div class="product-m__wishlist">
-
-                                                        <a class="far fa-heart" href="#" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"></a></div>
+                                                        <a :class="likedCamps.includes(vo.ino) ? 'fas fa-heart' : 'far fa-heart'"
+														  title="좋아요" :style="{ color: likedCamps.includes(vo.ino) ? '#ff1500' : '' }"
+														  @click.prevent="likeCamp(vo.ino)">
+														</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -182,7 +188,7 @@
             </div>
         </div>
     </div>
-    
+    <script src="../like/likeTypes.js"></script>
     <script>
 	let listApp=Vue.createApp({
     data(){
@@ -193,13 +199,19 @@
             startPage:0,
             endPage:0,
             ino:0,
-            cookieList:[]
+            cookieList:[],
+            likedCamps: [] // 로그인 유저가 좋아요한거 표시
         }
     },
     mounted() {
         this.dataRecv()
+        likeUtil.loadLikedCamps(this, window.LIKE_TYPES.SHOP);
     },
     methods:{
+    	likeCamp(no) { // 좋아요 클릭시
+		      likeUtil.likeCamp(this, no , window.LIKE_TYPES.SHOP); 
+		//  CAMP: 0, SHOP: 1, RECIPE: 2, CAR: 3, COMMUNITY: 4
+		},
         changeCategory(ino) {
             const categoryMap={
                 1:"화로/BBQ",

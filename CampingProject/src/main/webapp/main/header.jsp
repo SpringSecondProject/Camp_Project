@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <head>
@@ -23,9 +22,11 @@
 
 				<!--====== Main Logo ======-->
 
-				<a class="main-logo" href="../main/main.do">
-
-					<img src="../images/logo/logo-2.png" alt=""></a>
+				<a id="main-logo-wrap" class="main-logo"
+				   href="../main/main.do">
+					<img src="../assets/icons/main-logo.svg"
+					     alt="" id="main-logo">
+				</a>
 				<!--====== End - Main Logo ======-->
 
 				<!--====== Dropdown Main plugin ======-->
@@ -150,7 +151,7 @@
 								<span class="js-menu-toggle"></span>
 								<ul style="width:200px">
 									<li>
-										<a href="../campcar/list.do">캠핑장 목록</a>
+										<a href="../campcar/list.do">캠핑카 목록</a>
 									</li>
 								</ul>
 								<!--====== End - Dropdown ======-->

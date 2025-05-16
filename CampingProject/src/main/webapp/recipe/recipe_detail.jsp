@@ -97,13 +97,13 @@
     <div style="height: 10px"></div>
 	<div class="container" id="replyApp" style="font-size:12px; line-height:1.6; font-family:'맑은 고딕','Malgun Gothic',sans-serif;">
 	  <div class="panel panel-default">
-	    <div class="panel-heading"><h4 class="panel-title">[ 댓글 / Comment ]</h4></div>
+	    <div class="panel-heading"><h4 class="panel-title">[ 댓글 / review ]</h4></div>
 	    <div class="panel-body">
 	      <%-- 댓글 : Vue --%>
-	      <!-- Comment Area Start -->
+	      <!-- review Area Start -->
 	      <div class="comment_area section_padding_50 clearfix">
 	          <ol>
-	              <!-- Single Comment Area -->
+	              <!-- Single review Area -->
 	              <li class="single_comment_area" v-for="rvo in reply_list">
 	                  <div class="comment-wrapper d-flex" v-if="rvo.group_step===0">
 	                      <!-- Comment Meta -->
@@ -115,29 +115,29 @@
 	                          <span class="comment-date text-muted">{{rvo.dbday}}</span>
 	                          <h5>{{rvo.username}}</h5>
 	                          <p>{{rvo.msg}}</p>
-	                          <button v-if="sessionId===rvo.userid" class="btn-xs btn-danger update" style="margin-left: 2px" :id="'u'+rvo.no" @click="replyUpdateForm(rvo.no)">Update</button>
-	                          <button v-if="sessionId===rvo.userid" class="btn-xs btn-info" style="margin-left: 2px" @click="replyDelete(rvo.no)">Delete</button>
-	                          <button v-if="sessionId!==''" class="btn-xs btn-success insert" style="margin-left: 2px" :id="'i'+rvo.no" @click="replyReplyInsertForm(rvo.no)">Reply</button>
+	                          <button v-if="sessionId===rvo.userid" class="btn-xs btn-danger update" style="margin-left: 2px" :id="'u'+rvo.rno" @click="replyUpdateForm(rvo.rno)">Update</button>
+	                          <button v-if="sessionId===rvo.userid" class="btn-xs btn-info" style="margin-left: 2px" @click="replyDelete(rvo.rno)">Delete</button>
+	                          <button v-if="sessionId!==''" class="btn-xs btn-success insert" style="margin-left: 2px" :id="'i'+rvo.rno" @click="replyReplyInsertForm(rvo.rno)">Reply</button>
 	                          <%-- 수정창 --%>
-	                          <table class="table ups" style="display:none" :id="'up'+rvo.no">
+	                          <table class="table ups" style="display:none" :id="'up'+rvo.rno">
 				                  <tr>
 				                   <td>
-				                    <textarea rows="4" cols="45" style="float: left" :id="'umsg'+rvo.no">{{rvo.msg}}</textarea>
+				                    <textarea rows="4" cols="45" style="float: left" :id="'umsg'+rvo.rno">{{rvo.msg}}</textarea>
 				                    <input type="button" value="수정"
 				                     style="float: left;background-color: blue;color:white;width: 80px;height: 94px"
-				                      @click="replyUpdate(rvo.no)"
+				                      @click="replyUpdate(rvo.rno)"
 				                     >
 				                   </td>
 				                  </tr>
 			                  </table>
 	                          <%-- 대댓글창 --%>
-	                          <table class="table ins" style="display:none" :id="'in'+rvo.no">
+	                          <table class="table ins" style="display:none" :id="'in'+rvo.rno">
 				                  <tr>
 				                   <td>
-				                    <textarea rows="4" cols="45" style="float: left" :id="'imsg'+rvo.no"></textarea>
+				                    <textarea rows="4" cols="45" style="float: left" :id="'imsg'+rvo.rno"></textarea>
 				                    <input type="button" value="댓글"
 				                     style="float: left;background-color: blue;color:white;width: 80px;height: 94px"
-				                      @click="replyReplyInsert(rvo.no)"
+				                      @click="replyReplyInsert(rvo.rno)"
 				                     >
 				                   </td>
 				                  </tr>
@@ -156,15 +156,15 @@
 	                            <span class="comment-date text-muted">{{rvo.dbday}}</span>
 	                            <h5>{{rvo.username}}</h5>
 	                            <p>{{rvo.msg}}</p>
-	                            <button v-if="sessionId===rvo.userid" class="btn-xs btn-danger update" style="margin-left: 2px" :id="'u'+rvo.no" @click="replyUpdateForm(rvo.no)">Update</button>
-	                                  <button v-if="sessionId===rvo.userid" class="btn-xs btn-info" style="margin-left: 2px" @click="replyDelete(rvo.no)">Delete</button>
-	                            <table class="table ups" style="display:none" :id="'up'+rvo.no">
+	                            <button v-if="sessionId===rvo.userid" class="btn-xs btn-danger update" style="margin-left: 2px" :id="'u'+rvo.rno" @click="replyUpdateForm(rvo.rno)">Update</button>
+	                                  <button v-if="sessionId===rvo.userid" class="btn-xs btn-info" style="margin-left: 2px" @click="replyDelete(rvo.rno)">Delete</button>
+	                            <table class="table ups" style="display:none" :id="'up'+rvo.rno">
 	                    <tr>
 	                     <td>
-	                      <textarea rows="4" cols="45" style="float: left" :id="'umsg'+rvo.no">{{rvo.msg}}</textarea>
+	                      <textarea rows="4" cols="45" style="float: left" :id="'umsg'+rvo.rno">{{rvo.msg}}</textarea>
 	                      <input type="button" value="수정"
 	                       style="float: left;background-color: blue;color:white;width: 80px;height: 94px"
-	                        @click="replyUpdate(rvo.no)"
+	                        @click="replyUpdate(rvo.rno)"
 	                       >
 	                     </td>
 	                    </tr>
@@ -239,7 +239,7 @@
  	 data(){
  		 return {
  			 reply_list:[],
- 			 cno:parseInt('${vo.fno}'),
+ 			 no:parseInt('${vo.no}'),
  			 type:2,
  			 curpage:1,
  			 sessionId:'${sessionId}',
@@ -262,11 +262,11 @@
 	 		 this.startPage = resData.startPage
 	 		 this.endPage = resData.endPage
  		 },
- 		 replyDelete(no){
-   			axios.get('../comment/delete_vue.do',{
+ 		 replyDelete(rno){
+   			axios.get('../review/delete_vue.do',{
  				params:{
- 					no:no,
- 					cno:this.cno,
+ 					rno:rno,
+ 					no:this.no,
  					type:this.type
  				}
  			}).then(res=>{
@@ -278,17 +278,17 @@
  			})
  			 
  		 },
- 		 replyReplyInsert(no){
- 			let msg=$('#imsg'+no).val()
+ 		 replyReplyInsert(rno){
+ 			let msg=$('#imsg'+rno).val()
  			if(msg.trim()==="")
  			{
-	 			$('#imsg'+no).focus()
+	 			$('#imsg'+rno).focus()
 	 			return
  			}	 
-   			axios.post('../comment/reply_insert_vue.do',null,{
+   			axios.post('../review/reply_insert_vue.do',null,{
  				params:{
- 					pno:no,
- 					cno:this.cno,
+ 					pno:rno,
+ 					no:this.no,
  					type:this.type,
  					msg:msg
  				}
@@ -296,18 +296,18 @@
  				console.log(res.data)
   				 // res.data=Map {list=[],curpage:1....}
  				updateReplyData(res.data)
-  				 $('#imsg'+no).val("")
+  				 $('#imsg'+rno).val("")
   				 // textarea
-  				 $('#in'+no).hide()
+  				 $('#in'+rno).hide()
   				 // table
-  				 $('#i'+no).text("Reply")
+  				 $('#i'+rno).text("Reply")
   				 // Button
  			}).catch(err=>{
  				console.log(err.response)
  			})
  			 
  		 },
- 		 replyReplyInsertForm(no){
+ 		 replyReplyInsertForm(rno){
   			$('.ins').hide()
  			$('.insert').text("Reply")
  			$('.ups').hide()
@@ -315,27 +315,27 @@
  			if(this.inReply===false)
  			{
  				this.inReply=true
- 				$('#in'+no).show()
- 				$('#i'+no).text("Cancel")
+ 				$('#in'+rno).show()
+ 				$('#i'+rno).text("Cancel")
  			}
  			else
  			{
  				this.inReply=false
- 				$('#in'+no).hide()
- 				$('#i'+no).text("Reply")
+ 				$('#in'+rno).hide()
+ 				$('#i'+rno).text("Reply")
  			}	
   		 },
- 		 replyUpdate(no){
- 			let msg=$('#umsg'+no).val()
+ 		 replyUpdate(rno){
+ 			let msg=$('#umsg'+rno).val()
  			if(msg.trim()==="")
  			{
-				$('#umsg'+no).focus() 
+				$('#umsg'+rno).focus() 
 				return
  			} 
-  			axios.post('../comment/update_vue.do',null,{
+  			axios.post('../review/update_vue.do',null,{
  				params:{
- 					no:no,
- 					cno:this.cno,
+ 					rno:rno,
+ 					no:this.no,
  					type:this.type,
  					msg:msg
  				}
@@ -343,17 +343,17 @@
  				console.log(res.data)
   				 // res.data=Map {list=[],curpage:1....}
  				updateReplyData(res.data)
-  				 $('#umsg'+no).val("")
+  				 $('#umsg'+rno).val("")
   				 // textarea
-  				 $('#up'+no).hide()
+  				 $('#up'+rno).hide()
   				 // table
-  				 $('#u'+no).text("Update")
+  				 $('#u'+rno).text("Update")
   				 // Button
  			}).catch(err=>{
  				console.log(err.response)
  			})
  		 },
- 		 replyUpdateForm(no){
+ 		 replyUpdateForm(rno){
  			$('.ins').hide()
  			$('.insert').text("Reply")
  			$('.ups').hide()
@@ -361,14 +361,14 @@
  			if(this.upReply===false)
  			{
  				this.upReply=true
- 				$('#up'+no).show()
- 				$('#u'+no).text("Cancel")
+ 				$('#up'+rno).show()
+ 				$('#u'+rno).text("Cancel")
  			}
  			else
  			{
  				this.upReply=false
- 				$('#up'+no).hide()
- 				$('#u'+no).text("Update")
+ 				$('#up'+rno).hide()
+ 				$('#u'+rno).text("Update")
  			}	
  		 },
  		 replyInsert(){
@@ -377,9 +377,9 @@
  				this.$refs.msg.focus()
  				return
  			}	
- 			axios.post('../comment/insert_vue.do',null,{
+ 			axios.post('../review/insert_vue.do',null,{
  				params:{
- 					cno:this.cno,
+ 					no:this.no,
  					type:this.type,
  					msg:this.msg
  				}
@@ -392,10 +392,10 @@
  			})
  		 },
  		 commentRecv(){
-			axios.get("../comment/list_vue.do",{
+			axios.get("../review/list_vue.do",{
 				params:{
 					page:this.curpage,
-					cno:this.cno,
+					no:this.no,
 					type:this.type
 				}
 			}).then(res=>{

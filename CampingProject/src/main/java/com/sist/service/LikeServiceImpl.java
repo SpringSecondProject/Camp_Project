@@ -51,5 +51,13 @@ public class LikeServiceImpl implements LikeService {
 		return Ldao.MyRecipeLikeList(map);
 	}
 	
+	// 좋아요 삭제
+	@Override
+	public void deleteLike(Map map) {
+		// TODO Auto-generated method stub
+		Ldao.deleteLike(map);
+		
+	}
+	
 	
 }

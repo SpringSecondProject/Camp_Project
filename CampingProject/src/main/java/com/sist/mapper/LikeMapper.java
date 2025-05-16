@@ -1,5 +1,6 @@
 package com.sist.mapper;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 
 import org.apache.ibatis.annotations.Param;
@@ -24,7 +25,9 @@ public interface LikeMapper {
     		+ "WHERE id=#{id} AND type=#{type}")
     public List<Integer> likedCampList(@Param("id") String id, @Param("type") int type);
     
-    
+    @Delete("DELETE FROM CAMPLIKE "
+    		+ "WHERE id=#{id} AND type=#{type} AND no = #{no} ")
+    public void deleteLike(Map map);
     
     // 이건 마이페이지 들어가는거라 따로 만들어야함 // 캠핑장 상품 레시피 따로
     // 마이페이지 좋아요한 캠핑장 리스트 출력 // CAMPLIKE에서 no를 받아서 cno검색

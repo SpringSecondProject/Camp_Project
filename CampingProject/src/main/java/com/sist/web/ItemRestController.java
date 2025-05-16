@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sist.vo.*;
@@ -21,7 +22,7 @@ public class ItemRestController {
 	@GetMapping("item/list_vue.do")
 	public Map item_list(int page)
 	{
-		int rowSize=20;
+		int rowSize=15;
 		   List<ItemVO> list=
 			 service.itemListData((page*rowSize)-(rowSize-1), page*rowSize);
 		   int totalpage=service.itemTotalPage();
@@ -52,7 +53,7 @@ public class ItemRestController {
 	@GetMapping("item/list_by_category_vue.do")
 	public Map item_list_by_category(int page, String category)throws UnsupportedEncodingException{
 		category=URLDecoder.decode(category, "UTF-8");
-	    int rowSize=20;
+	    int rowSize=15;
 	    List<ItemVO> list=service.itemListByCategory((page*rowSize)-(rowSize-1),page*rowSize,category);
 	    int totalpage=service.itemTotalPageByCategory(category);
 
@@ -79,7 +80,7 @@ public class ItemRestController {
 	        @RequestParam(required = false) Integer min,
 	        @RequestParam(required = false) Integer max) {
 
-	    int rowSize=20;
+	    int rowSize=15;
 	    int start=(page*rowSize)-(rowSize - 1);
 	    int end=page*rowSize;
 
@@ -111,7 +112,7 @@ public class ItemRestController {
 	        fd="name"; // 기본 필드 설정
 	    }
 
-	    int rowSize=20;
+	    int rowSize=15;
 	    int start=(page*rowSize)-(rowSize-1);
 	    int end=page*rowSize;
 
@@ -151,5 +152,28 @@ public class ItemRestController {
 			result=ex.getMessage();  
 	  	}
 		return result;
+	}
+	@PostMapping("item/cart_delete.do")
+	public String cart_delete(int ino)
+	{
+		service.CartDelete(ino);
+		return "delete";
+	}
+	@PostMapping("item/cart_reset.do")
+	public String cart_reset(String id)
+	{
+		service.CartReset(id);
+		return "reset";
+	}
+	@PostMapping("/item/item_modify.do")
+	@ResponseBody
+	public void itemAccountModify(@RequestParam("id") String id,
+	                                   @RequestParam("ino") int ino,
+	                                   @RequestParam("account") int account) {
+	    CartVO vo = new CartVO();
+	    vo.setId(id);
+	    vo.setIno(ino);
+	    vo.setAccount(account);
+	    service.itemAccountModify(vo);
 	}
 }
