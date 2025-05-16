@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
+</head> 
 <body>
 	<!--====== 조회수 순위 TOP12 ======-->
     <div class="u-s-p-b-60">
