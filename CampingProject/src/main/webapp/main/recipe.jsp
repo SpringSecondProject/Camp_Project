@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,10 +8,7 @@
 <title>Insert title here</title>
 </head> 
 <body>
-	<!--====== 조회수 순위 TOP12 ======-->
     <div class="u-s-p-b-60">
-
-        <!--====== Section Intro ======-->
         <div class="section__intro u-s-m-b-46">
             <div class="container">
                 <div class="row">
@@ -26,37 +24,36 @@
 
 
         <!--====== Section Content ======-->
-        <div class="section__content" id="listapp">
+        <div class="section__content">
             <div class="container">
                 <div class="tab-content">
                     <!--====== Tab 3 ======-->
                     <div class="tab-pane active show" id="e-t-r">
                         <div class="slider-fouc">
                             <div class="owl-carousel tab-slider" data-item="4">
-                                <div class="u-s-m-b-30" v-for="(vo, index) in list" :key="vo.rno">
+							  <c:forEach var="rvo" items="${Rlist}">
+                                <div class="u-s-m-b-30">
                                     <div class="product-o product-o--hover-on">
                                         <div class="product-o__wrap">
-
-                                            <a class="aspect aspect--bg-grey aspect--square u-d-block" :href="'../recipe/recipe_detail?no='+vo.rno">
-
-                                                <img class="aspect__img" :src="vo.poster" alt=""></a>
+                                            <a class="aspect aspect--bg-grey aspect--square u-d-block" href="../recipe/recipe_detail.do?no=${rvo.no }">
+                                                <img class="aspect__img" src="${rvo.poster }" alt="">
+                                            </a>
                                             <div class="product-o__action-wrap">
                                                 <ul class="product-o__action-list">
                                                     <li>
-
-                                                        <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
+                                                        <a data-modal="modal" data-modal-id="#quick-look" title="Quick View">
+                                                        	<i class="fas fa-search-plus"></i>
+                                                        </a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-
-                                            <span class="product-o__review">(23)</span></div>
-
-                                        <span class="product-o__price">$125.00
-
-                                            <span class="product-o__discount">$160.00</span></span>
+                                        <span class="product-o__name">
+                                        	<a href="../recipe/recipe_detail.do?no=${rvo.no }">${rvo.title }</a>
+                                        </span>
                                     </div>
                                 </div>
+                              </c:forEach>  
                             </div>
                         </div>
                     </div>
@@ -66,31 +63,5 @@
         </div>
         <!--====== End - Section Content ======-->
     </div>
-    <script>
-    listApp=Vue.createApp({
-    	data(){
-    		return {
-    			list:[]
-    		}
-    	},
-    	mounted(){
-    		this.dataRecv()
-    	},
-    	methods:{
-    		dataRecv()
-    		{
-    			axios.get('../main/recipe_vue.do',{
-    				params:{
-    				}
-    			}).then(res=>{
-    				console.log(res.data)
-    				this.list=res.data.list
-    			}).catch(err=>{
-    				console.log(err.response)
-    			})	
-    		}
-    	}
-    }).mount("#listApp")
-    </script>
 </body>
 </html>

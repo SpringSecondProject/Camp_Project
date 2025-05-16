@@ -8,7 +8,7 @@ import com.sist.vo.*;
 public interface RecipeMapper {
 
 	@Select("SELECT rno,poster,title,no "
-			+ "FROM recipeDetail "
+			+ "FROM recentRecipe "
 			+ "WHERE rownum<=#{topSize}"
 			+ "ORDER BY rno DESC")
 	public List<RecentRecipeVO> selectRecentData(int topSize);

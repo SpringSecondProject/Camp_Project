@@ -9,6 +9,7 @@ import java.util.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import com.sist.commons.RecipeConfig;
 import com.sist.manager.*;
 import com.sist.vo.*;
 import com.sist.service.*;
@@ -23,6 +24,9 @@ public class MainController {
 	@Autowired
 	private ItemService iservice;
 	
+	@Autowired
+	private RecipeService rservice;
+	
 	@GetMapping("main/main.do")
 	public String main(Model model) {
 		//메인페이지 캠핑 관련 영상 => 사용시 YoutubeManager.youtubeJsonData API key값 입력후 주석 해제
@@ -33,6 +37,9 @@ public class MainController {
 	    
 	    List<ItemVO> Ilist = iservice.itemList();
 	    model.addAttribute("Ilist", Ilist);
+	    
+	    List<RecentRecipeVO> Rlist = rservice.selectRecentData(RecipeConfig.TOP_SIZE);
+	    model.addAttribute("Rlist", Rlist);
 	    
 		model.addAttribute("main_jsp","../main/home.jsp");
 		return "main/main";
