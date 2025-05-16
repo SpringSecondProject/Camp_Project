@@ -21,4 +21,6 @@ public interface ItemService {
 	public ItemVO ItemCookie(int ino);
 	public void HitIncrement(int ino);
 	public List<ItemVO> itemList();
+	public void CartReset(String id);
+	public void itemAccountModify(CartVO vo);
 }

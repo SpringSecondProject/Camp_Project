@@ -78,8 +78,8 @@ public interface ItemMapper {
 			+"WHERE ${fd} LIKE '%'||#{ss}||'%' ")
 	public int itemFindTotalPage(@Param("fd") String fd,@Param("ss") String ss);
 	
-	@Insert("INSERT INTO Cartlist(cno,ino,userid,account) "
-			  +"VALUES(bc_cno_seq.nextval,#{ino},#{userid},#{account})")
+	@Insert("INSERT INTO Cartlist(cno,ino,id,account) "
+			  +"VALUES(cl_cno_seq.nextval,#{ino},#{id},#{account})")
 	public void CartInsert(CartVO vo);
 	
 	@Select("SELECT COUNT(*) FROM Cartlist "
@@ -121,10 +121,19 @@ public interface ItemMapper {
 	@Update("UPDATE item SET hit=hit+1 "
 			+ "WHERE ino=#{ino}")
 	public void HitIncrement(int ino);
-	
-	
+		
 	@Select("SELECT ino,poster,type,brand,name,price,discount,hit "
 			 + "FROM (SELECT * FROM item ORDER BY hit DESC) "
 		     + "WHERE ROWNUM<=12")
 	public List<ItemVO> itemList();
+	
+	@Delete("DELETE FROM Cartlist "
+			  +"WHERE id=#{id}")
+	public void CartReset(String id);
+	
+	@Update("UPDATE Cartlist SET "
+			+"account = #{account} "
+			+ "WHERE ino = #{ino} "
+			+ "AND id = #{id}")
+	void itemAccountModify(CartVO vo);
 }

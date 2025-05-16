@@ -1,5 +1,7 @@
 package com.sist.web;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +19,14 @@ public class RecipeController {
 	}
 
 	@GetMapping("recipe/recipe_detail.do")
-	public String chef_list(String no,Model model)
+	public String recipe_detail(String no,Model model,HttpSession session)
 	{
 		if(no==null)
 			no="57";
+		String id=(String)session.getAttribute("userid");
+		
 		model.addAttribute("no",no);
+		model.addAttribute("sessionId", id);
 		model.addAttribute("main_jsp","../recipe/recipe_detail.jsp");
 		return "main/main";
 	}
