@@ -30,8 +30,12 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
+							<div class="checkbox text-right">
+							  <label><input type="checkbox" v-model="all" @click="allPrint()">전체보기</label>
+							</div>
 							<div class="table-responsive">
-								<table class="table-p">
+								<h3 class="text-center" style="font-size: 24px" v-if="list.length==0">예약 내역이 없습니다</h3>
+								<table class="table-p" v-if="list.length!=0">
 									<tbody>
 										<!--====== Row ======-->
 										<tr v-for="vo in list">
@@ -43,10 +47,10 @@
 	                                                    <span class="table-p__name">
 	                                                        <a :href="'../camp/detail.do?cno='+vo.cno">{{vo.title}}</a>
 	                                                    </span>
-														<span class="table-p__category">
-	                                                         <a href="shop-side-version-2.html">예약일 : {{vo.regDateStr}}</a>
-	                                                    </span>
 														<ul class="table-p__variant-list">
+															<li>
+																<span>{{vo.typeStr}} : {{vo.sites.toString()}}</span>
+															</li>
 															<li>
 																<span>주소 : {{vo.cvo.addr}}</span>
 															</li>
@@ -74,7 +78,7 @@
 									</tbody>
 								</table>
 							</div>
-							<div class="text-center">
+							<div class="text-center" v-if="list.length!=0">
 								<page-card></page-card>
 							</div>
 						</div>
@@ -97,13 +101,23 @@ let myReserveApp=Vue.createApp({
 			curpage:1,
 			totalpage:0,
 			startPage:0,
-			endPage:0
+			endPage:0,
+			all:false
 		}
 	},
 	mounted(){
 		this.dataRecv()
 	},
 	methods:{
+		allPrint(){
+			if(this.all){
+				this.all=false
+			}else {
+				this.all=true
+			}
+			this.curpage=1
+			dataRecv()
+		},
 		dataRecv(){
 			axios.get('../mypage/reserve_list_vue.do',{
 				params:{

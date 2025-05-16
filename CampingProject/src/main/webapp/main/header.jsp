@@ -42,7 +42,7 @@
 						<!--====== List ======-->
 						<ul class="ah-list ah-list--design1 ah-list--link-color-white">
 							<li class="mileage-point" data-tooltip="tooltip" data-placement="left">
-								<span>마일리지 : ${sessionScope.point } Point</span>
+								<span style="color: white;font-size: 16px">마일리지 : ${sessionScope.point }</span>
 							</li>
 							<li class="has-dropdown" data-tooltip="tooltip" data-placement="left">
 

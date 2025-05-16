@@ -38,11 +38,12 @@ td p{
 					<div class="row">
 						<div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
 							<div class="table-responsive">
-								<table class="table" style="font-size: 16px">
+								<h3 class="text-center" style="font-size: 24px" v-if="list.length==0">마일리지 내역이 없습니다</h3>
+								<table class="table" style="font-size: 16px" v-if="list.length!=0">
 									<tr>
 										<th class="text-center" width="10%">번호</th>
-										<th class="text-center" width="20%">적립일</th>
-										<th class="text-center" width="50%"></th>
+										<th class="text-center" width="20%">적용일</th>
+										<th class="text-center" width="50%">내역</th>
 										<th class="text-center" width="15%">잔여포인트</th>
 									</tr>
 									<tr v-for="vo in list" :style="(vo.state==='적립'?'background-color:#F0FFF0;':'background-color:#FFF0F5;')+'color: black;'">
@@ -53,7 +54,7 @@ td p{
 									</tr>
 								</table>
 							</div>
-							<div class="text-center">
+							<div class="text-center" v-if="list.length!=0">
 								<page-card></page-card>
 							</div>
 						</div>

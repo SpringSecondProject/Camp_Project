@@ -6,7 +6,7 @@ import java.util.*;
 @Data
 public class ReserveVO {
 	private int rno,cno,price,state,type;
-	private String id,title,regDateStr,startDateStr,endDateStr;
+	private String id,title,regDateStr,startDateStr,endDateStr,typeStr;
 	private Date regDate,startDate,endDate;
 	private CampVO cvo;
 	private List<ReserveDetailVO> rdList;

@@ -89,10 +89,8 @@ public class CampServiceImpl implements CampService{
 			
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(startDate);
-			
-			for(int i=0;i<vo.getBak();i++) {
+			for(int i=0;i<vo.getBak()+1;i++) {
 				dvo.setResdate(cal.getTime());
-				
 				for(int dno:vo.getSites()) {
 					dvo.setDno(dno);
 					int check=rDao.reserveCheck(dvo);
@@ -137,7 +135,18 @@ public class CampServiceImpl implements CampService{
 	}
 	@Override
 	public List<ReserveVO> myReserveListData(Map map) {
-		return rDao.myReserveListData(map);
+		List<ReserveVO> list=rDao.myReserveListData(map);
+		for(ReserveVO vo:list){
+			vo.setTypeStr(camp[vo.getType()]);
+			List<ReserveDetailVO> rdList=vo.getRdList();
+			int[] sites=new int[rdList.size()];
+			for(int i=0;i<rdList.size();i++) {
+				sites[i]=rdList.get(i).getDno();
+			}
+			Arrays.sort(sites);
+			vo.setSites(sites);
+		}
+		return list;
 	}
 	@Override
 	public int myReserveTotalPage(String id) {

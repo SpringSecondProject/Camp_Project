@@ -40,21 +40,22 @@
 	    <result property="endDateStr" column="endDateStr"/>
 	    <result property="price" column="price"/>
 	    <result property="state" column="state"/>
+		<result property="type" column="type"/>
 	    <collection property="rdList" ofType="ReserveDetailVO">
 			<result property="dno" column="dno"/>
 		</collection>
 	</resultMap>
 	<select id="myReserveListData" resultMap="reserveListMap" parameterType="hashmap">
-		SELECT rno,id,cno,title,poster,addr,regDateStr,startDateStr,endDateStr,price,state,num
+		SELECT l.rno,id,l.cno,title,poster,addr,regDateStr,startDateStr,endDateStr,l.price,state,dno,cs.type,num
 		FROM (SELECT rno,id,cno,title,poster,addr,regDateStr,startDateStr,endDateStr,price,state,rownum as num
 		FROM (SELECT cr.rno,id,cr.cno,cr.title,c.poster,addr,
-			TO_CHAR(regdate,'YYYY-MM-DD') as regDateStr,
-			TO_CHAR(startdate,'YYYY-MM-DD') as startDateStr,
-			TO_CHAR(enddate,'YYYY-MM-DD') as endDateStr,
-			cr.price,state
-			FROM CAMP_RESERVE cr,CAMP c
-			WHERE cr.id=#{id} AND cr.cno=c.cno AND TRUNC(SYSDATE) &lt;= TRUNC(endDate)
-	        ORDER BY startDate DESC))
-		WHERE num BETWEEN #{start} AND #{end}
+		    TO_CHAR(regdate,'YYYY-MM-DD') as regDateStr,
+		    TO_CHAR(startdate,'YYYY-MM-DD') as startDateStr,
+		    TO_CHAR(enddate,'YYYY-MM-DD') as endDateStr,
+		    cr.price,state
+		    FROM CAMP_RESERVE cr,CAMP c
+		    WHERE cr.id=#{id} AND cr.cno=c.cno AND TRUNC(SYSDATE) &lt;= TRUNC(endDate)
+		    ORDER BY startDate DESC)) l, RESERVE_DETAIL rd,camp_site cs
+		WHERE l.rno=rd.rno AND rd.sno=cs.sno AND num BETWEEN #{start} AND #{end}
 	</select>
 </mapper>
