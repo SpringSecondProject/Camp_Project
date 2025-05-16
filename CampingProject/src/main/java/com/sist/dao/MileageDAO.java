@@ -22,4 +22,10 @@ public class MileageDAO {
 	public void mileageInsert(MileageVO vo) {
 		mapper.mileageInsert(vo);
 	}
+	public List<MileageVO> myMileageListData(Map map){
+		return mapper.myMileageListData(map);
+	}
+	public int myMileageTotalPage(String id) {
+		return mapper.myMileageTotalPage(id);
+	}
 }

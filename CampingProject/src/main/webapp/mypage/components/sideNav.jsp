@@ -11,7 +11,7 @@
 	<a id="profile" href="../mypage/profile.do">
 		프로필
 	</a>
-	<a id="campreserve" href="../mypage/mileage.do">
+	<a id="mileage" href="../mypage/mileage.do">
 		마일리지 조회
 	</a>
 	<a id="campreserve" href="../mypage/campreserve.do">

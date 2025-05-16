@@ -110,6 +110,7 @@ let myReserveApp=Vue.createApp({
 					page:this.curpage
 				}
 			}).then(res=>{
+				console.log(res.data)
 				this.list=res.data.list
 				for(let i=0;i<this.list.length;i++){
 					this.list[i].price=new Intl.NumberFormat().format(this.list[i].price)

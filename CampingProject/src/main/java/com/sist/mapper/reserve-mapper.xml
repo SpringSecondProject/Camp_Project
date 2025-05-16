@@ -40,6 +40,9 @@
 	    <result property="endDateStr" column="endDateStr"/>
 	    <result property="price" column="price"/>
 	    <result property="state" column="state"/>
+	    <collection property="rdList" ofType="ReserveDetailVO">
+			<result property="dno" column="dno"/>
+		</collection>
 	</resultMap>
 	<select id="myReserveListData" resultMap="reserveListMap" parameterType="hashmap">
 		SELECT rno,id,cno,title,poster,addr,regDateStr,startDateStr,endDateStr,price,state,num

@@ -58,6 +58,26 @@ public class CampRestController {
 		}
 		return map;
 	}
+	////////////////////// 마이페이지-마일리지(임시)/////////////////////
+	@GetMapping("mypage/mileage_list_vue.do")
+	public Map mypage_mileage_list(int page,HttpSession session) {
+		Map map=new HashMap();
+		String id=(String)session.getAttribute("userid");
+		int rowSize=20;
+		map=ListUtil.setListRange(page, rowSize);
+		map.put("id", id);
+		List<MileageVO> list=service.myMileageListData(map);
+		int totalpage=service.myMileageTotalPage(id);
+		
+		map=new HashMap();
+		map.put("list", list);
+		
+		final int BLOCK=10;
+		map.put("curpage", page);
+		map.put("totalpage", totalpage);
+		map=ListUtil.setPageRange(map, BLOCK);
+		return map;
+	}
 	////////////////////// 마이페이지-예약(임시)/////////////////////
 	@GetMapping("mypage/reserve_list_vue.do")
 	public Map mypage_reserve_list(int page,HttpSession session) {

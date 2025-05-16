@@ -19,6 +19,8 @@ public class CampServiceImpl implements CampService{
 	@Autowired
 	private ReserveDAO rDao;
 	@Autowired
+	private MileageDAO mDao;
+	@Autowired
 	private MileageService mService;
 	
 	private String[] camp= {"","일반 야영장","자동차 야영장","글램핑 야영장","카라반","개인 카라반 구역"};
@@ -124,17 +126,23 @@ public class CampServiceImpl implements CampService{
 	public int reserveFindNewRno(String id) {
 		return rDao.reserveFindNewRno(id);
 	}
-
+	///////////////////////////////////////////////////////////
+	@Override
+	public List<MileageVO> myMileageListData(Map map) {
+		return mDao.myMileageListData(map);
+	}
+	@Override
+	public int myMileageTotalPage(String id) {
+		return mDao.myMileageTotalPage(id);
+	}
 	@Override
 	public List<ReserveVO> myReserveListData(Map map) {
 		return rDao.myReserveListData(map);
 	}
-
 	@Override
 	public int myReserveTotalPage(String id) {
 		return rDao.myReserveTotalPage(id);
 	}
-
 	@Override
 	@Transactional
 	public String reserveCancel(int rno) {
@@ -168,4 +176,5 @@ public class CampServiceImpl implements CampService{
 		}
 		return msg;
 	}
+	/////////////////////////////////////////////////////////////////////////
 }
