@@ -43,7 +43,7 @@
             <div class="row">
                 <!-- 검색창 -->
                 <div class="col-12">
-                    <form class="search-box" @submit.prevent="search()">
+                    <form class="search-box" @submit.prevent="search(true)">
                         <select class="search-select" v-model="fd">
                             <option value="name">상품명</option>
                             <option value="type">타입</option>
@@ -78,8 +78,8 @@
 
                                                     <a class="fas fa-search" data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick Look"></a></div>
                                                 <div class="product-m__add-cart">
-
-                                                    <a class="btn--e-brand" data-modal="modal" data-modal-id="#add-to-cart">Add to Cart</a></div>
+													<c:if test="${sessionScope.userid!=null }">
+                                                    <a class="btn--e-brand" data-modal="modal" data-modal-id="#add-to-cart">Add to Cart</a></c:if></div>
                                             </div>
                                             <div class="product-m__content">
                                                 <div class="product-m__category">
@@ -131,32 +131,39 @@ const listApp = Vue.createApp({
             startPage: 0,
             endPage: 0,
             ss: "",
-            fd: "name"
-        };
+            fd: "name",
+            message: ""
+        }
     },
     mounted(){
-        this.search()
+        this.search(false)
     },
     methods:{
-    	search(resetPage=true){
-    	    if(resetPage){
-    	        this.curpage=1
+    	search(isSearchClick=false,resetPage=true) {
+    	    if(isSearchClick && this.ss.trim()==="") {
+    	        alert("검색어를 입력하세요.")
+    	        this.dataRecv()
+    	        return
     	    }
-    	    axios.get("http://localhost:8080/web/item/find_vue.do",{
-    	        params:{
+    	    if(resetPage)this.curpage=1
+    	    axios.get("http://localhost:8080/web/item/find_vue.do", {
+    	        params: {
     	            page:this.curpage,
     	            fd:this.fd,
     	            ss:this.ss
     	        }
-    	    }).then(res=>{
+    	    }).then(res=> {
     	        this.list=res.data.list
     	        this.curpage=res.data.curpage
     	        this.totalpage=res.data.totalpage
     	        this.startPage=res.data.startPage
     	        this.endPage=res.data.endPage
-    	    }).catch(error=>{
-    	        console.error("검색 오류:", err.response)
-    	    });
+    	        if (this.list.length === 0) {
+    	            alert("해당되는 상품은 없습니다")
+    	        }
+    	    }).catch(error=> {
+    	        console.error("검색 오류:", error.response)
+    	    })
     	},
         dataRecv(){
             axios.get('http://localhost:8080/web/item/list_vue.do',{

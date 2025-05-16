@@ -30,7 +30,7 @@ public class ItemController {
 	    if (cookies != null) {
 	        for (int i = cookies.length - 1; i >= 0; i--) {
 	            Cookie c = cookies[i];
-	            if (c.getName().startsWith("spring_camp_")) {
+	            if (c.getName().startsWith("spring_item_")) {
 	                try {
 	                    int ino = Integer.parseInt(c.getValue());
 	                    ItemVO vo = service.ItemCookie(ino);
@@ -43,41 +43,77 @@ public class ItemController {
 	    model.addAttribute("main_jsp", "../item/list.jsp");
 	    return "main/main";
 	}
-
 	
 	@GetMapping("item/detail.do")
 	public String itemDetail(int ino, HttpServletRequest request, HttpServletResponse response, Model model) {
-	    // 쿠키 저장
-	    Cookie cookie = new Cookie("spring_camp_" + ino, String.valueOf(ino));
-	    cookie.setPath("/");
-	    cookie.setMaxAge(60 * 60 * 24); // 하루
-	    response.addCookie(cookie);
-	    
+	    Cookie[] cookies = request.getCookies();
+
+	    // 1. 중복 제거
+	    if(cookies!=null)
+	    {
+	        for(Cookie c:cookies)
+	        {
+	            if(c.getName().equals("spring_item_"+ino))
+	            {
+	                c.setPath("/");
+	                c.setMaxAge(0);
+	                response.addCookie(c);
+	            }
+	        }
+	    }
+	    List<Cookie>itemCookies=new ArrayList<>();
+	    if(cookies!=null)
+	    {
+	        for(Cookie c:cookies)
+	        {
+	            if(c.getName().startsWith("spring_item_") && !c.getName().equals("spring_item_"+ino))
+	            {
+	                itemCookies.add(c);
+	            }
+	        }
+	    }
+	    if (itemCookies.size()>=5)
+	    {
+	        itemCookies.sort((a,b)->a.getName().compareTo(b.getName()));
+	        Cookie old=itemCookies.get(0);
+	        old.setPath("/");
+	        old.setMaxAge(0);
+	        response.addCookie(old);
+	    }
+	    Cookie newCookie=new Cookie("spring_item_"+ino,String.valueOf(ino));
+	    newCookie.setPath("/");
+	    newCookie.setMaxAge(60*60*24); // 유효기간 1일
+	    response.addCookie(newCookie);
+
 	    // 조회수 증가
 	    service.HitIncrement(ino);
-	    
+
 	    // 상세 정보 조회
-	    ItemVO vo = service.itemDetailData(ino);
+	    ItemVO vo=service.itemDetailData(ino);
 	    model.addAttribute("vo", vo);
 
-	    // 최근 본 상품 리스트 추가
-	    List<ItemVO> recentList = new ArrayList<>();
-	    Cookie[] cookies = request.getCookies();
-	    if (cookies != null) {
-	        for (int i = cookies.length - 1; i >= 0; i--) {
-	            Cookie c = cookies[i];
-	            if (c.getName().startsWith("spring_camp_")) {
+	    // 5. 최근 본 상품 리스트 만들기 (최대 5개 제한)
+	    List<ItemVO> recentList=new ArrayList<>();
+	    Cookie[] updatedCookies=request.getCookies();
+	    if (updatedCookies!=null) {
+	        int count=0;
+	        for (int i=updatedCookies.length-1;i>=0&&count<5;i--) 
+	        {
+	            Cookie c=updatedCookies[i];
+	            if (c.getName().startsWith("spring_item_"))
+	            {
 	                try {
-	                    int cookieIno = Integer.parseInt(c.getValue());
-	                    ItemVO recentVo = service.ItemCookie(cookieIno);
+	                    int cookieIno=Integer.parseInt(c.getValue());
+	                    ItemVO recentVo=service.ItemCookie(cookieIno);
 	                    recentList.add(recentVo);
+	                    count++;
 	                } catch (Exception e) {}
 	            }
 	        }
 	    }
 	    model.addAttribute("recentList", recentList);
-
 	    model.addAttribute("main_jsp", "../item/detail.jsp");
+
 	    return "main/main";
 	}
 	@GetMapping("item/find.do")

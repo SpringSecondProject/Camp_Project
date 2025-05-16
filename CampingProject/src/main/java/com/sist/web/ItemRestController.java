@@ -21,7 +21,7 @@ public class ItemRestController {
 	@GetMapping("item/list_vue.do")
 	public Map item_list(int page)
 	{
-		int rowSize=20;
+		int rowSize=15;
 		   List<ItemVO> list=
 			 service.itemListData((page*rowSize)-(rowSize-1), page*rowSize);
 		   int totalpage=service.itemTotalPage();
@@ -52,7 +52,7 @@ public class ItemRestController {
 	@GetMapping("item/list_by_category_vue.do")
 	public Map item_list_by_category(int page, String category)throws UnsupportedEncodingException{
 		category=URLDecoder.decode(category, "UTF-8");
-	    int rowSize=20;
+	    int rowSize=15;
 	    List<ItemVO> list=service.itemListByCategory((page*rowSize)-(rowSize-1),page*rowSize,category);
 	    int totalpage=service.itemTotalPageByCategory(category);
 
@@ -79,7 +79,7 @@ public class ItemRestController {
 	        @RequestParam(required = false) Integer min,
 	        @RequestParam(required = false) Integer max) {
 
-	    int rowSize=20;
+	    int rowSize=15;
 	    int start=(page*rowSize)-(rowSize - 1);
 	    int end=page*rowSize;
 
@@ -111,7 +111,7 @@ public class ItemRestController {
 	        fd="name"; // 기본 필드 설정
 	    }
 
-	    int rowSize=20;
+	    int rowSize=15;
 	    int start=(page*rowSize)-(rowSize-1);
 	    int end=page*rowSize;
 
