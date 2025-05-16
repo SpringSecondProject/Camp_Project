@@ -74,13 +74,14 @@
 
                                                 <span class="w-r__category">${item.ivo.type}</span>
                                                                                                           
-												        <fmt:parseNumber var="price" value="${item.ivo.price}" integerOnly="true"/>
-												          <fmt:parseNumber var="discount" value="${item.ivo.discount}" integerOnly="true"/>
-												          <c:set var="salePrice" value="${price - (price * discount / 100)}"/>
-														 <fmt:formatNumber value="${salePrice}" type="number" maxFractionDigits="0" var="formattedSalePrice"/>
-														<span class="w-r__price" id="salePrice">${formattedSalePrice}원	
+												<fmt:parseNumber var="price" value="${item.ivo.price}" integerOnly="true"/>
+												<fmt:parseNumber var="discount" value="${item.ivo.discount}" integerOnly="true"/>
+												<c:set var="salePrice" value="${price - (price * discount / 100)}"/>
+												
+														<fmt:formatNumber value="${salePrice}" type="number" maxFractionDigits="0" var="formattedSalePrice"/>
+														<span class="w-r__price">${formattedSalePrice}원
 											         <input type="hidden" class="priceValue" value="${formattedSalePrice}" />
-											       <span class="w-r__discount">${item.ivo.price}원</span></span>  											       
+											       <span class="w-r__discount">${item.ivo.price}원</span></span>											       
 										          <div class="input-counter">										        
                                                     <span class="input-counter__minus fas fa-minus"></span>
 										            <input type="text" class="input-counter__text input-counter--text-primary-style" value="${item.account}" data-default="${item.account}" />
@@ -99,6 +100,7 @@
                             </div>
 							<div class="col-lg-12">
 							    <div class="w-r__container">
+							    <div class="route-box__g"></div>
 							        <div class="w-r__wrap-2">
 							            <span class="route-box__link">총 결제 금액: <span id="totalPrice">0</span>원</span>
 							            <a class="w-r__link btn--e-brand-b-2" data-modal="modal" data-modal-id="#add-to-cart">BUY</a>
