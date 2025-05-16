@@ -13,6 +13,8 @@ public interface LikeService {
 	
 	public List<Integer> likedCampList(String id, int type);
 	
+	//좋아요 삭제
+	public void deleteLike(Map map);
 	
 	//마이페이지
 	public List<CampVO> MyCampLikeList(Map map);
@@ -21,6 +23,8 @@ public interface LikeService {
 	 
 	//레시피 임시
 	public List<RecipeVO> MyRecipeLikeList(Map map);
+	
+
 	
 	
 }

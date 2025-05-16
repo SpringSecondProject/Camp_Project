@@ -28,6 +28,11 @@ public class LikeDAO {
     	return mapper.likedCampList(id, type);
     }
     
+    //좋아요 삭제
+    public void deleteLike(Map map) {
+    	mapper.deleteLike(map);
+    }
+    
     //마이페이지
     public List<CampVO> MyCampLikeList(Map map){
     	return mapper.MyCampLikeList(map);

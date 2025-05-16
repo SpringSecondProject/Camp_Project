@@ -20,16 +20,16 @@ public class LikeRestController {
 	private LikeService service;
 
 	@RequestMapping("like/insert_vue.do")
-	public Map insertLike(@RequestBody Map map, HttpSession session ,HttpServletResponse response) {
+	public Map insertLike(@RequestBody Map map, HttpSession session, HttpServletResponse response) {
 		Map result = new HashMap();
 
 		// 로그인 여부 확인
 		String id = (String) session.getAttribute("userid");
 
 		if (id == null) {
-		    result.put("msg", "NOLOGIN");
-		    return result; 
-		} 
+			result.put("msg", "NOLOGIN");
+			return result;
+		}
 		// 세션에서 ID 주입
 		map.put("id", id);
 
@@ -41,18 +41,30 @@ public class LikeRestController {
 		} else {
 			result.put("msg", "이미 좋아요 했습니다");
 		}
- 
+
 		return result;
 	}
-	
+
 	@GetMapping("like/list_vue.do")
 	public List<Integer> campLikeList(@RequestParam("type") int type, HttpSession session) {
-		
-	    String id = (String) session.getAttribute("userid");
-	    if (id == null) return Collections.emptyList();
-	     
-	    return service.likedCampList(id, type); //캠핑장 타입임.  0 : 캠핑장 1: 쇼핑몰 2 : 레시피 3 : 캠핑카 4 : 커뮤니티
+
+		String id = (String) session.getAttribute("userid");
+		if (id == null)
+			return Collections.emptyList();
+
+		return service.likedCampList(id, type); // 캠핑장 타입임. 0 : 캠핑장 1: 쇼핑몰 2 : 레시피 3 : 캠핑카 4 : 커뮤니티
 	}
-	
-	
+
+	@PostMapping("like/delete_vue.do")
+	public void deleteLike(HttpSession session, @RequestParam int no, @RequestParam int type) {
+		String id=(String)session.getAttribute("userid");
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("no", no);
+		map.put("type", type);
+
+		service.deleteLike(map);
+
+	}
+
 }
