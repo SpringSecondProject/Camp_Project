@@ -8685,3 +8685,23 @@ input::-ms-clear {
   opacity: .8;
 }
 
+#main-logo-wrap {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  margin-top: 12px;
+  padding: 4px;
+}
+
+#main-logo-wrap:hover {
+  box-shadow: 2px 3px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+}
+
+#main-logo {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  background: none;
+  object-fit: fill;
+}

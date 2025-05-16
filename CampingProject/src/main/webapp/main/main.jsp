@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<link href="../images/favicon.png" rel="shortcut icon">
+	<link href="../assets/icons/favicon.png" rel="shortcut icon">
 	<title>CAMPRO</title>
 	<!-- bootstrap -->
 	<link rel="stylesheet"
