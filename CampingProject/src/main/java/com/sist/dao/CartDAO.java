@@ -33,4 +33,12 @@ public class CartDAO {
 	{
 		mapper.CartDelete(ino);
 	}
+	public void CartReset(String id)
+	{
+		mapper.CartReset(id);
+	}
+	public void itemAccountModify(CartVO vo)
+	{
+		mapper.itemAccountModify(vo);
+	}
 }

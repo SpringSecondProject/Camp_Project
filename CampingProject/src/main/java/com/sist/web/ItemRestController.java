@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sist.vo.*;
@@ -151,5 +152,28 @@ public class ItemRestController {
 			result=ex.getMessage();  
 	  	}
 		return result;
+	}
+	@PostMapping("item/cart_delete.do")
+	public String cart_delete(int ino)
+	{
+		service.CartDelete(ino);
+		return "delete";
+	}
+	@PostMapping("item/cart_reset.do")
+	public String cart_reset(String id)
+	{
+		service.CartReset(id);
+		return "reset";
+	}
+	@PostMapping("/item/item_modify.do")
+	@ResponseBody
+	public void itemAccountModify(@RequestParam("id") String id,
+	                                   @RequestParam("ino") int ino,
+	                                   @RequestParam("account") int account) {
+	    CartVO vo = new CartVO();
+	    vo.setId(id);
+	    vo.setIno(ino);
+	    vo.setAccount(account);
+	    service.itemAccountModify(vo);
 	}
 }
