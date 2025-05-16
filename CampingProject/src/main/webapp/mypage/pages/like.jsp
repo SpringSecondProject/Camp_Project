@@ -32,7 +32,7 @@
 	</div>
 
 	<!--====== Main App ======-->
-	<div id="app">
+	<div id="CampLikeApp">
 		<!--====== App Content ======-->
 		<div class="app-content">
 			<!--====== Section 1 ======-->
@@ -68,9 +68,8 @@
 												</span> <br>
 
 											<div class="blog-t-w">
-												<a class="gl-tag btn--e-transparent-hover-brand-b-2"
-													href="#">예약하기</a> <a
-													class="gl-tag btn--e-transparent-hover-brand-b-2" href="#">삭제하기</a>
+												<a class="gl-tag btn--e-transparent-hover-brand-b-2" href="../camp/reserve.do?cno=${camp.cno }">예약하기</a> 
+												<a class="gl-tag btn--e-transparent-hover-brand-b-2" @click.prevent="deleteLike(${camp.cno })">삭제하기</a>
 											</div>
 										</div>
 									</div>
@@ -97,5 +96,31 @@
 		</div>
 		<!--====== End - App Content ======-->
 	</div>
+	<script>
+	let campLike=Vue.createApp({
+		data(){
+			return{
+				
+			}
+		},
+		methods:{
+			deleteLike(cno){
+				axios.post("../like/delete_vue.do",null,{
+					params:{
+						no:cno,
+						type:0
+					}
+				}).then(res=>{
+					location.reload();
+				}).catch(error=>{
+					console.log(error.response)
+				})
+			}			
+		},
+		mounted(){
+			
+		}	
+	}).mount("#CampLikeApp")
+	</script>
 </body>
 
