@@ -142,6 +142,17 @@
 								<!--====== End - Dropdown ======-->
 							</li>
 							<li class="has-dropdown">
+								<a>캠핑카<i class="fas fa-angle-down u-s-m-l-6"></i></a>
+								<!--====== Dropdown ======-->
+								<span class="js-menu-toggle"></span>
+								<ul style="width:200px">
+									<li>
+										<a href="../campcar/list.do">캠핑장 목록</a>
+									</li>
+								</ul>
+								<!--====== End - Dropdown ======-->
+							</li>
+							<li class="has-dropdown">
 								<a>쇼핑몰<i class="fas fa-angle-down u-s-m-l-6"></i></a>
 								<!--====== Dropdown ======-->
 								<span class="js-menu-toggle"></span>
@@ -202,7 +213,7 @@
 									<span class="js-menu-toggle"></span>
 									<ul style="width:200px">
 										<li>
-											<a href="../mypage/mypage.do">계정</a>
+											<a href="../mypage/main.do">계정</a>
 										</li>
 										<li>
 											<a href="../mypage/profile.do">프로필</a>

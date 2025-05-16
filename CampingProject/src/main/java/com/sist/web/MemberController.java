@@ -38,12 +38,12 @@ public class MemberController {
 
   @GetMapping("mypage/mileage.do")
   public String mypage_mileage(Model model) {
-	  model.addAttribute("path", "mileage");
-	  model.addAttribute("page", "../mypage/pages/mileage.jsp");
-	  model.addAttribute("main_jsp", "../mypage/main.jsp");
-	  return "main/main";
+    model.addAttribute("path", "mileage");
+    model.addAttribute("page", "../mypage/pages/mileage.jsp");
+    model.addAttribute("main_jsp", "../mypage/main.jsp");
+    return "main/main";
   }
-  
+
   @GetMapping("mypage/campreserve.do")
   public String mypage_campReserve(Model model) {
     model.addAttribute("path", "campreserve");
@@ -79,7 +79,7 @@ public class MemberController {
   @GetMapping("mypage/reply.do")
   public String mypage_reply(Model model) {
     model.addAttribute("path", "reply");
-    model.addAttribute("page", "../member/pages/reply.jsp");
+    model.addAttribute("page", "../mypage/pages/reply.jsp");
     model.addAttribute("main_jsp", "../mypage/main.jsp");
     return "main/main";
   }
