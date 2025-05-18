@@ -29,9 +29,9 @@ public interface RecipeMapper {
 			+ "WHERE title=#{title}")
 	public int findRecentRecipe(String title);
 	
-	@Select("SELECT no,poster,title,num "
-			+ "FROM (SELECT no,poster,title,rownum as num  "
-			+ "FROM (SELECT /* INDEX_DESC(recipeDetail rd_no_pk)*/no,poster,title "
+	@Select("SELECT no,poster,title,chef,num "
+			+ "FROM (SELECT no,poster,title,chef,rownum as num  "
+			+ "FROM (SELECT /* INDEX_DESC(recipeDetail rd_no_pk)*/no,poster,title,chef "
 			+ "FROM recipeDetail)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<RecipeVO> recipeListData(Map map);

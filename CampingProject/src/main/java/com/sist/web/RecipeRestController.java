@@ -81,8 +81,8 @@ public class RecipeRestController {
 		map.put("list", list);
 		map.put("curpage", page);
 		map.put("totalpage", totalpage);
-		map.put("count", count);
 		ListUtil.setPageRange(map, BLOCK);
+		map.put("count", count);
 		
 		return map;
 	}

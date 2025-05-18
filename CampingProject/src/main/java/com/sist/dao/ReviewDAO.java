@@ -17,9 +17,9 @@ public class ReviewDAO {
 	{
 		return mapper.reviewListData(map);
 	}
-	public int reviewTotalPage(int no,int type)
+	public int reviewTotalPage(Map map)
 	{
-		return mapper.reviewTotalPage(no, type);
+		return mapper.reviewTotalPage(map);
 	}
 	public void reviewInsert(ReviewVO vo)
 	{

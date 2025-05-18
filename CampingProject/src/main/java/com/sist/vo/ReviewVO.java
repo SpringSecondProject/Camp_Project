@@ -18,8 +18,10 @@ GROUP_STEP          NUMBER
 @Data
 public class ReviewVO {
 	private int rno,no,type,group_id,group_step;
-	private String id,nickname,sex,msg;
+	private String id,nickname,msg;
 	private Double score;
 	private Date regdate,moddate;
 	private String rgday,mdday;
+	
+	private String sex;
 }

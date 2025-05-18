@@ -7,6 +7,8 @@ public class RecipeConfig {
 	public static final int BLOCK_SIZE=10;
 
 	public static final int REVIEW_TYPE=2;
+	public static final int REVIEW_SIZE=10;
+	public static final int REVIEW_BLOCK=5;
 
 	public static final String STEP_SEPERATOR="\n";
 	public static final String IMAGE_SEPERATOR="^";

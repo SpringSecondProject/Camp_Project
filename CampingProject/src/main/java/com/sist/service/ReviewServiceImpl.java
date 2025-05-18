@@ -18,9 +18,9 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public int reviewTotalPage(int no, int type) {
+	public int reviewTotalPage(Map map) {
 		// TODO Auto-generated method stub
-		return wDao.reviewTotalPage(no, type);
+		return wDao.reviewTotalPage(map);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,9 +31,9 @@
 	  <!-- 이미지와 제목 -->
 	  <div class="panel panel-default">
 	    <div class="panel-body text-center">
-	      <img :src="vo.poster" class="img-responsive center-block crop-height-300">
-	      <h2 class="text-primary" style="margin-top:20px;">{{ vo.title }}</h2>
-	      <p class="text-muted">{{ vo.content }}</p>
+	      <img src="${vo.poster }" class="img-responsive center-block crop-height-300">
+	      <h2 class="text-primary" style="margin-top:20px;">${vo.title }</h2>
+	      <p class="text-muted">${vo.content }</p>
 	    </div>
 	  </div>
 	
@@ -40,15 +41,15 @@
 	  <div class="row text-center" style="margin-bottom: 20px;">
 	    <div class="col-sm-4">
 	      <img src="../images/icon/recipe/a1.png" class="img-responsive center-block" style="height:50px;">
-	      <p class="text-muted">{{ vo.cook_portion }}</p>
+	      <p class="text-muted">${vo.cook_portion }</p>
 	    </div>
 	    <div class="col-sm-4">
 	      <img src="../images/icon/recipe/a2.png" class="img-responsive center-block" style="height:50px;">
-	      <p class="text-muted">{{ vo.cook_time }}</p>
+	      <p class="text-muted">${vo.cook_time }</p>
 	    </div>
 	    <div class="col-sm-4">
 	      <img src="../images/icon/recipe/a3.png" class="img-responsive center-block" style="height:50px;">
-	      <p class="text-muted">{{ vo.cook_level }}</p>
+	      <p class="text-muted">${vo.cook_level }</p>
 	    </div>
 	  </div>
 	
@@ -57,7 +58,11 @@
 	    <div class="panel-heading"><h4 class="panel-title">[ 재료 ]</h4></div>
 	    <div class="panel-body">
 	      <ul class="list-unstyled" style="column-count: 2;">
-	        <li v-for="d in materials" class="text-muted"><span class="glyphicon glyphicon-leaf"></span> {{ d }}</li>
+	       <c:forEach var="d" items="${materials }">
+	        <li class="text-muted">
+	        	<span class="glyphicon glyphicon-leaf"></span> ${d }
+	        </li>
+	       </c:forEach>
 	      </ul>
 	    </div>
 	  </div>
@@ -66,14 +71,19 @@
 	  <div class="panel panel-default">
 	    <div class="panel-heading"><h4 class="panel-title">[ 조리 순서 ]</h4></div>
 	    <div class="panel-body">
-	      <div v-for="(m, index) in mlist" class="row" style="margin-bottom:15px;">
+         <c:forEach var="m" items="${mlist }" varStatus="s">
+	      <div class="row" style="margin-bottom:15px;">
 	        <div class="col-sm-8">
-	          <strong>{{ index + 1 }}.</strong> {{ m }}
-	        </div>
+<!-- 	        
+	          <strong>${s.index+1 }.</strong>
+-->	        
+	           ${m }
+ 	        </div>
 	        <div class="col-sm-4 text-right">
-	          <img :src="ilist[index]" class="img-thumbnail crop-height-150">
+	          <img src="${ilist[s.index] }" class="img-thumbnail crop-height-150">
 	        </div>
 	      </div>
+	     </c:forEach> 
 	    </div>
 	  </div>
 	
@@ -83,11 +93,11 @@
 	    <div class="panel-body">
 	      <div class="media">
 	        <div class="media-left">
-	          <img :src="vo.chef_poster" class="img-circle media-object" style="width:80px; height:80px;">
+	          <img src="${vo.chef_poster }" class="img-circle media-object" style="width:80px; height:80px;">
 	        </div>
 	        <div class="media-body">
-	          <h5 class="media-heading">{{ vo.chef }}</h5>
-	          <p class="text-muted"><small>{{ vo.chef_comment }}</small></p>
+	          <h5 class="media-heading">${vo.chef }</h5>
+	          <p class="text-muted"><small>${vo.chef_comment }</small></p>
 	        </div>
 	      </div>
 	    </div>
@@ -101,87 +111,141 @@
 	    <div class="panel-body">
 	      <%-- 댓글 : Vue --%>
 	      <!-- review Area Start -->
-	      <div class="comment_area section_padding_50 clearfix">
-	          <ol>
-	              <!-- Single review Area -->
-	              <li class="single_comment_area" v-for="rvo in reply_list">
-	                  <div class="comment-wrapper d-flex" v-if="rvo.group_step===0">
-	                      <!-- Comment Meta -->
-	                      <div class="comment-author">
-	                          <img :src="rvo.sex==='남자'?'../img/man.png':'../img/woman.png'" alt="">
-	                      </div>
-	                      <!-- Comment Content -->
-	                      <div class="comment-content">
-	                          <span class="comment-date text-muted">{{rvo.dbday}}</span>
-	                          <h5>{{rvo.username}}</h5>
-	                          <p>{{rvo.msg}}</p>
-	                          <button v-if="sessionId===rvo.userid" class="btn-xs btn-danger update" style="margin-left: 2px" :id="'u'+rvo.rno" @click="replyUpdateForm(rvo.rno)">Update</button>
-	                          <button v-if="sessionId===rvo.userid" class="btn-xs btn-info" style="margin-left: 2px" @click="replyDelete(rvo.rno)">Delete</button>
-	                          <button v-if="sessionId!==''" class="btn-xs btn-success insert" style="margin-left: 2px" :id="'i'+rvo.rno" @click="replyReplyInsertForm(rvo.rno)">Reply</button>
-	                          <%-- 수정창 --%>
-	                          <table class="table ups" style="display:none" :id="'up'+rvo.rno">
-				                  <tr>
-				                   <td>
-				                    <textarea rows="4" cols="45" style="float: left" :id="'umsg'+rvo.rno">{{rvo.msg}}</textarea>
-				                    <input type="button" value="수정"
-				                     style="float: left;background-color: blue;color:white;width: 80px;height: 94px"
-				                      @click="replyUpdate(rvo.rno)"
-				                     >
-				                   </td>
-				                  </tr>
-			                  </table>
-	                          <%-- 대댓글창 --%>
-	                          <table class="table ins" style="display:none" :id="'in'+rvo.rno">
-				                  <tr>
-				                   <td>
-				                    <textarea rows="4" cols="45" style="float: left" :id="'imsg'+rvo.rno"></textarea>
-				                    <input type="button" value="댓글"
-				                     style="float: left;background-color: blue;color:white;width: 80px;height: 94px"
-				                      @click="replyReplyInsert(rvo.rno)"
-				                     >
-				                   </td>
-				                  </tr>
-			                  </table>
-	                      </div>
-	                  </div>
-	                  <ol class="children" v-if="rvo.group_step>0">
-	                      <li class="single_comment_area">
-	                          <div class="comment-wrapper d-flex">
-	                              <!-- Comment Meta -->
-	                              <div class="comment-author">
-	                            <img :src="rvo.sex==='남자'?'../img/man.png':'../img/woman.png'" alt="">
-	                        </div>
-	                        <!-- Comment Content -->
-	                        <div class="comment-content">
-	                            <span class="comment-date text-muted">{{rvo.dbday}}</span>
-	                            <h5>{{rvo.username}}</h5>
-	                            <p>{{rvo.msg}}</p>
-	                            <button v-if="sessionId===rvo.userid" class="btn-xs btn-danger update" style="margin-left: 2px" :id="'u'+rvo.rno" @click="replyUpdateForm(rvo.rno)">Update</button>
-	                                  <button v-if="sessionId===rvo.userid" class="btn-xs btn-info" style="margin-left: 2px" @click="replyDelete(rvo.rno)">Delete</button>
-	                            <table class="table ups" style="display:none" :id="'up'+rvo.rno">
-	                    <tr>
-	                     <td>
-	                      <textarea rows="4" cols="45" style="float: left" :id="'umsg'+rvo.rno">{{rvo.msg}}</textarea>
-	                      <input type="button" value="수정"
-	                       style="float: left;background-color: blue;color:white;width: 80px;height: 94px"
-	                        @click="replyUpdate(rvo.rno)"
-	                       >
-	                     </td>
-	                    </tr>
-	                   </table>
-	                        </div>
-	                          </div>
-	                      </li>
-	                  </ol>
-	              </li>
-	              
-	          </ol>
-	      </div>
+<div class="comment_area section_padding_50 clearfix">
+  <ol>
+    <!-- 댓글 -->
+    <li class="single_comment_area" v-for="rvo in reply_list">
+      <!-- 원댓글 -->
+      <div class="media comment-wrapper" v-if="rvo.group_step === 0">
+        <div class="media-left">
+          <img :src="sex === '남자' ? '../images/man.png' : '../images/woman.png'"
+               class="media-object img-circle"
+               style="width:50px; height:50px;" alt="">
+        </div>
+        <div class="media-body">
+          <h5 class="media-heading">
+            {{ rvo.nickname }}
+            <small class="text-muted" style="margin-left: 10px;">{{ rvo.rgday }}</small>
+          </h5>
+          <p>{{ rvo.msg }}</p>
+
+          <!-- 버튼 -->
+          <div class="btn-group btn-group-xs" role="group" style="margin-bottom:10px;">
+            <button v-if="sessionId === rvo.id"
+                    class="btn btn-danger update" style="margin-right: 5px; min-width: 50px;"
+                    :id="'u' + rvo.rno"
+                    @click="replyUpdateForm(rvo.rno)">Update</button>
+            <button v-if="sessionId === rvo.id" style="margin-right: 5px; min-width: 50px;"
+                    class="btn btn-info"
+                    @click="replyDelete(rvo.rno)">Delete</button>
+            <button v-if="sessionId !== ''"
+                    class="btn btn-success insert" style="margin-right: 5px; min-width: 50px;"
+                    :id="'i' + rvo.rno"
+                    @click="replyReplyInsertForm(rvo.rno)">Reply</button>
+          </div>
+
+          <!-- 수정창 -->
+          <div class="table-responsive ups" style="display:none;" :id="'up' + rvo.rno">
+            <table class="table">
+              <tr>
+                <td>
+                  <textarea rows="4" cols="45" class="form-control" :id="'umsg' + rvo.rno">{{ rvo.msg }}</textarea>
+                </td>
+                <td style="width:90px;">
+                  <input type="button" value="수정"
+                         class="btn btn-primary btn-block"
+                         style="height:94px;"
+                         @click="replyUpdate(rvo.rno)">
+                </td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- 대댓글창 -->
+          <div class="table-responsive ins" style="display:none;" :id="'in' + rvo.rno">
+            <table class="table">
+              <tr>
+                <td>
+                  <textarea rows="4" cols="45" class="form-control" :id="'imsg' + rvo.rno"></textarea>
+                </td>
+                <td style="width:90px;">
+                  <input type="button" value="댓글"
+                         class="btn btn-primary btn-block"
+                         style="height:94px;"
+                         @click="replyReplyInsert(rvo.rno)">
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- 대댓글 -->
+      <ol class="children" v-if="rvo.group_step > 0">
+        <li class="single_comment_area">
+          <div class="media comment-wrapper">
+            <div class="media-left">
+              <img :src="sex === '남자' ? '../images/man.png' : '../images/woman.png'"
+                   class="media-object img-circle"
+                   style="width:40px; height:40px;" alt="">
+            </div>
+            <div class="media-body">
+              <h5 class="media-heading">
+                {{ rvo.nickname }}
+                <small class="text-muted" style="margin-left: 10px;">{{ rvo.rgday }}</small>
+              </h5>
+              <p>{{ rvo.msg }}</p>
+
+              <div class="btn-group btn-group-xs" role="group">
+                <button v-if="sessionId === rvo.id"
+                        class="btn btn-danger update" style="margin-right: 5px; min-width: 50px;"
+                        :id="'u' + rvo.rno"
+                        @click="replyUpdateForm(rvo.rno)">Update</button>
+                <button v-if="sessionId === rvo.id"
+                        class="btn btn-info" style="margin-right: 5px; min-width: 50px;"
+                        @click="replyDelete(rvo.rno)">Delete</button>
+              </div>
+
+              <!-- 수정창 (대댓글용) -->
+              <div class="table-responsive ups" style="display:none;" :id="'up' + rvo.rno">
+                <table class="table">
+                  <tr>
+                    <td>
+                      <textarea rows="4" cols="45" class="form-control" :id="'umsg' + rvo.rno">{{ rvo.msg }}</textarea>
+                    </td>
+                    <td style="width:90px;">
+                      <input type="button" value="수정"
+                             class="btn btn-primary btn-block"
+                             style="height:94px;"
+                             @click="replyUpdate(rvo.rno)">
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</div>
 	      <!-- Leave A Comment -->
-	      <c:if test="${sessionScope.userid!=null }">
-	       <div class="leave-comment-area section_padding_50 clearfix">
+	      
+	       <div class="leave-comment-area section_padding_50 clearfix" v-if="sessionId!==''">
 	          <div class="comment-form">
 	              <table class="table">
+                  <tr>
+                    <td>
+                      <textarea rows="4" cols="45" class="form-control" ref="msg" v-model="msg"></textarea>
+                    </td>
+                    <td style="width:90px;">
+                      <input type="button" value="리뷰 쓰기"
+                             class="btn btn-primary btn-block"
+                             style="height:94px;"
+                             @click="replyInsert()">
+                    </td>
+                  </tr>	              
+<!-- 
 	               <tr>
 	                <td>
 				    <div style="display: flex; align-items: stretch; gap: 1px;">
@@ -194,55 +258,24 @@
 				    </div>
 	                </td>
 	               </tr>
-	              </table>
+
+ -->	              </table>
 	          </div>
 	       </div>
-	      </c:if>
 	    </div>
 	  </div>
 	</div>
   </section>
   <script>
-  let listApp=Vue.createApp({
-  	data(){
-  		return {
-			no:parseInt('${no}'),
-			vo:{},
-			mlist:[],
-			ilist:[],
-			materials:[]			
-  		}
-  	},
-  	mounted(){
-  		this.dataRecv()
-  	},
-  	methods:{
-		dataRecv() {
-		  axios.get('../recipe/recipe_detail_vue.do',{
-			params:{
-				no:this.no
-			}
-		  }).then(res=>{
-			console.log(res)
-			this.vo=res.data.vo
-			this.mlist=res.data.mlist
-			this.ilist=res.data.ilist
-			this.materials=res.data.materials;
-		  }).catch(err=>{
-     		console.log(err.response);
-		  })
-		}
-  	}
-  }).mount("#listApp")
-  
   let replyApp=Vue.createApp({
  	 data(){
  		 return {
  			 reply_list:[],
- 			 no:parseInt('${vo.no}'),
- 			 type:2,
+ 			 no:parseInt(${vo.no}),
+ 			 type:parseInt(${type}),
  			 curpage:1,
  			 sessionId:'${sessionId}',
+ 			 sex:'${sex}',
  			 totalpage:0,
  			 startPage:0,
  			 endPage:0,
@@ -252,7 +285,7 @@
  		 }
  	 },
  	 mounted(){
- 		 this.commentRecv()
+ 		 this.reviewRecv()
  	 },
  	 methods:{
  		 updateReplyData(resData) {
@@ -271,8 +304,7 @@
  				}
  			}).then(res=>{
  				console.log(res.data)
-  				 // res.data=Map {list=[],curpage:1....}
- 				updateReplyData(res.data)
+ 				this.updateReplyData(res.data)
  			}).catch(err=>{
  				console.log(err.response)
  			})
@@ -294,18 +326,13 @@
  				}
  			}).then(res=>{
  				console.log(res.data)
-  				 // res.data=Map {list=[],curpage:1....}
- 				updateReplyData(res.data)
+ 				this.updateReplyData(res.data)
   				 $('#imsg'+rno).val("")
-  				 // textarea
   				 $('#in'+rno).hide()
-  				 // table
   				 $('#i'+rno).text("Reply")
-  				 // Button
  			}).catch(err=>{
  				console.log(err.response)
  			})
- 			 
  		 },
  		 replyReplyInsertForm(rno){
   			$('.ins').hide()
@@ -341,14 +368,10 @@
  				}
  			}).then(res=>{
  				console.log(res.data)
-  				 // res.data=Map {list=[],curpage:1....}
- 				updateReplyData(res.data)
+ 				this.updateReplyData(res.data)
   				 $('#umsg'+rno).val("")
-  				 // textarea
   				 $('#up'+rno).hide()
-  				 // table
   				 $('#u'+rno).text("Update")
-  				 // Button
  			}).catch(err=>{
  				console.log(err.response)
  			})
@@ -385,13 +408,13 @@
  				}
  			}).then(res=>{
  				console.log(res.data)
- 				updateReplyData(res.data)
+ 				this.updateReplyData(res.data)
   				this.msg=''
  			}).catch(err=>{
  				console.log(err.response)
  			})
  		 },
- 		 commentRecv(){
+ 		 reviewRecv(){
 			axios.get("../review/list_vue.do",{
 				params:{
 					page:this.curpage,
@@ -400,13 +423,11 @@
 				}
 			}).then(res=>{
 				console.log(res.data)
-				// res.data=Map {list=[],curpage:1....}
-				updateReplyData(res.data)
-				 
-			}).catch(error=>{
-				console.log(error.response)
-			})
- 		 }
+				this.updateReplyData(res.data)
+			}).catch(err=>{
+				console.log(err.response)
+			})	
+		 }
  	 }
   }).mount("#replyApp")
   </script>

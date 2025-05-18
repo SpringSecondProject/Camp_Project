@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.sist.vo.*;
+import com.sist.commons.ListUtil;
+import com.sist.commons.RecipeConfig;
 import com.sist.service.*;
 @RestController
 public class ReviewRestController {
@@ -15,31 +17,25 @@ public class ReviewRestController {
 	
 	public Map commonsListData(int page,int no,int type)
 	{
-		Map map=new HashMap();
-		//데이터베이스 연동
-		int rowSize=10;
-		map.put("start", (page*rowSize)-(rowSize-1));
-		map.put("end", (page*rowSize));
+		final int ROWSIZE=RecipeConfig.RECIPE_SIZE;
+		final int BLOCK=RecipeConfig.REVIEW_BLOCK;
+
+		Map map=ListUtil.setListRange(page, ROWSIZE);
 		map.put("no", no);
 		map.put("type", type);
-		List<ReviewVO> list=service.reviewListData(map);
-		int totalpage=service.reviewTotalPage(no, type);
+		map.put("rowSize", ROWSIZE);
 		
-		final int BLOCK=5;
-		int startPage=(page-1)/BLOCK*BLOCK+1;
-		int endPage=(page-1)/BLOCK*BLOCK+BLOCK;
-		if(endPage > totalpage)
-			endPage=totalpage;
+		List<ReviewVO> list=service.reviewListData(map);
+		int totalpage=service.reviewTotalPage(map);
 		
 		map=new HashMap();
 		map.put("list", list);
 		map.put("curpage", page);
 		map.put("totalpage", totalpage);
-		map.put("startPage", startPage);
-		map.put("endPage", endPage);
+		map=ListUtil.setPageRange(map, BLOCK);
 		map.put("no", no);
 		map.put("type", type);
-		// 값 읽기 => JSON으로 전송 Map
+
 		return map;
 	}
 	
