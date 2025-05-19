@@ -112,13 +112,13 @@
 	      <%-- 댓글 : Vue --%>
 	      <!-- review Area Start -->
 			<div class="comment_area section_padding_50 clearfix">
-			  <ol>
+			  <ul style="list-style: none;">
 			    <!-- 댓글 -->
 			    <li class="single_comment_area" v-for="rvo in reply_list">
 			      <!-- 원댓글 -->
 			      <div class="media comment-wrapper" v-if="rvo.group_step === 0">
 			        <div class="media-left">
-			          <img :src="sex === '남자' ? '../images/man.png' : '../images/woman.png'"
+			          <img :src="rvo.sex === '남자' ? '../images/man.png' : '../images/woman.png'"
 			               class="media-object img-circle"
 			               style="width:50px; height:50px;" alt="">
 			        </div>
@@ -181,11 +181,11 @@
 			      </div>
 			
 			      <!-- 대댓글 -->
-			      <ol class="children" v-if="rvo.group_step > 0">
+			      <ul class="children" v-if="rvo.group_step > 0" style="list-style: none;">
 			        <li class="single_comment_area">
 			          <div class="media comment-wrapper">
 			            <div class="media-left">
-			              <img :src="sex === '남자' ? '../images/man.png' : '../images/woman.png'"
+			              <img :src="rvo.sex === '남자' ? '../images/man.png' : '../images/woman.png'"
 			                   class="media-object img-circle"
 			                   style="width:40px; height:40px;" alt="">
 			            </div>
@@ -225,9 +225,9 @@
 			            </div>
 			          </div>
 			        </li>
-			      </ol>
+			      </ul>
 			    </li>
-			  </ol>
+			  </ul>
 			</div>
 	      <!-- Leave A Comment -->
 	      
@@ -261,7 +261,6 @@
  			 type:parseInt(${type}),
  			 curpage:1,
  			 sessionId:'${sessionId}',
- 			 sex:'${sex}',
  			 totalpage:0,
  			 startPage:0,
  			 endPage:0,

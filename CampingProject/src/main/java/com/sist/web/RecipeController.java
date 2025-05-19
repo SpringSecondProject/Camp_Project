@@ -45,9 +45,7 @@ public class RecipeController {
 		if(no==null) 
 			no=RecipeConfig.RECIPE_DEFAULT; 
 		String id=(String)session.getAttribute("userid");
-		String sex=(String)session.getAttribute("sex");
 		model.addAttribute("sessionId", id);
-		model.addAttribute("sex", sex);
 		model.addAttribute("type", RecipeConfig.REVIEW_TYPE);
 		
 		Map map=new HashMap();
