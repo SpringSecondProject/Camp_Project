@@ -168,8 +168,7 @@ const listApp = Vue.createApp({
         dataRecv(){
             axios.get('http://localhost:8080/web/item/list_vue.do',{
                 params:{
-                    page:this.curpage,
-                    ino: this.ino
+                    page:this.curpage
                 }
             }).then(res=>{
                 this.list=res.data.list
@@ -181,28 +180,40 @@ const listApp = Vue.createApp({
                 console.log(error.response)
             })
         },
+        pageChange(page){
+            this.curpage=page
+            if (this.ss.trim()!=="")
+            {
+                this.search(false, false)
+            }
+            else
+            {
+                this.dataRecv()
+            }
+        },
         prev(){
-            this.curpage = this.startPage-1
-            if (this.ss.trim()!==""){
-                this.search(false)
-            }else{
-               this.dataRecv();
+            this.curpage=this.startPage-1
+            if (this.ss.trim()!=="")
+            {
+                this.search(false, false)
+            }
+            else
+            {
+                this.dataRecv()
             }
         },
         next(){
-            this.curpage=this.endPage+1
-            if (this.ss.trim()!=="") {
-                this.search(false)
-            } else{
-                this.dataRecv()
-            }
-        },
-        pageChange(page){
-            this.curpage=page
-            if (this.ss.trim()!==""){
-                this.search(false)
-            }else{
-                this.dataRecv()
+            if (this.curpage<this.totalpage) 
+            {
+                this.curpage+=1
+                if(this.ss.trim()!=="")
+                {
+                    this.search(false, false)
+                } 
+                else
+                {
+                    this.dataRecv()
+                }
             }
         },
         range(start,end){

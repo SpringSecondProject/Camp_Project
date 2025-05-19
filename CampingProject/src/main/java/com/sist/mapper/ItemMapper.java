@@ -38,6 +38,18 @@ public interface ItemMapper {
 	@Select("SELECT CEIL(COUNT(*)/20.0) FROM item")
 	public int itemTotalPageByCategory(String category);
 	
+	
+	@Select("SELECT ino,poster,type,brand,name,price,discount,rcount,hit,num "
+	        + "FROM (SELECT ino,poster,type,brand,name,price,discount,rcount,hit,rownum as num "
+	        + "FROM Item WHERE brand=#{brand}) "
+	        + "WHERE num BETWEEN #{start} AND #{end}")
+	public List<ItemVO> itemListByBrand(@Param("start") int start,
+	                                        @Param("end") int end,
+	                                        @Param("brand") String brand);
+	
+	@Select("SELECT CEIL(COUNT(*)/20.0) FROM item WHERE brand=#{brand}")
+	public int itemTotalPageByBrand(String brand);
+	
 	@Select("<script>"
 	        + "SELECT ino,poster,type,brand,name,price,discount,rcount,hit,num "
 	        + "FROM (SELECT ino,poster,type,brand,name,price,discount,rcount,hit,rownum as num "

@@ -20,4 +20,8 @@ public class CampCarDAO {
     return mapper.campcarTotalPage();
   }
 
+  public CampCarVO campcarDetailData(int id) {
+    return mapper.campcarDetailData(id);
+  }
+
 }

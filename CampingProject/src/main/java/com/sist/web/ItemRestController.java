@@ -74,6 +74,30 @@ public class ItemRestController {
 	    return map;
 	}
 	
+	@GetMapping("item/list_by_brand_vue.do")
+	public Map item_list_by_brand(int page, String brand)throws UnsupportedEncodingException{
+		brand=URLDecoder.decode(brand, "UTF-8");
+	    int rowSize=15;
+	    List<ItemVO> list=service.itemListByBrand((page*rowSize)-(rowSize-1),page*rowSize,brand);
+	    int totalpage=service.itemTotalPageByBrand(brand);
+
+	    final int BLOCK=10;
+	    int startPage=((page-1)/BLOCK*BLOCK)+1;
+	    int endPage=((page-1)/BLOCK*BLOCK)+BLOCK;
+
+	    if(endPage>totalpage)
+	        endPage=totalpage;
+
+	    Map<String, Object> map=new HashMap<>();
+	    map.put("list", list);
+	    map.put("curpage", page);
+	    map.put("totalpage", totalpage);
+	    map.put("startPage", startPage);
+	    map.put("endPage", endPage);
+
+	    return map;
+	}
+	
 	@GetMapping("item/list_by_price_vue.do")
 	public Map<String, Object> item_list_by_price(
 	        @RequestParam(defaultValue = "1") int page,

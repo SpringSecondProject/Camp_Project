@@ -20,4 +20,8 @@ public class CampCarServiceImpl implements CampCarService {
     return dao.campcarTotalPage();
   }
 
+  public CampCarVO campcarDetailData(int id) {
+    return dao.campcarDetailData(id);
+  }
+
 }

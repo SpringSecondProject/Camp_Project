@@ -6,6 +6,6 @@ import lombok.Data;
 public class CampCarVO {
 
   private int id, capacity, price;
-  private String name, poster, content, options;
+  private String name, poster, content;
 
 }

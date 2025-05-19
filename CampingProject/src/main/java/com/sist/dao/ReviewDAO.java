@@ -25,9 +25,9 @@ public class ReviewDAO {
 	{
 		mapper.reviewInsert(vo);
 	}
-	public void reviewUpdate(String msg,int no)
+	public void reviewUpdate(String msg,int rno)
 	{
-		mapper.reviewUpdate(msg, no);
+		mapper.reviewUpdate(msg, rno);
 	}
 	@Transactional
 	public void reviewReplyReplyInsert(int pno,ReviewVO vo)
@@ -38,11 +38,11 @@ public class ReviewDAO {
 		vo.setGroup_step(pvo.getGroup_step()+1);
 		mapper.reviewReplyReplyInsert(vo);
 	}
-	public void reviewDelete(int no)
+	public void reviewDelete(int rno)
 	{
-		ReviewVO vo=mapper.reviewParentInfoData(no);
+		ReviewVO vo=mapper.reviewParentInfoData(rno);
 		Map map=new HashMap();
-		map.put("no", no);
+		map.put("rno", rno);
 		map.put("group_id", vo.getGroup_id());
 		map.put("group_step", vo.getGroup_step());
 		

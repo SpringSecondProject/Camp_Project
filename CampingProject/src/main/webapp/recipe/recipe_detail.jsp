@@ -111,129 +111,129 @@
 	    <div class="panel-body">
 	      <%-- 댓글 : Vue --%>
 	      <!-- review Area Start -->
-<div class="comment_area section_padding_50 clearfix">
-  <ol>
-    <!-- 댓글 -->
-    <li class="single_comment_area" v-for="rvo in reply_list">
-      <!-- 원댓글 -->
-      <div class="media comment-wrapper" v-if="rvo.group_step === 0">
-        <div class="media-left">
-          <img :src="sex === '남자' ? '../images/man.png' : '../images/woman.png'"
-               class="media-object img-circle"
-               style="width:50px; height:50px;" alt="">
-        </div>
-        <div class="media-body">
-          <h5 class="media-heading">
-            {{ rvo.nickname }}
-            <small class="text-muted" style="margin-left: 10px;">{{ rvo.rgday }}</small>
-          </h5>
-          <p>{{ rvo.msg }}</p>
-
-          <!-- 버튼 -->
-          <div class="btn-group btn-group-xs" role="group" style="margin-bottom:10px;">
-            <button v-if="sessionId === rvo.id"
-                    class="btn btn-danger update" style="margin-right: 5px; min-width: 50px;"
-                    :id="'u' + rvo.rno"
-                    @click="replyUpdateForm(rvo.rno)">Update</button>
-            <button v-if="sessionId === rvo.id" style="margin-right: 5px; min-width: 50px;"
-                    class="btn btn-info"
-                    @click="replyDelete(rvo.rno)">Delete</button>
-            <button v-if="sessionId !== ''"
-                    class="btn btn-success insert" style="margin-right: 5px; min-width: 50px;"
-                    :id="'i' + rvo.rno"
-                    @click="replyReplyInsertForm(rvo.rno)">Reply</button>
-          </div>
-
-          <!-- 수정창 -->
-          <div class="table-responsive ups" style="display:none;" :id="'up' + rvo.rno">
-            <table class="table">
-              <tr>
-                <td>
-                  <textarea rows="4" cols="45" class="form-control" :id="'umsg' + rvo.rno">{{ rvo.msg }}</textarea>
-                </td>
-                <td style="width:90px;">
-                  <input type="button" value="수정"
-                         class="btn btn-primary btn-block"
-                         style="height:94px;"
-                         @click="replyUpdate(rvo.rno)">
-                </td>
-              </tr>
-            </table>
-          </div>
-
-          <!-- 대댓글창 -->
-          <div class="table-responsive ins" style="display:none;" :id="'in' + rvo.rno">
-            <table class="table">
-              <tr>
-                <td>
-                  <textarea rows="4" cols="45" class="form-control" :id="'imsg' + rvo.rno"></textarea>
-                </td>
-                <td style="width:90px;">
-                  <input type="button" value="댓글"
-                         class="btn btn-primary btn-block"
-                         style="height:94px;"
-                         @click="replyReplyInsert(rvo.rno)">
-                </td>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- 대댓글 -->
-      <ol class="children" v-if="rvo.group_step > 0">
-        <li class="single_comment_area">
-          <div class="media comment-wrapper">
-            <div class="media-left">
-              <img :src="sex === '남자' ? '../images/man.png' : '../images/woman.png'"
-                   class="media-object img-circle"
-                   style="width:40px; height:40px;" alt="">
-            </div>
-            <div class="media-body">
-              <h5 class="media-heading">
-                {{ rvo.nickname }}
-                <small class="text-muted" style="margin-left: 10px;">{{ rvo.rgday }}</small>
-              </h5>
-              <p>{{ rvo.msg }}</p>
-
-              <div class="btn-group btn-group-xs" role="group">
-                <button v-if="sessionId === rvo.id"
-                        class="btn btn-danger update" style="margin-right: 5px; min-width: 50px;"
-                        :id="'u' + rvo.rno"
-                        @click="replyUpdateForm(rvo.rno)">Update</button>
-                <button v-if="sessionId === rvo.id"
-                        class="btn btn-info" style="margin-right: 5px; min-width: 50px;"
-                        @click="replyDelete(rvo.rno)">Delete</button>
-              </div>
-
-              <!-- 수정창 (대댓글용) -->
-              <div class="table-responsive ups" style="display:none;" :id="'up' + rvo.rno">
-                <table class="table">
-                  <tr>
-                    <td>
-                      <textarea rows="4" cols="45" class="form-control" :id="'umsg' + rvo.rno">{{ rvo.msg }}</textarea>
-                    </td>
-                    <td style="width:90px;">
-                      <input type="button" value="수정"
-                             class="btn btn-primary btn-block"
-                             style="height:94px;"
-                             @click="replyUpdate(rvo.rno)">
-                    </td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ol>
-    </li>
-  </ol>
-</div>
+			<div class="comment_area section_padding_50 clearfix">
+			  <ol>
+			    <!-- 댓글 -->
+			    <li class="single_comment_area" v-for="rvo in reply_list">
+			      <!-- 원댓글 -->
+			      <div class="media comment-wrapper" v-if="rvo.group_step === 0">
+			        <div class="media-left">
+			          <img :src="sex === '남자' ? '../images/man.png' : '../images/woman.png'"
+			               class="media-object img-circle"
+			               style="width:50px; height:50px;" alt="">
+			        </div>
+			        <div class="media-body">
+			          <h5 class="media-heading">
+			            {{ rvo.nickname }}
+			            <small class="text-muted" style="margin-left: 10px;">{{ rvo.rgday }}</small>
+			          </h5>
+			          <p>{{ rvo.msg }}</p>
+			
+			          <!-- 버튼 -->
+			          <div class="btn-group btn-group-xs" role="group" style="margin-bottom:10px;">
+			            <button v-if="sessionId === rvo.id"
+			                    class="btn btn-danger update" style="margin-right: 5px; min-width: 50px;"
+			                    :id="'u' + rvo.rno"
+			                    @click="replyUpdateForm(rvo.rno)">Update</button>
+			            <button v-if="sessionId === rvo.id" style="margin-right: 5px; min-width: 50px;"
+			                    class="btn btn-info"
+			                    @click="replyDelete(rvo.rno)">Delete</button>
+			            <button v-if="sessionId !== ''"
+			                    class="btn btn-success insert" style="margin-right: 5px; min-width: 50px;"
+			                    :id="'i' + rvo.rno"
+			                    @click="replyReplyInsertForm(rvo.rno)">Reply</button>
+			          </div>
+			
+			          <!-- 수정창 -->
+			          <div class="table-responsive ups" style="display:none;" :id="'up' + rvo.rno">
+			            <table class="table">
+			              <tr>
+			                <td>
+			                  <textarea rows="4" cols="45" class="form-control" :id="'umsg' + rvo.rno">{{ rvo.msg }}</textarea>
+			                </td>
+			                <td style="width:90px;">
+			                  <input type="button" value="수정"
+			                         class="btn btn-primary btn-block"
+			                         style="height:94px;"
+			                         @click="replyUpdate(rvo.rno)">
+			                </td>
+			              </tr>
+			            </table>
+			          </div>
+			
+			          <!-- 대댓글창 -->
+			          <div class="table-responsive ins" style="display:none;" :id="'in' + rvo.rno">
+			            <table class="table">
+			              <tr>
+			                <td>
+			                  <textarea rows="4" cols="45" class="form-control" :id="'imsg' + rvo.rno"></textarea>
+			                </td>
+			                <td style="width:90px;">
+			                  <input type="button" value="댓글"
+			                         class="btn btn-primary btn-block"
+			                         style="height:94px;"
+			                         @click="replyReplyInsert(rvo.rno)">
+			                </td>
+			              </tr>
+			            </table>
+			          </div>
+			        </div>
+			      </div>
+			
+			      <!-- 대댓글 -->
+			      <ol class="children" v-if="rvo.group_step > 0">
+			        <li class="single_comment_area">
+			          <div class="media comment-wrapper">
+			            <div class="media-left">
+			              <img :src="sex === '남자' ? '../images/man.png' : '../images/woman.png'"
+			                   class="media-object img-circle"
+			                   style="width:40px; height:40px;" alt="">
+			            </div>
+			            <div class="media-body">
+			              <h5 class="media-heading">
+			                {{ rvo.nickname }}
+			                <small class="text-muted" style="margin-left: 10px;">{{ rvo.rgday }}</small>
+			              </h5>
+			              <p>{{ rvo.msg }}</p>
+			
+			              <div class="btn-group btn-group-xs" role="group">
+			                <button v-if="sessionId === rvo.id"
+			                        class="btn btn-danger update" style="margin-right: 5px; min-width: 50px;"
+			                        :id="'u' + rvo.rno"
+			                        @click="replyUpdateForm(rvo.rno)">Update</button>
+			                <button v-if="sessionId === rvo.id"
+			                        class="btn btn-info" style="margin-right: 5px; min-width: 50px;"
+			                        @click="replyDelete(rvo.rno)">Delete</button>
+			              </div>
+			
+			              <!-- 수정창 (대댓글용) -->
+			              <div class="table-responsive ups" style="display:none;" :id="'up' + rvo.rno">
+			                <table class="table">
+			                  <tr>
+			                    <td>
+			                      <textarea rows="4" cols="45" class="form-control" :id="'umsg' + rvo.rno">{{ rvo.msg }}</textarea>
+			                    </td>
+			                    <td style="width:90px;">
+			                      <input type="button" value="수정"
+			                             class="btn btn-primary btn-block"
+			                             style="height:94px;"
+			                             @click="replyUpdate(rvo.rno)">
+			                    </td>
+			                  </tr>
+			                </table>
+			              </div>
+			            </div>
+			          </div>
+			        </li>
+			      </ol>
+			    </li>
+			  </ol>
+			</div>
 	      <!-- Leave A Comment -->
 	      
 	       <div class="leave-comment-area section_padding_50 clearfix" v-if="sessionId!==''">
 	          <div class="comment-form">
-	              <table class="table">
+	            <table class="table">
                   <tr>
                     <td>
                       <textarea rows="4" cols="45" class="form-control" ref="msg" v-model="msg"></textarea>
@@ -245,21 +245,7 @@
                              @click="replyInsert()">
                     </td>
                   </tr>	              
-<!-- 
-	               <tr>
-	                <td>
-				    <div style="display: flex; align-items: stretch; gap: 1px;">
-				      <textarea rows="4" cols="70" ref="msg" v-model="msg"
-				        style="resize: none; flex: 1;">
-				      </textarea>
-				      <input type="button" value="댓글 쓰기"
-				        @click="replyInsert()"
-				        style="background-color: blue; color: white; width: 85px; height: 63px;">
-				    </div>
-	                </td>
-	               </tr>
-
- -->	              </table>
+                </table>
 	          </div>
 	       </div>
 	    </div>

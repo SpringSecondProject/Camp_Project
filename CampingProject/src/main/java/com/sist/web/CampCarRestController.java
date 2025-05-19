@@ -43,4 +43,9 @@ public class CampCarRestController {
     return map;
   }
 
+  @GetMapping("campcar/detail_vue.do")
+  public CampCarVO campcar_detail_vue(int id) {
+    return service.campcarDetailData(id);
+  }
+
 }
