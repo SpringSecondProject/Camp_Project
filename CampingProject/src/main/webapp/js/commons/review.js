@@ -1,4 +1,61 @@
-const type = $('#review-app').data('type')
-const no = $('#review-app').data('no')
-console.log(no)
-console.log(type)
+const type = $('#reviewApp').data('type')
+const no = $('#reviewApp').data('no')
+let reviewApp=Vue.createApp({
+	data(){
+		return {
+			type:type,
+			no:no,
+			list:[],
+			curpage:1,
+			totalpage:0,
+			startPage:0,
+			endPage:0
+		}
+	},
+	mounted(){
+		this.dataRecv()
+	},
+	methods:{
+		dataRecv(){
+			axios.get('../commons/review_list.do',{
+				params:{
+					page:this.curpage,
+					no:this.no,
+					type:this.type
+				}
+			}).then(res=>{
+				console.log(res.data)
+				this.list=res.data.list
+			this.curpage=res.data.curpage
+			this.totalpage=res.data.totalpage
+			this.startPage=res.data.startPage
+			this.endPage=res.data.endPage
+			}).catch(error=>{
+				console.log(error.response)
+			})
+		},
+		replyInsert(){
+			if(this.msg===''){
+				this.$refs.msg.focus()
+				return
+			}
+			axios.post('../commons/review_insert.do',null,{
+				params:{
+					no:this.no,
+					type:this.type,
+					msg:this.msg,
+				}
+			}).then(res=>{
+				console.log(res.data)
+				this.list=res.data.list
+				this.curpage=res.data.curpage
+				this.totalpage=res.data.totalpage
+				this.startPage=res.data.startPage
+				this.endPage=res.data.endPage
+				this.msg=''
+			}).catch(error=>{
+				console.log(error.response)
+			})
+		}
+	}
+}).mount('#reviewApp')

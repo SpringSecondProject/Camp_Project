@@ -31,7 +31,7 @@ public class CampController {
 	public String camp_detail(int cno,Model model) {
 		String title=service.campGetTitle(cno);
 		cm.CampRequest(title, cno);
-		model.addAttribute("type",1);
+		model.addAttribute("type",0);
 		model.addAttribute("main_jsp","../camp/detail.jsp");
 		return "main/main";
 	}

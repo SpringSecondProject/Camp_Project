@@ -12,7 +12,6 @@ $(function(){
 		let tab=$(this).attr('href')
 		$('.tab-pane').removeClass("show")
 	})
-	console.log(${vo})
 })
 </script>
 <style type="text/css">
@@ -100,7 +99,7 @@ $(function(){
                         <!--====== Product Right Side Details ======-->
                         <div class="pd-detail">
                             <div>
-                                <span class="pd-detail__name"><h2>${vo.facltNm}</h2></span>
+                                <span class="pd-detail__name">${vo.facltNm}</span>
                             </div>
                             <div class="u-s-m-b-15">
                                 <span class="pd-detail__preview-desc">${vo.lineIntro }</span>
@@ -222,47 +221,31 @@ $(function(){
                             <div class="u-s-m-b-30">
                                 <ul class="nav pd-tab__list">
                                     <li class="nav-item">
-                                        <a class="nav-link active" data-toggle="tab" href="#pd-descript">캠핑장 소개</a>
+                                        <a class="nav-link" data-toggle="tab" href="#pd-descript">캠핑장 소개</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#pd-map">위치/주변정보</a>
+                                        <a class="nav-link" id="map-tab" data-toggle="tab" href="#pd-map">위치/주변정보</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#pd-calendar">예약정보</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="view-review" data-toggle="tab" href="#pd-review">리뷰</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="view-review" data-toggle="tab" href="#pd-notice">공지</a>
+                                        <a class="nav-link active" id="view-review" data-toggle="tab" href="#pd-review">리뷰</a>
                                     </li>
                                 </ul>
                             </div>
                             <div class="tab-content">
                             
-								<div class="tab-pane show active" id="pd-descript">
+								<div class="tab-pane" id="pd-descript">
 								    <div class="pd-tab__">
 								        <jsp:include page="detail_tap.jsp"/>
 								    </div>
 								</div>	
 								<div class="tab-pane" id="pd-map">
 								    <div class="pd-tab__">
-								        <h2 class="u-s-m-b-15">위치/주변정보</h2>
+								        <div id="map" style="width:100%;height:350px;"></div>
 								    </div>
 								</div>
-								<div class="tab-pane" id="pd-calendar">
-								    <div class="pd-tab__">
-								        <h2 class="u-s-m-b-15">예약정보</h2>
-								    </div>
-								</div>
-								<div class="tab-pane" id="pd-review">
-								    <div class="pd-tab__" id="review-app" data-type=${type } data-no=${param.cno }>
+								<div class="tab-pane show active" id="pd-review">
+								    <div class="pd-tab__" id="reviewApp" data-type="${type }" data-no="${param.cno }">
 								        <jsp:include page="../commons/review.jsp"/>
-								    </div>
-								</div>
-								<div class="tab-pane" id="pd-notice">
-								    <div class="pd-tab__">
-								        <h2 class="u-s-m-b-15">공지</h2>
 								    </div>
 								</div>
                             </div>
@@ -551,5 +534,49 @@ $(function(){
         <!--====== End - Section 1 ======-->
     </div>
     <!--====== End - App Content ======-->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f5c499003a5ed7ef16b41579b19a32a3&libraries=services"></script>
+<script>
+$("#map-tab").click(function () {
+	setTimeout(function() {
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		    mapOption = {
+		        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+		        level: 3 // 지도의 확대 레벨
+		    };  
+		
+		// 지도를 생성합니다    
+		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
+		var address='${vo.addr1}'
+		var title='${vo.facltNm}'
+		// 주소로 좌표를 검색합니다
+		geocoder.addressSearch(address, function(result, status) {
+		
+		    // 정상적으로 검색이 완료됐으면 
+		     if (status === kakao.maps.services.Status.OK) {
+		
+		        let coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+		        // 결과값으로 받은 위치를 마커로 표시합니다
+		        var marker = new kakao.maps.Marker({
+		            map: map,
+		            position: coords
+		        });
+		
+		        // 인포윈도우로 장소에 대한 설명을 표시합니다
+		        var infowindow = new kakao.maps.InfoWindow({
+		            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+title+'</div>'
+		        });
+		        infowindow.open(map, marker);
+		
+		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+		        map.setCenter(coords);
+		    } 
+		});
+	}, 100)
+})
+</script>
+<script src="../js/commons/review.js"></script>
 </body>
 </html>

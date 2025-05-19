@@ -1,25 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
 <body>
 	<div class="rev-f1__review">
-        <div class="review-o u-s-m-b-15">
+        <div class="review-o u-s-m-b-15" v-for="rvo in list">
             <div class="review-o__info u-s-m-b-8">
-
-                <span class="review-o__name">John Doe</span>
-
-                <span class="review-o__date">27 Feb 2018 10:57:43</span></div>
-            <div class="review-o__rating gl-rating-style u-s-m-b-8"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
-
-                <span>(4)</span></div>
-            <p class="review-o__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+	        	<div class="comment-author">
+	                <img :src="rvo.sex==='남자'?'../images/man.png':'../images/woman.png'" style="width: 30px;height: 30px;">
+	            </div>
+                <span class="review-o__name">{{rvo.nickname}}</span>
+                <span class="review-o__date">{{rvo.rgday}}</span>
+            </div>
+            <p class="review-o__text">{{rvo.msg}}</p>
         </div>
     </div>
-	<script src="../js/commons/review.js"></script>
+    <c:if test="${sessionScope.userid!=null }">
+	    <div class="u-s-m-b-30">
+		    <form class="pd-tab__rev-f2">
+		        <div class="rev-f2__group">
+		            <div class="u-s-m-b-15">
+		                <label class="gl-label" for="reviewer-text">리뷰 쓰기</label>
+		                <textarea rows="10" cols="100" style="float: left;" ref="msg" v-model="msg"></textarea>
+		                <input type="button" class="btn-sm btn-primary" value="댓글"
+		                    style="float: left;color: white;width: 80px;height: 121px" @click="replyInsert()">
+		            </div>
+		        </div>
+		    </form>
+		</div>
+    </c:if>
 </body>
 </html>
