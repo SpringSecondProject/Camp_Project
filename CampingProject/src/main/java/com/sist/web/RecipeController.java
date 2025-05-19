@@ -23,7 +23,7 @@ public class RecipeController {
 	public String chef_list(String page,String[] gds,Model model)
 	{
 		if(page==null)
-			page="1";
+			page=RecipeConfig.PAGE_DEFAULT;
 		model.addAttribute("page",Integer.parseInt(page));
 		model.addAttribute("gds",gds);
 		model.addAttribute("main_jsp","../recipe/recipe_group.jsp");
@@ -43,7 +43,7 @@ public class RecipeController {
 		 */
 		
 		if(no==null) 
-			no="57"; 
+			no=RecipeConfig.RECIPE_DEFAULT; 
 		String id=(String)session.getAttribute("userid");
 		String sex=(String)session.getAttribute("sex");
 		model.addAttribute("sessionId", id);
@@ -75,9 +75,9 @@ public class RecipeController {
 	public String chef_list(String page,String fd,Model model)
 	{
 		if(page==null)
-			page="1";
+			page=RecipeConfig.PAGE_DEFAULT;
 		if(fd==null)
-			fd="fcount";
+			fd=RecipeConfig.CHEF_FD_DEFAULT;
 		model.addAttribute("page",Integer.parseInt(page));
 		model.addAttribute("fd",fd);
 		model.addAttribute("main_jsp","../recipe/chef_list.jsp");
@@ -87,7 +87,7 @@ public class RecipeController {
 	@GetMapping("recipe/chefs_recipe.do")
 	public String chefs_recipe(String chef,Model model)
 	{
-		model.addAttribute("page","1");
+		model.addAttribute("page",RecipeConfig.PAGE_DEFAULT);
 		model.addAttribute("chef",chef);
 		model.addAttribute("main_jsp","../recipe/chefs_recipe.jsp");
 		return "main/main";

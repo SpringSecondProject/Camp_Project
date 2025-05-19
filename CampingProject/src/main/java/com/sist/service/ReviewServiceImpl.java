@@ -43,9 +43,9 @@ public class ReviewServiceImpl implements ReviewService{
 	 *  =======================================
 	 */
 	@Override
-	public void reviewUpdate(String msg, int no) {
+	public void reviewUpdate(String msg, int rno) {
 		// TODO Auto-generated method stub
-		wDao.reviewUpdate(msg, no);
+		wDao.reviewUpdate(msg, rno);
 	}
 
 	@Override
@@ -55,8 +55,8 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public void reviewDelete(int no) {
+	public void reviewDelete(int rno) {
 		// TODO Auto-generated method stub
-		wDao.reviewDelete(no);
+		wDao.reviewDelete(rno);
 	}
 }

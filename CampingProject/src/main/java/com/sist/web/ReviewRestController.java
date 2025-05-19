@@ -67,14 +67,14 @@ public class ReviewRestController {
 	@PostMapping("review/update_vue.do")
 	public Map review_update(ReviewVO vo)
 	{
-		service.reviewUpdate(vo.getMsg(), vo.getNo());
+		service.reviewUpdate(vo.getMsg(), vo.getRno());
 		return commonsListData(1, vo.getNo(), vo.getType());
 	}
 	// 삭제
 	@GetMapping("review/delete_vue.do")
 	public Map review_delete(ReviewVO vo)
 	{
-		service.reviewDelete(vo.getNo());
+		service.reviewDelete(vo.getRno());
 		return commonsListData(1, vo.getNo(), vo.getType());
 	}
 	// 대댓글
