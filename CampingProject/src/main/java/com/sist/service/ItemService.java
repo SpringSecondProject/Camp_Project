@@ -11,6 +11,8 @@ public interface ItemService {
 	public ItemVO itemDetailData(int ino);
 	public List<ItemVO> itemListByCategory(int start,int end,String category);
 	public int itemTotalPageByCategory(String category);
+	public List<ItemVO> itemListByBrand(int start,int end,String brand);
+	public int itemTotalPageByBrand(String brand);
 	public List<ItemVO> itemListByPrice(int start,int end,Integer min,Integer max);
 	public int itemPriceTotalPage(Integer min,Integer max);
 	public List<ItemVO> itemFindList(int start,int end,String fd,String ss);

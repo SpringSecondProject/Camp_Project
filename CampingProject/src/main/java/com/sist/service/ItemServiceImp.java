@@ -44,6 +44,16 @@ public class ItemServiceImp implements ItemService{
 		return idao.itemTotalPageByCategory(category);
 	}
 	@Override
+	public List<ItemVO> itemListByBrand(int start, int end, String brand) {
+		// TODO Auto-generated method stub
+		return idao.itemListByBrand(start, end, brand);
+	}
+	@Override
+	public int itemTotalPageByBrand(String brand) {
+		// TODO Auto-generated method stub
+		return idao.itemTotalPageByBrand(brand);
+	}
+	@Override
 	public List<ItemVO> itemListByPrice(int start, int end, Integer min, Integer max) {
 		// TODO Auto-generated method stub
 		return idao.itemListByPrice(start, end, min, max);
@@ -111,4 +121,5 @@ public class ItemServiceImp implements ItemService{
 		// TODO Auto-generated method stub
 		cdao.itemAccountModify(vo);
 	}
+	
 }

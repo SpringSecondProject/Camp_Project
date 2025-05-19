@@ -37,6 +37,16 @@ public class ItemDAO {
 		return mapper.itemTotalPageByCategory(category);
 	}
 	
+	public List<ItemVO> itemListByBrand(int start,int end,String brand)
+	{
+		return mapper.itemListByBrand(start, end, brand);
+	}
+	
+	public int itemTotalPageByBrand(String brand)
+	{
+		return mapper.itemTotalPageByBrand(brand);
+	}
+	
 	public List<ItemVO> itemListByPrice(int start,int end,Integer min,Integer max)
 	{
 		return mapper.itemListByPrice(start, end, min, max);

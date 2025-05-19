@@ -157,8 +157,64 @@
                                             </ul>
                                         </div>
                                     </div>
-                                </div>
+                                </div> 	
                                 <div class="u-s-m-b-30">
+                                    <div class="shop-w">
+                                        <div class="shop-w__intro-wrap">
+                                            <h1 class="shop-w__h">브랜드 top11</h1>
+
+                                            <span class="fas fa-minus shop-w__toggle" data-target="#s-category" data-toggle="collapse"></span>
+                                        </div>
+                                        <div class="shop-w__wrap collapse show" id="s-category">
+                                            <ul class="shop-w__category-list gl-scroll">
+                                                <li class="has-list">
+                                                    <a @click.prevent="changeCategory(1)">거버</a>
+                                                    <span class="category-list__text u-s-m-l-6">(42)</span>
+                                                        </li>
+                                                        <li class="has-list">
+                                                            <a @click.prevent="changeCategory(2)">노마드</a>
+                                                            <span class="category-list__text u-s-m-l-6">(166)</span>
+                                                        </li>
+                                                        <li class="has-list">
+                                                            <a @click.prevent="changeCategory(3)">듀랑고</a>
+                                                            <span class="category-list__text u-s-m-l-6">(166)</span>
+                                                        </li>
+                                                        <li class="has-list">
+                                                            <a @click.prevent="changeCategory(4)">반고</a>
+                                                            <span class="category-list__text u-s-m-l-6">(159)</span>
+                                                        </li>
+                                                        <li class="has-list">
+                                                            <a @click.prevent="changeCategory(5)">블레부</a>
+                                                            <span class="category-list__text u-s-m-l-6">(77)</span>
+                                                        </li>
+                                                        <li class="has-list">
+                                                            <a @click.prevent="changeCategory(6)">스노우라인</a>
+                                                            <span class="category-list__text u-s-m-l-6">(329)</span>
+                                                        </li>
+                                                        <li class="has-list">
+                                                            <a @click.prevent="changeCategory(7)">스텐리</a>
+                                                            <span class="category-list__text u-s-m-l-6">(210)</span>
+                                                        </li>
+                                                        <li class="has-list">
+                                                            <a @click.prevent="changeCategory(8)">씨투써밋</a>
+                                                            <span class="category-list__text u-s-m-l-6">(327)</span>
+                                                        </li>
+                                                        <li class="has-list">
+                                                            <a @click.prevent="changeCategory(9)">웨버</a>
+                                                            <span class="category-list__text u-s-m-l-6">(154)</span>
+                                                        </li>
+                                                        <li class="has-list">
+                                                            <a @click.prevent="changeCategory(10)">카즈미</a>
+                                                            <span class="category-list__text u-s-m-l-6">(177)</span>
+                                                        </li>
+                                                        <li class="has-list">
+                                                            <a @click.prevent="changeCategory(11)">탑엔탑</a>
+                                                            <span class="category-list__text u-s-m-l-6">(134)</span>
+                                                        </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div> 	
                                     <div class="shop-w">
                                         <div class="shop-w__intro-wrap">
                                             <h1 class="shop-w__h">가격대</h1>
@@ -225,6 +281,25 @@
                 9:"계절용품",
                 10:"RV용품",
                 11:"기타"
+            }
+            this.ino=categoryMap[ino]
+            this.curpage=1
+            this.list=[]
+            this.dataRecvC()
+        },
+        changeBrand(ino) {
+            const brandMap={
+                1:"거버",
+                2:"노마드",
+                3:"듀랑고",
+                4:"반고",
+                5:"블레부",
+                6:"스노우라인",
+                7:"스텐리",
+                8:"씨투써밋",
+                9:"웨버",
+                10:"카즈미",
+                11:"탑엔탑"
             }
             this.ino=categoryMap[ino]
             this.curpage=1
