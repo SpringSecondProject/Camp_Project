@@ -6,20 +6,20 @@
 <body>
 <div id="campcarListApp" class="flex w-screen min-h-screen justify-center align-start p-12">
 	<div class="flex flex-col w-2/3">
-		<jsp:include page="../mypage/components/breadcrumb.jsp"/>
+		<jsp:include page="components/breadcrumb.jsp"/>
 		<div class="grid grid-cols-4 w-full gap-12 px-8">
 			<div v-for="item in list"
 			     :key="item.id"
 			     @click="goDetail(item.id)"
 			     class="flex flex-col w-100 h-140 shadow-lg rounded-xl hover:shadow-xl hover:cursor-pointer">
 				<div class="relative w-full h-80 bg-gray-400 rounded-t-xl">
-					<img :src="item.poster || '../assets/icons/logo.png'" alt=""
+					<img :src="item.poster || '../assets/images/no_image.webp'" alt=""
 					     class="absolute w-full h-full object-fill rounded-t-xl"/>
 				</div>
 				<div class="flex flex-col font-normal text-2xl p-4">
 					<p class="text-gray-900 font-bold">{{ item.name }}</p>
 					<p class="text-gray-600">최대 {{ item.capacity }}명</p>
-					<p class="text-gray-900">{{ item.price.toLocaleString('ko-KR') }}원~</p>
+					<p class="text-gray-900">{{ formatPrice(item.price) }}원~</p>
 				</div>
 			</div>
 		</div>
@@ -77,6 +77,9 @@
       },
       goDetail(id) {
         location.href = '/web/campcar/detail.do?id=' + id
+      },
+      formatPrice(price) {
+        return (price || 0).toLocaleString('ko-KR');
       }
     }
   }).mount('#campcarListApp')

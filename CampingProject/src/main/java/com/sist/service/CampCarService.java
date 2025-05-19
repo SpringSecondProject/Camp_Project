@@ -9,4 +9,6 @@ public interface CampCarService {
 
   public int campcarTotalPage();
 
+  public CampCarVO campcarDetailData(int id);
+
 }

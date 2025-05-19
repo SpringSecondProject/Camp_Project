@@ -20,7 +20,7 @@ public interface CampCarMapper {
   @Select("SELECT ceil(COUNT(*) / 12.0) FROM CAMPCAR")
   public int campcarTotalPage();
 
-  @Select("SELECT id, name, capacity, price, poster, options, address, content FROM CAMPCAR WHERE id=#{id}")
+  @Select("SELECT id, name, capacity, price, poster, content FROM CAMPCAR WHERE id=#{id}")
   public CampCarVO campcarDetailData(int id);
 
 }

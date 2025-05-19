@@ -11,8 +11,15 @@ public class CampCarController {
 
   @GetMapping("campcar/list.do")
   public String campcar_list(Model model) {
-    model.addAttribute("path", "list");
+    model.addAttribute("path", "main");
     model.addAttribute("main_jsp", "../campcar/list.jsp");
+    return "main/main";
+  }
+
+  @GetMapping("campcar/detail.do")
+  public String campcar_detail(Model model) {
+    model.addAttribute("path", "detail");
+    model.addAttribute("main_jsp", "../campcar/detail.jsp");
     return "main/main";
   }
 
