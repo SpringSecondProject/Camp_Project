@@ -21,7 +21,10 @@ public class CommonsDAO {
 	public void commonsReviewUpdate(ReviewVO vo) {
 		mapper.commonsReviewUpdate(vo);
 	}
-	public void commonsReviewDelete(Map map) {
-		mapper.commonsReviewDelete(map);
+	public void commonsReviewDelete(ReviewVO vo) {
+		mapper.commonsReviewDelete(vo);
+	}
+	public void commonsReviewGroupStepIncrement(ReviewVO vo) {
+		mapper.commonsReviewGroupStepIncrement(vo);
 	}
 }

@@ -20,29 +20,32 @@ public interface CommonsMapper {
 	public List<ReviewVO> commonsReviewList(Map map);
 	@Select("SELECT COUNT(*) FROM review WHERE  type=#{type} AND no=#{no}")
 	public int commonsReviewCount(Map map);
-	@Insert("INSERT INTO review(rno,id,no,type,nickname,sex,msg,group_id) "
-			+ "VALUES((SELECT NVL(MAX(rno)+1,1) FROM review),#{id},#{no},#{type},#{nickname},#{sex},#{msg},(SELECT NVL(MAX(rno)+1,1) FROM review))")
+	@Insert("<script>"
+			+ "INSERT INTO review(rno,id,no,type,nickname,sex,msg,group_step,group_id) "
+			+ "VALUES((SELECT NVL(MAX(rno)+1,1) FROM review),#{id},#{no},#{type},#{nickname},#{sex},#{msg},#{group_step},"
+			+ "<if test=\"group_step==0\">"
+			+ "(SELECT NVL(MAX(rno)+1,1) FROM review))"
+			+ "</if>"
+			+ "<if test=\"group_step!=0\">"
+			+ "#{group_id})"
+			+ "</if>"
+			+ "</script>")
 	public void commonsReviewInsert(ReviewVO vo);
-	@Update("UPDATE SET review SET msg=#{msg} WHERE rno=#{rno}")
+	@Update("UPDATE review SET msg=#{msg} WHERE rno=#{rno}")
 	public void commonsReviewUpdate(ReviewVO vo);
 	@Delete({"<script>"
-			+ "DELETE FROM busanReply "
+			+ "DELETE FROM review "
 			+ "WHERE "
 			+ "<if test=\"group_step==0\">"
 			+ "group_id=#{group_id}"
 			+ "</if>"
 			+ "<if test=\"group_step!=0\">"
-			+ "no=#{no}"
+			+ "rno=#{rno}"
 			+ "</if>"
 			+ "</script>"
 		})
-	public void commonsReviewDelete(Map map);
-	// 대댓글
-	@Select("SELECT group_id,group_step FROM review WHERE rno=#{rno}")
-	public ReviewVO commonsReviewParentInfoData(int no);
-	@Update("UPDATE review SET group_step=group_step+1 WHERE group_id=#{group_id} AND group_step>#{group_step}")
+	public void commonsReviewDelete(ReviewVO vo);
+	// 대댓글 순서 조절
+	@Update("UPDATE review SET group_step=group_step+1 WHERE group_id=#{group_id} AND group_step>(#{group_step}-1)")
 	public void commonsReviewGroupStepIncrement(ReviewVO vo);
-	@Insert("INSERT INTO review(rno,id,no,type,nickname,msg,group_id,group_step) "
-			+ "VALUES((SELECT NVL(MAX(rno)+1,1) FROM review),#{id},#{no},#{type},#{nickname},#{msg},(SELECT NVL(MAX(rno)+1,1) FROM review),1)")
-	public void commonsReviewReplyInsert(ReviewVO vo);
 }

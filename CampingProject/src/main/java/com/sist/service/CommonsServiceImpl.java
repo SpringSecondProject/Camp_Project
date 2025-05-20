@@ -16,12 +16,15 @@ public class CommonsServiceImpl implements CommonsService{
 		return cDao.commonsReviewCount(map);
 	}
 	public void commonsReviewInsert(ReviewVO vo) {
+		if(vo.getGroup_step()==1) {
+			cDao.commonsReviewGroupStepIncrement(vo);
+		}
 		cDao.commonsReviewInsert(vo);
 	}
 	public void commonsReviewUpdate(ReviewVO vo) {
 		cDao.commonsReviewUpdate(vo);
 	}
-	public void commonsReviewDelete(Map map) {
-		cDao.commonsReviewDelete(map);
+	public void commonsReviewDelete(ReviewVO vo) {
+		cDao.commonsReviewDelete(vo);
 	}
 }

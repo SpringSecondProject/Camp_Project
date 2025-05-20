@@ -577,6 +577,7 @@ $("#map-tab").click(function () {
 	}, 100)
 })
 </script>
+<script src="../js/commons/page-card.js"></script>
 <script src="../js/commons/review.js"></script>
 </body>
 </html>

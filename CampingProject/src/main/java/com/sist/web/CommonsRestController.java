@@ -55,4 +55,14 @@ public class CommonsRestController {
 		service.commonsReviewInsert(vo);
 		return reviewListData(1, vo.getNo(), vo.getType());
 	}
+	@PostMapping("commons/review_update.do")
+	public Map review_update(ReviewVO vo) {
+		service.commonsReviewUpdate(vo);
+		return reviewListData(1, vo.getNo(), vo.getType());
+	}
+	@GetMapping("commons/review_delete.do")
+	public Map review_delete(ReviewVO vo) {
+		service.commonsReviewDelete(vo);
+		return reviewListData(1, vo.getNo(), vo.getType());
+	}
 }
