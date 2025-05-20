@@ -78,5 +78,13 @@ public class CamplistServiceImpl implements CamplistService {
 		return cDao.campMainList();
 	}
 
+	
+	//cctv용도
+	@Override
+	public CampVO CampCctv(int cno) {
+		// TODO Auto-generated method stub
+		return cDao.CampCctv(cno); 
+	}
+
 
 }

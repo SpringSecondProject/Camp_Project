@@ -1,5 +1,6 @@
 package com.sist.dao;
 
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.sist.mapper.*;
@@ -46,4 +47,10 @@ public class CamplistDAO {
 	public List<CampVO> campMainList() {
 		return mapper.campMainList();
 	}
+	
+	// CCTV 위도경도 
+	public CampVO CampCctv(int cno) {
+		return mapper.CampCctv(cno);
+	}
+		
 }

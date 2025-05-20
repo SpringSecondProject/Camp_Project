@@ -89,4 +89,12 @@ public interface CamplistMapper {
 			+ "FROM camp "
 			+ "WHERE cno=#{cno}")
 	public CampVO CampCookie(int cno);
+	
+	
+	// CCTV 위도경도 
+	@Select("SELECT cno,mapx,mapy "
+			+ "FROM camp "
+			+ "WHERE cno=#{cno}")
+	public CampVO CampCctv(int cno);
+	
 }
