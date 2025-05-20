@@ -71,7 +71,7 @@ public class CampController {
 	    //System.out.println(recentList);
 	    model.addAttribute("recentList", recentList);
 	    
-		model.addAttribute("type", 1); 
+		model.addAttribute("type", 0); 
 		model.addAttribute("main_jsp", "../camp/detail.jsp");
 		return "main/main";
 	}
