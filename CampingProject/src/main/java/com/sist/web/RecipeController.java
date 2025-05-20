@@ -19,6 +19,7 @@ public class RecipeController {
 	public List<RecipeVO> recipeCookieData(Cookie[] cookies)
 	{
 		List<RecipeVO> clist= new ArrayList<RecipeVO>();
+		Arrays.sort(cookies, Comparator.comparing(Cookie::getName));
 		for(Cookie c:cookies)
 		{
 			if(c.getName().startsWith("recipe_"))
@@ -46,6 +47,7 @@ public class RecipeController {
 			recentList=recipeCookieData(cookies);
 		}	
 		model.addAttribute("recentList",recentList);
+		System.out.println("recentList:"+recentList);
 		
 		model.addAttribute("recipe_jsp","../recipe/recipe_group.jsp");
 		model.addAttribute("main_jsp","../recipe/recipe_main.jsp");
