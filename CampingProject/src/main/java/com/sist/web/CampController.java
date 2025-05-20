@@ -16,28 +16,46 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.sist.manager.*;
 import com.sist.service.*;
 import com.sist.vo.*;
+
 @Controller
 public class CampController {
 	@Autowired
 	private CampService service;
+
+	@Autowired
+	private CamplistService campservice;
 	
+	@Autowired
+	private CCTVService cctvService;  
+
 	@Autowired
 	private MileageService ms;
-	
+
 	@Autowired
 	private CampManager cm;
-	
+
 	@GetMapping("camp/detail.do")
-	public String camp_detail(int cno,Model model) {
-		String title=service.campGetTitle(cno);
+	public String camp_detail(int cno, Model model) {
+		String title = service.campGetTitle(cno);
 		cm.CampRequest(title, cno);
-		model.addAttribute("type",1);
-		model.addAttribute("main_jsp","../camp/detail.jsp");
+		
+		CampVO cctvlist = campservice.CampCctv(cno);
+		double mapX = Double.parseDouble(cctvlist.getMapX());
+		double mapY = Double.parseDouble(cctvlist.getMapY());
+		CCTVVO cctv = cctvService.getNearestCCTV(mapX, mapY);
+//		System.out.println(mapX);
+//		System.out.println(mapY);
+		model.addAttribute("cctvlist", cctvlist);
+		model.addAttribute("cctv", cctv);
+		
+		model.addAttribute("type", 1); 
+		model.addAttribute("main_jsp", "../camp/detail.jsp");
 		return "main/main";
 	}
+
 	@GetMapping("camp/reserve.do")
-	public String camp_reserve(int cno,Model model) {
-		model.addAttribute("main_jsp","../camp/reserve.jsp");
+	public String camp_reserve(int cno, Model model) {
+		model.addAttribute("main_jsp", "../camp/reserve.jsp");
 		return "main/main";
 	}
 }

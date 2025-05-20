@@ -236,6 +236,9 @@ $(function(){
                                     <li class="nav-item">
                                         <a class="nav-link" id="view-review" data-toggle="tab" href="#pd-notice">공지</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="view-review" data-toggle="tab" href="#pd-cctv">교통정보</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="tab-content">
@@ -263,6 +266,11 @@ $(function(){
 								<div class="tab-pane" id="pd-notice">
 								    <div class="pd-tab__">
 								        <h2 class="u-s-m-b-15">공지</h2>
+								    </div>
+								</div>
+								<div class="tab-pane" id="pd-cctv">
+								    <div class="pd-tab__">
+								        <jsp:include page="cctv_tap.jsp"/>
 								    </div>
 								</div>
                             </div>
