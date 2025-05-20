@@ -1,10 +1,7 @@
 package com.sist.web;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringTokenizer;
-
-import javax.servlet.http.HttpSession;
+import java.util.*;
+import javax.servlet.http.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +16,21 @@ public class RecipeController {
 	@Autowired
 	private RecipeService service;
 	
+	public List<RecipeVO> recipeCookieData(Cookie[] cookies)
+	{
+		List<RecipeVO> clist= new ArrayList<RecipeVO>();
+		for(Cookie c:cookies)
+		{
+			if(c.getName().startsWith("recipe_"))
+			{
+				RecipeVO vo=service.recipeDetailData(Integer.parseInt(c.getValue()));
+				clist.add(vo);
+			}
+		}
+		return clist;
+		
+	}
+	
 	@GetMapping("recipe/recipe_group.do")
 	public String chef_list(String page,String[] gds,Model model)
 	{
@@ -31,19 +43,58 @@ public class RecipeController {
 	}
 
 	@GetMapping("recipe/recipe_detail.do")
-	public String recipe_detail(String no,Model model,HttpSession session)
+	public String recipe_detail(String no,Model model,HttpSession session,
+								HttpServletRequest request,HttpServletResponse response)
 	{
-		/*
-		 * if(no==null) no="57"; String id=(String)session.getAttribute("userid");
-		 * 
-		 * model.addAttribute("no",no); model.addAttribute("sessionId", id);
-		 * model.addAttribute("main_jsp","../recipe/recipe_detail.jsp"); return
-		 * "main/main";
-		 * 
-		 */
-		
-		if(no==null) 
+		if(no==null)
+		{
 			no=RecipeConfig.RECIPE_DEFAULT; 
+		}
+		else
+		{
+			final int COOKIESIZE=RecipeConfig.COOKIE_SIZE;
+			Cookie newCookie=new Cookie("recipe_1",no);
+			newCookie.setPath("/");
+			newCookie.setMaxAge(60*60*30); // 유효기간 1달
+			response.addCookie(newCookie);
+			
+			Cookie[] cookies=request.getCookies();
+			if(cookies!=null)
+			{
+				boolean existSame=false;
+				Arrays.sort(cookies, Comparator.comparing(Cookie::getName));
+				for(Cookie c:cookies)
+				{
+					String name=c.getName();
+					if(name.startsWith("recipe_"))
+					{
+						int idx=Integer.parseInt(name.substring(name.length()-1));
+						if(c.getValue().equals(no))
+						{
+							existSame=true;
+						}
+						else if(existSame)
+						{
+							Cookie oldCookie=new Cookie("recipe_"+idx,c.getValue());
+							oldCookie.setPath("/");
+							oldCookie.setMaxAge(60*60*30); // 유효기간 1달
+							response.addCookie(oldCookie);
+						}
+						else if(idx<RecipeConfig.COOKIE_SIZE)
+						{
+							Cookie oldCookie=new Cookie("recipe_"+(idx+1),c.getValue());
+							oldCookie.setPath("/");
+							oldCookie.setMaxAge(60*60*30); // 유효기간 1달
+							response.addCookie(oldCookie);
+						}
+						c.setMaxAge(0);
+						response.addCookie(c);
+
+					}
+				}
+			}
+		}
+		
 		String id=(String)session.getAttribute("userid");
 		model.addAttribute("sessionId", id);
 		model.addAttribute("type", RecipeConfig.REVIEW_TYPE);
@@ -83,11 +134,21 @@ public class RecipeController {
 	}
 	
 	@GetMapping("recipe/chefs_recipe.do")
-	public String chefs_recipe(String chef,Model model)
+	public String chefs_recipe(String chef,Model model,HttpServletRequest request)
 	{
 		model.addAttribute("page",RecipeConfig.PAGE_DEFAULT);
 		model.addAttribute("chef",chef);
-		model.addAttribute("main_jsp","../recipe/chefs_recipe.jsp");
+		Cookie[] cookies=request.getCookies();
+		List<RecipeVO> recentList=new ArrayList<RecipeVO>();
+		if(cookies!=null)
+		{
+			recentList=recipeCookieData(cookies);
+			System.out.println("recipeCookieData"+recentList.toString());
+		}	
+		model.addAttribute("recentList",recentList);
+		
+		model.addAttribute("recipe_jsp","../recipe/chefs_recipe.jsp");
+		model.addAttribute("main_jsp","../recipe/recipe_main.jsp");
 		return "main/main";
 	}
 }

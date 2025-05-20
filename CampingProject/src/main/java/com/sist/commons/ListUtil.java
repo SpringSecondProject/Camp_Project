@@ -1,10 +1,8 @@
 package com.sist.commons;
 import java.util.*;
-import org.springframework.stereotype.Component;
 
-//test
 public class ListUtil {
-
+	
 	public static Map setListRange(int page,int rowSize)
 	{
 		Map map=new HashMap();

@@ -5,6 +5,7 @@ public class RecipeConfig {
 	public static final int TOP_SIZE=12;
 	public static final int CHEF_SIZE=100;
 	public static final int BLOCK_SIZE=10;
+	public static final int COOKIE_SIZE=5;
 	
 	public static final int REVIEW_TYPE=2;
 	public static final int REVIEW_SIZE=10;
