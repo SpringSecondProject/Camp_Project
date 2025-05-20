@@ -32,13 +32,23 @@ public class RecipeController {
 	}
 	
 	@GetMapping("recipe/recipe_group.do")
-	public String chef_list(String page,String[] gds,Model model)
+	public String chef_list(String page,String[] gds,Model model,HttpServletRequest request)
 	{
 		if(page==null)
 			page=RecipeConfig.PAGE_DEFAULT;
 		model.addAttribute("page",Integer.parseInt(page));
 		model.addAttribute("gds",gds);
-		model.addAttribute("main_jsp","../recipe/recipe_group.jsp");
+
+		Cookie[] cookies=request.getCookies();
+		List<RecipeVO> recentList=new ArrayList<RecipeVO>();
+		if(cookies!=null)
+		{
+			recentList=recipeCookieData(cookies);
+		}	
+		model.addAttribute("recentList",recentList);
+		
+		model.addAttribute("recipe_jsp","../recipe/recipe_group.jsp");
+		model.addAttribute("main_jsp","../recipe/recipe_main.jsp");
 		return "main/main";
 	}
 
@@ -129,6 +139,7 @@ public class RecipeController {
 			fd=RecipeConfig.CHEF_FD_DEFAULT;
 		model.addAttribute("page",Integer.parseInt(page));
 		model.addAttribute("fd",fd);
+		
 		model.addAttribute("main_jsp","../recipe/chef_list.jsp");
 		return "main/main";
 	}
@@ -143,7 +154,6 @@ public class RecipeController {
 		if(cookies!=null)
 		{
 			recentList=recipeCookieData(cookies);
-			System.out.println("recipeCookieData"+recentList.toString());
 		}	
 		model.addAttribute("recentList",recentList);
 		
