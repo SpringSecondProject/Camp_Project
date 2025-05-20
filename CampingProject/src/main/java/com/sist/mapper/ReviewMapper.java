@@ -6,10 +6,10 @@ import org.apache.ibatis.annotations.*;
 import com.sist.vo.*;
 public interface ReviewMapper {
 	// 목록
-	@Select("SELECT rno,no,type,id,nickname,msg,"
+	@Select("SELECT rno,no,type,id,nickname,sex,msg,"
 			+ "group_id,group_step,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as rgday,num "
-			+ "FROM (SELECT rno,no,type,id,nickname,msg,group_id,group_step,regdate,rownum as num "
-			+ "FROM (SELECT rno,no,type,id,nickname,msg,group_id,group_step,regdate "
+			+ "FROM (SELECT rno,no,type,id,nickname,sex,msg,group_id,group_step,regdate,rownum as num "
+			+ "FROM (SELECT rno,no,type,id,nickname,sex,msg,group_id,group_step,regdate "
 			+ "FROM review WHERE no=#{no} AND type=#{type} "
 			+ "ORDER BY group_id DESC, group_step ASC)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
@@ -19,9 +19,9 @@ public interface ReviewMapper {
 			+ "WHERE no=#{no} AND type=#{type}")
 	public int reviewTotalPage(Map map);
 	// 글쓰기
-	@Insert("INSERT INTO review(rno,no,type,id,nickname,msg,group_id) "
+	@Insert("INSERT INTO review(rno,no,type,id,nickname,sex,msg,group_id) "
 			+ "VALUES((SELECT NVL(MAX(rno)+1,1) FROM review),"
-			+ "#{no},#{type},#{id},#{nickname},#{msg},"
+			+ "#{no},#{type},#{id},#{nickname},#{sex},#{msg},"
 			+ "(SELECT NVL(MAX(group_id)+1,1) FROM review))")
 	public void reviewInsert(ReviewVO vo);
 	// 수정
@@ -60,8 +60,8 @@ public interface ReviewMapper {
 			+ "WHERE group_id=#{group_id} AND group_step>#{group_step}")
 	public void reviewGroupStepIncrement(ReviewVO vo);
 			
-	@Insert("INSERT INTO review(rno,no,type,id,nickname,msg,group_id,group_step) "
+	@Insert("INSERT INTO review(rno,no,type,id,nickname,sex,msg,group_id,group_step) "
 			+ "VALUES((SELECT NVL(MAX(rno)+1,1) FROM review),"
-			+ "#{no},#{type},#{id},#{nickname},#{msg},#{group_id},#{group_step})")
+			+ "#{no},#{type},#{id},#{nickname},#{sex},#{msg},#{group_id},#{group_step})")
 	public void reviewReplyReplyInsert(ReviewVO vo);
 }
