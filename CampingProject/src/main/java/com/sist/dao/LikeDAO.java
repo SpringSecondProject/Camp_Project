@@ -33,16 +33,21 @@ public class LikeDAO {
     	mapper.deleteLike(map);
     }
     
-    //마이페이지
+    //마이페이지 캠핑
     public List<CampVO> MyCampLikeList(Map map){
     	return mapper.MyCampLikeList(map);
+    }
+    public int countMyCampLikes(Map map) {
+    	return mapper.countMyCampLikes(map);
     }
     
     //아이템 임시
 	public List<ItemVO> MyItemLikeList(Map map){
 		return mapper.MyItemLikeList(map);
 	} 
-	
+	public int countMyItemLikes(Map map) {
+		return mapper.countMyItemLikes(map);
+	}
 	//레시피 임시
 	public List<RecipeVO> MyRecipeLikeList(Map map){
 		return mapper.MyRecipeLikeList(map);

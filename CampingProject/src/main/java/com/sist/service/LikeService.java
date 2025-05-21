@@ -18,9 +18,13 @@ public interface LikeService {
 	
 	//마이페이지
 	public List<CampVO> MyCampLikeList(Map map);
+	public int countMyCampLikes(Map map);
+	
     //아이템 임시
 	public List<ItemVO> MyItemLikeList(Map map);
-	 
+	public int countMyItemLikes(Map map);
+	
+	
 	//레시피 임시
 	public List<RecipeVO> MyRecipeLikeList(Map map);
 	
