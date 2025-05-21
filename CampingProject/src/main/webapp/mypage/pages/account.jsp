@@ -19,10 +19,8 @@
 				<p class="text-xl">{{ vo.phone }}</p>
 			</div>
 			<div class="flex flex-col px-8 py-6 text-left shadow-lg bg-gray-100 w-full gap-2">
-				<p class="text-2xl text-gray-800">BILLING ADDRESS</p>
-				<p class="text-xl">Default Billing Address</p>
-				<p class="text-xl">4247 Ashford Drive Virginia - VA-20006 - USA</p>
-				<p class="text-xl">(+0) 900901904</p>
+				<p class="text-2xl text-gray-800">마일리지 내역 : {{mileage}} 포인트</p>
+				<p class="text-xl" v-for="m in list">{{m.regdateStr}} : {{m.state}}({{m.point}})</p>
 			</div>
 		</div>
 	</div>
@@ -125,18 +123,40 @@
     data() {
       return {
         vo: {},
+        list:[],
+        mileage:''
       }
     },
     mounted() {
-      axios.get('/web/mypage/account_vue.do', {
-        params: {
-          id: '${sessionScope.userid}'
-        }
-      }).then(res => {
-        this.vo = res.data
-      }).catch(e => {
-        console.error(e)
-      })
+	    axios.get('/web/mypage/account_vue.do', {
+	      params: {
+	        id: '${sessionScope.userid}'
+	      }
+	    }).then(res => {
+	      this.vo = res.data
+	    }).catch(e => {
+	      console.error(e)
+	    })
+		axios.get('../mypage/mileage_list_vue.do',{
+			params:{
+				page:1
+			}
+		}).then(res=>{
+			this.list=res.data.list
+			const maxLength = Math.min(5, res.data.list.length)
+			for(let i=0;i<maxLength;i++){
+				this.list[i]=res.data.list[i]
+				if(i==0){
+					this.mileage=new Intl.NumberFormat().format(res.data.list[i].total_point)
+				}
+			}
+			for(let i=0;i<this.list.length;i++){
+				this.list[i].point=new Intl.NumberFormat().format(this.list[i].point)
+				this.list[i].total_point=new Intl.NumberFormat().format(this.list[i].total_point)
+			}
+		}).catch(error=>{
+			console.log(error.response)
+		})
     },
   }).mount('#accountApp')
 </script>

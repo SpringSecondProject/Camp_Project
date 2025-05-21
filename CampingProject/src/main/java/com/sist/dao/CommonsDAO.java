@@ -27,4 +27,11 @@ public class CommonsDAO {
 	public void commonsReviewGroupStepIncrement(ReviewVO vo) {
 		mapper.commonsReviewGroupStepIncrement(vo);
 	}
+	// 마이페이지 - 리뷰 조회
+	public List<ReviewVO> myReviewList(Map map){
+		return mapper.myReviewList(map);
+	}
+	public int myReviewCount(Map map) {
+		return mapper.myReviewCount(map);
+	}
 }

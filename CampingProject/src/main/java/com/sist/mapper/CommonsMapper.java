@@ -48,4 +48,8 @@ public interface CommonsMapper {
 	// 대댓글 순서 조절
 	@Update("UPDATE review SET group_step=group_step+1 WHERE group_id=#{group_id} AND group_step>(#{group_step}-1)")
 	public void commonsReviewGroupStepIncrement(ReviewVO vo);
+	
+	// 마이페이지 - 리뷰
+	public List<ReviewVO> myReviewList(Map map);
+	public int myReviewCount(Map map);
 }

@@ -21,13 +21,11 @@
 							<option value="/web/like/likeList.do" ${page eq '../mypage/pages/like.jsp' ? 'selected' : ''}>캠핑장</option>
 							<option value="/web/like/itemList.do" ${page eq '../mypage/pages/like_item.jsp' ? 'selected' : ''}>쇼핑몰</option>
 							<option value="/web/like/recipeList.do" ${page eq '../mypage/pages/like_recipe.jsp' ? 'selected' : ''}>레시피</option>
-							<option>커뮤니티</option>
 						</select>
 					</div>
 
 				</div>
 			</form>
-			<img class="preloader__img" src="images/preloader.png" alt="">
 		</div>
 	</div>
 
@@ -47,14 +45,14 @@
 											<img src="https://www.ocamall.com${item.poster}" style="width: 100%; height: 180px;" />
 										</div>
 										<div class="bp-mini__content">
-											<span class="bp-mini__h1 addr"><a href="#">${item.name}</a></span>
+											<span class="bp-mini__h1 addr"><a href="../item/detail.do?ino=${item.ino}">${item.name}</a></span>
 											<span class="bp-mini__stat-wrap">
 												<span class="bp-mini__preposition addr">브랜드 : ${item.brand}</span>
 												<span class="bp-mini__preposition addr">종류 : ${item.type}</span>
 												<span class="bp-mini__preposition addr" style="color: #4285F4;">가격 : ${item.price}%</span>
 											</span>
 											<div class="blog-t-w">
-												<a class="gl-tag btn--e-transparent-hover-brand-b-2" href="#">예약하기</a> 
+												<a class="gl-tag btn--e-transparent-hover-brand-b-2" href="../item/detail.do?ino=${item.ino}">구매하기</a> 
 												<a class="gl-tag btn--e-transparent-hover-brand-b-2" @click.prevent="deleteLike(${item.ino })">삭제하기</a>
 											</div>
 										</div>

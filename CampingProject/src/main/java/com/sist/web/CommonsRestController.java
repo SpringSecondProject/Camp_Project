@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
 
 import javax.servlet.http.HttpSession;
-
+import com.sist.commons.*;
 import com.sist.vo.*;
 import com.sist.service.*;
 @RestController
@@ -65,4 +65,27 @@ public class CommonsRestController {
 		service.commonsReviewDelete(vo);
 		return reviewListData(1, vo.getNo(), vo.getType());
 	}
+	@GetMapping("mypage/review_list.do")
+	public Map mypage_review_list(int page,int type,HttpSession session) {
+		String id=(String)session.getAttribute("userid");
+		int rowSize=20;
+		Map map=new HashMap();
+		map=ListUtil.setListRange(page, rowSize);
+		map.put("id", id);
+		map.put("type", type);
+		List<ReviewVO> list=service.myReviewList(map);
+		int count=service.myReviewCount(map);
+		int totalpage=(int)(Math.ceil(count/(rowSize/1.0)));
+		
+		map=new HashMap();
+		final int BLOCK=10;
+		map.put("list", list);
+		map.put("curpage", page);
+		map.put("totalpage", totalpage);
+		map.put("count", count);
+		map=ListUtil.setPageRange(map, BLOCK);
+		return map;
+	}
+	
+	
 }

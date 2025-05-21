@@ -21,13 +21,11 @@
 							<option value="/web/like/likeList.do" ${page eq '../mypage/pages/like.jsp' ? 'selected' : ''}>캠핑장</option>
 							<option value="/web/like/itemList.do" ${page eq '../mypage/pages/like_item.jsp' ? 'selected' : ''}>쇼핑몰</option>
 							<option value="/web/like/recipeList.do" ${page eq '../mypage/pages/like_recipe.jsp' ? 'selected' : ''}>레시피</option>
-							<option>커뮤니티</option>
 						</select>
 					</div>
 
 				</div>
 			</form>
-			<img class="preloader__img" src="images/preloader.png" alt="">
 		</div>
 	</div>
 

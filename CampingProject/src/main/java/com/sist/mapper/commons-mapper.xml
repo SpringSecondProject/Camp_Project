@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.CommonsMapper">
+	<select id="myReviewList" resultType="ReviewVO" parameterType="hashmap">
+		SELECT rno,no,type,msg,rgday,title,poster,rCount,num
+		FROM (SELECT rno,no,type,msg,rgday,title,poster,rCount,rownum as num
+		FROM (SELECT r.rno,r.no,r.type,r.msg,TO_CHAR(r.regdate,'YYYY-MM-DD HH24:MI:SS') as rgday,
+		<choose>
+			<when test="type==0">
+				p.title as title,p.poster as poster,p.rCount as rCount
+				FROM REVIEW r,CAMP p
+				WHERE r.id=#{id} AND r.type=#{type} AND r.no=p.cno
+				ORDER BY r.regdate DESC
+			</when>
+			<when test="type==1">
+				p.name as title,p.poster as poster,p.rCount as rCount
+				FROM REVIEW r,ITEM p
+				WHERE r.id=#{id} AND r.type=#{type} AND r.no=p.ino 
+				ORDER BY r.regdate DESC
+			</when>
+			<when test="type==2">
+				p.title as title,p.poster as poster,p.REPLYCOUNT as rCount
+				FROM REVIEW r,RECIPEDETAIL p
+				WHERE r.id=#{id} AND r.type=#{type} AND r.no=p.no 
+				ORDER BY r.regdate DESC
+			</when>
+			<when test="type==3">
+				p.name as title,p.poster as poster,p.rCount as rCount
+				FROM REVIEW r,CAMPCAR p
+				WHERE r.id=#{id} AND r.type=#{type} AND r.no=p.id 
+				ORDER BY r.regdate DESC
+			</when>
+		</choose>
+		))
+		WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	<select id="myReviewCount" resultType="int" parameterType="hashmap">
+		SELECT COUNT(*) FROM REVIEW WHERE id=#{id} AND type=#{type}
+	</select>
+</mapper>

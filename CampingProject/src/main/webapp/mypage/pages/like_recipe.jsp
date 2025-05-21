@@ -22,18 +22,16 @@
 							<option value="/web/like/likeList.do" ${page eq '../mypage/pages/like.jsp' ? 'selected' : ''}>캠핑장</option>
 							<option value="/web/like/itemList.do" ${page eq '../mypage/pages/like_item.jsp' ? 'selected' : ''}>쇼핑몰</option>
 							<option value="/web/like/recipeList.do" ${page eq '../mypage/pages/like_recipe.jsp' ? 'selected' : ''}>레시피</option>
-							<option>커뮤니티</option>
 						</select>
 					</div>
 
 				</div>
 			</form>
-			<img class="preloader__img" src="images/preloader.png" alt="">
 		</div>
 	</div>
 
 	<!--====== Main App ======-->
-	<div id="app">
+	<div id="ItemLikeApp">
 		<!--====== App Content ======-->
 		<div class="app-content">
 			<!--====== Section 1 ======-->
@@ -49,10 +47,10 @@
 												style="width: 100%; height: 180px;" />
 										</div>
 										<div class="bp-mini__content">
-											<span class="bp-mini__h1"><a href="#">${recipe.title}</a></span>
+											<span class="bp-mini__h1"><a href="../recipe/detail.do?rno=${recipe.rno}">${recipe.title}</a></span>
 											<div class="blog-t-w">
 												<a class="gl-tag btn--e-transparent-hover-brand-b-2"
-													href="#">레시피 보기</a> <a
+													href="../recipe/detail.do?rno=${recipe.rno}">레시피 보기</a> <a
 													class="gl-tag btn--e-transparent-hover-brand-b-2" href="#">삭제하기</a>
 											</div>
 										</div>
@@ -79,5 +77,31 @@
 		</div>
 		<!--====== End - App Content ======-->
 	</div>
+	<script>
+	let ItemLike=Vue.createApp({
+		data(){
+			return{
+				
+			}
+		},
+		methods:{
+			deleteLike(ino){
+				axios.post("../like/delete_vue.do",null,{
+					params:{
+						no:ino,
+						type:1
+					}
+				}).then(res=>{
+					location.reload();
+				}).catch(error=>{
+					console.log(error.response)
+				})
+			}			
+		},
+		mounted(){
+			
+		}	
+	}).mount("#ItemLikeApp")
+	</script>
 </body>
 

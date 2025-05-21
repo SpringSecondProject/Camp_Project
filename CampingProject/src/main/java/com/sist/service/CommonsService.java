@@ -8,4 +8,7 @@ public interface CommonsService {
 	public void commonsReviewInsert(ReviewVO vo);
 	public void commonsReviewUpdate(ReviewVO vo);
 	public void commonsReviewDelete(ReviewVO vo);
+	// 마이페이지 - 리뷰 조회
+	public List<ReviewVO> myReviewList(Map map);
+	public int myReviewCount(Map map);
 }
