@@ -82,12 +82,25 @@
 
 						<!--====== Pagination ======-->
 						<ul class="blog-pg">
-							<li class="blog-pg--active"><a href="blog-masonry.html">1</a></li>
-							<li><a href="blog-masonry.html">2</a></li>
-							<li><a href="blog-masonry.html">3</a></li>
-							<li><a href="blog-masonry.html">4</a></li>
-							<li><a class="fas fa-angle-right" href="blog-masonry.html"></a></li>
+						  <c:if test="${startPage > 1}">
+						    <li>
+						      <a class="fas fa-angle-left" href="likeList.do?page=${startPage - 1}"></a>
+						    </li>
+						  </c:if>
+						
+						  <c:forEach var="i" begin="${startPage}" end="${endPage}">
+						    <li class="${i == curpage ? 'blog-pg--active' : ''}">
+						      <a href="likeList.do?page=${i}">${i}</a>
+						    </li>
+						  </c:forEach>
+						
+						  <c:if test="${endPage < totalpage}">
+						    <li>
+						      <a class="fas fa-angle-right" href="likeList.do?page=${endPage + 1}"></a>
+						    </li>
+						  </c:if>
 						</ul>
+
 						<!--====== End - Pagination ======-->
 					</nav>
 				</div>

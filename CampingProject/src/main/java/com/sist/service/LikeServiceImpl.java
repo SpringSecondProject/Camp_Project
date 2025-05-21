@@ -58,6 +58,18 @@ public class LikeServiceImpl implements LikeService {
 		Ldao.deleteLike(map);
 		
 	}
+
+	@Override
+	public int countMyCampLikes(Map map) {
+		// TODO Auto-generated method stub
+		return Ldao.countMyCampLikes(map);
+	}
+
+	@Override
+	public int countMyItemLikes(Map map) {
+		// TODO Auto-generated method stub
+		return Ldao.countMyItemLikes(map);
+	}
 	
 	
 }
