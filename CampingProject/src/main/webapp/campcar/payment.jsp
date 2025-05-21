@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" import="com.google.gson.Gson"%>
 <head>
 	<title>결제 페이지</title>
 	<script src="https://cdn.tailwindcss.com"></script>

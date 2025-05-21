@@ -47,6 +47,9 @@ public class MileageServiceImpl implements MileageService{
 	}
 	@Override
 	public String mileageUse(MileageVO vo) {
+		if(vo.getPoint()==0) {
+			return "미사용";
+		}
 		Map map=new HashMap();
 		String result="";
 		vo.setState("사용");

@@ -142,7 +142,6 @@
 				page:1
 			}
 		}).then(res=>{
-			this.list=res.data.list
 			const maxLength = Math.min(5, res.data.list.length)
 			for(let i=0;i<maxLength;i++){
 				this.list[i]=res.data.list[i]
@@ -150,7 +149,7 @@
 					this.mileage=new Intl.NumberFormat().format(res.data.list[i].total_point)
 				}
 			}
-			for(let i=0;i<this.list.length;i++){
+			for(let i=0;i<maxLength;i++){
 				this.list[i].point=new Intl.NumberFormat().format(this.list[i].point)
 				this.list[i].total_point=new Intl.NumberFormat().format(this.list[i].total_point)
 			}
