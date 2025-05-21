@@ -46,7 +46,10 @@ p{
 			</div>
 			<!--====== Section 1 ======-->
 			<div class="u-s-p-y-10">
-				<div class="container">
+				<div class="container" v-if="list.length==0">
+					<h3 class="text-center" style="font-size: 24px;margin-top: 50px;" v-if="list.length==0">등록된 댓글이 없습니다</h3>
+				</div>
+				<div class="container" v-if="list.length!=0">
 					<div style="min-height: 400px;">
 						<table class="table">
 							<tr style="font-size: 18px;">
@@ -103,7 +106,6 @@ p{
 						page:this.curpage
 					}
 				}).then(res=>{
-					console.log(res.data)
 					this.list=res.data.list
 					this.curpage=res.data.curpage
 					this.totalpage=res.data.totalpage
