@@ -8,7 +8,7 @@
 		<li class="has-separator">
 			<a href="../main/main.do">Home</a></li>
 		<li class="has-separator">
-			<a href="../main/main.do">CAMPING_CAR</a></li>
+			<a href="../campcar/list.do">CAMPING_CAR</a></li>
 		<li class="is-marked">
 			<a href="${path}">${path.toUpperCase() }</a>
 		</li>
