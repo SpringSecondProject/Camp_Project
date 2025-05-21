@@ -31,7 +31,7 @@ public interface ReserveMapper {
 	
 	public ReserveVO reserveDetailData(int rno);
 	public List<ReserveVO> myReserveListData(Map map);
-	@Select("SELECT CEIL(COUNT(*)/5.0) FROM CAMP_RESERVE WHERE id=#{id} ORDER BY rno DESC")
+	@Select("SELECT CEIL(COUNT(*)/5.0) FROM CAMP_RESERVE WHERE id=#{id}")
 	public int myReserveTotalPage(String id);
 	//예약 취소
 	@Delete("DELETE FROM RESERVE_DETAIL WHERE rno=#{rno}")

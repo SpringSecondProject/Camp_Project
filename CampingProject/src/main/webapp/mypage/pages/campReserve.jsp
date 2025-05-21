@@ -30,9 +30,6 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
-							<div class="checkbox text-right">
-							  <label><input type="checkbox" v-model="all" @click="allPrint()">전체보기</label>
-							</div>
 							<div class="table-responsive">
 								<h3 class="text-center" style="font-size: 24px" v-if="list.length==0">예약 내역이 없습니다</h3>
 								<table class="table-p" v-if="list.length!=0">
@@ -65,8 +62,8 @@
 												<span class="table-p__price">{{vo.price}} 원</span>
 											</td>
 											<td width="20%">
-												<div class="table-p__del-wrap text-center" v-if="vo.state==-1">
-													<input type="button" value="취소 완료" class="btn btn-sm btn-default" disabled>
+												<div class="table-p__del-wrap text-center" v-if="vo.state==1">
+													<input type="button" value="확정완료" class="btn btn-sm btn-default" disabled>
 												</div>
 												<div class="table-p__del-wrap text-center" v-if="vo.state==0">
 													<input type="button" value="확정" class="btn btn-xs btn-primary" @click="reserveConfirmed(vo.rno)">
@@ -159,6 +156,11 @@ let myReserveApp=Vue.createApp({
 			return arr
 		},
 		reserveCancel(rno){
+			if(confirm('취소하시겠습니까?\n취소시 사용한 마일리지는 복구되지 않습니다')){
+				
+			}else{
+				return
+			}
 			axios.get('../mypage/reserve_cancel_vue.do',{
 				params:{
 					rno:rno
@@ -175,6 +177,11 @@ let myReserveApp=Vue.createApp({
 			})
 		},
 		reserveConfirmed(rno){
+			if(confirm('확정하시겠습니까?\n확정 이후 취소할 수 없습니다')){
+				
+			}else{
+				return
+			}
 			axios.get('../mypage/reserve_confirmed_vue.do',{
 				params:{
 					rno:rno
