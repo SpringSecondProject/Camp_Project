@@ -18,8 +18,8 @@ import lombok.Data;
 @Data
 public class CampCarRentVO {
 
-  private int id, cid, price;
-  private String pid, startdate, enddate;
+  private int id, cid, price, capacity;
+  private String pid, startdate, enddate, poster, name;
   private Date regdate;
 
 }

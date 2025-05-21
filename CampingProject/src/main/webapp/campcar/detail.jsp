@@ -168,7 +168,10 @@
               startDate: this.startDate,
               endDate: this.endDate,
               price: this.item.price,
-              finalPrice: Math.round(this.finalPrice)
+              finalPrice: Math.round(this.finalPrice),
+              poster: this.item.poster,
+              name: this.item.name,
+              capacity: this.item.capacity
             }
           }).then(res => {
             if (res.data === "success") {

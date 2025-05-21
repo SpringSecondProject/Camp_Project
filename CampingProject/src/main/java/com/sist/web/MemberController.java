@@ -52,6 +52,14 @@ public class MemberController {
     return "main/main";
   }
 
+  @GetMapping("mypage/campcarrent.do")
+  public String mypage_campcarrent(Model model) {
+    model.addAttribute("path", "campcarrent");
+    model.addAttribute("page", "../mypage/pages/campcarRent.jsp");
+    model.addAttribute("main_jsp", "../mypage/main.jsp");
+    return "main/main";
+  }
+
   @GetMapping("mypage/cart.do")
   public String mypage_cart(Model model) {
     model.addAttribute("path", "cart");
@@ -83,4 +91,5 @@ public class MemberController {
     model.addAttribute("main_jsp", "../mypage/main.jsp");
     return "main/main";
   }
+
 }

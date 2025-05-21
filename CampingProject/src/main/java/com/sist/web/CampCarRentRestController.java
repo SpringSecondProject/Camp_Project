@@ -1,7 +1,10 @@
 package com.sist.web;
 
 import com.sist.service.CampCarRentService;
+import com.sist.service.CampCarService;
 import com.sist.vo.CampCarRentVO;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +21,9 @@ public class CampCarRentRestController {
 
   @Autowired
   private CampCarRentService service;
+
+  @Autowired
+  private CampCarService carService;
 
   @ResponseBody
   @PostMapping("campcar/savePaymentData.do")
@@ -47,6 +53,9 @@ public class CampCarRentRestController {
       vo.setStartdate(payment.get("startDate").toString());
       vo.setEnddate(payment.get("endDate").toString());
       vo.setPrice(Integer.parseInt(payment.get("finalPrice").toString()));
+      vo.setPoster(payment.get("poster").toString());
+      vo.setName(payment.get("name").toString());
+      vo.setCapacity(Integer.parseInt(payment.get("capacity").toString()));
 
       System.out.println(vo);
       service.campcarrentInsert(vo);
@@ -58,6 +67,32 @@ public class CampCarRentRestController {
       e.printStackTrace();
       return "error";
     }
+  }
+
+  @GetMapping("mypage/campcarrent_vue.do")
+  public Map mypage_campcarrent(int page, String id) {
+    int rowSize = 20;
+    List<CampCarRentVO> list =
+        service.campcarrentListData((page * rowSize) - (rowSize - 1), page * rowSize, id);
+    int totalpage = service.campcarrentTotalPage(id);
+
+    final int BLOCK = 10;
+    int startPage = ((page - 1) / BLOCK * BLOCK) + 1;
+    int endPage = ((page - 1) / BLOCK * BLOCK) + BLOCK;
+
+    if (endPage > totalpage) {
+      endPage = totalpage;
+    }
+
+    // Vue로 전송
+    Map map = new HashMap();
+    map.put("list", list);
+    map.put("curpage", page);
+    map.put("totalpage", totalpage);
+    map.put("startPage", startPage);
+    map.put("endPage", endPage);
+
+    return map;
   }
 
 }

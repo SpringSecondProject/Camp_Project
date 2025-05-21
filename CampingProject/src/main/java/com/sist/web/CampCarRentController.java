@@ -13,5 +13,5 @@ public class CampCarRentController {
     model.addAttribute("main_jsp", "../campcar/payment.jsp");
     return "main/main";
   }
-  
+
 }

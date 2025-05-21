@@ -17,6 +17,9 @@
 	<a id="campreserve" href="../mypage/campreserve.do">
 		캠핑장 예약 관리
 	</a>
+	<a id="campcarrent" href="../mypage/campcarrent.do">
+		캠핑카 렌트 내역
+	</a>
 	<a id="cart" href="../mypage/cart.do">
 		장바구니
 	</a>

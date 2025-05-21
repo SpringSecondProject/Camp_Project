@@ -43,7 +43,8 @@
 						<!--====== List ======-->
 						<ul class="ah-list ah-list--design1 ah-list--link-color-white">
 							<c:if test="${sessionScope.userid!=null }">
-								<li class="mileage-point" data-tooltip="tooltip" data-placement="left">
+								<li class="mileage-point" data-tooltip="tooltip"
+								    data-placement="left">
 									<span style="color: white;font-size: 16px">마일리지 : ${sessionScope.point }</span>
 								</li>
 							</c:if>
@@ -198,6 +199,9 @@
 										</li>
 										<li>
 											<a href="../mypage/campreserve.do">캠핑장 예약 관리</a>
+										</li>
+										<li>
+											<a href="../mypage/campcarrent.do">캠핑카 렌트 내역</a>
 										</li>
 										<li>
 											<a href="../mypage/cart.do">장바구니</a>
