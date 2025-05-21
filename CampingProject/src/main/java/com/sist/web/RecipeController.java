@@ -47,7 +47,7 @@ public class RecipeController {
 			recentList=recipeCookieData(cookies);
 		}	
 		model.addAttribute("recentList",recentList);
-		System.out.println("recentList:"+recentList);
+		//System.out.println("recentList:"+recentList);
 		
 		model.addAttribute("recipe_jsp","../recipe/recipe_group.jsp");
 		model.addAttribute("main_jsp","../recipe/recipe_main.jsp");
