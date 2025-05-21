@@ -2,8 +2,8 @@
 <head>
 	<title></title>
 	<script src="https://cdn.tailwindcss.com"></script>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 	<style>
       .inline-calendar .flatpickr-calendar {
         width: 100%;
@@ -51,7 +51,7 @@
 			</div>
 			<div class="flex flex-col w-1/2 p-4 justify-center items-center">
 				<div id="dateRangePicker" class="inline-calendar"></div>
-				<p class="mt-2 text-gray-600">선택된 기간: {{ rangeText || '기간을 선택하세요' }}</p>
+				<p class="mt-2 text-gray-600">{{ rangeText || '기간을 선택하세요' }}</p>
 			</div>
 		</div>
 		<div class="mt-4 mb-12 w-full border-b border-gray-400"></div>
@@ -59,7 +59,7 @@
 			<div class="flex flex-col gap-4 w-1/2 h-full font-normal text-left px-12">
 				<p class="text-4xl">모델명: {{ item.name }}</p>
 				<p class="text-3xl">최대인원: {{ item.capacity }}명</p>
-				<p class="text-3xl">가격: {{ formatPrice(item.price) }}원/일</p>
+				<p class="text-3xl">가격: {{ formatPrice(item.price) }}원</p>
 				<div class="my-4 w-full border-b border-gray-400"></div>
 				<p class="text-3xl">총 가격: {{ formatPrice(calculateTotalPrice()) }}원</p>
 				<button class="px-8 py-4 bg-blue-500 text-white rounded-xl shadow-lg hover:bg-blue-600 font-normal text-2xl mt-8"
@@ -67,7 +67,7 @@
 					결제하기
 				</button>
 			</div>
-			<div class="w-1/2 h-full min-h-screen p-4" v-html="item.content">
+			<div class="w-1/2 h-full min-h-screen p-4 mb-36" v-html="item.content">
 			</div>
 		</div>
 	</div>
@@ -77,6 +77,7 @@
     data() {
       const param = new URLSearchParams(window.location.search)
       return {
+        userid: '${sessionScope.userid}',
         id: param.get('id'),
         item: {},
         startDate: null,
@@ -146,16 +147,39 @@
           const end = new Date(this.endDate);
           const days = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
           const dailyPrice = this.item.price || 0;
-          this.finalPrice = dailyPrice + ((days - 1) * (dailyPrice / 6));
+          this.finalPrice = Math.round(dailyPrice + ((days - 1) * (dailyPrice / 6))); // 반올림
           return this.finalPrice;
         }
         return 0;
       },
       goRent() {
-        if (this.startDate && this.endDate) {
-          console.log(this.startDate)
-          console.log(this.endDate)
-          console.log(this.finalPrice)
+        if (!this.userid) {
+          alert('로그인 후 사용할 수 있습니다.');
+        } else if (this.startDate && this.endDate) {
+          const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+          if (!datePattern.test(this.startDate) || !datePattern.test(this.endDate)) {
+            alert('잘못된 날짜 형식입니다.');
+            return;
+          }
+          axios.post('/web/campcar/savePaymentData.do', {
+            payment: {
+              pid: this.userid,
+              cid: this.item.id,
+              startDate: this.startDate,
+              endDate: this.endDate,
+              price: this.item.price,
+              finalPrice: Math.round(this.finalPrice)
+            }
+          }).then(res => {
+            if (res.data === "success") {
+              window.location.href = '/web/campcar/payment.do';
+            } else {
+              alert('데이터 저장 중 오류가 발생했습니다: ' + res.data);
+            }
+          }).catch(error => {
+            alert('서버와의 통신 중 오류가 발생했습니다.');
+            console.error(error.response);
+          });
         } else {
           alert('기간을 선택해주세요.');
         }

@@ -54,8 +54,9 @@
 		    TO_CHAR(enddate,'YYYY-MM-DD') as endDateStr,
 		    cr.price,state
 		    FROM CAMP_RESERVE cr,CAMP c
-		    WHERE cr.id=#{id} AND cr.cno=c.cno AND TRUNC(SYSDATE) &lt;= TRUNC(endDate)
-		    ORDER BY startDate DESC)) l, RESERVE_DETAIL rd,camp_site cs
+		    WHERE cr.id=#{id} AND cr.cno=c.cno AND TRUNC(SYSDATE) &lt;= TRUNC(endDate) AND cr.state!=-1
+		    ORDER BY cr.startDate DESC)) l, RESERVE_DETAIL rd,camp_site cs
 		WHERE l.rno=rd.rno AND rd.sno=cs.sno AND num BETWEEN #{start} AND #{end}
+		ORDER BY num ASC
 	</select>
 </mapper>

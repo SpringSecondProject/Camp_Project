@@ -203,9 +203,6 @@
 											<a href="../mypage/cart.do">장바구니</a>
 										</li>
 										<li>
-											<a href="../mypage/bookmark.do">즐겨찾기</a>
-										</li>
-										<li>
 											<a href="../like/likeList.do">좋아요</a>
 										</li>
 										<li>

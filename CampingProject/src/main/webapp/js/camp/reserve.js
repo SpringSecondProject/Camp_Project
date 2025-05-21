@@ -226,10 +226,16 @@
     				$('.site_check').prop('checked',false)
     			},
 				pointInsert(){
+					this.usePoint = parseInt(this.usePoint) || 0;
+					if(this.usePoint<0){
+						this.usePoint=0
+					}
 					if(this.usePoint>this.hasPoint){
+						alert("보유한 포인트 이상 사용하실 수 없습니다")
 						this.usePoint=this.hasPoint
 					}
 					if(this.usePoint>this.totalPrice){
+						alert("총 금액 이상 사용하실 수 없습니다")
 						this.usePoint=this.totalPrice
 					}
 					this.payPrice=this.totalPrice-this.usePoint

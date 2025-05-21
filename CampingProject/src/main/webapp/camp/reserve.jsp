@@ -89,7 +89,7 @@
                        		<tr>
                        			<th width="25%" class="text-center">사용<br>마일리지</th>
                        			<td class="text-center">
-                       				<input type="number" ref="usePoint" v-model="usePoint" @keyup="pointInsert()">
+                       				<input type="number" min="0" ref="usePoint" v-model="usePoint" @input="pointInsert()">
                        			</td>
                        		</tr>
                        		<tr>
