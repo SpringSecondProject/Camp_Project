@@ -19,7 +19,7 @@ public interface ReserveMapper {
 	@Insert("INSERT INTO CAMP_RESERVE(rno,id,cno,title,regdate,startdate,enddate,price,state) "
 			+ "VALUES(cr_rno_seq.nextval,#{id},#{cno},#{title},SYSDATE,#{startDateStr},#{endDateStr},#{price},0)")
 	public void reserveInsert(ReserveVO vo);
-	@Select("SELECT rno FROM CAMP_RESERVE WHERE id=#{id} AND rownum=1 ORDER BY rno DESC")
+	@Select("SELECT rno FROM (SELECT rno FROM CAMP_RESERVE WHERE id=#{id} ORDER BY rno DESC) WHERE rownum=1")
 	public int reserveFindNewRno(String id);
 	@Select("SELECT sno FROM CAMP_SITE WHERE cno=#{cno} AND type=#{type}")
 	public int siteFindSno(ReserveVO vo);
