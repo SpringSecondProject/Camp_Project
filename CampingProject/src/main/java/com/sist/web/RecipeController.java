@@ -163,4 +163,27 @@ public class RecipeController {
 		model.addAttribute("main_jsp","../recipe/recipe_main.jsp");
 		return "main/main";
 	}
+	
+	@GetMapping("recipe/recipe_find.do")
+	public String recipe_test(String page,String[] gds,Model model,HttpServletRequest request)
+	{
+		if(page==null)
+			page=RecipeConfig.PAGE_DEFAULT;
+		model.addAttribute("page",Integer.parseInt(page));
+		model.addAttribute("gds",gds);
+
+		Cookie[] cookies=request.getCookies();
+		List<RecipeVO> recentList=new ArrayList<RecipeVO>();
+		if(cookies!=null)
+		{
+			recentList=recipeCookieData(cookies);
+		}	
+		model.addAttribute("recentList",recentList);
+		//System.out.println("recentList:"+recentList);
+		model.addAttribute("findtype",RecipeConfig.RECIPE_FIND_TYPE);
+		
+		model.addAttribute("recipe_jsp","../recipe/recipe_find.jsp");
+		model.addAttribute("main_jsp","../recipe/recipe_main.jsp");
+		return "main/main";
+	}
 }

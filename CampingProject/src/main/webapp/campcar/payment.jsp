@@ -36,7 +36,7 @@
       return {
         item: {},
         payment: <%= session.getAttribute("payment") != null ?
-                    new com.google.gson.Gson().toJson(session.getAttribute("payment")) : "{}" %>
+                    new com.google.gson.Gson().toJson(session.getAttribute("payment")) : "{}" %> 
       }
     },
     mounted() {
