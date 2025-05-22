@@ -133,4 +133,24 @@ public interface ItemMapper {
 			+ "WHERE cno = #{cno} "
 			+ "AND id = #{id}")
 	void itemAccountModify(CartVO vo);
+	//상세페이지 바로구매 - 가장 최근 생성된 장바구니 찾기
+	@Select("SELECT cno FROM (SELECT cno FROM cartlist WHERE id=#{id} AND status=0 ORDER BY cno DESC) WHERE rownum=1")
+	public int cartFindNewCno(String id);
+	
+	//장바구니 구매 - 결제 테이블 추가
+	@Insert("INSERT INTO buy_history(bno,id,regdate,total_price) "
+			+ "VALUES((SELECT NVL(MAX(bno)+1,1) FROM buy_history),#{id},SYSDATE,#{total_price})")
+	public void buyInsert(BuyVO vo);
+	//장바구니 구매 - 가장 최근 생성된 결제 테이블 찾기
+	@Select("SELECT bno FROM (SELECT bno FROM buy_history WHERE id=#{id} ORDER BY bno DESC) WHERE rownum=1")
+	public int buyFindNewBno(String id);
+	//장바구니 구매 - 장바구니 업데이트
+	@Update("UPDATE cartlist set status=1,bno=#{bno} WHERE id=#{id} AND status=0 AND cno=#{cno}")
+	public void cartUpdateByBuy(CartVO vo);
+	
+	
+	//구매내역 조회
+	public List<BuyVO> myBuyListData(Map map);
+	@Select("SELECT COUNT(*) FROM BUY_HISTORY WHERE id=#{id}")
+	public int myBuycount(String id);
 }

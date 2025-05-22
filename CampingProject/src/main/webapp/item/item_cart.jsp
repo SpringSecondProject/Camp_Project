@@ -185,13 +185,14 @@ let cartApp=Vue.createApp({
     buyItems() {    // 장바구니 결제
       // 결제 로직 구현
     	let formData=new FormData()
-		formData.append("price",this.totalPrice);
+		formData.append("total_price",this.totalPrice);
 		for(let i=0;i<this.cartItems.length;i++){
 			formData.append("carts",this.cartItems[i].cno)
 		}
       axios.post('../item/cart_buy.do',formData)
       .then(res=>{
-    	  if(res=="yes"){
+    	  console.log(res.data)
+    	  if(res.data=="yes"){
 	    	  this.requestPay()
     	  }else{
     		  alert("결제 실패")
@@ -212,8 +213,7 @@ let cartApp=Vue.createApp({
 	        buyer_postcode: ''
 	    }, function (rsp) {
 	    	alert("구매 완료!!")
-	    	//this.resetCart()
-	    	//location.href="../mypage/campreserve.do"
+	    	location.href="../mypage/buy.do"
 	    })
 	},
   }

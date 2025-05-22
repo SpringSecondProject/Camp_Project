@@ -25,4 +25,9 @@ public interface ItemService {
 	public List<ItemVO> itemList();
 	public void CartReset(String id);
 	public void itemAccountModify(CartVO vo);
+	public int cartFindNewCno(String id);
+	public void buyInsert(BuyVO vo);
+	public List<BuyVO> myBuyListData(Map map);
+	public int myBuycount(String id);
+
 }

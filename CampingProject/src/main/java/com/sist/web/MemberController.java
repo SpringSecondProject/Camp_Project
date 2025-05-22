@@ -67,6 +67,14 @@ public class MemberController {
     model.addAttribute("main_jsp", "../mypage/main.jsp");
     return "main/main";
   }
+  
+  @GetMapping("mypage/buy.do")
+  public String mypage_buy(Model model) {
+	  model.addAttribute("path", "buy");
+	  model.addAttribute("page", "../mypage/pages/buy.jsp");
+	  model.addAttribute("main_jsp", "../mypage/main.jsp");
+	  return "main/main";
+  }
 
   @GetMapping("mypage/bookmark.do")
   public String mypage_bookmark(Model model) {

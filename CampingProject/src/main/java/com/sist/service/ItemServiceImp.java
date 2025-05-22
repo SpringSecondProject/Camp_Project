@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sist.dao.*;
 import com.sist.vo.*;
@@ -120,6 +121,31 @@ public class ItemServiceImp implements ItemService{
 	public void itemAccountModify(CartVO vo) {
 		// TODO Auto-generated method stub
 		cdao.itemAccountModify(vo);
+	}
+	@Override
+	public int cartFindNewCno(String id) {
+		return idao.cartFindNewCno(id);
+	}
+	@Override
+	@Transactional
+	public void buyInsert(BuyVO vo) {
+		idao.buyInsert(vo);
+		int bno=idao.buyFindNewBno(vo.getId());
+		CartVO cvo=new CartVO();
+		cvo.setId(vo.getId());
+		cvo.setBno(bno);
+		for(int cno:vo.getCarts()) {
+			cvo.setCno(cno);
+			idao.cartUpdateByBuy(cvo);
+		}
+	}
+	@Override
+	public List<BuyVO> myBuyListData(Map map) {
+		return idao.myBuyListData(map);
+	}
+	@Override
+	public int myBuycount(String id) {
+		return idao.myBuycount(id);
 	}
 	
 }

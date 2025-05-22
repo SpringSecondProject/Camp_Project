@@ -198,7 +198,6 @@ $(function(){
                             			<td colspan="2" class="text-right">
 	                                    	<c:if test="${sessionScope.userid!=null }">
 		                                        <a class="btn btn-sm btn-primary" href="../camp/reserve.do?cno=${vo.contentId}">예약</a>
-		                                        <a class="btn btn-sm btn-default" href="#">좋아요</a>
 	                                    	</c:if>
 	                                        <a class="btn btn-sm btn-primary" href="javascript:history.back()">목록</a>
                             			</td>

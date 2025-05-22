@@ -5,6 +5,7 @@ import java.util.*;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sist.vo.*;
 import com.sist.service.*;
+import com.sist.commons.*;
 @RestController
 public class ItemRestController {
 	@Autowired
@@ -199,11 +201,42 @@ public class ItemRestController {
 	public void itemAccountModify(CartVO vo) {
 	    service.itemAccountModify(vo);
 	}
+	@GetMapping("item/new_cno.do")
+	public int new_cno(HttpSession session) {
+		String id=(String)session.getAttribute("userid");
+		return service.cartFindNewCno(id);
+	}
 	@PostMapping("item/cart_buy.do")
-	public void item_cart_buy(int[] carts,int price) {
-		for(int cno:carts) {
-			System.out.println(cno);
+	public String item_cart_buy(BuyVO vo,HttpSession session) {
+		String result="";
+		String id=(String)session.getAttribute("userid");
+		vo.setId(id);
+		try {
+			service.buyInsert(vo);
+			result="yes";
+		} catch (Exception e) {
+			result="no";
+			e.printStackTrace();
 		}
-		System.out.println(price);
+		return result;
+	}
+	@GetMapping("mypage/buy_list_vue.do")
+	public Map mypage_buy_list(int page,HttpSession session) {
+		String id=(String)session.getAttribute("userid");
+		int rowSize=10;
+		Map map=ListUtil.setListRange(page, rowSize);
+		map.put("id", id);
+		List<BuyVO> list=service.myBuyListData(map);
+		int count=service.myBuycount(id);
+		int totalpage=(int)(Math.ceil(count/(rowSize/1.0)));
+		
+		map=new HashMap();
+		final int BLOCK=10;
+		map.put("list", list);
+		map.put("curpage", page);
+		map.put("totalpage", totalpage);
+		map=ListUtil.setPageRange(map, BLOCK);
+		map.put("count", count);
+		return map;
 	}
 }
