@@ -95,7 +95,7 @@ public interface ItemMapper {
 	public void CartInsert(CartVO vo);
 	
 	@Select("SELECT COUNT(*) FROM Cartlist "
-		   +"WHERE ino=#{ino} AND id=#{id}")
+		   +"WHERE ino=#{ino} AND id=#{id} ANd status=0")
 	public int CartInoCount(CartVO vo);
 	   
 	@Update("UPDATE Cartlist SET "
