@@ -99,20 +99,6 @@ public class LikeController {
 		return "main/main";
 	}
 
-	// 레시피 좋아요 임시
-	@GetMapping("like/recipeList.do")
-	public String recipeLikeList(Model model, HttpSession session) {
-		String id = (String) session.getAttribute("userid");
-		Map map = new HashMap();
-		map.put("id", id);
-		map.put("type", 2);
-		List<RecipeVO> likeList = lService.MyRecipeLikeList(map);
-		// System.out.println(likeList+"레시피리스트 정보");
-		model.addAttribute("likeList", likeList);
-		model.addAttribute("path", "like");
-		model.addAttribute("page", "../mypage/pages/like_recipe.jsp");
-		model.addAttribute("main_jsp", "../mypage/main.jsp");
-		return "main/main";
-	}
+
 
 }
