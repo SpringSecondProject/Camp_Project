@@ -26,7 +26,12 @@
     				payPrice:0,
     				payPriceStr:'',
     				hasPoint:dpoint,
-    				usePoint:0
+    				usePoint:0,
+    				list:[],
+					curpage:1,
+					totalpage:0,
+					startPage:0,
+					endPage:0
     			}
     		},
     		mounted(){
@@ -35,7 +40,6 @@
     					cno:this.cno
     				}
     			}).then(res=>{
-    				console.log(res.data)
     				this.vo=res.data
 	    			this.printCalender()
     			}).catch(error=>{
@@ -52,6 +56,7 @@
        			}).catch(error=>{
        				console.log(error.response)
        			})
+       			this.dataRecv()
     		},
     		methods:{
     			printCalender(){
@@ -256,7 +261,6 @@
 					}
     				axios.post('../camp/reserve_vue.do',formData)
     				.then(res=>{
-    					console.log(res.data)
     					if(res.data.msg=='OK'){
     						this.requestPay()
     					}else{
@@ -284,6 +288,48 @@
 				    	alert("예약 완료!!")
 				    	location.href="../mypage/campreserve.do"
 				    })
+				},
+				dataRecv(){
+					axios.get('../mypage/reserve_list_vue.do',{
+						params:{
+							page:this.curpage
+						}
+					}).then(res=>{
+						this.list=res.data.list
+						for(let i=0;i<this.list.length;i++){
+							this.list[i].price=new Intl.NumberFormat().format(this.list[i].price)
+						}
+						this.curpage=res.data.curpage
+						this.totalpage=res.data.totalpage
+						this.startPage=res.data.startPage
+						this.endPage=res.data.endPage
+					}).catch(error=>{
+						console.log(error.response)
+					})
+				},
+				prev(){
+					this.curpage=this.curpage-1
+					this.dataRecv()
+				},
+				next(){
+					this.curpage=this.curpage+1
+					this.dataRecv()
+				},
+				pageChange(i){
+					this.curpage=i
+					this.dataRecv()
+				},
+				range(start,end){
+					let arr=[]
+					let len=end-start
+					for(let i=0;i<=len;i++){
+						arr[i]=start
+						start++
+					}
+					return arr
 				}
-    		}
+    		},
+			components:{
+				'page-card':page_card
+			}
     	}).mount('#reserveApp')

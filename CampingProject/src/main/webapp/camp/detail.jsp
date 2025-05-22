@@ -194,16 +194,16 @@ $(function(){
 	                            			</c:if>
 	                            		</td>
                             		</tr>
+                            		<tr>
+                            			<td colspan="2" class="text-right">
+	                                    	<c:if test="${sessionScope.userid!=null }">
+		                                        <a class="btn btn-sm btn-primary" href="../camp/reserve.do?cno=${vo.contentId}">예약</a>
+		                                        <a class="btn btn-sm btn-default" href="#">좋아요</a>
+	                                    	</c:if>
+	                                        <a class="btn btn-sm btn-primary" href="javascript:history.back()">목록</a>
+                            			</td>
+                            		</tr>
                             	</table>
-                            </div>
-                            <div class="u-s-m-b-15">
-                                <div class="pd-detail-inline-2">
-                                    <div class="u-s-m-b-15">
-                                    	<c:if test="${sessionScope.userid!=null }">
-	                                        <a class="btn btn--e-brand-b-2" href="../camp/reserve.do?cno=${vo.contentId}">예약하기</a>
-                                    	</c:if>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <!--====== End - Product Right Side Details ======-->
@@ -221,13 +221,13 @@ $(function(){
                             <div class="u-s-m-b-30">
                                 <ul class="nav pd-tab__list">
                                     <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#pd-descript">캠핑장 소개</a>
+                                        <a class="nav-link active" data-toggle="tab" href="#pd-descript">캠핑장 소개</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="map-tab" data-toggle="tab" href="#pd-map">위치/주변정보</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="view-review" data-toggle="tab" href="#pd-review">리뷰</a>
+                                        <a class="nav-link" id="view-review" data-toggle="tab" href="#pd-review">리뷰</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="view-review" data-toggle="tab" href="#pd-cctv">교통정보</a>
@@ -236,7 +236,7 @@ $(function(){
                             </div>
                             <div class="tab-content">
                             
-								<div class="tab-pane" id="pd-descript">
+								<div class="tab-pane show active" id="pd-descript">
 								    <div class="pd-tab__">
 								        <jsp:include page="detail_tap.jsp"/>
 								    </div>
@@ -246,14 +246,9 @@ $(function(){
 								        <div id="map" style="width:100%;height:350px;"></div>
 								    </div>
 								</div>
-								<div class="tab-pane show active" id="pd-review">
+								<div class="tab-pane" id="pd-review">
 								    <div class="pd-tab__" id="reviewApp" data-type="${type }" data-no="${param.cno }">
 								        <jsp:include page="../commons/review.jsp"/>
-								    </div>
-								</div>
-								<div class="tab-pane" id="pd-notice">
-								    <div class="pd-tab__">
-								        <h2 class="u-s-m-b-15">공지</h2>
 								    </div>
 								</div>
 								<div class="tab-pane" id="pd-cctv">

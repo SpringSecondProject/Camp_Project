@@ -127,7 +127,48 @@
 			                </div>
                     	</div>
                     	<div id="notic-box" ref="notic-box" v-show="isDate && isSite">
-                    		<h1>test</h1>
+                    		<h3>예약 현황</h3>
+                    		<div class="table-responsive">
+								<h3 class="text-center" style="font-size: 24px" v-if="list.length==0">예약 내역이 없습니다</h3>
+								<table class="table-p" v-if="list.length!=0">
+									<tbody>
+										<!--====== Row ======-->
+										<tr v-for="vo in list">
+											<td>
+												<div class="table-p__box">
+													<div class="table-p__img-wrap">
+														<img class="u-img-fluid" :src="vo.cvo.poster" style="width: 120px;height: 120px;"></div>
+													<div class="table-p__info">
+	                                                    <span class="table-p__name">
+	                                                        <a :href="'../camp/detail.do?cno='+vo.cno">{{vo.title}}</a>
+	                                                    </span>
+														<ul class="table-p__variant-list">
+															<li>
+																<span>{{vo.typeStr}} : {{vo.sites.toString()}}</span>
+															</li>
+															<li>
+																<span>주소 : {{vo.cvo.addr}}</span>
+															</li>
+															<li>
+																<span>일정 : {{vo.startDateStr}} ~ {{vo.endDateStr}}</span>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</td>
+											<td>
+												<span class="table-p__price">{{vo.price}} 원</span>
+											</td>
+											<td width="20%">
+											</td>
+										</tr>
+										<!--====== End - Row ======-->
+									</tbody>
+								</table>
+							</div>
+							<div class="text-center" v-if="list.length!=0">
+								<page-card></page-card>
+							</div>
                     	</div>
                     </div>
                 </div>
@@ -136,6 +177,7 @@
         <!--====== End - Section 1 ======-->
     </div>
     <!--====== End - App Content ======-->
+    <script src="../js/commons/page-card.js"></script>
     <script src="../js/camp/reserve.js"></script>
 </body>
 </html>

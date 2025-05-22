@@ -72,6 +72,11 @@
 		</div>
 	</div>
 </div>
+<div class="container">
+	<div class="pd-tab__" id="reviewApp" data-type="3" data-no="${param.id }">
+		<jsp:include page="../commons/review.jsp"/>
+	</div>
+</div>
 <script>
   let campcarDetailApp = Vue.createApp({
     data() {
@@ -190,4 +195,6 @@
     }
   }).mount('#campcarDetailApp')
 </script>
+<script src="../js/commons/page-card.js"></script>
+<script src="../js/commons/review.js"></script>
 </body>

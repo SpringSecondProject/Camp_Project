@@ -33,7 +33,6 @@ let reviewApp=Vue.createApp({
 					type:this.type
 				}
 			}).then(res=>{
-				console.log(res.data)
 				this.list=res.data.list
 				this.curpage=res.data.curpage
 				this.totalpage=res.data.totalpage
