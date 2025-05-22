@@ -92,10 +92,4 @@ public class MemberRestController {
       throw new RuntimeException(e);
     }
   }
-	@GetMapping("mypage/buy_list_vue.do")
-	public Map mypage_buy_list(int page) {
-		Map map=new HashMap();
-		System.out.println(page);
-		return map;
-	}
 }

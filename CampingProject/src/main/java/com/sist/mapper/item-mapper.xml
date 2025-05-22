@@ -32,16 +32,23 @@
 	</select>
 	<!-- 구매내역 조회 -->
 	<resultMap type="BuyVO" id="BuyMap">
-		<collection property="cvo" ofType="CartVO">
+		<result property="bno" column="bno"/>
+		<result property="id" column="id"/>
+		<result property="regdateStr" column="regdateStr"/>
+		<result property="total_price" column="total_price"/>
+		<result property="num" column="num"/>
+		<collection property="cList" ofType="CartVO">
 			<result property="cno" column="cno"/>
+			<result property="ino" column="ino"/>
 			<result property="account" column="account"/>
 			<result property="ivo.name" column="name"/>
+			<result property="ivo.poster" column="poster"/>
 		</collection>
 	</resultMap>
 	<select id="myBuyListData" resultMap="BuyMap" parameterType="hashmap">
-		select b.bno,b.id,b.regdate,total_price,c.cno,c.account,i.name,num
-		FROM (select bno,id,regdate,total_price,rownum as num
-		FROM (select bno,id,regdate,total_price FROM buy_history WHERE id=#{id} ORDER BY bno desc)) b,CARTLIST c,ITEM i
+		select b.bno,b.id,b.regdateStr,total_price,c.cno,c.account,i.name,i.poster,i.ino,num
+		FROM (select bno,id,regdateStr,total_price,rownum as num
+		FROM (select bno,id,TO_CHAR(regdate,'YYYY-MM-DD') as regdateStr,total_price FROM buy_history WHERE id=#{id} ORDER BY bno desc)) b,CARTLIST c,ITEM i
 		WHERE b.bno=c.bno AND c.ino=i.ino AND num BETWEEN #{start} AND #{end} AND c.status=1
 		ORDER BY bno DESC
 	</select>

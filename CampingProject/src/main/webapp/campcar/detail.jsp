@@ -72,9 +72,26 @@
 		</div>
 	</div>
 </div>
-<div class="container">
-	<div class="pd-tab__" id="reviewApp" data-type="3" data-no="${param.id }">
-		<jsp:include page="../commons/review.jsp"/>
+<div class="u-s-p-y-90">
+    <div class="container">
+    	<div class="row">
+        	<div class="col-lg-12">
+            	<div class="pd-tab">
+                	<div class="u-s-m-b-30">
+                    	<ul class="nav pd-tab__list">
+                            <li class="nav-item">
+                            	<a class="nav-link" id="view-review" data-toggle="tab" href="#pd-review">리뷰</a>
+                        	</li>
+                    	</ul>
+               		</div>
+               		<div class="tab-content">                          
+						<div class="pd-tab__" id="reviewApp" data-type="3" data-no="${param.id }">
+							<jsp:include page="../commons/review.jsp"/>
+						</div>
+                	</div>
+            	</div>
+			</div>
+		</div>
 	</div>
 </div>
 <script>

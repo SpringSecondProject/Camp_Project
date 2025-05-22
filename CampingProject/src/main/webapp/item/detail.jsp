@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 </head>
 <body>
     <!--====== App Content ======-->
@@ -131,7 +132,7 @@
                                   <c:if test="${sessionScope.userid!=null }">			
 									<input type="hidden" id="userid" value="${sessionScope.userid}" />
 									<a class="btn btn--e-brand-b-2" href="#" onclick="cartInsert(${vo.ino})">장바구니</a>
-									<a class="btn btn--e-brand-b-2" href="../item/item_cart.do?id=${userid}">바로구매</a>
+									<a class="btn btn--e-brand-b-2" href="#" onclick="buy()">바로구매</a>
 			                       </c:if>
 			                       </td>
 			                      </tr>	
@@ -215,6 +216,56 @@
       alert('서버 요청 중 오류가 발생했습니다.');
     });
   }
+  function buy(){
+		const account = document.getElementById('quantitySelect').value
+		const price = Number($('#totalAmount').text().replaceAll(',',''))
+		let cno=0
+		axios.post('../item/cart_insert.do',null,{
+			params:{
+				ino: ${param.ino},
+		        account: account
+			}
+		}).then(res=>{
+			if(res.data==="yes"){
+				//장바구니 추가후 결제
+				axios.get('../item/new_cno.do').then(res => {
+					cno=res.data
+					
+					let formData=new FormData()
+					formData.append("total_price",price);
+					formData.append("carts",cno)
+				    axios.post('../item/cart_buy.do',formData)
+				    .then(res=>{
+						console.log(res.data)
+						if(res.data=="yes"){
+				    		requestPay(price)
+						}else{
+							alert("결제 실패")
+						}
+					})
+				})
+			}
+		})
+	}
+  	function requestPay(price){
+  		var IMP = window.IMP; 
+		IMP.init("imp42434332");
+		IMP.request_pay({
+	        pg: "kakaopay",
+	        pay_method: "card",
+	        merchant_uid: "ORD20180131-0000011",
+	        name: '${vo.name}'+" 결제",
+	        amount: price,
+	        buyer_email: '',
+	        buyer_name: '',
+	        buyer_tel:'',
+	        buyer_addr: '',
+	        buyer_postcode: ''
+	    }, function (rsp) {
+	    	alert("구매 완료!!")
+	    	location.href="../mypage/buy.do"
+	    })
+  	}
 </script>
 </body>
 </html>

@@ -81,4 +81,23 @@ public class ItemDAO {
 	{
 		return mapper.itemList();
 	}
+	public int cartFindNewCno(String id) {
+		return mapper.cartFindNewCno(id);
+	}
+	public void buyInsert(BuyVO vo) {
+		mapper.buyInsert(vo);
+	}
+	public int buyFindNewBno(String id) {
+		return mapper.buyFindNewBno(id);
+	}
+	public void cartUpdateByBuy(CartVO vo) {
+		mapper.cartUpdateByBuy(vo);
+	}
+	public List<BuyVO> myBuyListData(Map map){
+		return mapper.myBuyListData(map);
+	}
+	public int myBuycount(String id) {
+		return mapper.myBuycount(id);
+	}
+
 }
