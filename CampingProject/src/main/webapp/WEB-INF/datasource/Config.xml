@@ -15,7 +15,6 @@
 	</typeAliases>
   <mappers>
  	<mapper resource="com/sist/mapper/camplist-mapper.xml"/>
-	<mapper resource="com/sist/mapper/chef-mapper.xml"/>
  	<mapper resource="com/sist/mapper/recipe-mapper.xml"/>
  	<mapper resource="com/sist/mapper/reserve-mapper.xml"/>
  	<mapper resource="com/sist/mapper/commons-mapper.xml"/>
