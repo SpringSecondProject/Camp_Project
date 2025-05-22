@@ -107,7 +107,7 @@ public interface ItemMapper {
     public List<CartVO> CartListData(String id);
 	
 	@Delete("DELETE FROM Cartlist "
-				  +"WHERE ino=#{ino}")
+				  +"WHERE ino=#{ino} ANd status=0")
 	public void CartDelete(int ino);
 	
 	@Select("SELECT ino,name,poster,hit "
