@@ -49,13 +49,9 @@ public class ReviewRestController {
 	@PostMapping("review/insert_vue.do")
 	public Map review_insert(ReviewVO vo,HttpSession session)
 	{
-		System.out.println("댓글 쓰기 시작");
 		String id=(String)session.getAttribute("userid");
 		String username=(String)session.getAttribute("username");
 		String sex=(String)session.getAttribute("sex");
-		System.out.println("id:"+id);
-		System.out.println("username:"+username);
-		System.out.println("sex:"+sex);
 		vo.setId(id);
 		vo.setNickname(username);
 		vo.setSex(sex);

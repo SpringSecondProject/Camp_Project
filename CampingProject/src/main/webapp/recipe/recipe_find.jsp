@@ -73,7 +73,7 @@
     <div class="row mb-3">
       <div class="col-md-12 text-primary">
         <h4>
-          총 <span class="text-success">{{ count }}</span>개의 맛있는 레시피가 있습니다.
+         총 <span class="text-success">{{ count }}</span>개의 맛있는 레시피가 있습니다.
         </h4>
       </div>
     </div>
@@ -124,22 +124,13 @@
 			startPage:0,
 			endPage:0,
 			count:0,
-			fd:'title',
-			ss:'',
-			defaultType:''
+			fd:'${fd}',
+			ss:''
 	    };
       },
   	  mounted(){
   		this.dataRecv()
   	  },
-  	  watch: {
-  	    fd(newVal, oldVal) {
-  	      this.dataRecv();
-  	    },
-  	    ss(newVal, oldVal) {
-  	      this.dataRecv();
-  	    }
-  	  },  	  
       methods: {
         onSearch() {
           // selectedCodes를 기반으로 fetch 등으로 검색 요청

@@ -180,7 +180,9 @@ public class RecipeController {
 		}	
 		model.addAttribute("recentList",recentList);
 		//System.out.println("recentList:"+recentList);
+		String fd=RecipeConfig.RECIPE_FIND_TYPE.keySet().iterator().next();
 		model.addAttribute("findtype",RecipeConfig.RECIPE_FIND_TYPE);
+		model.addAttribute("fd",fd);
 		
 		model.addAttribute("recipe_jsp","../recipe/recipe_find.jsp");
 		model.addAttribute("main_jsp","../recipe/recipe_main.jsp");

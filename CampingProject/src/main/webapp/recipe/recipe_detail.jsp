@@ -257,8 +257,8 @@
  	 data(){
  		 return {
  			 reply_list:[],
- 			 no:parseInt(${vo.no}),
- 			 type:parseInt(${type}),
+ 			 no:parseInt('${vo.no}'),
+ 			 type:parseInt('${type}'),
  			 curpage:1,
  			 sessionId:'${sessionId}',
  			 totalpage:0,
