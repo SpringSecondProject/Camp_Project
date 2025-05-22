@@ -50,9 +50,7 @@
             page: this.curpage,
           }
         }).then(res => {
-          console.log(res.data)
           this.list = res.data.list
-          console.log(this.list)
         }).catch(e => {
           console.error(e)
         })

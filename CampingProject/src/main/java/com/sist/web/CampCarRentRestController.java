@@ -57,7 +57,6 @@ public class CampCarRentRestController {
       vo.setName(payment.get("name").toString());
       vo.setCapacity(Integer.parseInt(payment.get("capacity").toString()));
 
-      System.out.println(vo);
       service.campcarrentInsert(vo);
 
       session.removeAttribute("payment");
