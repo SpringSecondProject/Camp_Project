@@ -20,7 +20,6 @@
 						<select class="select-box select-box--transparent-b-2" onchange="location.href=this.value">
 							<option value="/web/like/likeList.do" ${page eq '../mypage/pages/like.jsp' ? 'selected' : ''}>캠핑장</option>
 							<option value="/web/like/itemList.do" ${page eq '../mypage/pages/like_item.jsp' ? 'selected' : ''}>쇼핑몰</option>
-							<option value="/web/like/recipeList.do" ${page eq '../mypage/pages/like_recipe.jsp' ? 'selected' : ''}>레시피</option>
 						</select>
 					</div>
 
