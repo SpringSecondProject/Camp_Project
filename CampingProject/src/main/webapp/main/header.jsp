@@ -177,7 +177,7 @@
 										<a href="/web/service/list.do">QnA</a>
 									</li>
 									<li>
-										<a href="/web/service/notice.do">공지사항</a>
+										<a href="/web/board/list.do">공지사항</a>
 									</li>
 								</ul>
 								<!--====== End - Dropdown ======-->
@@ -217,9 +217,14 @@
 								</li>
 							</sec:authorize>
 							<sec:authorize access="hasRole('ROLE_ADMIN')">
-								<li>
-									<a href="../admin/main.do">관리자페이지</a>
-								</li>
+								<li class="has-dropdown">
+									<a>관리자 페이지<i class="fas fa-angle-down u-s-m-l-6"></i></a>
+									<!--====== Dropdown ======-->
+									<span class="js-menu-toggle"></span>
+									<ul style="width:200px">
+										<li>
+											<a href="../admin/list.do">공지사항 관리</a>
+										</li>
 							</sec:authorize>
 						</ul>
 						<!--====== End - List ======-->
