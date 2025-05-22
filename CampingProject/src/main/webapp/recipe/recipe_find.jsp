@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>레시피 분류</title>
+<title>레시피 검색</title>
 <!-- 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
  -->
@@ -54,7 +54,7 @@
       <div class="col-md-3">
         <div class="form-group">
           <label for="typeSelect">분류</label>
-          <select v-model="type" id="typeSelect" class="form-control">
+          <select v-model="fd" id="typeSelect" class="form-control" @change="dataRecv()">
             <c:forEach var="entry" items="${findtype}">
               <option value="${entry.key}">${entry.value}</option>
             </c:forEach>
@@ -64,7 +64,7 @@
       <div class="col-md-9">
         <div class="form-group">
           <label for="searchInput">검색어</label>
-          <input v-model="fd" id="searchInput" type="text" class="form-control" placeholder="검색어를 입력하세요" />
+          <input v-model="ss" id="searchInput" type="text" class="form-control" placeholder="검색어를 입력하세요" @keyup.enter="dataRecv()"/>
         </div>
       </div>
     </div>
@@ -124,8 +124,7 @@
 			startPage:0,
 			endPage:0,
 			count:0,
-			findtype:[],
-			fd:'',
+			fd:'title',
 			ss:'',
 			defaultType:''
 	    };
@@ -133,6 +132,14 @@
   	  mounted(){
   		this.dataRecv()
   	  },
+  	  watch: {
+  	    fd(newVal, oldVal) {
+  	      this.dataRecv();
+  	    },
+  	    ss(newVal, oldVal) {
+  	      this.dataRecv();
+  	    }
+  	  },  	  
       methods: {
         onSearch() {
           // selectedCodes를 기반으로 fetch 등으로 검색 요청
@@ -167,6 +174,8 @@
 			axios.get('../recipe/recipe_list_vue.do',{
 				params:{
 					page:this.curpage,
+					fd:this.fd,
+					ss:this.ss
 				}
 			}).then(res=>{
 				console.log(res.data)

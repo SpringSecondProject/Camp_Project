@@ -70,12 +70,14 @@ public class RecipeRestController {
 	}
 
 	@GetMapping("recipe/recipe_list_vue.do")
-	public Map recipe_list_vue(int page)
+	public Map recipe_list_vue(int page, String fd, String ss)
 	{
 		final int ROWSIZE=RecipeConfig.RECIPE_SIZE;
 		final int BLOCK=RecipeConfig.BLOCK_SIZE;
 
 		Map map=ListUtil.setListRange(page, ROWSIZE);
+		map.put("fd", fd);
+		map.put("ss", ss);
 		List<RecipeVO> list=service.recipeListData(map);
 		int count=service.recipeTotalCount(map);
 		int totalpage=(int)Math.ceil(count/(double)ROWSIZE);

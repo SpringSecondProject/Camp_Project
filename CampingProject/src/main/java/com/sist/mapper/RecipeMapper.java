@@ -32,11 +32,14 @@ public interface RecipeMapper {
 	@Select("SELECT no,poster,title,chef,num "
 			+ "FROM (SELECT no,poster,title,chef,rownum as num  "
 			+ "FROM (SELECT /* INDEX_DESC(recipeDetail rd_no_pk)*/no,poster,title,chef "
-			+ "FROM recipeDetail)) "
+			+ "FROM recipeDetail "
+			+ "WHERE ${fd} LIKE '%'||#{ss}||'%')) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<RecipeVO> recipeListData(Map map);
 	
-	@Select("SELECT COUNT(*) FROM recipeDetail")
+	@Select("SELECT COUNT(*) "
+			+ "FROM recipeDetail "
+			+ "WHERE ${fd} LIKE '%'||#{ss}||'%'")
 	public int recipeTotalCount(Map map);
 	@Select("SELECT * FROM recipeDetail "
 			+ "WHERE no=#{no}")
