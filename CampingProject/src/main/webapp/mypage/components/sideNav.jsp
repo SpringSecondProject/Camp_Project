@@ -23,6 +23,9 @@
 	<a id="cart" href="../mypage/cart.do">
 		장바구니
 	</a>
+	<a id="buy" href="../mypage/buy.do">
+		구매내역
+	</a>
 	<a id="like" href="../like/likeList.do">
 		좋아요
 	</a>

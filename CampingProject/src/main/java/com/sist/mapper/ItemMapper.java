@@ -133,4 +133,9 @@ public interface ItemMapper {
 			+ "WHERE cno = #{cno} "
 			+ "AND id = #{id}")
 	void itemAccountModify(CartVO vo);
+	//장바구니 구매
+	//구매내역 조회
+	public List<BuyVO> myBuyListData(Map map);
+	@Select("SELECT COUNT(*) FROM BUY_HISTORY WHERE id=#{id}")
+	public int myBuycount(String id);
 }

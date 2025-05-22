@@ -14,7 +14,8 @@
  		<typeAlias type="com.sist.vo.ReviewVO" alias="ReviewVO"/>
  		<typeAlias type="com.sist.vo.CartVO" alias="CartVO"/>
  		<typeAlias type="com.sist.vo.ItemVO" alias="ItemVO"/> 	
- 	</typeAliases>
+ 		<typeAlias type="com.sist.vo.BuyVO" alias="BuyVO"/>
+	</typeAliases>
   <mappers>
  	<mapper resource="com/sist/mapper/camplist-mapper.xml"/>
  	<mapper resource="com/sist/mapper/recipe-mapper.xml"/>

@@ -2,6 +2,8 @@ package com.sist.web;
 
 import com.sist.service.MemberService;
 import com.sist.vo.MemberVO;
+
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.apache.ibatis.annotations.Param;
@@ -90,4 +92,10 @@ public class MemberRestController {
       throw new RuntimeException(e);
     }
   }
+	@GetMapping("mypage/buy_list_vue.do")
+	public Map mypage_buy_list(int page) {
+		Map map=new HashMap();
+		System.out.println(page);
+		return map;
+	}
 }

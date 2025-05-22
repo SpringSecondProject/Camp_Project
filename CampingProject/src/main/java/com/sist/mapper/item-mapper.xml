@@ -30,5 +30,19 @@
 	  WHERE cl.id = #{id, jdbcType=VARCHAR} AND cl.status = 0 AND it.ino IS NOT NULL
 	  ORDER BY cl.cno DESC
 	</select>
-	
+	<!-- 구매내역 조회 -->
+	<resultMap type="BuyVO" id="BuyMap">
+		<collection property="cvo" ofType="CartVO">
+			<result property="cno" column="cno"/>
+			<result property="account" column="account"/>
+			<result property="ivo.name" column="name"/>
+		</collection>
+	</resultMap>
+	<select id="myBuyListData" resultMap="BuyMap" parameterType="hashmap">
+		select b.bno,b.id,b.regdate,total_price,c.cno,c.account,i.name,num
+		FROM (select bno,id,regdate,total_price,rownum as num
+		FROM (select bno,id,regdate,total_price FROM buy_history WHERE id=#{id} ORDER BY bno desc)) b,CARTLIST c,ITEM i
+		WHERE b.bno=c.bno AND c.ino=i.ino AND num BETWEEN #{start} AND #{end} AND c.status=1
+		ORDER BY bno DESC
+	</select>
 </mapper>
