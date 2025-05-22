@@ -64,9 +64,7 @@
                                                 <a class="aspect aspect--bg-grey aspect--square u-d-block" :href="'../camp/detail_before.do?cno='+vo.cno" >
 
                                                     <img class="aspect__img" :src="vo.poster"></a> 
-                                                <div class="product-m__quick-look">
-
-                                                    <a class="fas fa-search" data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick Look"></a></div>
+                                            
                                             <div class="product-m__add-cart"> 
 
                                                 <a class="btn--e-brand" data-modal="modal" data-modal-id="#add-to-cart">Add to Cart</a></div>
@@ -76,28 +74,28 @@
 		
                                                 <div class="product-m__name" >
 
-                                                    <a :href="'/camp/detail.do?cno=' + vo.cno">{{ vo.title }}</a>
+                                                    <a :href="'../camp/detail_before.do?cno='+vo.cno">{{ vo.title }}</a>
                                                 </div>
                                                 
                                                 <div class="product-m__name" style="color: #4285F4 !important;" >
-                                                	<a style="color: #4285F4 !important;"href="shop-side-version-2.html">가격 : {{vo.price.toLocaleString()+ '원'}} </a>
+                                                	<a style="color: #4285F4 !important;" :href="'../camp/detail_before.do?cno='+vo.cno">가격 : {{vo.price.toLocaleString()+ '원'}} </a>
                                                 </div>
                                                 
                                                 <hr style="margin: 5px;">
                                                 
                                                 <div class="product-m__category" >
                                                 
-                                                    <a href="shop-side-version-2.html">종류 : {{vo.induty}} </a>
+                                                    <a :href="'../camp/detail_before.do?cno='+vo.cno">종류 : {{vo.induty}} </a>
                                                 </div>
                                                 
                                                 <div class="product-m__category" >
                                                 
-                                                    <a href="shop-side-version-2.html">애견 동반 : {{vo.animalCmgCl}} </a>
+                                                    <a :href="'../camp/detail_before.do?cno='+vo.cno">애견 동반 : {{vo.animalCmgCl}} </a>
                                                 </div>
                                                     
                                                 
                                                 <div class="product-m__category">
-                                                	<a href="shop-side-version-2.html">환경 정보 : {{vo.lctCl || '없음' }} </a>
+                                                	<a :href="'../camp/detail_before.do?cno='+vo.cno">환경 정보 : {{vo.lctCl || '없음' }} </a>
                                                 </div>
                                                 
                                                 <div class="product-m__hover">
