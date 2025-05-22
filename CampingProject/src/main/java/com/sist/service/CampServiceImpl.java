@@ -112,6 +112,11 @@ public class CampServiceImpl implements CampService{
 			result="NO";
 			e.printStackTrace();
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		} finally { // 일주일 이내 예약인 경우 바로 확정처리
+			List<ReserveVO> list=mService.reserveConfirmedList();
+			for(ReserveVO rvo:list) {
+				reserveConfirmedState(rvo.getRno());
+			}
 		}
 		List<Integer> list = new ArrayList<>(set);
 		Collections.sort(list);
