@@ -17,7 +17,7 @@ public class RecipeConfig {
 	public static final String RECIPE_DEFAULT="57";
 	public static final String CHEF_FD_DEFAULT="fcount";
 	
-	public static final Map<String, String> RECIPE_FIND_TYPE= new HashMap<String, String>() {{
+	public static final Map<String, String> RECIPE_FIND_TYPE= new LinkedHashMap<String, String>() {{
 															    put("title", 		"레시피명");
 															    put("chef", 		"셰프명");
 															    put("content", 		"소개");
