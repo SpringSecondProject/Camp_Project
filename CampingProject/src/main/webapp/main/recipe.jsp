@@ -38,15 +38,7 @@
                                             <a class="aspect aspect--bg-grey aspect--square u-d-block" href="../recipe/recipe_detail.do?no=${rvo.no }">
                                                 <img class="aspect__img" src="${rvo.poster }" alt="">
                                             </a>
-                                            <div class="product-o__action-wrap">
-                                                <ul class="product-o__action-list">
-                                                    <li>
-                                                        <a data-modal="modal" data-modal-id="#quick-look" title="Quick View">
-                                                        	<i class="fas fa-search-plus"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                            
                                         </div>
                                         <span class="product-o__name">
                                         	<a href="../recipe/recipe_detail.do?no=${rvo.no }">${rvo.title }</a>

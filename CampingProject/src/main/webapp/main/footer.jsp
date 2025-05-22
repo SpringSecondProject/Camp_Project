@@ -17,7 +17,7 @@
 
 						<span class="outer-footer__content-title">소개</span>
 						<div class="outer-footer__text-wrap"><i class="fas fa-home"></i>
-							<span>서울특별시 마포구 서교동 447-5 풍성빌딩 2 D강의실</span></div>
+							<span>서울시 마포구 서교동 447-5 풍성빌딩 2 D강의실</span></div>
 						<div class="outer-footer__text-wrap"><i class="fas fa-phone-volume"></i>
 							<span> 02-336-8546</span></div>
 						
@@ -30,7 +30,7 @@
 							<div class="outer-footer__content u-s-m-b-40">
 								<div class="outer-footer__list-wrap">
 									<ul>
-										<li><a href="../camp/list.do">캠프</a></li>
+										<li><a href="../camp/list.do">캠핑장</a></li>
 									</ul>
 								</div>
 							</div>
@@ -72,7 +72,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="lower-footer__content">
-						<div class="outer-footer__social">
+						<div class="outer-footer__social" >
 							<ul>
 								<li>
 

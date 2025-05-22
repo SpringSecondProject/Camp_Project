@@ -44,28 +44,11 @@
 													href="../item/detail.do?ino=${ivo.ino}"> 
 													<img class="aspect__img" src="https://www.ocamall.com${ivo.poster}" >
 												</a> 
-												<div class="product-o__action-wrap">
-													<ul class="product-o__action-list">
-														<li>
-														<a data-modal="modal" data-modal-id="#quick-look"
-															title="Quick View"><i class="fas fa-search-plus"></i></a>
-														</li>
-														<li><a data-modal="modal"
-															data-modal-id="#add-to-cart" title="Add to Cart">
-															<i class="fas fa-plus-circle"></i>
-															</a>
-														</li>
-														<li><a href="#" title="Add to Wishlist"><i
-																class="fas fa-heart"></i></a></li>
-														<li><a href="#"
-															title="Email me When the price drops"><i
-																class="fas fa-envelope"></i></a></li>
-													</ul>
-												</div>
+												
 											</div>
 
 											<span class="product-o__category"> 
-												<a href="#">${ivo.type} </a>
+												<a href="../item/detail.do?ino=${ivo.ino}">${ivo.type} </a>
 											</span> <span class="product-o__name"> <a
 												href="../item/detail.do?ino=${ivo.ino}">${ivo.name}</a>
 											</span>
