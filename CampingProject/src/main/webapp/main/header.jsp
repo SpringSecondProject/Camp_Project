@@ -160,7 +160,7 @@
 								<span class="js-menu-toggle"></span>
 								<ul style="width:200px">
 									<li>
-										<a href="../recipe/recipe_group.do">레시피 분류</a>
+										<a href="../recipe/recipe_find.do">레시피 분류</a>
 									</li>
 									<li>
 										<a href="../recipe/chef_list.do">셰프 목록</a>

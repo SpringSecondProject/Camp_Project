@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +35,10 @@
   	border-top-left-radius: calc(.25rem - 1px); 
   	border-top-right-radius: calc(.25rem - 1px) 
   }
+  .no-padding {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
   .card-title{margin-bottom:.75rem}
   .card-text:last-child{margin-bottom:0}
   .text-truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -40,67 +46,73 @@
 </style>
 </head>
 <body>  
-    <section class="archive-area section_padding_80" id="listApp">
-	<div class="container mt-4">
-	  
-	  <!-- 카테고리 메뉴 -->
-	  <div class="category-menu mb-1" style="font-size: 14px;">
-          <div id="category-container" class="pl-3">
-            <div v-for="(items, title, idx) in categories" :key="idx" 
-            	class="row align-items-center mb-2" :class="{'mt-4':title==='테마별'}">
-              <div class="col-title font-weight-bold text-success">{{ title }}</div>
-              <div class="col-items cate-list d-flex flex-wrap align-items-center">
-                <label v-for="item in items" :key="item.code" class="d-inline-block mr-3">
-                  <input type="checkbox" :value="item.code" :name="'cat'+idx" 
-                  		@change="handleCheckboxChange(idx,item.code)" />
-                  {{ item.name }}
-                </label>
-              </div>
-            </div>
-          </div>	
-		  
-		  <div class="text-center text-success mt-3" style="cursor:pointer;">
-		    <strong>카테고리 닫기 ↑</strong>
-		  </div>
-	  </div>
-	  <div class="mt-4 mb-4 text-primary">
-    	<h4>총 <span class="text-success">{{count}}</span>개의 맛있는 레시피가 있습니다.</h5>
-  	  </div>
-  	  
-	  <!-- 레시피 카드 목록 -->
-	  <div class="row">
-	    <div class="col-md-3 mb-4" v-for="vo in list" :key="vo.no">
-	      <div class="card h-100">
-	        <a :href="'../recipe/recipe_detail.do?no=' + vo.no">
-	          <img :src="vo.poster" class="card-img-top" alt="레시피 이미지">
-	        </a>
-	        <div class="card-body p-2">
-	          <h6 class="card-title text-truncate">{{ vo.title }}</h6>
-	          <p class="card-text text-muted mb-0" style="font-size: 13px;">by {{ vo.chef }}</p>
-	        </div>
-	      </div>
-	    </div>
-	    
-        <div class="col-12">
-             <div class="pagination-area d-sm-flex mt-15">
-			<nav class="text-center">
-			<ul class="pagination">
-				<li class="page-item" v-if="startPage>1">
-					<a href="#" @click="prev()">&laquo;</a>
-				</li>
-				<li  v-for="i in pageRange(startPage,endPage)" :class="i==curpage?'page-item active':'page-item'">
-					<a href="#" @click="changePage(i)">{{i}}</a>
-				</li>
-				<li class="page-item" v-if="endPage<totalpage">
-					<a href="#" @click="next()">&raquo;</a>
-				</li>
-			</ul>
-			</nav>
-             </div>
-           </div>
+<section class="archive-area section_padding_80" id="listApp">
+  <div class="container mt-4">
+
+    <!-- 검색 메뉴 -->
+    <div class="row mb-4">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="typeSelect">분류</label>
+          <select v-model="type" id="typeSelect" class="form-control">
+            <c:forEach var="entry" items="${findtype}">
+              <option value="${entry.key}">${entry.value}</option>
+            </c:forEach>
+          </select>
         </div>
-	  </div>
-	</section>
+      </div>
+      <div class="col-md-9">
+        <div class="form-group">
+          <label for="searchInput">검색어</label>
+          <input v-model="fd" id="searchInput" type="text" class="form-control" placeholder="검색어를 입력하세요" />
+        </div>
+      </div>
+    </div>
+
+    <!-- 검색 결과 요약 -->
+    <div class="row mb-3">
+      <div class="col-md-12 text-primary">
+        <h4>
+          총 <span class="text-success">{{ count }}</span>개의 맛있는 레시피가 있습니다.
+        </h4>
+      </div>
+    </div>
+
+    <!-- 레시피 카드 목록 -->
+    <div class="row">
+      <div class="col-md-3 mb-4 no-padding" v-for="vo in list" :key="vo.no">
+        <div class="thumbnail">
+          <a :href="'../recipe/recipe_detail.do?no=' + vo.no">
+            <img :src="vo.poster" alt="레시피 이미지" style="width:100%; height:180px; object-fit:cover;">
+          </a>
+          <div class="caption">
+            <h5 class="text-truncate">{{ vo.title }}</h5>
+            <p class="text-muted" style="font-size: 13px;">by {{ vo.chef }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 페이지네이션 -->
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <ul class="pagination">
+          <li v-if="startPage > 1">
+            <a href="#" @click.prevent="prev()">&laquo;</a>
+          </li>
+          <li v-for="i in pageRange(startPage, endPage)"
+              :class="{ 'active': i === curpage }">
+            <a href="#" @click.prevent="changePage(i)">{{ i }}</a>
+          </li>
+          <li v-if="endPage < totalpage">
+            <a href="#" @click.prevent="next()">&raquo;</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
 	<script src="../js/category.js"></script>
     <script>
     let listApp=Vue.createApp({
@@ -111,7 +123,11 @@
 			totalpage:0,
 			startPage:0,
 			endPage:0,
-			count:0
+			count:0,
+			findtype:[],
+			fd:'',
+			ss:'',
+			defaultType:''
 	    };
       },
   	  mounted(){
