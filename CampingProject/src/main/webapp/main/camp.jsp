@@ -18,6 +18,7 @@
 </head>
 <body>
 	<!--====== 캠핑장 TOP12 ======-->
+	<div style="margin-top: 20px;"></div>
 	<div class="u-s-p-b-60" id="electronic-01">
 		<div class="section__intro u-s-m-b-46">
 			<div class="container">
@@ -46,27 +47,10 @@
 													href="../camp/detail_before.do?cno=${cvo.cno}"> <img
 													class="aspect__img" src="${cvo.poster}">
 												</a>
-												<div class="product-o__action-wrap">
-													<ul class="product-o__action-list">
-														<li><a href="#" data-toggle="modal" data-target="#quick-look"
-															title="Quick View"> <i class="fas fa-search-plus"></i>
-														</a></li>
-
-
-														
-
-														<li><a data-modal="modal"
-															data-modal-id="#add-to-cart" title="Add to Cart"> <i
-																class="fas fa-plus-circle"></i></a></li>
-														<li><a href="#" title="Add to Wishlist"><i
-																class="fas fa-heart"></i></a></li>
-														<li><a href="#" title="Email me When the price drops"><i
-																class="fas fa-envelope"></i></a></li>
-													</ul>
-												</div>
+												
 											</div>
 
-											<span class="product-o__category"> <a href="#">종류
+											<span class="product-o__category"> <a href="../camp/detail_before.do?cno=${cvo.cno}">종류
 													: ${cvo.induty} </a>
 											</span> <span class="product-o__name"> <a
 												href="../camp/detail_before.do?cno=${cvo.cno}">${cvo.title}</a>
@@ -98,6 +82,5 @@
 			</div>
 		</div>
 	</div>
-	<jsp:include page="campQuick.jsp"/>
 </body>
 </html>
