@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style>
   .container {
-    margin-top: 50px;
     max-width: 800px;
   }
   h3 {
@@ -25,7 +24,7 @@
     border: 1px solid #ddd;
     padding: 15px;
     background-color: #fafafa;
-    white-space: pre-wrap; /* 줄바꿈 유지 */
+    white-space: pre-wrap;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 16px;
     min-height: 200px;
@@ -40,7 +39,7 @@
 </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container" style="height: 550px;">
     <h3>내용보기</h3>
     <table class="table table-bordered">
       <tr>

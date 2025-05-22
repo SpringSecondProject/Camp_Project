@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style>
   .container {
-    margin-top: 50px;
     max-width: 800px;
   }
   h3 {
@@ -40,7 +39,7 @@
 </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container" style="height: 550px;">
     <h3>내용보기</h3>
     <table class="table table-bordered">
       <tr>
