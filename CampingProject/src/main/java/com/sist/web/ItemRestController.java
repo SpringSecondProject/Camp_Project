@@ -6,8 +6,10 @@ import java.util.*;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -177,6 +179,10 @@ public class ItemRestController {
 	  	}
 		return result;
 	}
+    @GetMapping("item/get_cart_items.do")
+    public List<CartVO> getCartItems(@RequestParam("id") String id) {
+        return service.CartListData(id);
+    }
 	@PostMapping("item/cart_delete.do")
 	public String cart_delete(int ino)
 	{
@@ -189,15 +195,15 @@ public class ItemRestController {
 		service.CartReset(id);
 		return "reset";
 	}
-	@PostMapping("/item/item_modify.do")
-	@ResponseBody
-	public void itemAccountModify(@RequestParam("id") String id,
-	                                   @RequestParam("ino") int ino,
-	                                   @RequestParam("account") int account) {
-	    CartVO vo = new CartVO();
-	    vo.setId(id);
-	    vo.setIno(ino);
-	    vo.setAccount(account);
+	@PostMapping("item/item_modify.do")
+	public void itemAccountModify(CartVO vo) {
 	    service.itemAccountModify(vo);
+	}
+	@PostMapping("item/cart_buy.do")
+	public void item_cart_buy(int[] carts,int price) {
+		for(int cno:carts) {
+			System.out.println(cno);
+		}
+		System.out.println(price);
 	}
 }

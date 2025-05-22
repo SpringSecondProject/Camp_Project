@@ -12,11 +12,14 @@
  		<typeAlias type="com.sist.vo.ReserveDetailVO" alias="ReserveDetailVO"/>
  		<typeAlias type="com.sist.vo.SiteVO" alias="SiteVO"/>
  		<typeAlias type="com.sist.vo.ReviewVO" alias="ReviewVO"/>
-	</typeAliases>
+ 		<typeAlias type="com.sist.vo.CartVO" alias="CartVO"/>
+ 		<typeAlias type="com.sist.vo.ItemVO" alias="ItemVO"/> 	
+ 	</typeAliases>
   <mappers>
  	<mapper resource="com/sist/mapper/camplist-mapper.xml"/>
  	<mapper resource="com/sist/mapper/recipe-mapper.xml"/>
  	<mapper resource="com/sist/mapper/reserve-mapper.xml"/>
  	<mapper resource="com/sist/mapper/commons-mapper.xml"/>
+	<mapper resource="com/sist/mapper/item-mapper.xml"/>
   </mappers>
 </configuration>

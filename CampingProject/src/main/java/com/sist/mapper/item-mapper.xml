@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.ItemMapper">
+
+	<resultMap id="CartResultMap" type="com.sist.vo.CartVO">
+	  <result property="cno" column="cno"/>
+	  <result property="ino" column="ino"/>
+	  <result property="account" column="account"/>
+	  <result property="status" column="status"/>
+	  <result property="bno" column="bno"/>
+	  <result property="dbday" column="dbday"/>
+	  
+	  <!-- 중첩된 객체 IVO -->
+	  <association property="ivo" javaType="com.sist.vo.ItemVO">
+	    <result property="name" column="item_name"/>
+	    <result property="poster" column="item_poster"/>
+	    <result property="price" column="item_price"/>
+	    <result property="discount" column="item_discount"/>
+	    <result property="type" column="item_type"/>
+	  </association>
+	</resultMap>
+
+	<select id="CartListData" parameterType="string" resultMap="CartResultMap">
+	  SELECT cl.cno, cl.ino, cl.account, cl.status, cl.bno,
+	         TO_CHAR(cl.regdate, 'YYYY-MM-DD') AS dbday,
+	         it.name AS item_name, it.poster AS item_poster, 
+	         it.price AS item_price, it.type AS item_type, it.discount AS item_discount
+	  FROM Cartlist cl
+	  INNER JOIN item it ON cl.ino = it.ino
+	  WHERE cl.id = #{id, jdbcType=VARCHAR} AND cl.status = 0 AND it.ino IS NOT NULL
+	  ORDER BY cl.cno DESC
+	</select>
+	
+</mapper>

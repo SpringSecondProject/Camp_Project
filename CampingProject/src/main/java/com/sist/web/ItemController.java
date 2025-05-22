@@ -6,11 +6,13 @@ import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sist.service.*;
@@ -122,10 +124,11 @@ public class ItemController {
 		return "main/main";
 	}
 	@GetMapping("item/item_cart.do")
-	public String item_cart(String id, Model model) {
-		List<CartVO> cartItem = service.CartListData(id); 
+	public String item_cart(Model model,HttpSession session) {
+	    String id = (String) session.getAttribute("userId");  
+	    List<CartVO> cartItem = service.CartListData(id);
 	    model.addAttribute("cartItem", cartItem);
-		model.addAttribute("main_jsp","../item/item_cart.jsp");
-		return "main/main";
+	    model.addAttribute("main_jsp","../item/item_cart.jsp");
+	    return "main/main";
 	}	
 }

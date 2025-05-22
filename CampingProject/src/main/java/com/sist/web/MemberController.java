@@ -63,7 +63,7 @@ public class MemberController {
   @GetMapping("mypage/cart.do")
   public String mypage_cart(Model model) {
     model.addAttribute("path", "cart");
-    model.addAttribute("page", "../mypage/pages/cart.jsp");
+    model.addAttribute("page", "../item/item_cart.jsp");
     model.addAttribute("main_jsp", "../mypage/main.jsp");
     return "main/main";
   }

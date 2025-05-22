@@ -10,4 +10,9 @@ public class CartVO {
 	private Date regdate;
     private String dbday;
 	private ItemVO ivo=new ItemVO();
+
+    public int getIno() { return ino; }
+    public String getId() { return id; }
+    public int getAccount() { return account; }
+    public ItemVO getIvo() { return ivo; }
 }
