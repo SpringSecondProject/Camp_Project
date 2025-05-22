@@ -20,10 +20,10 @@ public class CCTVService {
             .queryParam("apiKey", API_KEY)
             .queryParam("type", "all")
             .queryParam("cctvType", "1")
-            .queryParam("minX", mapx - 0.2)
-            .queryParam("maxX", mapx + 0.2) 
-            .queryParam("minY", mapy - 0.2)
-            .queryParam("maxY", mapy + 0.2)
+            .queryParam("minX", mapx - 0.1)
+            .queryParam("maxX", mapx + 0.1) 
+            .queryParam("minY", mapy - 0.1)
+            .queryParam("maxY", mapy + 0.1)
             .queryParam("getType", "json");
 
         RestTemplate rest = new RestTemplate();
