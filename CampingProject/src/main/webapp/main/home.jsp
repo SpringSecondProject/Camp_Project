@@ -80,11 +80,11 @@
 	                    <!--====== End - Primary Slider ======-->
 	                
 	                <!-- top12 추가 start -->
-	                <jsp:include page="../main/notice.jsp"/>
-	                <jsp:include page="../main/video.jsp"/>
+	                <%-- <jsp:include page="../main/notice.jsp"/> --%>
 	                <jsp:include page="../main/camp.jsp"/>
 	                <jsp:include page="../main/item.jsp"/>
 	                <jsp:include page="../main/recipe.jsp"/>
+	                <jsp:include page="../main/video.jsp"/>
 	                <!-- top12 추가end -->
 	                <!-- 쿠키 추가 start -->
 	                <!-- 쿠키 추가 end -->
