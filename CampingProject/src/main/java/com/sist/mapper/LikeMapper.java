@@ -58,7 +58,7 @@ public interface LikeMapper {
 	//아이템 임시
 	@Select("SELECT * FROM ("
 		      + "  SELECT a.*, ROWNUM AS rn FROM ("
-		      + "    SELECT i.ino, i.name, i.poster, i.brand, i.type, i.price "
+		      + "    SELECT i.ino, i.name, i.poster, i.brand, i.type, i.price, i.discount "
 		      + "    FROM Item i "
 		      + "    JOIN CAMPLIKE l ON i.ino = l.no "
 		      + "    WHERE l.id = #{id} AND l.type = #{type} "

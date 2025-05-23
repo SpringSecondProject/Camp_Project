@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <head>
 
 <style>
@@ -47,8 +48,21 @@
 											<span class="bp-mini__h1 addr"><a href="../item/detail.do?ino=${item.ino}">${item.name}</a></span>
 											<span class="bp-mini__stat-wrap">
 												<span class="bp-mini__preposition addr">브랜드 : ${item.brand}</span>
-												<span class="bp-mini__preposition addr">종류 : ${item.type}</span>
-												<span class="bp-mini__preposition addr" style="color: #4285F4;">가격 : ${item.price}%</span>
+												<span class="bp-mini__preposition addr">종류 : ${item.type}</span>																					      
+									      <c:choose>
+									        <c:when test="${item.discount != ''}">
+									          <fmt:parseNumber var="price" value="${item.price}" integerOnly="true"/>
+									          <fmt:parseNumber var="discount" value="${item.discount}" integerOnly="true"/>
+									          <c:set var="salePrice" value="${price - (price * discount / 100)}"/>
+											 <fmt:formatNumber value="${salePrice}" type="number" maxFractionDigits="0" var="formattedSalePrice"/>
+											<span class="bp-mini__preposition addr" style="color: #4285F4;">가격 : ${formattedSalePrice}원</span>	
+								          <input type="hidden" id="priceValue" value="${formattedSalePrice}" />
+									        </c:when>
+									        <c:otherwise>
+												<span class="bp-mini__preposition addr" style="color: #4285F4;">가격 : ${item.price}원</span>												
+									          <input type="hidden" id="priceValue" value="${item.price}" />
+									        </c:otherwise>
+									        </c:choose>
 											</span>
 											<div class="blog-t-w">
 												<a class="gl-tag btn--e-transparent-hover-brand-b-2" href="../item/detail.do?ino=${item.ino}">구매하기</a> 
@@ -95,7 +109,7 @@
 	let ItemLike=Vue.createApp({
 		data(){
 			return{
-				
+			
 			}
 		},
 		methods:{
