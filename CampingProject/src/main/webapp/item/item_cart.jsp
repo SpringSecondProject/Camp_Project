@@ -16,7 +16,7 @@
          data-cno="${param.cno}" 
          data-point="${sessionScope.point}"
          data-userid="${sessionScope.userid}">
-    </div>>
+    </div>
     <!-- Section 2 -->
     <div class="u-s-p-b-60">
       <div class="section__intro u-s-m-b-60">

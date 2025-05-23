@@ -37,7 +37,7 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-<div class="app-content" id="listApp">
+<div class="app-content" id="listApp" data-userid="${sessionScope.userid}">
     <div class="u-s-p-y-90">
         <div class="container">
             <div class="row">
@@ -79,7 +79,7 @@
                                                     <a class="fas fa-search" data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick Look"></a></div>
                                                 <div class="product-m__add-cart">
 													<c:if test="${sessionScope.userid!=null }">
-                                                    <a class="btn--e-brand" data-modal="modal" data-modal-id="#add-to-cart">Add to Cart</a></c:if></div>
+                                                    <a class="btn--e-brand" data-modal="modal" @click.prevent="cartInsert(vo.ino)">장바구니 추가</a></c:if></div>
                                             </div>
                                             <div class="product-m__content">
                                                 <div class="product-m__category">
@@ -132,11 +132,16 @@ const listApp = Vue.createApp({
             endPage: 0,
             ss: "",
             fd: "name",
-            message: ""
+            message: "",
+            ino: 0,
+            result: "",
+            userId: '',
+            cno: 0
         }
     },
     mounted(){
         this.search(false)
+	    this.userId = $('#listApp').data('userid');
     },
     methods:{
     	search(isSearchClick=false,resetPage=true) {
@@ -218,7 +223,25 @@ const listApp = Vue.createApp({
         },
         range(start,end){
             return Array.from({length:end-start+1},(_,i)=>start+i)
-        }
+        },
+        cartInsert(ino){
+        	axios.post('../item/cart_insert.do',null, {
+          	  params:{
+      	          ino: ino,
+      	          account: 1,
+      	          id: this.userId      	          
+          	  }
+              })
+              .then(response => {
+            	  const result = response.data;
+            	  console.log(result)
+            	  if (result === 'yes') {
+                     alert('장바구니에 추가되었습니다!');
+                 } else{
+                     alert('에러: ' + result);
+                 }
+              })
+          }     
     }
 }).mount("#listApp")
 </script>
