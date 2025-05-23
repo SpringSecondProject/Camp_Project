@@ -198,7 +198,7 @@
             }
           }).then(res => {
             if (res.data === "success") {
-              window.location.href = '/web/campcar/payment.do';
+              window.location.href = '../campcar/payment.do';
             } else {
               alert('데이터 저장 중 오류가 발생했습니다: ' + res.data);
             }
