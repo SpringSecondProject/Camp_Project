@@ -17,7 +17,7 @@ public interface ReserveMapper {
 			+ "AND sno=(SELECT SNO FROM CAMP_SITE s WHERE s.CNO=#{cno} AND TYPE=#{type})")
 	public List<Integer> reserveListData(ReserveVO vo);
 	@Insert("INSERT INTO CAMP_RESERVE(rno,id,cno,title,regdate,startdate,enddate,price,state) "
-			+ "VALUES(cr_rno_seq.nextval,#{id},#{cno},#{title},SYSDATE,#{startDateStr},#{endDateStr},#{price},0)")
+			+ "VALUES(cr_rno_seq.nextval,#{id},#{cno},#{title},SYSDATE,TO_DATE(#{startDateStr}, 'YYYY-MM-DD'),TO_DATE(#{endDateStr}, 'YYYY-MM-DD'),#{price},0)")
 	public void reserveInsert(ReserveVO vo);
 	@Select("SELECT rno FROM (SELECT rno FROM CAMP_RESERVE WHERE id=#{id} ORDER BY rno DESC) WHERE rownum=1")
 	public int reserveFindNewRno(String id);
@@ -26,11 +26,11 @@ public interface ReserveMapper {
 	@Select("SELECT COUNT(*) FROM RESERVE_DETAIL WHERE sno=#{sno} AND dno=#{dno} AND resdate=#{resdate}")
 	public int reserveCheck(ReserveDetailVO vo);
 	@Insert("INSERT INTO RESERVE_DETAIL(rno,sno,cno,dno,resdate) "
-			+ "VALUES(#{rno},#{sno},#{cno},#{dno},#{resdate})")
+			+ "VALUES(#{rno},#{sno},#{cno},#{dno},TO_DATE(#{resdate}, 'YYYY-MM-DD'))")
 	public void reserveDetailInsert(ReserveDetailVO vo);
 	
 	public ReserveVO reserveDetailData(int rno);
-	public List<ReserveVO> myReserveListData(Map map);
+	public List<ReserveVO> myReserveListData(Map map); 
 	@Select("SELECT CEIL(COUNT(*)/5.0) FROM CAMP_RESERVE WHERE id=#{id} AND TRUNC(SYSDATE) <= TRUNC(endDate) AND state!=-1")
 	public int myReserveTotalPage(String id);
 	//예약 취소

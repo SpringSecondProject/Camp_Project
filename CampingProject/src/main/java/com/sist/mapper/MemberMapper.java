@@ -15,8 +15,8 @@ public interface MemberMapper {
   // 회원가입
   @Insert(
       "INSERT INTO member(id,pwd,name,sex,birthday,email,post,addr1,addr2,phone,content,enable) "
-          + "VALUES(#{id},#{pwd},#{name},#{sex},#{dbday},#{email},#{post},#{addr1},#{addr2},#{phone},#{content},1)")
-  public void memberInsert(MemberVO vo);
+          + "VALUES(#{id},#{pwd},#{name},#{sex},TO_DATE(#{dbday}, 'YYYY-MM-DD'),#{email},#{post},#{addr1},#{addr2},#{phone},#{content},1)")
+  public void memberInsert(MemberVO vo); 
 
   // 권한 부여
   @Insert("INSERT INTO authority VALUES(#{id},'ROLE_USER')")
