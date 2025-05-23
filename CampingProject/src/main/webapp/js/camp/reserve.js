@@ -1,7 +1,8 @@
-    	var IMP = window.IMP; 
-		IMP.init("imp42434332");
-		let dcno=$('#reserve-data').data('cno')
-		let dpoint=$('#reserve-data').data('point')
+	var IMP = window.IMP; 
+	IMP.init("imp42434332");
+	let dcno=$('#reserve-data').data('cno')
+	let dpoint=$('#reserve-data').data('point')
+	window.onload = function() {
     	let reserveApp=Vue.createApp({
     		data(){
     			return {
@@ -333,3 +334,4 @@
 				'page-card':page_card
 			}
     	}).mount('#reserveApp')
+    }
