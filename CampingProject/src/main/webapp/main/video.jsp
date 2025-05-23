@@ -50,12 +50,14 @@ $(function(){
                             <div class="owl-carousel tab-slider" data-item="4">
                             	<c:forEach var="vVo" items="${vList }">
 	                                <div class="u-s-m-b-30" title="${vVo.title}">
+	                                	<a href="https://www.youtube.com/embed/${vVo.videoid }">
 	                                    <div class="product-o product-o--hover-on">
 	                                        <div class="product-o__wrap">
 	                                            <iframe src="https://www.youtube.com/embed/${vVo.videoid}" style="width: 240px;height: 180px"></iframe>
 	                                        </div>
 	                                        <p class="video_title">${vVo.title}</p>
 	                                    </div>
+	                                	</a>
 	                                </div>
                             	</c:forEach>
                             </div>
