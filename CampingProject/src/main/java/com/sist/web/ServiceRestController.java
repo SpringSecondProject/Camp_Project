@@ -61,7 +61,7 @@ public class ServiceRestController {
     map.put("writer", mvo.getName());
 
     if (qvo.getOk() == 1) {
-      ServiceVO avo = service.serviceDetailAnswer(String.valueOf(qvo.getPid()));
+      ServiceVO avo = service.serviceDetailAnswer(qvo.getId());
       map.put("avo", avo);
     }
 
@@ -70,13 +70,12 @@ public class ServiceRestController {
 
   @PostMapping("service/write_vue.do")
   public void service_write(@RequestBody ServiceVO vo) {
-    System.out.println(vo);
     service.serviceWriteQuestion(vo);
   }
 
   @PostMapping("service/answer_vue.do")
   public void service_answer(@RequestBody ServiceVO vo) {
-    service.serviceUpdateOk(Integer.parseInt(String.valueOf(vo.getId())));
+    service.serviceUpdateOk(vo.getTarget());
     service.serviceWriteAnswer(vo);
   }
 

@@ -28,7 +28,7 @@ public class ServiceServiceImpl implements ServiceService {
   }
 
   @Override
-  public ServiceVO serviceDetailAnswer(String id) {
+  public ServiceVO serviceDetailAnswer(int id) {
     return dao.serviceDetailAnswer(id);
   }
 

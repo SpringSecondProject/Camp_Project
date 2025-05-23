@@ -15,7 +15,7 @@ import lombok.Data;
 @Data
 public class ServiceVO {
 
-  private int id, type, ok;
+  private int id, type, ok, target;
   private String pid, title, content;
   private Date regdate;
 }

@@ -27,8 +27,8 @@ public interface ServiceMapper {
   public ServiceVO serviceDetailQuestion(@Param("id") int id);
 
   @Select("SELECT id, pid, type, title, content, regdate, ok "
-      + "from service where pid=#{id} and type=1 ")
-  public ServiceVO serviceDetailAnswer(@Param("id") String id);
+      + "from service where target=#{id} and type=1 ")
+  public ServiceVO serviceDetailAnswer(@Param("id") int id);
 
   @Insert("INSERT INTO service(id, pid, type, title, content, regdate, ok) "
       + "values (SERVICE_SEQ.nextval, #{pid}, 0, #{title}, #{content}, SYSDATE, 0) ")
@@ -37,7 +37,7 @@ public interface ServiceMapper {
   @Update("UPDATE service set ok=1 where id=#{id} ")
   public void serviceUpdateOk(@Param("id") int id);
 
-  @Insert("INSERT INTO service(id, pid, type, title, content, regdate, ok) "
-      + "values (SERVICE_SEQ.nextval, #{pid}, 1, #{title}, #{content}, sysdate, 1) ")
+  @Insert("INSERT INTO service(id, pid, type, title, content, regdate, ok, target) "
+      + "values (SERVICE_SEQ.nextval, #{pid}, 1, #{title}, #{content}, sysdate, 1, #{target}) ")
   public void serviceWriteAnswer(ServiceVO vo);
 }

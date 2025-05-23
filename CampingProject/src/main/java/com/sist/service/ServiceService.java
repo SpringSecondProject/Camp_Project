@@ -12,7 +12,7 @@ public interface ServiceService {
 
   public ServiceVO serviceDetailQuestion(int id);
 
-  public ServiceVO serviceDetailAnswer(String id);
+  public ServiceVO serviceDetailAnswer(int id);
 
   public void serviceWriteQuestion(ServiceVO vo);
 
