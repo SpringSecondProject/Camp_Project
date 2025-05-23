@@ -65,7 +65,7 @@
 
                                                     <img class="aspect__img" :src="vo.poster"></a> 
                                             
-                                            
+                                            </div>
                                             <div class="product-m__content">
                                             	<br>
 		
