@@ -13,7 +13,7 @@ public interface ReserveMapper {
 	@Select("SELECT * FROM CAMP_SITE WHERE cno=#{cno}")
 	public List<SiteVO> siteListData(int cno);
 	@Select("SELECT DISTINCT DNO FROM RESERVE_DETAIL d "
-			+ "WHERE RESDATE IN(#{startDateStr},#{endDateStr}) "
+			+ "WHERE RESDATE IN(TO_DATE(#{startDateStr},TO_DATE(#{endDateStr}) "
 			+ "AND sno=(SELECT SNO FROM CAMP_SITE s WHERE s.CNO=#{cno} AND TYPE=#{type})")
 	public List<Integer> reserveListData(ReserveVO vo);
 	@Insert("INSERT INTO CAMP_RESERVE(rno,id,cno,title,regdate,startdate,enddate,price,state) "
