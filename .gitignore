@@ -1,6 +1,6 @@
 # Eclipse 관련
-*.classpath
-*.project
+.project
+.classpath
 .settings/
 
 # 빌드 결과물
@@ -16,5 +16,3 @@ build/
 # IDE 관련
 .idea/
 *.iml
-
-/CampingProject/
