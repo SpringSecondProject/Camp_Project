@@ -71,7 +71,7 @@
             <div class="col-lg-12">
               <div class="w-r__wrap-2">
                 <span class="route-box__link">총 결제 금액: {{ totalPriceStr }}원</span>
-                <a class="w-r__link btn--e-brand-b-2" @click="buyItems">BUY</a>
+                <a class="w-r__link btn--e-brand-b-2" @click="buyItems">구매</a>
               </div>
             </div>
 
