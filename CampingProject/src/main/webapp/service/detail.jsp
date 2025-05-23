@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <head>
 	<title></title>
 	<script src="https://cdn.tailwindcss.com"></script>
@@ -51,24 +52,20 @@
 	<div class="mt-4 mb-12 w-full border-b border-gray-400"></div>
 
 	<!-- 답변 -->
-	<div v-show="qvo.ok == 1" class="container my-6 flex flex-col w-full">
+	<div v-show="qvo.ok == 1" class="flex flex-col justify-start text-left gap-4 w-full">
 		<div class="flex flex-row justify-between items-center w-full">
 			<p class="font-bold text-5xl text-black w-full">
-				{{ qvo.title }}
+				{{ avo.title }}
 			</p>
 			<div class="flex flex-row w-full justify-end items-center gap-4">
 				<button type="button"
-				        v-show="qvo.pid == userid"
+				        v-show="avo.pid == userid"
 				        onclick="deleteQuestion()"
 				        class="bg-red-200 hover:bg-red-300 focus:outline-none font-medium rounded-lg text-2xl px-5 py-2.5 me-2 mb-2">
 					삭제
 				</button>
 			</div>
 		</div>
-		<!-- 제목 -->
-		<p class="fw-bold my-2">
-			{{ avo.title }}
-		</p>
 		<!-- 작성 정보 -->
 		<p class="text-2xl">
 			{{ formatDate(avo.regdate) }}
@@ -78,6 +75,30 @@
 			{{ avo.content }}
 		</p>
 	</div>
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
+		<div v-show="qvo.ok == 0" class="flex flex-col w-full gap-2">
+			<label for="answerTitle" class="text-2xl">제목</label>
+			<input type="text" id="answerTitle" name="answerTitle" placeholder="제목을 입력하세요" required
+			       class="w-full p-4 text-2xl border border-gray-400 rounded-xl focus:border-blue-200 mb-12"/>
+
+			<!-- 내용 -->
+			<label for="answerContent" class="text-2xl">내용</label>
+			<textarea id="answerContent" name="answerContent" rows="12" placeholder="내용을 입력하세요"
+			          class="w-full p-4 text-2xl border border-gray-400 rounded-2xl focus:border-blue-200 mb-12"
+			          required></textarea>
+			<!-- 버튼 영역 -->
+			<div class="flex justify-between">
+				<button type="button" @click="location.reload()"
+				        class="px-8 py-4 text-2xl text-white rounded-xl bg-blue-400 hover:bg-blue-500">
+					취소하기
+				</button>
+				<button type="submit" @click="answerRecv()"
+				        class="px-8 py-4 text-2xl text-white rounded-xl bg-blue-400 hover:bg-blue-500">
+					등록하기
+				</button>
+			</div>
+		</div>
+	</sec:authorize>
 </div>
 <script>
   let serviceDetailApp = Vue.createApp({
@@ -87,8 +108,8 @@
         id: param.get('id'),
         userid: '',
         writer: '',
-        qvo: [],
-        avo: []
+        qvo: {},
+        avo: {},
       }
     },
     mounted() {
@@ -104,7 +125,7 @@
           this.qvo = res.data.qvo
           this.userid = res.data.userid
           this.writer = res.data.writer
-          if (res.data.avo != null) {
+          if (res.data.avo) {
             this.avo = res.data.avo
           }
         }).catch(error => {
@@ -125,6 +146,23 @@
             // location.href = "/Project_Main/service/main.do"
           }, 2000)
         }
+      },
+      answerRecv() {
+        axios.post('/web/service/answer_vue.do', {
+          pid: '${sessionScope.userid}',
+          title: document.getElementById('answerTitle').value,
+          content: document.getElementById('answerContent').value,
+          target: this.qvo.id,
+        }).then(res => {
+          setTimeout(() => {
+            alert("답변이 완료되었습니다!")
+            location.reload()
+          }, 2000)
+        }).catch(error => {
+          alert("답변이 실패하였습니다!")
+          console.log(error)
+          throw Error(res.statusText)
+        })
       }
     }
   }).mount("#serviceDetailApp")

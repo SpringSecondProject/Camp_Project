@@ -24,7 +24,7 @@ public class ServiceDAO {
     return mapper.serviceDetailQuestion(id);
   }
 
-  public ServiceVO serviceDetailAnswer(String id) {
+  public ServiceVO serviceDetailAnswer(int id) {
     return mapper.serviceDetailAnswer(id);
   }
 
