@@ -16,7 +16,7 @@ import java.net.*;
 public class YoutubeManager {
 	public String youtubeJsonData(String fd) {
 		String result="";
-		String key="";
+		String key="AIzaSyCmkLlitCMTKVz4Uqtr8MAaukW4XabQ2nY";
 		try {
 			String strUrl="https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=4&q="+URLEncoder.encode(fd,"UTF-8")+"&type=video&key="+key;
 			URL url=new URL(strUrl);

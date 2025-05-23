@@ -11,5 +11,5 @@ public interface BoardService {
 	public void updateNotice(BoardVO vo);
 	public void deleteNotice(int bno);
 	public void hitIncrement(int bno);
-	
+	public List<BoardVO> mainNoticeList();
 }

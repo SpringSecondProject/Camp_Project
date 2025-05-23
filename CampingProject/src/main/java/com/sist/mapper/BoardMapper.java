@@ -37,4 +37,10 @@ public interface BoardMapper {
   		  	+"hit=hit+1 "
   		  	+"WHERE BNO=#{bno}")
     public void hitIncrement(int bno);
+    
+    @Select("SELECT bno,subject,nickname,regdate,hit,num "
+    		+ "FROM (SELECT bno,subject,nickname,regdate,hit,rownum as num "
+    		+ "FROM (SELECT bno,subject,nickname,regdate,hit FROM board WHERE type=3 ORDER BY bno desc)) "
+    		+ "WHERE num < 6")
+    public List<BoardVO> mainNoticeList();
 }

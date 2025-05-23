@@ -220,7 +220,7 @@
 		const account = document.getElementById('quantitySelect').value
 		const price = Number($('#totalAmount').text().replaceAll(',',''))
 		let cno=0
-		axios.post('../item/cart_insert.do',null,{
+		axios.post('../item/cart_insert2.do',null,{
 			params:{
 				ino: ${param.ino},
 		        account: account

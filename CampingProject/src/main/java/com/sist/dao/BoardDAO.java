@@ -36,6 +36,9 @@ public class BoardDAO {
 	{
 		mapper.updateNotice(vo);
 	}
+	public List<BoardVO> mainNoticeList(){
+		return mapper.mainNoticeList();
+	}
 	
 	public void deleteNotice(int bno)
 	{

@@ -88,6 +88,10 @@ public class ItemServiceImp implements ItemService{
 		}
 	}
 	@Override
+	public void CartInsert2(CartVO vo) {
+		cdao.CartInsert(vo);
+	}
+	@Override
 	public List<CartVO> CartListData(String id) {
 		// TODO Auto-generated method stub
 		return cdao.CartListData(id);

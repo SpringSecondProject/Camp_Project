@@ -53,4 +53,9 @@ public class BoardServiceImpl implements BoardService{
 		// TODO Auto-generated method stub
 		bDao.hitIncrement(bno);
 	}
+
+	@Override
+	public List<BoardVO> mainNoticeList() {
+		return bDao.mainNoticeList();
+	}
 }

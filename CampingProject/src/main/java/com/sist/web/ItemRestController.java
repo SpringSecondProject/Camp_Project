@@ -181,6 +181,23 @@ public class ItemRestController {
 	  	}
 		return result;
 	}
+	@PostMapping("item/cart_insert2.do")
+	public String cart_insert2(int ino,int account,HttpSession session)	{
+		String result="";
+		String id=(String)session.getAttribute("userid");
+		CartVO vo=new CartVO();
+		vo.setAccount(account);
+		vo.setId(id);
+		vo.setIno(ino);
+		try
+		{
+			service.CartInsert2(vo);
+			result="yes";
+		} catch(Exception ex) {
+			result=ex.getMessage();  
+		}
+		return result;
+	}
     @GetMapping("item/get_cart_items.do")
     public List<CartVO> getCartItems(@RequestParam("id") String id) {
         return service.CartListData(id);
