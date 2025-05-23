@@ -44,7 +44,7 @@
     },
     methods: {
       dataRecv() {
-        axios.get('/campcar/detail_vue.do', {
+        axios.get('../campcar/detail_vue.do', {
           params: {
             id: this.payment.cid
           }
@@ -58,9 +58,9 @@
         return (price || 0).toLocaleString('ko-KR');
       },
       completePayment() {
-        axios.get('/campcar/clearSession.do').then(() => {
+        axios.get('../campcar/clearSession.do').then(() => {
           alert('결제가 완료되었습니다.');
-          location.href = '/web/campcar/list.do';
+          location.href = '../campcar/list.do';
         }).catch(error => {
           console.error(error.response);
           alert('결제 처리 중 오류가 발생했습니다.');
