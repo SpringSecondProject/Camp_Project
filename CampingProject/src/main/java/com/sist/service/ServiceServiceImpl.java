@@ -47,4 +47,14 @@ public class ServiceServiceImpl implements ServiceService {
     dao.serviceUpdateOk(id);
   }
 
+  @Override
+  public List<ServiceVO> serviceSearchData(int start, int end, String query) {
+    return dao.serviceSearchData(start, end, query);
+  }
+
+  @Override
+  public int serviceSearchTotalPage(String query) {
+    return dao.serviceSearchTotalPage(query);
+  }
+
 }

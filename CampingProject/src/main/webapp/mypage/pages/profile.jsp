@@ -64,7 +64,7 @@
     },
     methods: {
       dataRecv() {
-        axios.get('/web/mypage/profile_vue.do', {
+        axios.get('../mypage/profile_vue.do', {
           params: {
             id: '${sessionScope.userid }'
           }
@@ -79,7 +79,7 @@
       onCommit() {
         console.log('onCommit', this.inputValue);
         // 서버로 수정된 데이터 전송
-        axios.post('/web/mypage/profile_update_vue.do', {
+        axios.post('../mypage/profile_update_vue.do', {
           id: '${sessionScope.userid }',
           ...this.inputValue
         }).then(res => {
@@ -92,7 +92,7 @@
       accountDelete() {
         console.log('onCommit', this.inputValue);
         // 서버로 수정된 데이터 전송
-        axios.post('/web/mypage/profile_delete_vue.do', {
+        axios.post('../mypage/profile_delete_vue.do', {
           id: '${sessionScope.userid }',
         }).then(res => {
           console.log(res)

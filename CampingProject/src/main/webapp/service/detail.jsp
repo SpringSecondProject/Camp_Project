@@ -117,7 +117,7 @@
     },
     methods: {
       dataRecv() {
-        axios.get('/web/service/detail_vue.do', {
+        axios.get('../service/detail_vue.do', {
           params: {
             id: this.id,
           }
@@ -140,15 +140,13 @@
       },
       deleteQuestion() {
         if (confirm("정말 삭제하시겠습니까?")) {
-          <%--fetch('/Project_Main/service/delete.do?id=${svo.id }', {method: 'get'});--%>
           alert("삭제되었습니다!")
           setInterval(() => {
-            // location.href = "/Project_Main/service/main.do"
           }, 2000)
         }
       },
       answerRecv() {
-        axios.post('/web/service/answer_vue.do', {
+        axios.post('../service/answer_vue.do', {
           pid: '${sessionScope.userid}',
           title: document.getElementById('answerTitle').value,
           content: document.getElementById('answerContent').value,

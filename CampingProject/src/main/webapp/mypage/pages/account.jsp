@@ -31,39 +31,39 @@
     data() {
       return {
         vo: {},
-        list:[],
-        mileage:''
+        list: [],
+        mileage: ''
       }
     },
     mounted() {
-	    axios.get('/web/mypage/account_vue.do', {
-	      params: {
-	        id: '${sessionScope.userid}'
-	      }
-	    }).then(res => {
-	      this.vo = res.data
-	    }).catch(e => {
-	      console.error(e)
-	    })
-		axios.get('../mypage/mileage_list_vue.do',{
-			params:{
-				page:1
-			}
-		}).then(res=>{
-			const maxLength = Math.min(5, res.data.list.length)
-			for(let i=0;i<maxLength;i++){
-				this.list[i]=res.data.list[i]
-				if(i==0){
-					this.mileage=new Intl.NumberFormat().format(res.data.list[i].total_point)
-				}
-			}
-			for(let i=0;i<maxLength;i++){
-				this.list[i].point=new Intl.NumberFormat().format(this.list[i].point)
-				this.list[i].total_point=new Intl.NumberFormat().format(this.list[i].total_point)
-			}
-		}).catch(error=>{
-			console.log(error.response)
-		})
+      axios.get('../mypage/account_vue.do', {
+        params: {
+          id: '${sessionScope.userid}'
+        }
+      }).then(res => {
+        this.vo = res.data
+      }).catch(e => {
+        console.error(e)
+      })
+      axios.get('../mypage/mileage_list_vue.do', {
+        params: {
+          page: 1
+        }
+      }).then(res => {
+        const maxLength = Math.min(5, res.data.list.length)
+        for (let i = 0; i < maxLength; i++) {
+          this.list[i] = res.data.list[i]
+          if (i == 0) {
+            this.mileage = new Intl.NumberFormat().format(res.data.list[i].total_point)
+          }
+        }
+        for (let i = 0; i < maxLength; i++) {
+          this.list[i].point = new Intl.NumberFormat().format(this.list[i].point)
+          this.list[i].total_point = new Intl.NumberFormat().format(this.list[i].total_point)
+        }
+      }).catch(error => {
+        console.log(error.response)
+      })
     },
   }).mount('#accountApp')
 </script>

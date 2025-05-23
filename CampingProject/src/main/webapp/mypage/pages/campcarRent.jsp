@@ -44,7 +44,7 @@
     },
     methods: {
       dataRecv() {
-        axios.get('/web/mypage/campcarrent_vue.do', {
+        axios.get('../mypage/campcarrent_vue.do', {
           params: {
             id: '${sessionScope.userid}',
             page: this.curpage,

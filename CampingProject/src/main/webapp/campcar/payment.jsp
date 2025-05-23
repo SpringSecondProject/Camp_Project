@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" import="com.google.gson.Gson"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" import="com.google.gson.Gson" %>
 <head>
 	<title>결제 페이지</title>
 	<script src="https://cdn.tailwindcss.com"></script>
@@ -36,7 +36,7 @@
       return {
         item: {},
         payment: <%= session.getAttribute("payment") != null ?
-                    new com.google.gson.Gson().toJson(session.getAttribute("payment")) : "{}" %> 
+                    new com.google.gson.Gson().toJson(session.getAttribute("payment")) : "{}" %>
       }
     },
     mounted() {
@@ -44,7 +44,7 @@
     },
     methods: {
       dataRecv() {
-        axios.get('/web/campcar/detail_vue.do', {
+        axios.get('/campcar/detail_vue.do', {
           params: {
             id: this.payment.cid
           }
@@ -58,7 +58,7 @@
         return (price || 0).toLocaleString('ko-KR');
       },
       completePayment() {
-        axios.get('/web/campcar/clearSession.do').then(() => {
+        axios.get('/campcar/clearSession.do').then(() => {
           alert('결제가 완료되었습니다.');
           location.href = '/web/campcar/list.do';
         }).catch(error => {
