@@ -314,7 +314,7 @@
             const min=document.getElementById("price-min").value||null;
             const max=document.getElementById("price-max").value||null;
 
-            axios.get("../web/item/list_by_price_vue.do",{
+            axios.get("../item/list_by_price_vue.do",{
                 params:{
                     page:this.curpage,
                     min:min?parseInt(min):null,
@@ -350,7 +350,7 @@
             return arr
         },
         dataRecv(){
-            axios.get('../web/item/list_vue.do',{
+            axios.get('../item/list_vue.do',{
                 params:{
                     page:this.curpage,
                     ino:this.ino
@@ -366,7 +366,7 @@
             })
         },
         dataRecvC(){
-            axios.get('../web/item/list_by_category_vue.do',{
+            axios.get('../item/list_by_category_vue.do',{
                 params:{
                     page:this.curpage,
                     category:this.ino

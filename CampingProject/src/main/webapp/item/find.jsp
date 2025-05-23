@@ -151,7 +151,7 @@ const listApp = Vue.createApp({
     	        return
     	    }
     	    if(resetPage)this.curpage=1
-    	    axios.get("../web/item/find_vue.do", {
+    	    axios.get("../item/find_vue.do", {
     	        params: {
     	            page:this.curpage,
     	            fd:this.fd,
@@ -171,7 +171,7 @@ const listApp = Vue.createApp({
     	    })
     	},
         dataRecv(){
-            axios.get('../web/item/list_vue.do',{
+            axios.get('../item/list_vue.do',{
                 params:{
                     page:this.curpage
                 }
