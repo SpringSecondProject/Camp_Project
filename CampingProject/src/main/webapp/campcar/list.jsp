@@ -38,7 +38,7 @@
       }
     },
     mounted() {
-      axios.get('../campcar/list_vue.do', {
+      axios.get('/web/campcar/list_vue.do', {
         params: {
           page: this.curpage,
           rowSize: this.rowSize,
@@ -76,7 +76,7 @@
         return arr
       },
       goDetail(id) {
-        location.href = '../campcar/detail.do?id=' + id
+        location.href = '/web/campcar/detail.do?id=' + id
       },
       formatPrice(price) {
         return (price || 0).toLocaleString('ko-KR');

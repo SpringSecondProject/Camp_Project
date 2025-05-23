@@ -14,7 +14,25 @@
 				<a href="../service/list.do">QnA</a></li>
 		</ul>
 	</div>
-	<div class="flex justify-end items-center w-1/2 mb-10">
+	<div class="flex justify-between items-center w-1/2 mb-10">
+		<form>
+			<label for="default-search"
+			       class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+			<div class="relative w-80">
+				<input type="search" id="default-search"
+				       class="block w-full p-4 text-xl text-gray-900 border border-gray-300 rounded-xl bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+				       placeholder="" required/>
+				<button type="submit"
+				        class="absolute top-3 right-4 bg-gray-800 hover:bg-blue-300 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+					<svg class="w-4 h-6 text-white" aria-hidden="true"
+					     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+						<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+						      stroke-width="2"
+						      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"></path>
+					</svg>
+				</button>
+			</div>
+		</form>
 		<button type="button"
 		        @click="goWrite()"
 		        class="w-40 h-14 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-2xl px-5 py-2.5 me-2 mb-2 hover:-translate-y-2 hover:duration-700">
@@ -62,8 +80,8 @@
   let serviceListApp = Vue.createApp({
     data() {
       return {
-        userid: '${sessionScope.userid}',
-        list: {},
+        userid: '',
+        list: [],
         curpage: 1,
         totalpage: 0,
         startPage: 0,
@@ -73,6 +91,7 @@
     },
     mounted() {
       this.dataRecv()
+      this.userid = '${sessionScope.userid}'
     },
     methods: {
       prev() {
@@ -97,7 +116,7 @@
         return arr
       },
       dataRecv() {
-        axios.get('../service/list_vue.do', {
+        axios.get('/web/service/list_vue.do', {
           params: {
             page: this.curpage,
             rowSize: this.rowSize,
@@ -118,15 +137,15 @@
             + data.getDate() + " " + data.getHours() + ":" + data.getMinutes();
       },
       goDetail(id) {
-        location.href = '../service/detail.do?id=' + id
+        location.href = '/web/service/detail.do?id=' + id
       },
       goWrite() {
         if (!this.userid) {
           alert('로그인이 필요합니다.')
         } else {
-          location.href = '../service/write.do?id=' + this.userid;
+          location.href = '/web/service/write.do?id=' + this.userid;
         }
-      },
+      }
     }
   }).mount("#serviceListApp")
 </script>

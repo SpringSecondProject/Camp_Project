@@ -20,8 +20,4 @@ public interface ServiceService {
 
   public void serviceUpdateOk(int id);
 
-  public List<ServiceVO> serviceSearchData(int start, int end, String query);
-
-  public int serviceSearchTotalPage(String query);
-
 }

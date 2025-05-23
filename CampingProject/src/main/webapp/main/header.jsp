@@ -80,8 +80,7 @@
 									</c:if>
 									<c:if test="${sessionScope.userid!=null }">
 										<li>
-											<a href="../mypage/main.do"><i
-													class="fas fa-user-circle u-s-m-r-6"></i>
+											<a href="../mypage/main.do"><i class="fas fa-user-circle u-s-m-r-6"></i>
 												<span>계정</span>
 											</a>
 										</li>
@@ -175,63 +174,63 @@
 								<span class="js-menu-toggle"></span>
 								<ul style="width:200px">
 									<li>
-										<a href="../service/list.do">QnA</a>
+										<a href="/web/service/list.do">QnA</a>
 									</li>
 									<li>
-										<a href="../board/list.do">공지사항</a>
+										<a href="/web/board/list.do">공지사항</a>
 									</li>
 								</ul>
 								<!--====== End - Dropdown ======-->
 							</li>
 							<sec:authorize access="hasRole('ROLE_USER')">
-							<li class="has-dropdown">
-								<a>마이페이지<i class="fas fa-angle-down u-s-m-l-6"></i></a>
-								<!--====== Dropdown ======-->
-								<span class="js-menu-toggle"></span>
-								<ul style="width:200px">
-									<li>
-										<a href="../mypage/main.do">계정</a>
-									</li>
-									<li>
-										<a href="../mypage/profile.do">프로필</a>
-									</li>
-									<li>
-										<a href="../mypage/mileage.do">마일리지 조회</a>
-									</li>
-									<li>
-										<a href="../mypage/campreserve.do">캠핑장 예약 관리</a>
-									</li>
-									<li>
-										<a href="../mypage/campcarrent.do">캠핑카 렌트 내역</a>
-									</li>
-									<li>
-										<a href="../mypage/cart.do">장바구니</a>
-									</li>
-									<li>
-										<a href="../mypage/buy.do">구매내역</a>
-									</li>
-									<li>
-										<a href="../like/likeList.do">좋아요</a>
-									</li>
-									<li>
-										<a href="../mypage/reply.do">댓글</a>
-									</li>
-								</ul>
-								<!--====== End - Dropdown ======-->
-							</li>
+								<li class="has-dropdown">
+									<a>마이페이지<i class="fas fa-angle-down u-s-m-l-6"></i></a>
+									<!--====== Dropdown ======-->
+									<span class="js-menu-toggle"></span>
+									<ul style="width:200px">
+										<li>
+											<a href="../mypage/main.do">계정</a>
+										</li>
+										<li>
+											<a href="../mypage/profile.do">프로필</a>
+										</li>
+										<li>
+											<a href="../mypage/mileage.do">마일리지 조회</a>
+										</li>
+										<li>
+											<a href="../mypage/campreserve.do">캠핑장 예약 관리</a>
+										</li>
+										<li>
+											<a href="../mypage/campcarrent.do">캠핑카 렌트 내역</a>
+										</li>
+										<li>
+											<a href="../mypage/cart.do">장바구니</a>
+										</li>
+										<li>
+											<a href="../mypage/buy.do">구매내역</a>
+										</li>
+										<li>
+											<a href="../like/likeList.do">좋아요</a>
+										</li>
+										<li>
+											<a href="../mypage/reply.do">댓글</a>
+										</li>
+									</ul>
+									<!--====== End - Dropdown ======-->
+								</li>
 							</sec:authorize>
 							<sec:authorize access="hasRole('ROLE_ADMIN')">
-							<li class="has-dropdown">
-								<a>관리자 페이지<i class="fas fa-angle-down u-s-m-l-6"></i></a>
-								<!--====== Dropdown ======-->
-								<span class="js-menu-toggle"></span>
-								<ul style="width:200px">
-									<li>
-										<a href="../admin/list.do">공지사항 관리</a>
-									</li>
-									</sec:authorize>
-								</ul>
-								<!--====== End - List ======-->
+								<li class="has-dropdown">
+									<a>관리자 페이지<i class="fas fa-angle-down u-s-m-l-6"></i></a>
+									<!--====== Dropdown ======-->
+									<span class="js-menu-toggle"></span>
+									<ul style="width:200px">
+										<li>
+											<a href="../admin/list.do">공지사항 관리</a>
+										</li>
+							</sec:authorize>
+						</ul>
+						<!--====== End - List ======-->
 					</div>
 					<!--====== End - Menu ======-->
 				</div>

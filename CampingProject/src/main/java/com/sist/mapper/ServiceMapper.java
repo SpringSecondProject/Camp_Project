@@ -40,20 +40,4 @@ public interface ServiceMapper {
   @Insert("INSERT INTO service(id, pid, type, title, content, regdate, ok, target) "
       + "values (SERVICE_SEQ.nextval, #{pid}, 1, #{title}, #{content}, sysdate, 1, #{target}) ")
   public void serviceWriteAnswer(ServiceVO vo);
-
-  @Select("SELECT id, pid, type, title, content, regdate, ok, num "
-      + "FROM (SELECT id, pid, type, title, content, regdate, ok, rownum as num "
-      + "FROM (SELECT id, pid, type, title, content, regdate, ok "
-      + "FROM service where type = 0 and (title like '%' || #{query} || '%' or content like '%' || #{query} || '%')"
-      + "order by id desc)) "
-      + "WHERE num BETWEEN #{start} AND #{end}")
-  public List<ServiceVO> serviceSearchData(
-      @Param("start") int start,
-      @Param("end") int end,
-      @Param("query") String query
-  );
-
-  @Select("SELECT ceil(COUNT(*) / 12.0) FROM service where type = 0 and (title like '%' || #{query} || '%' or content like '%' || #{query} || '%')")
-  public int serviceSearchTotalPage(String query);
-
 }

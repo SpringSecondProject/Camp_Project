@@ -79,32 +79,4 @@ public class ServiceRestController {
     service.serviceWriteAnswer(vo);
   }
 
-  @GetMapping("service/search_vue.do")
-  public Map service_search(int page, String query) {
-    System.out.println(query);
-    int rowSize = 20;
-    List<ServiceVO> list =
-        service.serviceSearchData((page * rowSize) - (rowSize - 1), page * rowSize, query);
-    int totalpage = service.serviceSearchTotalPage(query);
-
-    final int BLOCK = 10;
-    int startPage = ((page - 1) / BLOCK * BLOCK) + 1;
-    int endPage = ((page - 1) / BLOCK * BLOCK) + BLOCK;
-
-    if (endPage > totalpage) {
-      endPage = totalpage;
-    }
-
-    System.out.println(list);
-
-    // Vue로 전송
-    Map map = new HashMap();
-    map.put("list", list);
-    map.put("curpage", page);
-    map.put("totalpage", totalpage);
-    map.put("startPage", startPage);
-    map.put("endPage", endPage);
-
-    return map;
-  }
 }

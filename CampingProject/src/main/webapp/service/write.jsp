@@ -159,7 +159,7 @@
   let serviceListApp = Vue.createApp({
     methods: {
       dataRecv() {
-        axios.post('../service/write_vue.do', {
+        axios.post('/web/service/write_vue.do', {
           pid: '${sessionScope.userid}',
           title: document.getElementById('title').value,
           content: document.getElementById('content').value,

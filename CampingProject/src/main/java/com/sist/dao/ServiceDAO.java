@@ -40,12 +40,4 @@ public class ServiceDAO {
     mapper.serviceUpdateOk(id);
   }
 
-  public List<ServiceVO> serviceSearchData(int start, int end, String query) {
-    return mapper.serviceSearchData(start, end, query);
-  }
-
-  public int serviceSearchTotalPage(String query) {
-    return mapper.serviceSearchTotalPage(query);
-  }
-
 }
