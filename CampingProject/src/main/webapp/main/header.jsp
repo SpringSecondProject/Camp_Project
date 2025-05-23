@@ -80,7 +80,7 @@
 									</c:if>
 									<c:if test="${sessionScope.userid!=null }">
 										<li>
-											<a href="#"><i class="fas fa-user-circle u-s-m-r-6"></i>
+											<a href="../mypage/main.do"><i class="fas fa-user-circle u-s-m-r-6"></i>
 												<span>계정</span>
 											</a>
 										</li>

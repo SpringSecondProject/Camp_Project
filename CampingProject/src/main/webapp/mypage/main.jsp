@@ -10,7 +10,6 @@
 		<div class="flex flex-row w-full">
 			<div class="flex flex-col w-1/4">
 				<jsp:include page="components/sideNav.jsp"/>
-				<jsp:include page="components/orderSummary.jsp"/>
 			</div>
 			<div class="flex flex-col w-full px-8">
 				<jsp:include page="${page }"/>

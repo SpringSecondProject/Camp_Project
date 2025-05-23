@@ -29,7 +29,7 @@
         <!--====== Section 1 ======-->
         <div class="u-s-p-t-90">
             <div class="container">
-                <div class="row">
+                <div class="row" style="min-height: 600px;">
                     <div class="col-lg-4">
 
                         <div>
