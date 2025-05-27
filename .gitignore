@@ -1,6 +1,6 @@
 # Eclipse 관련
-*.classpath
-*.project
+.classpath
+.project
 .settings/
 
 # 빌드 결과물
